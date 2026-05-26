@@ -97,11 +97,13 @@
     }
 
     .echr-banner-img {
-      height: 72px;
-      width: auto;
+      /* CSS mask: image alpha determines what's painted, background-color is the fill */
+      width: 240px;
+      height: 88px;
       flex: 0 0 auto;
-      filter: invert(1) brightness(2);
-      opacity: 0.9;
+      background-color: rgba(255, 255, 255, 0.92);
+      -webkit-mask: url('echr-building.png') no-repeat center / contain;
+      mask: url('echr-building.png') no-repeat center / contain;
     }
 
     .echr-banner-text {
@@ -1112,6 +1114,261 @@
       border-color: var(--brand);
     }
 
+    /* CASE READER MODAL (full case in a sheet) */
+    .cr-modal {
+      position: fixed;
+      inset: 0;
+      z-index: 320;
+      display: flex;
+      align-items: stretch;
+      justify-content: center;
+    }
+    .cr-modal[hidden] { display: none; }
+
+    .cr-backdrop {
+      position: absolute;
+      inset: 0;
+      background: rgba(10, 25, 41, 0.6);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      animation: backdropIn 0.2s ease;
+    }
+
+    .cr-sheet {
+      position: relative;
+      background: var(--white);
+      width: min(880px, 100%);
+      margin-left: auto;
+      box-shadow: -20px 0 60px -10px rgba(10, 25, 41, 0.35);
+      overflow-y: auto;
+      animation: sheetSlideIn 0.32s var(--ease);
+      display: flex;
+      flex-direction: column;
+    }
+
+    @keyframes sheetSlideIn {
+      from { transform: translateX(60px); opacity: 0; }
+      to { transform: translateX(0); opacity: 1; }
+    }
+
+    .cr-head {
+      position: sticky;
+      top: 0;
+      z-index: 2;
+      background: rgba(255, 255, 255, 0.96);
+      backdrop-filter: blur(10px);
+      padding: 16px 28px;
+      border-bottom: 1px solid var(--rule);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+    }
+
+    .cr-head-title {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--brand-deep);
+    }
+
+    .cr-close {
+      background: var(--rule-soft);
+      border: none;
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--muted);
+      flex: 0 0 auto;
+    }
+    .cr-close:hover { background: var(--rule); color: var(--ink); }
+    .cr-close .icon { width: 16px; height: 16px; }
+
+    .cr-body {
+      padding: 36px 40px 48px;
+    }
+
+    .cr-case-head {
+      padding-bottom: 22px;
+      margin-bottom: 28px;
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .cr-case-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px 16px;
+      font-size: 12px;
+      color: var(--muted);
+      letter-spacing: 0.02em;
+      margin-bottom: 12px;
+      align-items: center;
+    }
+    .cr-case-meta .cr-year {
+      font-size: 28px;
+      font-weight: 800;
+      color: var(--brand-deep);
+      letter-spacing: -0.02em;
+      line-height: 1;
+      margin-right: 4px;
+    }
+    .cr-case-meta .cr-flag { font-size: 22px; }
+    .cr-case-meta .cr-app {
+      font-family: ui-monospace, monospace;
+      font-size: 11px;
+      color: var(--muted-soft);
+    }
+
+    .cr-case-name {
+      font-size: clamp(24px, 3.4vw, 34px);
+      font-weight: 700;
+      letter-spacing: -0.015em;
+      color: var(--ink);
+      line-height: 1.15;
+      margin: 0 0 4px;
+    }
+    .cr-case-name em { font-style: italic; font-feature-settings: "ss01"; }
+
+    .cr-section {
+      margin-top: 26px;
+    }
+    .cr-section-label {
+      font-size: 10.5px;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--brand-deep);
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .cr-section-label .icon { width: 14px; height: 14px; color: var(--brand); }
+
+    .cr-text {
+      font-size: 16px;
+      line-height: 1.65;
+      color: var(--body);
+    }
+
+    .cr-quote {
+      padding: 22px 26px;
+      border: 2px solid var(--accent);
+      background: rgba(225, 29, 72, 0.04);
+      border-radius: 8px;
+      position: relative;
+      margin-bottom: 14px;
+    }
+    .cr-quote::before {
+      content: 'VERBATIM';
+      position: absolute;
+      top: -10px;
+      left: 18px;
+      background: var(--accent);
+      color: var(--white);
+      font-size: 9.5px;
+      font-weight: 800;
+      letter-spacing: 0.18em;
+      padding: 3px 9px;
+      border-radius: 3px;
+    }
+    .cr-quote-para {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      color: var(--accent);
+      margin: 2px 0 12px;
+    }
+    .cr-quote-text {
+      font-size: 16px;
+      line-height: 1.6;
+      color: var(--ink);
+      font-style: italic;
+    }
+    .cr-quote-lang {
+      font-size: 10.5px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted-soft);
+      margin-top: 12px;
+      padding-top: 10px;
+      border-top: 1px dashed var(--rule);
+    }
+
+    .cr-principles {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 6px;
+    }
+    .cr-principle-tag {
+      display: inline-block;
+      padding: 6px 12px;
+      background: var(--brand-soft);
+      color: var(--brand-deep);
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      border: 1px solid transparent;
+      font-family: inherit;
+      transition: all 0.15s var(--ease);
+    }
+    .cr-principle-tag:hover {
+      background: var(--brand);
+      color: var(--white);
+    }
+
+    .cr-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 32px;
+      padding-top: 22px;
+      border-top: 1px solid var(--rule);
+    }
+
+    .cr-action {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 9px 16px 9px 12px;
+      border-radius: 999px;
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      font-family: inherit;
+      cursor: pointer;
+      border: 1px solid transparent;
+      transition: all 0.15s;
+    }
+    .cr-action-hudoc {
+      background: var(--ink);
+      color: var(--white);
+    }
+    .cr-action-hudoc:hover { background: var(--brand-deep); transform: translateY(-1px); }
+    .cr-action-hudoc .icon { width: 13px; height: 13px; color: var(--brand); stroke-width: 2.2; }
+    .cr-action-copy {
+      background: var(--white);
+      color: var(--brand-deep);
+      border-color: var(--rule);
+    }
+    .cr-action-copy:hover { border-color: var(--brand); background: var(--brand-soft); }
+    .cr-action-copy.done { background: var(--brand); color: var(--white); border-color: var(--brand); }
+    .cr-action-copy .icon { width: 13px; height: 13px; stroke-width: 2.2; }
+
+    @media (max-width: 720px) {
+      .cr-sheet { width: 100%; }
+      .cr-body { padding: 24px 22px 36px; }
+    }
+
     /* OBLIGATION MODAL */
     .ob-modal {
       position: fixed;
@@ -1460,7 +1717,7 @@
 
   <div class="echr-banner">
     <div class="echr-banner-inner">
-      <img src="echr-building.png" alt="" class="echr-banner-img" aria-hidden="true" />
+      <div class="echr-banner-img" role="img" aria-label="European Court of Human Rights"></div>
       <div class="echr-banner-text" data-i18n="banner_text"></div>
     </div>
   </div>
@@ -1501,6 +1758,17 @@
   </main>
 
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <div class="cr-modal" id="cr-modal" hidden role="dialog" aria-modal="true" aria-labelledby="cr-case-name">
+    <div class="cr-backdrop" id="cr-backdrop"></div>
+    <aside class="cr-sheet">
+      <div class="cr-head">
+        <span class="cr-head-title" data-i18n="cr_head_title"></span>
+        <button class="cr-close" id="cr-close" aria-label="Close"><svg class="icon"><use href="#i-close"/></svg></button>
+      </div>
+      <div class="cr-body" id="cr-body"></div>
+    </aside>
+  </div>
 
   <div class="ob-modal" id="ob-modal" hidden role="dialog" aria-modal="true" aria-labelledby="ob-modal-title">
     <div class="ob-modal-backdrop" id="ob-modal-backdrop"></div>
@@ -1571,6 +1839,14 @@
         modal_actionables_label: "Hva skulle / kunne vært gjort",
         modal_cases_label: "Etablert i:",
         quote_lang_note: "Verbatim fra dommen (engelsk original).",
+        cr_head_title: "Dommen i sin helhet",
+        cr_label_holding: "Rettssats",
+        cr_label_facts: "Sakens fakta",
+        cr_label_quotes: "Verbatim sitater fra dommen",
+        cr_label_principles: "Positive forpliktelser etablert",
+        cr_action_hudoc: "Åpne på HUDOC",
+        cr_action_copy: "Kopier sitering",
+        cr_quote_lang_note: "Originalspråk: engelsk. Tekst hentet direkte fra dommen.",
         case_count: "%N% dommer",
         case_count_one: "1 dom",
         doc2_label: "Det rettslige arsenal — Ónodi mot Ungarn, EMD 2017",
@@ -1626,6 +1902,14 @@
         modal_actionables_label: "What should / could have been done",
         modal_cases_label: "Established in:",
         quote_lang_note: "Verbatim from the judgment (English original).",
+        cr_head_title: "Full judgment view",
+        cr_label_holding: "Holding",
+        cr_label_facts: "Facts of the case",
+        cr_label_quotes: "Verbatim quotes from the judgment",
+        cr_label_principles: "Positive obligations established",
+        cr_action_hudoc: "Open on HUDOC",
+        cr_action_copy: "Copy citation",
+        cr_quote_lang_note: "Original language: English. Text taken directly from the judgment.",
         case_count: "%N% judgments",
         case_count_one: "1 judgment",
         doc2_label: "The legal arsenal — Ónodi v. Hungary, ECHR 2017",
@@ -2247,9 +2531,9 @@
                 </div>
                 <div class="case-quotes">${quotes}</div>
                 <div class="case-detail-footer">
-                  <a class="case-finn" href="${getFinnDomUrl(c)}" target="_blank" rel="noopener" onclick="event.stopPropagation()">
-                    <svg class="icon"><use href="#i-external"/></svg>${currentLang === 'no' ? 'Finn dom' : 'Find judgment'}
-                  </a>
+                  <button class="case-finn" data-finn="${c.id}" type="button" onclick="event.stopPropagation()">
+                    <svg class="icon"><use href="#i-book-open"/></svg>${currentLang === 'no' ? 'Finn dom' : 'Find judgment'}
+                  </button>
                   <a class="case-hudoc-secondary" href="${c.hudoc}" target="_blank" rel="noopener" onclick="event.stopPropagation()">
                     <svg class="icon"><use href="#i-gavel"/></svg>HUDOC
                   </a>
@@ -2276,6 +2560,13 @@
         btn.addEventListener('click', (e) => {
           e.stopPropagation();
           openObligationModal(btn.dataset.obligation);
+        });
+      });
+
+      list.querySelectorAll('.case-finn').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          openCaseReader(btn.dataset.finn);
         });
       });
 
@@ -2325,6 +2616,112 @@
       t.classList.add('show');
       clearTimeout(toastTimer);
       toastTimer = setTimeout(() => t.classList.remove('show'), 2400);
+    }
+
+    /* ============ CASE READER MODAL ============ */
+    function openCaseReader(caseId) {
+      const c = cases.find(cc => cc.id === caseId);
+      if (!c) return;
+      const lang = currentLang;
+      const T = content[lang];
+
+      const enQuotes = (c.en.quotes || []);
+      const quotesHtml = enQuotes.map(q => `
+        <div class="cr-quote">
+          <div class="cr-quote-para">${q.para}</div>
+          <div class="cr-quote-text">${q.text}</div>
+          <div class="cr-quote-lang">${T.cr_quote_lang_note}</div>
+        </div>
+      `).join('');
+
+      const principleChips = c.principles.map(p => {
+        const o = obligations.find(x => x.id === p);
+        return o ? `<button class="cr-principle-tag" type="button" data-obligation="${p}">${o[lang].title}</button>` : '';
+      }).join('');
+
+      const body = document.getElementById('cr-body');
+      body.innerHTML = `
+        <div class="cr-case-head">
+          <div class="cr-case-meta">
+            <span class="cr-year">${c.year}</span>
+            <span class="cr-flag" aria-hidden="true">${getFlag(c)}</span>
+            <span>${c.date[lang]}</span>
+            <span>·</span>
+            <span class="cr-app">App. no. ${c.appNo}</span>
+          </div>
+          <h2 class="cr-case-name" id="cr-case-name"><em>${getName(c)}</em> ${lang === 'no' ? 'mot' : 'v.'} ${getCountry(c)}</h2>
+        </div>
+
+        <div class="cr-section">
+          <div class="cr-section-label"><svg class="icon"><use href="#i-shield"/></svg>${T.cr_label_holding}</div>
+          <div class="cr-text">${c[lang].rettssats || ''}</div>
+        </div>
+
+        <div class="cr-section">
+          <div class="cr-section-label"><svg class="icon"><use href="#i-list"/></svg>${T.cr_label_facts}</div>
+          <div class="cr-text">${c[lang].facts || ''}</div>
+        </div>
+
+        <div class="cr-section">
+          <div class="cr-section-label"><svg class="icon"><use href="#i-book-open"/></svg>${T.cr_label_quotes}</div>
+          ${quotesHtml}
+        </div>
+
+        <div class="cr-section">
+          <div class="cr-section-label"><svg class="icon"><use href="#i-grid"/></svg>${T.cr_label_principles}</div>
+          <div class="cr-principles">${principleChips}</div>
+        </div>
+
+        <div class="cr-actions">
+          <a class="cr-action cr-action-hudoc" href="${c.hudoc}" target="_blank" rel="noopener">
+            <svg class="icon"><use href="#i-external"/></svg>${T.cr_action_hudoc}
+          </a>
+          <button class="cr-action cr-action-copy" data-case-id="${c.id}" type="button">
+            <svg class="icon"><use href="#i-list"/></svg>${T.cr_action_copy}
+          </button>
+        </div>
+      `;
+
+      // Wire principle tags in modal
+      body.querySelectorAll('.cr-principle-tag').forEach(btn => {
+        btn.addEventListener('click', () => {
+          openObligationModal(btn.dataset.obligation);
+        });
+      });
+
+      // Wire copy citation in modal
+      const copyBtn = body.querySelector('.cr-action-copy');
+      copyBtn.addEventListener('click', () => {
+        const fullName = `${getName(c)} v. ${getCountry(c)}`;
+        const citation = `${fullName}, app. no. ${c.appNo}, ECHR ${c.date[lang]}. Available at ${c.hudoc}`;
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(citation).then(() => {
+            copyBtn.classList.add('done');
+            showToast(T.copy_done + ' · ' + fullName);
+            setTimeout(() => copyBtn.classList.remove('done'), 2200);
+          });
+        }
+      });
+
+      const modal = document.getElementById('cr-modal');
+      modal.hidden = false;
+      document.body.style.overflow = 'hidden';
+      // Scroll sheet to top
+      document.querySelector('.cr-sheet').scrollTop = 0;
+    }
+    function closeCaseReader() {
+      const modal = document.getElementById('cr-modal');
+      modal.hidden = true;
+      document.body.style.overflow = '';
+    }
+    function setupCaseReader() {
+      const close = document.getElementById('cr-close');
+      const backdrop = document.getElementById('cr-backdrop');
+      if (close) close.addEventListener('click', closeCaseReader);
+      if (backdrop) backdrop.addEventListener('click', closeCaseReader);
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && !document.getElementById('cr-modal').hidden) closeCaseReader();
+      });
     }
 
     /* ============ OBLIGATION MODAL ============ */
@@ -2399,8 +2796,8 @@
       const wrap = document.getElementById('search-suggestions');
       if (!wrap) return;
       const suggestions = currentLang === 'no'
-        ? ['når barnet sier nei', '60+ begjæringer ignorert', 'mor saboterer samvær', 'staten venter for lenge', 'koordinerte tiltak', 'mor i Bulgaria 2010']
-        : ['when the child refuses', '60+ petitions ignored', 'mother sabotages contact', 'state waits too long', 'coordinated measures', 'mother in Bulgaria 2010'];
+        ? ['rettslig arsenal', 'barnets motvilje', 'uopprettelige følger', 'koordinerte tiltak']
+        : ['legal arsenal', 'child resistance', 'irremediable consequences', 'coordinated measures'];
       const label = currentLang === 'no' ? 'Prøv' : 'Try';
       wrap.innerHTML = `<span class="ss-label">${label}</span>` + suggestions.map(s =>
         `<button class="ss-chip" type="button" data-q="${s}">${s}</button>`
@@ -2412,7 +2809,6 @@
           searchTerm = chip.dataset.q;
           renderCases();
           input.focus();
-          document.getElementById('database').scrollIntoView({ behavior: 'smooth', block: 'start' });
         });
       });
     }
@@ -2461,6 +2857,7 @@
       });
 
       setupObligationModal();
+      setupCaseReader();
 
       const searchInput = document.getElementById('db-search');
       searchInput.addEventListener('input', (e) => {
