@@ -1047,6 +1047,27 @@
 
     .case-hudoc-link .icon { width: 13px; height: 13px; stroke-width: 2.2; }
 
+    /* ============ HANDBOOK LINK ============ */
+    .handbook-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 7px 14px 7px 11px;
+      background: var(--ink);
+      color: var(--white);
+      border-radius: 999px;
+      text-decoration: none;
+      font-size: 11.5px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      transition: background 0.2s var(--ease), transform 0.2s var(--ease);
+      flex: 0 0 auto;
+    }
+    .handbook-link:hover { background: var(--brand-deep); transform: translateY(-1px); }
+    .handbook-link .icon { width: 14px; height: 14px; stroke-width: 2.2; color: var(--brand); }
+
+    @media (max-width: 720px) { .handbook-link span { display: none; } .handbook-link { padding: 7px 10px; } }
+
     /* ============ DRAWER (hamburger menu) ============ */
     .menu-trigger {
       background: var(--white);
@@ -3008,6 +3029,10 @@
       <div class="progress-rail" aria-hidden="true">
         <div class="progress-fill" id="progress-fill"></div>
       </div>
+      <a class="handbook-link" href="haandbok.html" aria-label="Håndbok">
+        <svg class="icon"><use href="#i-book-open"/></svg>
+        <span data-i18n="handbook_link"></span>
+      </a>
       <button class="search-trigger" id="search-trigger" aria-label="Search">
         <svg class="icon"><use href="#i-search"/></svg>
         <span class="search-label" data-i18n="search_label"></span>
@@ -3384,6 +3409,7 @@
         meta_title: "Artikkel 8 · En interaktiv guide til statens plikt",
         meta_description: "Hva Den europeiske menneskerettskonvensjonens artikkel 8 krever av staten, og hva som faktisk skjer i Norge.",
 
+        handbook_link: "Håndbok",
         search_label: "Søk",
         search_placeholder: "Søk etter dom, prinsipp, situasjon...",
         search_hint: "Søk i 9 dommer, 4 prinsipper og norsk praksis",
@@ -3528,6 +3554,7 @@
         meta_title: "Article 8 · An interactive guide to the state's duty",
         meta_description: "What Article 8 of the European Convention on Human Rights requires of the state, and what actually happens in Norway.",
 
+        handbook_link: "Handbook",
         search_label: "Search",
         search_placeholder: "Search judgments, principles, situations...",
         search_hint: "Search 9 judgments, 4 principles, and Norwegian practice",
