@@ -1,0 +1,4286 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Artikkel 8 · En interaktiv guide til statens plikt</title>
+  <meta name="description" content="Hva Den europeiske menneskerettskonvensjonens artikkel 8 krever av staten, og hva som faktisk skjer i Norge." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --white: #ffffff;
+      --off-white: #f6fbfd;
+      --tint: #eaf6fd;
+      --ink: #0a1929;
+      --body: #1a2942;
+      --muted: #5c6f8a;
+      --muted-soft: #93a3b8;
+      --rule: #dde7ef;
+      --rule-soft: #ebf1f6;
+      --brand: #4db2ec;
+      --brand-deep: #1a7fb8;
+      --brand-darker: #0c5780;
+      --brand-soft: rgba(77, 178, 236, 0.10);
+      --brand-softer: rgba(77, 178, 236, 0.04);
+      --accent: #e11d48;
+      --accent-soft: rgba(225, 29, 72, 0.08);
+      --sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", sans-serif;
+      --max: 1100px;
+      --max-narrow: 760px;
+      --pad: clamp(20px, 4vw, 48px);
+      --ease: cubic-bezier(0.2, 0.7, 0.2, 1);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    /* ============ ICONS ============ */
+    .icon {
+      width: 1em;
+      height: 1em;
+      vertical-align: -0.15em;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      flex: 0 0 auto;
+    }
+    .icon-xs { width: 12px; height: 12px; }
+    .icon-sm { width: 16px; height: 16px; }
+    .icon-md { width: 20px; height: 20px; }
+    .icon-lg { width: 28px; height: 28px; }
+    .icon-xl { width: 40px; height: 40px; }
+
+    body {
+      background: var(--white);
+      color: var(--body);
+      font-family: var(--sans);
+      font-size: 17px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      text-rendering: optimizeLegibility;
+      overflow-x: hidden;
+      font-feature-settings: "ss01", "cv11";
+    }
+
+    ::selection { background: var(--brand); color: var(--ink); }
+
+    a { color: inherit; }
+
+    /* ============ HEADER ============ */
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: saturate(160%) blur(14px);
+      -webkit-backdrop-filter: saturate(160%) blur(14px);
+      border-bottom: 1px solid var(--rule);
+      padding: 12px var(--pad);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: var(--ink);
+      min-width: 0;
+    }
+
+    .brand-logo {
+      height: 40px;
+      width: auto;
+      display: block;
+      flex: 0 0 auto;
+    }
+
+    .brand-divider {
+      width: 1px;
+      height: 18px;
+      background: var(--rule);
+    }
+
+    .brand-tagline {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      white-space: nowrap;
+    }
+
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+    }
+
+    .progress-rail {
+      height: 2px;
+      width: 80px;
+      background: var(--rule-soft);
+      border-radius: 2px;
+      overflow: hidden;
+      display: block;
+    }
+
+    @media (min-width: 720px) { .progress-rail { width: 140px; } }
+
+    .progress-fill {
+      height: 100%;
+      width: 0%;
+      background: var(--brand);
+      transform-origin: left;
+      transition: width 0.15s linear;
+    }
+
+    .lang-toggle {
+      display: inline-flex;
+      border: 1px solid var(--rule);
+      border-radius: 999px;
+      overflow: hidden;
+      background: var(--white);
+    }
+
+    .lang-toggle button {
+      background: transparent;
+      border: none;
+      padding: 6px 14px;
+      cursor: pointer;
+      font-family: var(--sans);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      color: var(--muted);
+      transition: color 0.2s var(--ease), background 0.2s var(--ease);
+    }
+
+    .lang-toggle button:hover { color: var(--ink); }
+    .lang-toggle button.active {
+      background: var(--ink);
+      color: var(--white);
+    }
+
+    /* ============ HERO ============ */
+    .hero {
+      position: relative;
+      padding: clamp(60px, 12vh, 140px) var(--pad) clamp(80px, 14vh, 160px);
+      max-width: 1240px;
+      margin: 0 auto;
+      overflow: hidden;
+    }
+
+    .hero-grid {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(to right, var(--rule-soft) 1px, transparent 1px),
+        linear-gradient(to bottom, var(--rule-soft) 1px, transparent 1px);
+      background-size: 80px 80px;
+      mask-image: radial-gradient(ellipse at 70% 30%, black 0%, transparent 70%);
+      -webkit-mask-image: radial-gradient(ellipse at 70% 30%, black 0%, transparent 70%);
+      pointer-events: none;
+      opacity: 0.6;
+    }
+
+    .hero-inner { position: relative; }
+
+    .eyebrow {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--brand-deep);
+      margin-bottom: 28px;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 16px;
+      background: var(--brand-soft);
+      border-radius: 999px;
+    }
+
+    .hero h1 {
+      font-family: var(--sans);
+      font-weight: 800;
+      font-size: clamp(36px, 5.6vw, 76px);
+      line-height: 1.04;
+      letter-spacing: -0.03em;
+      color: var(--ink);
+      margin: 0 0 32px;
+      max-width: 22ch;
+    }
+
+    .hero h1 .brand-highlight { color: var(--brand-deep); }
+    .hero h1 .underline {
+      position: relative;
+      display: inline-block;
+      white-space: nowrap;
+    }
+    .hero h1 .underline::after {
+      content: '';
+      position: absolute;
+      left: 0; right: 0; bottom: 0.05em;
+      height: 0.18em;
+      background: var(--brand);
+      opacity: 0.35;
+      z-index: -1;
+    }
+
+    .hero .lede {
+      font-size: clamp(18px, 1.9vw, 22px);
+      line-height: 1.55;
+      color: var(--body);
+      max-width: 38em;
+      font-weight: 400;
+      margin: 0 0 40px;
+    }
+
+    .hero-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px 32px;
+      padding-top: 28px;
+      border-top: 1px solid var(--rule);
+      max-width: 720px;
+    }
+
+    .hero-meta-item {
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      color: var(--muted);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .hero-meta-item strong {
+      color: var(--ink);
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      font-size: 13px;
+    }
+
+    .hero-meta-item .dot {
+      width: 4px;
+      height: 4px;
+      background: var(--brand);
+      border-radius: 50%;
+    }
+
+    .scroll-cue {
+      margin-top: clamp(48px, 8vh, 80px);
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-decoration: none;
+      padding: 10px 18px 10px 18px;
+      border: 1px solid var(--rule);
+      border-radius: 999px;
+      transition: all 0.25s var(--ease);
+    }
+
+    .scroll-cue:hover {
+      color: var(--brand-deep);
+      border-color: var(--brand);
+      background: var(--brand-softer);
+    }
+
+    .scroll-cue .arrow {
+      display: inline-block;
+      transition: transform 0.25s var(--ease);
+    }
+
+    .scroll-cue:hover .arrow { transform: translateY(2px); }
+
+    /* ============ CHAPTERS ============ */
+    .chapter {
+      padding: clamp(70px, 11vh, 130px) var(--pad);
+      position: relative;
+    }
+
+    .chapter > .inner {
+      max-width: var(--max);
+      margin: 0 auto;
+    }
+
+    .chapter.bg-alt { background: var(--off-white); }
+
+    .chapter-head {
+      max-width: var(--max-narrow);
+      margin-bottom: 56px;
+    }
+
+    .section-tag {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--brand-deep);
+      margin-bottom: 18px;
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      padding: 8px 14px 8px 10px;
+      background: var(--brand-soft);
+      border-radius: 999px;
+    }
+
+    .section-tag .icon {
+      color: var(--brand);
+      width: 16px;
+      height: 16px;
+      stroke-width: 2.2;
+    }
+
+    .chapter h2 {
+      font-family: var(--sans);
+      font-weight: 700;
+      font-size: clamp(28px, 4vw, 44px);
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+      color: var(--ink);
+      margin: 0 0 32px;
+    }
+
+    .chapter .intro {
+      font-size: 18px;
+      line-height: 1.6;
+      color: var(--body);
+      margin: 0;
+    }
+
+    .chapter .intro.large {
+      font-size: clamp(18px, 1.7vw, 21px);
+      line-height: 1.55;
+    }
+
+    /* ============ OPENER (Chapter 0) ============ */
+    .chapter.ch-start {
+      background: linear-gradient(180deg, var(--white) 0%, var(--tint) 100%);
+    }
+
+    .opener-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 16px;
+      margin-top: 8px;
+    }
+
+    @media (min-width: 720px) {
+      .opener-grid { grid-template-columns: repeat(2, 1fr); gap: 18px; }
+    }
+
+    @media (min-width: 1100px) {
+      .opener-grid { grid-template-columns: repeat(4, 1fr); }
+    }
+
+    .opener-card {
+      padding: 28px 24px;
+      background: var(--white);
+      border: 1px solid var(--rule);
+      border-radius: 10px;
+      transition: transform 0.25s var(--ease), border-color 0.25s var(--ease), box-shadow 0.25s var(--ease);
+    }
+
+    .opener-card:hover {
+      transform: translateY(-3px);
+      border-color: var(--brand);
+      box-shadow: 0 10px 30px -10px rgba(26, 127, 184, 0.18);
+    }
+
+    .opener-icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 52px;
+      height: 52px;
+      border-radius: 12px;
+      background: var(--brand-soft);
+      color: var(--brand-deep);
+      margin-bottom: 18px;
+    }
+
+    .opener-icon .icon { width: 26px; height: 26px; stroke-width: 1.8; }
+
+    .opener-card h3 {
+      font-size: 18px;
+      font-weight: 700;
+      line-height: 1.25;
+      color: var(--ink);
+      margin: 0 0 10px;
+      letter-spacing: -0.01em;
+    }
+
+    .opener-card p {
+      font-size: 14.5px;
+      line-height: 1.55;
+      color: var(--muted);
+      margin: 0;
+    }
+
+    .opener-actors {
+      margin-top: 56px;
+      padding-top: 40px;
+      border-top: 1px solid var(--rule);
+    }
+
+    .opener-actors h3 {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--ink);
+      letter-spacing: -0.01em;
+      margin: 0 0 8px;
+    }
+
+    .opener-actors .opener-actors-sub {
+      font-size: 14px;
+      color: var(--muted);
+      margin: 0 0 28px;
+    }
+
+    .actors-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 14px;
+    }
+
+    .actor-chip {
+      padding: 18px 18px 16px;
+      background: var(--white);
+      border: 1px solid var(--rule);
+      border-radius: 10px;
+      cursor: pointer;
+      transition: all 0.2s var(--ease);
+      position: relative;
+    }
+
+    .actor-chip:hover {
+      border-color: var(--brand);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px -10px rgba(26, 127, 184, 0.2);
+    }
+
+    .actor-icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      background: var(--brand-soft);
+      color: var(--brand-deep);
+      margin-bottom: 12px;
+    }
+
+    .actor-icon .icon { width: 22px; height: 22px; stroke-width: 1.9; }
+
+    .actor-chip.state .actor-icon { background: rgba(225, 29, 72, 0.08); color: var(--accent); }
+
+    .actor-name {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--ink);
+      letter-spacing: -0.01em;
+      margin-bottom: 2px;
+    }
+
+    .actor-role {
+      font-size: 12px;
+      color: var(--muted);
+      line-height: 1.4;
+    }
+
+    /* ============ TREATY CARD (Section 1) ============ */
+    .treaty {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 24px;
+      margin-top: 16px;
+    }
+
+    @media (min-width: 880px) {
+      .treaty { grid-template-columns: 1.4fr 1fr; gap: 40px; }
+    }
+
+    .treaty-quote {
+      padding: 36px 32px;
+      background: var(--ink);
+      color: var(--white);
+      border-radius: 8px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .treaty-quote::before {
+      content: '';
+      position: absolute;
+      top: -40px;
+      right: -40px;
+      width: 200px;
+      height: 200px;
+      background: radial-gradient(circle, var(--brand) 0%, transparent 70%);
+      opacity: 0.18;
+      pointer-events: none;
+    }
+
+    .treaty-quote .label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--brand);
+      margin-bottom: 18px;
+    }
+
+    .treaty-quote .article-num {
+      font-size: 44px;
+      font-weight: 800;
+      line-height: 1;
+      letter-spacing: -0.03em;
+      margin-bottom: 18px;
+      color: var(--white);
+    }
+
+    .treaty-quote .body {
+      font-size: 18px;
+      line-height: 1.55;
+      color: rgba(255, 255, 255, 0.92);
+      font-weight: 400;
+      max-width: 38em;
+    }
+
+    .treaty-quote .citation {
+      margin-top: 22px;
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      color: rgba(255, 255, 255, 0.6);
+    }
+
+    .treaty-side {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .treaty-fact {
+      padding: 22px 24px;
+      background: var(--white);
+      border: 1px solid var(--rule);
+      border-radius: 8px;
+    }
+
+    .chapter.bg-alt .treaty-fact { background: var(--white); }
+
+    .treaty-fact .ff-label {
+      font-size: 10.5px;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--brand-deep);
+      margin-bottom: 8px;
+    }
+
+    .treaty-fact .ff-body {
+      font-size: 15px;
+      line-height: 1.55;
+      color: var(--body);
+    }
+
+    .treaty-fact.ff-highlight {
+      background: var(--ink);
+      border-color: var(--ink);
+    }
+
+    .treaty-fact.ff-highlight .ff-label { color: var(--brand); }
+    .treaty-fact.ff-highlight .ff-body { color: rgba(255, 255, 255, 0.92); }
+
+    /* ============ PRINCIPLES ============ */
+    .principles {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 18px;
+      margin-top: 16px;
+    }
+
+    .principle {
+      padding: 28px 24px;
+      background: var(--white);
+      border: 1px solid var(--rule);
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.25s var(--ease);
+      position: relative;
+      text-align: left;
+      font-family: inherit;
+      color: inherit;
+    }
+
+    .chapter.bg-alt .principle { background: var(--white); }
+
+    .principle:hover {
+      transform: translateY(-3px);
+      border-color: var(--brand);
+      box-shadow: 0 10px 30px -10px rgba(26, 127, 184, 0.15);
+    }
+
+    .principle:focus-visible {
+      outline: 2px solid var(--brand);
+      outline-offset: 3px;
+    }
+
+    .case:focus-visible {
+      outline: 2px solid var(--brand);
+      outline-offset: -2px;
+    }
+
+    .principle.active {
+      background: var(--ink);
+      border-color: var(--ink);
+      color: var(--white);
+      box-shadow: 0 10px 30px -10px rgba(10, 25, 41, 0.3);
+    }
+
+    .principle.active .pnum,
+    .principle.active h3 { color: var(--brand); }
+
+    .principle.active p { color: rgba(255, 255, 255, 0.78); }
+
+    .principle-icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 44px;
+      height: 44px;
+      border-radius: 10px;
+      background: var(--brand-soft);
+      color: var(--brand-deep);
+      margin-bottom: 18px;
+      transition: background 0.25s var(--ease), color 0.25s var(--ease), transform 0.25s var(--ease);
+    }
+
+    .principle-icon .icon { width: 22px; height: 22px; stroke-width: 2; }
+
+    .principle:hover .principle-icon { transform: scale(1.05) rotate(-3deg); }
+    .principle.active .principle-icon { background: rgba(77, 178, 236, 0.2); color: var(--brand); }
+
+    .principle .pnum {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      color: var(--brand-deep);
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .principle .pnum::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: currentColor;
+      opacity: 0.25;
+    }
+
+    .principle h3 {
+      font-size: 18px;
+      font-weight: 700;
+      line-height: 1.25;
+      letter-spacing: -0.01em;
+      color: var(--ink);
+      margin: 0 0 12px;
+    }
+
+    .principle p {
+      font-size: 14.5px;
+      line-height: 1.55;
+      color: var(--muted);
+      margin: 0;
+    }
+
+    .principle-hint {
+      margin-top: 24px;
+      font-size: 12.5px;
+      color: var(--muted);
+      font-weight: 500;
+      letter-spacing: 0.02em;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .principle-hint .pulse {
+      display: inline-block;
+      width: 7px;
+      height: 7px;
+      background: var(--brand);
+      border-radius: 50%;
+      animation: pulse 2s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(1.3); }
+    }
+
+    /* ============ TIMELINE ============ */
+    .timeline-controls {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 28px;
+      flex-wrap: wrap;
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .timeline-controls .filter-label {
+      font-weight: 600;
+      letter-spacing: 0.04em;
+    }
+
+    .filter-clear {
+      background: none;
+      border: none;
+      color: var(--brand-deep);
+      font-family: inherit;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      padding: 4px 8px;
+      border-radius: 4px;
+      transition: background 0.2s var(--ease);
+    }
+
+    .filter-clear:hover { background: var(--brand-soft); }
+    .filter-clear:disabled { opacity: 0.4; cursor: default; }
+
+    .timeline {
+      position: relative;
+      margin-top: 8px;
+    }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 92px;
+      top: 14px;
+      bottom: 14px;
+      width: 2px;
+      background: var(--rule);
+      border-radius: 2px;
+    }
+
+    .case {
+      position: relative;
+      padding: 22px 0 22px 140px;
+      border-bottom: 1px solid var(--rule-soft);
+      transition: opacity 0.3s var(--ease), background 0.2s var(--ease);
+      cursor: pointer;
+    }
+
+    .case:last-child { border-bottom: none; }
+
+    .case:hover { background: var(--brand-softer); }
+
+    .case.dimmed { opacity: 0.25; }
+
+    .case::before {
+      content: '';
+      position: absolute;
+      left: 86px;
+      top: 32px;
+      width: 14px;
+      height: 14px;
+      background: var(--white);
+      border: 3px solid var(--brand);
+      border-radius: 50%;
+      box-sizing: border-box;
+      transition: transform 0.25s var(--ease), background 0.25s var(--ease);
+      z-index: 1;
+    }
+
+    .case:hover::before { transform: scale(1.25); background: var(--brand); }
+    .case.expanded::before { background: var(--brand); transform: scale(1.25); }
+
+    .chapter.bg-alt .case::before { background: var(--off-white); }
+    .chapter.bg-alt .case:hover::before,
+    .chapter.bg-alt .case.expanded::before { background: var(--brand); }
+
+    .case-year {
+      position: absolute;
+      left: 0;
+      top: 22px;
+      width: 72px;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--muted);
+      letter-spacing: 0.04em;
+      text-align: right;
+    }
+
+    .case-header {
+      display: flex;
+      align-items: baseline;
+      gap: 14px;
+      flex-wrap: wrap;
+      margin-bottom: 6px;
+    }
+
+    .case-name {
+      font-size: 19px;
+      font-weight: 700;
+      letter-spacing: -0.015em;
+      color: var(--ink);
+    }
+
+    .case-name em { font-style: italic; font-weight: 700; font-feature-settings: "ss01"; }
+
+    .case-country {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted);
+      padding: 3px 8px;
+      background: var(--rule-soft);
+      border-radius: 4px;
+    }
+
+    .chapter.bg-alt .case-country { background: var(--white); }
+
+    .case-principle {
+      font-size: 16px;
+      line-height: 1.55;
+      color: var(--body);
+      max-width: 40em;
+    }
+
+    .case-toggle {
+      position: absolute;
+      right: 4px;
+      top: 24px;
+      width: 32px;
+      height: 32px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--muted-soft);
+      transition: transform 0.3s var(--ease), color 0.2s var(--ease);
+      pointer-events: none;
+    }
+
+    .case:hover .case-toggle { color: var(--brand-deep); }
+    .case.expanded .case-toggle { transform: rotate(90deg); color: var(--brand); }
+
+    .timeline-hint {
+      margin-bottom: 16px;
+      font-size: 12.5px;
+      color: var(--muted);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      letter-spacing: 0.02em;
+    }
+
+    .timeline-hint svg { color: var(--brand); flex: 0 0 auto; }
+
+    .case-tags {
+      display: flex;
+      gap: 6px;
+      margin-top: 12px;
+      flex-wrap: wrap;
+    }
+
+    .case-tag {
+      font-size: 10.5px;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      color: var(--brand-deep);
+      padding: 3px 9px;
+      border: 1px solid var(--brand-soft);
+      background: var(--brand-softer);
+      border-radius: 999px;
+      transition: all 0.2s var(--ease);
+    }
+
+    .case-tag.match {
+      background: var(--brand);
+      color: var(--white);
+      border-color: var(--brand);
+    }
+
+    .case-expand {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s var(--ease), margin-top 0.4s var(--ease);
+    }
+
+    .case.expanded .case-expand {
+      max-height: 400px;
+      margin-top: 18px;
+    }
+
+    .case-quote {
+      padding: 18px 22px;
+      background: var(--white);
+      border-left: 3px solid var(--brand);
+      border-radius: 4px;
+      font-size: 15px;
+      line-height: 1.6;
+      color: var(--body);
+      font-style: italic;
+    }
+
+    .chapter.bg-alt .case-quote { background: var(--off-white); border-color: var(--brand); background: var(--white); }
+
+    .case-quote-source {
+      display: block;
+      margin-top: 12px;
+      font-style: normal;
+      font-size: 11.5px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .case-hudoc-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 14px;
+      padding: 6px 12px 6px 10px;
+      background: var(--brand-soft);
+      color: var(--brand-deep);
+      border-radius: 999px;
+      text-decoration: none;
+      font-size: 12px;
+      font-weight: 600;
+      font-style: normal;
+      letter-spacing: 0.02em;
+      transition: background 0.2s var(--ease), color 0.2s var(--ease), transform 0.2s var(--ease);
+    }
+
+    .case-hudoc-link:hover {
+      background: var(--brand);
+      color: var(--white);
+      transform: translateX(2px);
+    }
+
+    .case-hudoc-link .icon { width: 13px; height: 13px; stroke-width: 2.2; }
+
+    /* ============ DRAWER (hamburger menu) ============ */
+    .menu-trigger {
+      background: var(--white);
+      border: 1px solid var(--rule);
+      border-radius: 999px;
+      width: 32px;
+      height: 32px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--muted);
+      cursor: pointer;
+      transition: all 0.2s var(--ease);
+      flex: 0 0 auto;
+    }
+    .menu-trigger:hover { color: var(--brand-deep); border-color: var(--brand); }
+    .menu-trigger .icon { width: 16px; height: 16px; stroke-width: 2.2; }
+
+    .drawer {
+      position: fixed;
+      inset: 0;
+      z-index: 250;
+    }
+    .drawer[hidden] { display: none; }
+
+    .drawer-backdrop {
+      position: absolute;
+      inset: 0;
+      background: rgba(10, 25, 41, 0.55);
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+      animation: drawerBackdropIn 0.2s ease;
+    }
+
+    @keyframes drawerBackdropIn { from { opacity: 0; } to { opacity: 1; } }
+
+    .drawer-panel {
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      width: min(420px, 92vw);
+      background: var(--white);
+      box-shadow: -10px 0 40px -10px rgba(10, 25, 41, 0.3);
+      display: flex;
+      flex-direction: column;
+      animation: drawerSlideIn 0.32s var(--ease);
+      overflow: hidden;
+    }
+
+    @keyframes drawerSlideIn {
+      from { transform: translateX(100%); }
+      to { transform: translateX(0); }
+    }
+
+    .drawer-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px 22px;
+      border-bottom: 1px solid var(--rule);
+      flex: 0 0 auto;
+    }
+
+    .drawer-head .drawer-title {
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--brand-deep);
+    }
+
+    .drawer-close {
+      background: var(--rule-soft);
+      border: none;
+      width: 32px;
+      height: 32px;
+      border-radius: 6px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--muted);
+      transition: all 0.15s var(--ease);
+    }
+    .drawer-close:hover { background: var(--rule); color: var(--ink); }
+    .drawer-close .icon { width: 14px; height: 14px; }
+
+    .drawer-content {
+      flex: 1;
+      overflow-y: auto;
+      padding: 6px 0 32px;
+    }
+
+    .drawer-section {
+      padding: 18px 22px 8px;
+    }
+
+    .drawer-section + .drawer-section {
+      border-top: 1px solid var(--rule-soft);
+    }
+
+    .drawer-section-label {
+      font-size: 10.5px;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--brand-deep);
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .drawer-section-label .icon { width: 14px; height: 14px; color: var(--brand); }
+
+    .drawer-toc { list-style: none; padding: 0; margin: 0; }
+
+    .drawer-toc li {
+      counter-increment: tocnum;
+    }
+
+    .drawer-toc a {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      padding: 9px 10px;
+      margin: 0 -10px;
+      border-radius: 6px;
+      text-decoration: none;
+      color: var(--ink);
+      font-size: 14px;
+      transition: background 0.15s var(--ease);
+    }
+
+    .drawer-toc a:hover { background: var(--brand-soft); }
+
+    .drawer-toc a.active { background: var(--brand); color: var(--white); }
+    .drawer-toc a.active .toc-icon { background: rgba(255, 255, 255, 0.22); color: var(--white); }
+    .drawer-toc a.active .toc-meta { color: rgba(255, 255, 255, 0.75); }
+
+    .toc-icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 28px;
+      height: 28px;
+      border-radius: 6px;
+      background: var(--brand-soft);
+      color: var(--brand-deep);
+      flex: 0 0 auto;
+      transition: background 0.15s var(--ease), color 0.15s var(--ease);
+    }
+    .toc-icon .icon { width: 14px; height: 14px; }
+
+    .toc-content { flex: 1; min-width: 0; }
+
+    .toc-meta {
+      font-size: 10.5px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 2px;
+    }
+
+    .toc-title {
+      font-size: 13.5px;
+      font-weight: 600;
+      letter-spacing: -0.005em;
+      line-height: 1.35;
+    }
+
+    .drawer-glossary { list-style: none; padding: 0; margin: 0; }
+
+    .drawer-glossary li {
+      padding: 12px 10px;
+      margin: 0 -10px;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background 0.15s var(--ease);
+    }
+    .drawer-glossary li:hover { background: var(--brand-soft); }
+
+    .glossary-term {
+      font-size: 13.5px;
+      font-weight: 700;
+      color: var(--ink);
+      margin-bottom: 3px;
+      letter-spacing: -0.005em;
+    }
+
+    .glossary-term .glossary-pron {
+      font-weight: 400;
+      font-size: 11.5px;
+      color: var(--muted);
+      letter-spacing: 0;
+      margin-left: 6px;
+      text-transform: lowercase;
+    }
+
+    .glossary-def {
+      font-size: 12.5px;
+      line-height: 1.5;
+      color: var(--muted);
+    }
+
+    .glossary-def strong { color: var(--ink); font-weight: 600; }
+
+    .drawer-tips {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .drawer-tips li {
+      padding: 8px 0 8px 24px;
+      position: relative;
+      font-size: 13px;
+      line-height: 1.5;
+      color: var(--body);
+    }
+
+    .drawer-tips li::before {
+      content: '';
+      position: absolute;
+      left: 8px;
+      top: 14px;
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: var(--brand);
+    }
+
+    .drawer-tips li kbd {
+      display: inline-block;
+      padding: 1px 5px;
+      background: var(--rule-soft);
+      border: 1px solid var(--rule);
+      border-radius: 3px;
+      font-family: ui-monospace, monospace;
+      font-size: 11px;
+      color: var(--ink);
+      font-weight: 600;
+    }
+
+    /* ============ SEARCH ============ */
+    .search-trigger {
+      background: var(--white);
+      border: 1px solid var(--rule);
+      border-radius: 999px;
+      height: 32px;
+      padding: 0 14px 0 12px;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--muted);
+      cursor: pointer;
+      font-family: inherit;
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+      transition: all 0.2s var(--ease);
+    }
+
+    .search-trigger:hover { color: var(--brand-deep); border-color: var(--brand); }
+    .search-trigger .icon { width: 14px; height: 14px; }
+
+    .search-kbd {
+      display: inline-flex;
+      align-items: center;
+      gap: 1px;
+      padding: 1px 6px;
+      background: var(--rule-soft);
+      border: 1px solid var(--rule);
+      border-radius: 3px;
+      font-family: ui-monospace, "SF Mono", monospace;
+      font-size: 10px;
+      color: var(--muted);
+      font-weight: 600;
+      margin-left: 4px;
+    }
+
+    @media (max-width: 720px) { .search-trigger .search-label, .search-trigger .search-kbd { display: none; } .search-trigger { padding: 0; width: 32px; justify-content: center; } }
+
+    .search-modal {
+      position: fixed;
+      inset: 0;
+      z-index: 200;
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      padding: 80px 20px 20px;
+    }
+
+    .search-modal[hidden] { display: none; }
+
+    .search-modal-backdrop {
+      position: absolute;
+      inset: 0;
+      background: rgba(10, 25, 41, 0.55);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      animation: searchBackdropIn 0.2s ease;
+    }
+
+    @keyframes searchBackdropIn { from { opacity: 0; } to { opacity: 1; } }
+
+    .search-modal-content {
+      position: relative;
+      background: var(--white);
+      border-radius: 12px;
+      width: 100%;
+      max-width: 640px;
+      box-shadow: 0 24px 60px -10px rgba(10, 25, 41, 0.45);
+      overflow: hidden;
+      animation: searchModalIn 0.25s var(--ease);
+    }
+
+    @keyframes searchModalIn { from { opacity: 0; transform: translateY(-12px) scale(0.98); } to { opacity: 1; transform: none; } }
+
+    .search-input-wrap {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 18px 20px;
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .search-input-wrap > .icon:first-child { color: var(--brand-deep); width: 20px; height: 20px; }
+
+    .search-input {
+      flex: 1;
+      border: none;
+      outline: none;
+      font-family: inherit;
+      font-size: 17px;
+      background: transparent;
+      color: var(--ink);
+      letter-spacing: -0.01em;
+      min-width: 0;
+    }
+
+    .search-input::placeholder { color: var(--muted-soft); }
+
+    .search-close {
+      background: var(--rule-soft);
+      border: none;
+      width: 30px;
+      height: 30px;
+      border-radius: 6px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--muted);
+      flex: 0 0 auto;
+      transition: all 0.15s var(--ease);
+    }
+
+    .search-close:hover { background: var(--rule); color: var(--ink); }
+    .search-close .icon { width: 14px; height: 14px; }
+
+    .search-results {
+      max-height: 60vh;
+      overflow-y: auto;
+      padding: 6px;
+    }
+
+    .search-empty {
+      padding: 40px 24px;
+      text-align: center;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    .search-empty .icon {
+      width: 32px; height: 32px; color: var(--muted-soft);
+      margin-bottom: 12px; opacity: 0.6;
+    }
+
+    .search-result {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      width: 100%;
+      padding: 12px 14px;
+      background: transparent;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      text-align: left;
+      font-family: inherit;
+      color: var(--ink);
+      transition: background 0.15s var(--ease);
+    }
+
+    .search-result:hover, .search-result.focused { background: var(--brand-soft); }
+
+    .search-result + .search-result { border-top: 1px solid var(--rule-soft); margin-top: 2px; }
+
+    .result-icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 34px;
+      height: 34px;
+      border-radius: 7px;
+      background: var(--brand-soft);
+      color: var(--brand-deep);
+      flex: 0 0 auto;
+    }
+
+    .result-icon .icon { width: 16px; height: 16px; }
+
+    .result-content { flex: 1; min-width: 0; }
+
+    .result-meta {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--brand-deep);
+      margin-bottom: 4px;
+    }
+
+    .result-title {
+      font-size: 14px;
+      font-weight: 600;
+      line-height: 1.3;
+      color: var(--ink);
+      margin-bottom: 4px;
+      letter-spacing: -0.005em;
+    }
+
+    .result-snippet {
+      font-size: 12.5px;
+      line-height: 1.5;
+      color: var(--muted);
+      overflow: hidden;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+    }
+
+    .result-snippet mark, .result-title mark {
+      background: rgba(77, 178, 236, 0.35);
+      color: var(--ink);
+      padding: 0 2px;
+      border-radius: 2px;
+      font-weight: 600;
+    }
+
+    .search-footer {
+      padding: 10px 18px;
+      border-top: 1px solid var(--rule);
+      font-size: 11px;
+      color: var(--muted);
+      letter-spacing: 0.02em;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: var(--off-white);
+    }
+
+    .search-footer kbd {
+      display: inline-block;
+      padding: 1px 5px;
+      background: var(--white);
+      border: 1px solid var(--rule);
+      border-radius: 3px;
+      font-family: ui-monospace, monospace;
+      font-size: 10px;
+      color: var(--ink);
+      font-weight: 600;
+      margin: 0 2px;
+    }
+
+    /* ============ CHAPTER RAIL (sticky journey beats) ============ */
+    .chapter-rail {
+      position: fixed;
+      right: 18px;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 50;
+      display: none;
+    }
+
+    @media (min-width: 1024px) { .chapter-rail { display: block; } }
+
+    .chapter-rail ol {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .chapter-rail a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      background: var(--white);
+      border: 1px solid var(--rule);
+      color: var(--muted);
+      text-decoration: none;
+      position: relative;
+      transition: all 0.25s var(--ease);
+    }
+
+    .chapter-rail a .icon { width: 14px; height: 14px; stroke-width: 2.2; }
+
+    .chapter-rail a:hover {
+      background: var(--brand-soft);
+      color: var(--brand-deep);
+      border-color: var(--brand);
+    }
+
+    .chapter-rail a.active {
+      background: var(--brand);
+      color: var(--white);
+      border-color: var(--brand);
+      transform: scale(1.18);
+      box-shadow: 0 4px 14px -2px rgba(77, 178, 236, 0.45);
+    }
+
+    .chapter-rail a.dark.active {
+      background: var(--ink);
+      color: var(--brand);
+      border-color: var(--ink);
+      box-shadow: 0 4px 14px -2px rgba(10, 25, 41, 0.4);
+    }
+
+    .rail-label {
+      position: absolute;
+      right: calc(100% + 12px);
+      top: 50%;
+      transform: translateY(-50%) translateX(8px);
+      background: var(--ink);
+      color: var(--white);
+      font-size: 10.5px;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      padding: 6px 10px;
+      border-radius: 4px;
+      white-space: nowrap;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.2s var(--ease), transform 0.2s var(--ease);
+    }
+
+    .rail-label::after {
+      content: '';
+      position: absolute;
+      left: 100%;
+      top: 50%;
+      transform: translateY(-50%);
+      border: 4px solid transparent;
+      border-left-color: var(--ink);
+    }
+
+    .chapter-rail a:hover .rail-label,
+    .chapter-rail a.active .rail-label {
+      opacity: 1;
+      transform: translateY(-50%) translateX(0);
+    }
+
+    /* ============ SCROLLYTELLING (BOND DECAY) ============ */
+    .scrolly {
+      position: relative;
+      background: var(--ink);
+      color: var(--white);
+      padding: clamp(80px, 12vh, 140px) 0 clamp(40px, 6vh, 80px);
+      isolation: isolate;
+    }
+
+    .scrolly-bg {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at 20% 20%, rgba(77, 178, 236, 0.15) 0%, transparent 50%),
+        radial-gradient(circle at 80% 80%, rgba(225, 29, 72, 0.10) 0%, transparent 55%);
+      pointer-events: none;
+    }
+
+    .scrolly-head {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 0 var(--pad) clamp(48px, 8vh, 80px);
+      position: relative;
+      z-index: 1;
+    }
+
+    .scrolly-tag {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--brand);
+      margin-bottom: 18px;
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      padding: 8px 14px 8px 10px;
+      background: rgba(77, 178, 236, 0.12);
+      border-radius: 999px;
+    }
+
+    .scrolly-tag .icon { width: 16px; height: 16px; color: var(--brand); }
+
+    .scrolly h2 {
+      font-size: clamp(28px, 4.5vw, 50px);
+      font-weight: 700;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      color: var(--white);
+      margin: 0 0 22px;
+      max-width: 20ch;
+    }
+
+    .scrolly .scrolly-sub {
+      font-size: clamp(17px, 1.9vw, 22px);
+      line-height: 1.5;
+      color: rgba(255, 255, 255, 0.75);
+      max-width: 38em;
+      margin: 0;
+      font-weight: 400;
+    }
+
+    .scrolly-sub em { color: var(--brand); font-style: italic; font-weight: 500; }
+
+    .scrolly-container {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 0 var(--pad);
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 40px;
+      position: relative;
+      z-index: 1;
+    }
+
+    @media (min-width: 880px) {
+      .scrolly-container { grid-template-columns: 1.05fr 1fr; gap: 60px; }
+    }
+
+    .scrolly-graphic {
+      position: sticky;
+      top: 100px;
+      height: calc(100vh - 160px);
+      max-height: 560px;
+      min-height: 420px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      align-self: start;
+    }
+
+    .bond-viz {
+      width: 100%;
+      height: 100%;
+      max-width: 560px;
+    }
+
+    .bond-viz .figure { transition: opacity 0.8s var(--ease), transform 0.8s var(--ease); transform-origin: center; }
+    .bond-viz .figure-child { transition-delay: 0.05s; }
+    .bond-viz .cord { transition: stroke-dasharray 0.8s var(--ease), stroke-opacity 0.8s var(--ease), stroke 0.8s var(--ease); }
+    .bond-viz .year-marker { transition: opacity 0.5s var(--ease); }
+
+    /* Decay states */
+    .bond-viz[data-state="0"] .cord { stroke-dasharray: 1000 0; stroke-opacity: 1; stroke: var(--brand); }
+    .bond-viz[data-state="0"] .figure-child { opacity: 1; }
+
+    .bond-viz[data-state="1"] .cord { stroke-dasharray: 32 6; stroke-opacity: 0.92; stroke: var(--brand); }
+    .bond-viz[data-state="1"] .figure-child { opacity: 0.96; }
+
+    .bond-viz[data-state="2"] .cord { stroke-dasharray: 20 14; stroke-opacity: 0.7; stroke: #6ec5f0; }
+    .bond-viz[data-state="2"] .figure-child { opacity: 0.78; transform: translateX(6px); }
+
+    .bond-viz[data-state="3"] .cord { stroke-dasharray: 10 26; stroke-opacity: 0.45; stroke: #a8a8a8; }
+    .bond-viz[data-state="3"] .figure-child { opacity: 0.55; transform: translateX(14px); }
+
+    .bond-viz[data-state="4"] .cord { stroke-dasharray: 4 36; stroke-opacity: 0.25; stroke: var(--accent); }
+    .bond-viz[data-state="4"] .figure-child { opacity: 0.28; transform: translateX(22px); }
+
+    .scrolly-steps {
+      display: flex;
+      flex-direction: column;
+      padding-top: 8vh;
+      padding-bottom: 30vh;
+    }
+
+    .scrolly-step {
+      min-height: 70vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      opacity: 0.32;
+      transition: opacity 0.6s var(--ease);
+      padding: 30px 0;
+    }
+
+    .scrolly-step.active { opacity: 1; }
+
+    .step-year {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 6px 14px;
+      background: var(--brand);
+      color: var(--ink);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      border-radius: 999px;
+      margin-bottom: 18px;
+      align-self: flex-start;
+      transition: background 0.4s var(--ease), color 0.4s var(--ease);
+    }
+
+    .scrolly-step[data-step="4"] .step-year { background: var(--accent); color: var(--white); }
+    .scrolly-step[data-step="3"] .step-year { background: rgba(168, 168, 168, 0.7); color: var(--ink); }
+
+    .scrolly-step p {
+      font-size: clamp(20px, 2.1vw, 26px);
+      line-height: 1.4;
+      color: var(--white);
+      font-weight: 500;
+      max-width: 22em;
+      margin: 0;
+      letter-spacing: -0.01em;
+    }
+
+    .scrolly-step p em {
+      color: var(--brand);
+      font-style: italic;
+      font-weight: 600;
+    }
+
+    .scrolly-step[data-step="4"] p em { color: var(--accent); }
+
+    /* Mobile: graphic appears above the steps, no sticky */
+    @media (max-width: 880px) {
+      .scrolly-graphic {
+        position: relative;
+        top: 0;
+        height: 280px;
+        min-height: 0;
+      }
+      .scrolly-step { min-height: auto; padding: 24px 0; }
+      .scrolly-steps { padding-bottom: 0; }
+    }
+
+    /* ============ STATS (dramatic) ============ */
+    .stats-dramatic {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      margin-top: 16px;
+    }
+
+    .stat-row {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 24px;
+      padding: 56px 0;
+      border-top: 1px solid var(--rule);
+      align-items: center;
+    }
+
+    .stat-row:last-child { border-bottom: 1px solid var(--rule); }
+
+    @media (min-width: 720px) {
+      .stat-row { grid-template-columns: minmax(220px, 320px) 1fr; gap: 48px; }
+    }
+
+    .stat-figure {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .stat-figure-num {
+      font-family: var(--sans);
+      font-weight: 900;
+      font-size: clamp(96px, 18vw, 200px);
+      line-height: 0.85;
+      letter-spacing: -0.06em;
+      color: var(--brand-deep);
+      font-variant-numeric: tabular-nums;
+      font-feature-settings: "tnum";
+    }
+
+    .stat-figure-num.accent { color: var(--accent); }
+    .stat-figure-num.ink { color: var(--ink); }
+
+    .stat-figure-unit {
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-top: 12px;
+    }
+
+    .stat-figure-unit strong { color: var(--brand-deep); font-weight: 700; }
+
+    .stat-body p {
+      font-size: clamp(18px, 1.9vw, 22px);
+      line-height: 1.4;
+      color: var(--ink);
+      margin: 0 0 14px;
+      max-width: 32em;
+      font-weight: 500;
+      letter-spacing: -0.005em;
+    }
+
+    .stat-body p strong { background: rgba(225, 29, 72, 0.12); padding: 0 4px; color: var(--accent); font-weight: 700; }
+
+    .stat-body p em { color: var(--brand-deep); font-style: italic; font-weight: 600; }
+
+    .stat-body .stat-citation {
+      font-size: 11.5px;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--muted);
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .stat-body .stat-citation::before {
+      content: '';
+      width: 18px;
+      height: 1px;
+      background: var(--brand);
+    }
+
+    /* Month grid viz for Ribić */
+    .viz-months {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 3px;
+      max-width: 560px;
+      margin-top: 18px;
+    }
+
+    .viz-month {
+      aspect-ratio: 1;
+      background: var(--rule-soft);
+      border-radius: 1.5px;
+      transition: background 0.4s ease, transform 0.4s ease;
+    }
+
+    .viz-month.visit {
+      background: var(--brand);
+      box-shadow: 0 0 0 2px var(--brand-soft);
+      transform: scale(1.4);
+      z-index: 1;
+      position: relative;
+    }
+
+    .viz-months-legend {
+      display: flex;
+      gap: 20px;
+      margin-top: 14px;
+      font-size: 12px;
+      color: var(--muted);
+      font-weight: 500;
+      letter-spacing: 0.02em;
+    }
+
+    .viz-legend-key {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .viz-legend-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 2px;
+      background: var(--rule-soft);
+    }
+
+    .viz-legend-dot.visit {
+      background: var(--brand);
+    }
+
+    /* Petitions stack viz for Ónodi */
+    .viz-petitions {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 4px 6px;
+      max-width: 560px;
+      margin-top: 18px;
+    }
+
+    .viz-petition {
+      aspect-ratio: 0.72;
+      background: linear-gradient(180deg, var(--off-white) 0%, var(--rule-soft) 100%);
+      border: 1px solid var(--rule);
+      border-radius: 1.5px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .viz-petition::before {
+      content: '';
+      position: absolute;
+      left: 18%; right: 18%; top: 28%;
+      height: 1px;
+      background: var(--muted-soft);
+      opacity: 0.4;
+    }
+    .viz-petition::after {
+      content: '';
+      position: absolute;
+      left: 18%; right: 36%; top: 44%;
+      height: 1px;
+      background: var(--muted-soft);
+      opacity: 0.4;
+    }
+
+    .viz-petition .stamp {
+      position: absolute;
+      inset: 60% 12% 12% 12%;
+      background: var(--accent);
+      transform: rotate(-12deg);
+      opacity: 0;
+      border-radius: 1px;
+      animation: stampDrop 0.4s ease forwards;
+    }
+
+    @keyframes stampDrop {
+      0% { opacity: 0; transform: rotate(-12deg) translateY(-6px) scale(1.4); }
+      100% { opacity: 0.85; transform: rotate(-12deg) translateY(0) scale(1); }
+    }
+
+    .viz-petitions-caption {
+      margin-top: 14px;
+      font-size: 12.5px;
+      color: var(--muted);
+      letter-spacing: 0.04em;
+    }
+
+    .viz-petitions-caption strong { color: var(--accent); font-weight: 700; }
+
+    /* ============ COMPARISON ============ */
+    .compare-wrap {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 0;
+      margin-top: 8px;
+      border: 1px solid var(--rule);
+      border-radius: 10px;
+      overflow: hidden;
+      background: var(--white);
+    }
+
+    @media (min-width: 760px) {
+      .compare-wrap { grid-template-columns: 1fr 1fr; }
+    }
+
+    .compare-col {
+      padding: 0;
+    }
+
+    .compare-head {
+      padding: 18px 24px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .compare-head .badge {
+      display: inline-block;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+    }
+
+    .compare-col.standard .compare-head { background: var(--ink); color: var(--white); }
+    .compare-col.standard .compare-head .badge { background: var(--brand); }
+    .compare-col.practice .compare-head { background: var(--off-white); color: var(--ink); border-bottom: 1px solid var(--rule); }
+    .compare-col.practice .compare-head .badge { background: var(--accent); }
+
+    @media (min-width: 760px) {
+      .compare-col.practice .compare-head { border-bottom: 1px solid var(--rule); border-left: 1px solid var(--rule); }
+    }
+
+    .compare-row {
+      padding: 20px 24px;
+      border-top: 1px solid var(--rule);
+      font-size: 15.5px;
+      line-height: 1.55;
+      color: var(--body);
+      transition: background 0.2s var(--ease), opacity 0.5s var(--ease), transform 0.5s var(--ease);
+      cursor: pointer;
+      opacity: 0;
+      transform: translateY(14px);
+    }
+
+    .compare-row.in {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .compare-wrap.has-focus .compare-row:not(.pair-focused) {
+      opacity: 0.32;
+    }
+    .compare-wrap.has-focus .compare-row.pair-focused {
+      opacity: 1;
+    }
+
+    .compare-row.pair-focused {
+      background: var(--brand-softer);
+      box-shadow: inset 3px 0 0 0 var(--brand);
+    }
+    .compare-col.practice .compare-row.pair-focused {
+      background: var(--accent-soft);
+      box-shadow: inset 3px 0 0 0 var(--accent);
+    }
+
+    .compare-col.standard .compare-row {
+      background: var(--white);
+    }
+
+    .compare-col.practice .compare-row {
+      background: var(--off-white);
+    }
+
+    @media (min-width: 760px) {
+      .compare-col.practice .compare-row { border-left: 1px solid var(--rule); }
+    }
+
+    .compare-row strong {
+      color: var(--ink);
+      font-weight: 700;
+    }
+
+    .compare-row:hover,
+    .compare-row.pair-hover { background: var(--brand-softer); }
+
+    .compare-col.practice .compare-row:hover,
+    .compare-col.practice .compare-row.pair-hover { background: var(--accent-soft); }
+
+    /* ============ NORWAY RECORD ============ */
+    .record-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 32px;
+      margin-top: 16px;
+    }
+
+    @media (min-width: 960px) {
+      .record-grid { grid-template-columns: 1.55fr 1fr; gap: 40px; align-items: start; }
+    }
+
+    .record-stats {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0;
+      border-top: 2px solid var(--ink);
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .record-stat {
+      padding: 28px 24px 28px 0;
+      border-right: 1px solid var(--rule);
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .record-stat:nth-child(even) { border-right: none; padding-left: 28px; }
+    .record-stat:nth-last-child(-n+2) { border-bottom: none; }
+
+    @media (max-width: 600px) {
+      .record-stats { grid-template-columns: 1fr; }
+      .record-stat { border-right: none; padding: 24px 0; }
+      .record-stat:nth-child(even) { padding-left: 0; }
+    }
+
+    .record-stat .rs-num {
+      font-weight: 800;
+      font-size: clamp(40px, 5.5vw, 64px);
+      line-height: 0.95;
+      letter-spacing: -0.04em;
+      color: var(--brand-deep);
+      margin-bottom: 14px;
+      font-variant-numeric: tabular-nums;
+      font-feature-settings: "tnum";
+    }
+
+    .record-stat .rs-num.accent { color: var(--accent); }
+
+    .record-stat .rs-label {
+      font-size: 14px;
+      line-height: 1.5;
+      color: var(--body);
+      font-weight: 400;
+      max-width: 26em;
+    }
+
+    .record-stat .rs-source {
+      display: block;
+      margin-top: 10px;
+      font-size: 10.5px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .record-callout {
+      padding: 32px 28px;
+      background: var(--ink);
+      color: var(--white);
+      border-radius: 8px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .record-callout::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 100% 0%, rgba(77, 178, 236, 0.18) 0%, transparent 55%);
+      pointer-events: none;
+    }
+
+    .callout-label {
+      font-size: 10.5px;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--brand);
+      margin-bottom: 18px;
+    }
+
+    .callout-quote {
+      margin: 0 0 18px;
+      padding: 0;
+      font-size: 18px;
+      line-height: 1.45;
+      font-weight: 500;
+      color: var(--white);
+      letter-spacing: -0.005em;
+    }
+
+    .callout-cite {
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      color: rgba(255, 255, 255, 0.6);
+    }
+
+    .record-note {
+      margin-top: 36px;
+      padding: 20px 24px;
+      background: var(--brand-softer);
+      border-left: 3px solid var(--brand);
+      border-radius: 4px;
+      font-size: 14.5px;
+      line-height: 1.6;
+      color: var(--body);
+      max-width: 48em;
+    }
+
+    .record-note strong { color: var(--ink); font-weight: 700; }
+
+    /* ============ SOURCES ============ */
+    .source-list {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 12px;
+      margin-top: 16px;
+    }
+
+    @media (min-width: 720px) {
+      .source-list { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    .source-card {
+      padding: 24px 26px;
+      background: var(--white);
+      border: 1px solid var(--rule);
+      border-radius: 8px;
+      text-decoration: none;
+      color: inherit;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      transition: all 0.25s var(--ease);
+      position: relative;
+    }
+
+    .src-icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 38px;
+      height: 38px;
+      border-radius: 8px;
+      background: var(--brand-soft);
+      color: var(--brand-deep);
+      margin-bottom: 6px;
+      transition: background 0.2s var(--ease), color 0.2s var(--ease);
+    }
+
+    .src-icon .icon { width: 18px; height: 18px; }
+
+    .source-card:hover .src-icon { background: var(--brand); color: var(--white); }
+
+    .chapter.bg-alt .source-card { background: var(--white); }
+
+    .source-card:hover {
+      transform: translateY(-2px);
+      border-color: var(--brand);
+      box-shadow: 0 10px 24px -12px rgba(26, 127, 184, 0.18);
+    }
+
+    .source-card .src-label {
+      font-size: 10.5px;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--brand-deep);
+    }
+
+    .source-card .src-title {
+      font-size: 16px;
+      font-weight: 600;
+      line-height: 1.35;
+      color: var(--ink);
+      letter-spacing: -0.01em;
+    }
+
+    .source-card .src-url {
+      font-size: 12px;
+      color: var(--muted);
+      margin-top: 6px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .source-card .src-url::after {
+      content: '→';
+      transition: transform 0.2s var(--ease);
+    }
+
+    .source-card:hover .src-url::after { transform: translateX(4px); }
+
+    /* ============ FOOTER ============ */
+    .site-footer {
+      padding: 64px var(--pad) 48px;
+      border-top: 1px solid var(--rule);
+      background: var(--white);
+    }
+
+    .site-footer .inner {
+      max-width: var(--max);
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 32px;
+    }
+
+    @media (min-width: 760px) {
+      .site-footer .inner { grid-template-columns: 1.5fr 1fr; gap: 56px; }
+    }
+
+    .footer-mark {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      margin-bottom: 18px;
+    }
+
+    .footer-logo {
+      height: 64px;
+      width: auto;
+      display: block;
+    }
+
+    .footer-mark-text span {
+      display: block;
+      font-size: 13px;
+      color: var(--muted);
+      letter-spacing: 0.02em;
+    }
+
+    .site-footer p {
+      font-size: 13.5px;
+      line-height: 1.7;
+      color: var(--muted);
+      margin: 0 0 12px;
+      max-width: 56em;
+    }
+
+    .site-footer a {
+      color: var(--brand-deep);
+      text-decoration: underline;
+      text-decoration-color: var(--brand-soft);
+      text-underline-offset: 3px;
+      transition: text-decoration-color 0.2s var(--ease);
+    }
+
+    .site-footer a:hover { text-decoration-color: var(--brand); }
+
+    .footer-meta {
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted-soft);
+      padding-top: 24px;
+      border-top: 1px solid var(--rule-soft);
+      margin-top: 24px;
+      grid-column: 1 / -1;
+    }
+
+    /* ============ ANIMATIONS ============ */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 1s var(--ease), transform 1s var(--ease);
+    }
+
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ============ RESPONSIVE ============ */
+    @media (max-width: 720px) {
+      body { font-size: 16px; }
+
+      .header-right { gap: 10px; }
+      .brand-divider, .brand-tagline { display: none; }
+
+      .timeline::before { left: 12px; }
+      .case { padding: 22px 0 22px 38px; }
+      .case::before { left: 6px; top: 26px; }
+      .case-year { position: static; text-align: left; width: auto; margin-bottom: 8px; display: block; }
+      .case-name { font-size: 17px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .fade-in { opacity: 1; transform: none; transition: none; }
+      html { scroll-behavior: auto; }
+      .principle:hover { transform: none; }
+      .source-card:hover { transform: none; }
+      .pulse { animation: none; }
+    }
+  </style>
+</head>
+<body>
+  <svg width="0" height="0" style="position:absolute;overflow:hidden" aria-hidden="true">
+    <defs>
+      <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15.5 14"/></symbol>
+      <symbol id="i-bolt" viewBox="0 0 24 24"><path d="M13 2L4 14h7l-1 8L20 10h-7z"/></symbol>
+      <symbol id="i-search" viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6.5"/><line x1="15.5" y1="15.5" x2="20.5" y2="20.5"/></symbol>
+      <symbol id="i-unlink" viewBox="0 0 24 24"><path d="M15 7h2a5 5 0 0 1 0 10h-2"/><path d="M9 17H7A5 5 0 0 1 7 7h2"/><line x1="6" y1="6" x2="18" y2="18"/></symbol>
+      <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/></symbol>
+      <symbol id="i-grid" viewBox="0 0 24 24"><rect x="3.5" y="3.5" width="7" height="7" rx="0.5"/><rect x="13.5" y="3.5" width="7" height="7" rx="0.5"/><rect x="3.5" y="13.5" width="7" height="7" rx="0.5"/><rect x="13.5" y="13.5" width="7" height="7" rx="0.5"/></symbol>
+      <symbol id="i-gavel" viewBox="0 0 24 24"><line x1="3" y1="21" x2="21" y2="21"/><line x1="13" y1="11" x2="3" y2="21"/><rect x="10" y="3" width="9" height="6" rx="1" transform="rotate(45 14.5 6)"/></symbol>
+      <symbol id="i-trending" viewBox="0 0 24 24"><polyline points="3 17 9 11 13 15 21 7"/><polyline points="14 7 21 7 21 14"/></symbol>
+      <symbol id="i-balance" viewBox="0 0 24 24"><line x1="12" y1="3" x2="12" y2="21"/><line x1="3" y1="7" x2="21" y2="7"/><path d="M5 7l-2 6h4z"/><path d="M19 7l-2 6h4z"/><line x1="8" y1="21" x2="16" y2="21"/></symbol>
+      <symbol id="i-flag" viewBox="0 0 24 24"><line x1="5" y1="22" x2="5" y2="3"/><path d="M5 3h13l-2 4 2 4H5"/></symbol>
+      <symbol id="i-book" viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></symbol>
+      <symbol id="i-external" viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></symbol>
+      <symbol id="i-arrow-down" viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><polyline points="19 12 12 19 5 12"/></symbol>
+      <symbol id="i-chevron-right" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></symbol>
+      <symbol id="i-quote" viewBox="0 0 24 24"><path d="M7 7h4v4H7a3 3 0 0 0-3 3v4h0v-7a4 4 0 0 1 3-4z"/><path d="M16 7h4v4h-4a3 3 0 0 0-3 3v4h0v-7a4 4 0 0 1 3-4z"/></symbol>
+      <symbol id="i-document" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="8" y1="13" x2="16" y2="13"/><line x1="8" y1="17" x2="13" y2="17"/></symbol>
+      <symbol id="i-search-x" viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6.5"/><line x1="15.5" y1="15.5" x2="20.5" y2="20.5"/><line x1="8" y1="8" x2="13" y2="13"/><line x1="13" y1="8" x2="8" y2="13"/></symbol>
+      <symbol id="i-close" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></symbol>
+      <symbol id="i-parent" viewBox="0 0 24 24"><circle cx="12" cy="6" r="3"/><path d="M5 22V14a3 3 0 0 1 3-3h8a3 3 0 0 1 3 3v8"/></symbol>
+      <symbol id="i-child" viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.5"/><path d="M7 22v-6a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v6"/></symbol>
+      <symbol id="i-family" viewBox="0 0 24 24"><circle cx="8" cy="6" r="2.5"/><path d="M3 22v-8a2.5 2.5 0 0 1 2.5-2.5H10A2.5 2.5 0 0 1 12.5 14v8"/><circle cx="17" cy="9" r="2"/><path d="M13.5 22v-6a2 2 0 0 1 2-2H19a2 2 0 0 1 2 2v6"/></symbol>
+      <symbol id="i-judge" viewBox="0 0 24 24"><circle cx="12" cy="9" r="2.5"/><path d="M6 22v-7a3 3 0 0 1 3-3h6a3 3 0 0 1 3 3v7"/><path d="M7 5l5 2 5-2"/><line x1="12" y1="3" x2="12" y2="7"/></symbol>
+      <symbol id="i-lawyer" viewBox="0 0 24 24"><rect x="3" y="9" width="18" height="12" rx="1"/><path d="M9 9V6a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v3"/><line x1="3" y1="14" x2="21" y2="14"/><circle cx="12" cy="14" r="0.5" fill="currentColor"/></symbol>
+      <symbol id="i-mediator" viewBox="0 0 24 24"><circle cx="5" cy="7" r="2"/><circle cx="19" cy="7" r="2"/><circle cx="12" cy="14" r="2.5"/><path d="M5 10v3M19 10v3M12 17v4"/><path d="M7 12c1.5 1 3 1.5 5 1.5s3.5-.5 5-1.5"/></symbol>
+      <symbol id="i-court" viewBox="0 0 24 24"><polyline points="3 9 12 3 21 9"/><line x1="3" y1="21" x2="21" y2="21"/><line x1="3" y1="18" x2="21" y2="18"/><line x1="5" y1="9" x2="5" y2="18"/><line x1="9" y1="9" x2="9" y2="18"/><line x1="15" y1="9" x2="15" y2="18"/><line x1="19" y1="9" x2="19" y2="18"/></symbol>
+      <symbol id="i-state" viewBox="0 0 24 24"><rect x="4" y="11" width="16" height="10"/><line x1="4" y1="21" x2="20" y2="21"/><polyline points="6 11 12 7 18 11"/><line x1="12" y1="7" x2="12" y2="4"/><path d="M12 4h5l-1 1.5 1 1.5h-5"/></symbol>
+      <symbol id="i-care" viewBox="0 0 24 24"><path d="M12 21s-7-4-7-10a4 4 0 0 1 7-2.5A4 4 0 0 1 19 11c0 6-7 10-7 10z"/></symbol>
+      <symbol id="i-hourglass" viewBox="0 0 24 24"><path d="M6 2h12M6 22h12M6 2v4a6 6 0 0 0 6 6 6 6 0 0 0 6-6V2M18 22v-4a6 6 0 0 0-6-6 6 6 0 0 0-6 6v4"/></symbol>
+      <symbol id="i-menu" viewBox="0 0 24 24"><line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="14" y2="17"/></symbol>
+      <symbol id="i-book-open" viewBox="0 0 24 24"><path d="M2 4h7a3 3 0 0 1 3 3v14a2 2 0 0 0-2-2H2zM22 4h-7a3 3 0 0 0-3 3v14a2 2 0 0 1 2-2h8z"/></symbol>
+      <symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="11" x2="12" y2="16"/><circle cx="12" cy="8" r="0.6" fill="currentColor"/></symbol>
+      <symbol id="i-list" viewBox="0 0 24 24"><line x1="8" y1="6" x2="20" y2="6"/><line x1="8" y1="12" x2="20" y2="12"/><line x1="8" y1="18" x2="20" y2="18"/><circle cx="4" cy="6" r="1" fill="currentColor"/><circle cx="4" cy="12" r="1" fill="currentColor"/><circle cx="4" cy="18" r="1" fill="currentColor"/></symbol>
+    </defs>
+  </svg>
+
+  <nav class="chapter-rail" aria-label="Chapter navigation" id="chapter-rail"></nav>
+
+  <header class="site-header">
+    <a class="brand" href="#top">
+      <img src="mannsforum-logo.png" alt="MannsForum" class="brand-logo" />
+      <span class="brand-divider" aria-hidden="true"></span>
+      <span class="brand-tagline" data-i18n="brand_tagline"></span>
+    </a>
+    <div class="header-right">
+      <div class="progress-rail" aria-hidden="true">
+        <div class="progress-fill" id="progress-fill"></div>
+      </div>
+      <button class="search-trigger" id="search-trigger" aria-label="Search">
+        <svg class="icon"><use href="#i-search"/></svg>
+        <span class="search-label" data-i18n="search_label"></span>
+        <span class="search-kbd">⌘K</span>
+      </button>
+      <div class="lang-toggle" role="group" aria-label="Language">
+        <button data-lang="no" aria-label="Norsk" aria-pressed="true">NO</button>
+        <button data-lang="en" aria-label="English" aria-pressed="false">EN</button>
+      </div>
+      <button class="menu-trigger" id="menu-trigger" aria-label="Menu" aria-haspopup="dialog" aria-expanded="false">
+        <svg class="icon"><use href="#i-menu"/></svg>
+      </button>
+    </div>
+  </header>
+
+  <div class="drawer" id="drawer" hidden role="dialog" aria-modal="true" aria-label="Navigation menu" aria-hidden="true">
+    <div class="drawer-backdrop" id="drawer-backdrop"></div>
+    <aside class="drawer-panel">
+      <div class="drawer-head">
+        <span class="drawer-title" data-i18n="menu_title"></span>
+        <button class="drawer-close" id="drawer-close" aria-label="Close"><svg class="icon"><use href="#i-close"/></svg></button>
+      </div>
+      <div class="drawer-content">
+        <div class="drawer-section">
+          <div class="drawer-section-label"><svg class="icon"><use href="#i-list"/></svg><span data-i18n="menu_chapters"></span></div>
+          <ul class="drawer-toc" id="drawer-toc"></ul>
+        </div>
+        <div class="drawer-section">
+          <div class="drawer-section-label"><svg class="icon"><use href="#i-book-open"/></svg><span data-i18n="menu_glossary"></span></div>
+          <ul class="drawer-glossary" id="drawer-glossary"></ul>
+        </div>
+        <div class="drawer-section">
+          <div class="drawer-section-label"><svg class="icon"><use href="#i-info"/></svg><span data-i18n="menu_how"></span></div>
+          <ul class="drawer-tips" id="drawer-tips"></ul>
+        </div>
+      </div>
+    </aside>
+  </div>
+
+  <div class="search-modal" id="search-modal" hidden aria-hidden="true" role="dialog" aria-label="Search">
+    <div class="search-modal-backdrop" id="search-backdrop"></div>
+    <div class="search-modal-content">
+      <div class="search-input-wrap">
+        <svg class="icon"><use href="#i-search"/></svg>
+        <input type="search" class="search-input" id="search-input" autocomplete="off" spellcheck="false" />
+        <button class="search-close" id="search-close" aria-label="Close"><svg class="icon"><use href="#i-close"/></svg></button>
+      </div>
+      <div class="search-results" id="search-results"></div>
+      <div class="search-footer">
+        <span data-i18n="search_hint"></span>
+        <span><kbd>↑</kbd><kbd>↓</kbd> · <kbd>↵</kbd> · <kbd>esc</kbd></span>
+      </div>
+    </div>
+  </div>
+
+  <main id="top">
+    <section class="hero">
+      <div class="hero-grid" aria-hidden="true"></div>
+      <div class="hero-inner">
+        <div class="eyebrow" data-i18n="hero_eyebrow"></div>
+        <h1 data-i18n="hero_title"></h1>
+        <p class="lede" data-i18n="hero_lede"></p>
+        <div class="hero-meta">
+          <div class="hero-meta-item"><span class="dot"></span><span><strong data-i18n="meta1_n"></strong> <span data-i18n="meta1_l"></span></span></div>
+          <div class="hero-meta-item"><span class="dot"></span><span><strong data-i18n="meta2_n"></strong> <span data-i18n="meta2_l"></span></span></div>
+          <div class="hero-meta-item"><span class="dot"></span><span><strong data-i18n="meta3_n"></strong> <span data-i18n="meta3_l"></span></span></div>
+        </div>
+        <a href="#ch0" class="scroll-cue"><span data-i18n="scroll_cue"></span><svg class="icon icon-sm arrow"><use href="#i-arrow-down"/></svg></a>
+      </div>
+    </section>
+
+    <section class="chapter ch-start fade-in" id="ch0">
+      <div class="inner">
+        <div class="chapter-head">
+          <div class="section-tag"><svg class="icon"><use href="#i-family"/></svg><span data-i18n="ch0_tag"></span></div>
+          <h2 data-i18n="ch0_title"></h2>
+          <p class="intro large" data-i18n="ch0_intro"></p>
+        </div>
+        <div class="opener-grid">
+          <div class="opener-card">
+            <span class="opener-icon"><svg class="icon"><use href="#i-family"/></svg></span>
+            <h3 data-i18n="op1_title"></h3>
+            <p data-i18n="op1_body"></p>
+          </div>
+          <div class="opener-card">
+            <span class="opener-icon"><svg class="icon"><use href="#i-shield"/></svg></span>
+            <h3 data-i18n="op2_title"></h3>
+            <p data-i18n="op2_body"></p>
+          </div>
+          <div class="opener-card">
+            <span class="opener-icon"><svg class="icon"><use href="#i-state"/></svg></span>
+            <h3 data-i18n="op3_title"></h3>
+            <p data-i18n="op3_body"></p>
+          </div>
+          <div class="opener-card">
+            <span class="opener-icon"><svg class="icon"><use href="#i-hourglass"/></svg></span>
+            <h3 data-i18n="op4_title"></h3>
+            <p data-i18n="op4_body"></p>
+          </div>
+        </div>
+        <div class="opener-actors">
+          <h3 data-i18n="actors_title"></h3>
+          <p class="opener-actors-sub" data-i18n="actors_sub"></p>
+          <div class="actors-grid" id="actors-grid"></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="chapter fade-in" id="ch1">
+      <div class="inner">
+        <div class="chapter-head">
+          <div class="section-tag"><svg class="icon"><use href="#i-shield"/></svg><span data-i18n="ch1_tag"></span></div>
+          <h2 data-i18n="ch1_title"></h2>
+          <p class="intro large" data-i18n="ch1_intro"></p>
+        </div>
+        <div class="treaty">
+          <div class="treaty-quote">
+            <div class="label" data-i18n="treaty_label"></div>
+            <div class="article-num">Art. 8</div>
+            <div class="body" data-i18n="treaty_body"></div>
+            <div class="citation" data-i18n="treaty_cite"></div>
+          </div>
+          <div class="treaty-side">
+            <div class="treaty-fact">
+              <div class="ff-label" data-i18n="ff1_label"></div>
+              <div class="ff-body" data-i18n="ff1_body"></div>
+            </div>
+            <div class="treaty-fact">
+              <div class="ff-label" data-i18n="ff2_label"></div>
+              <div class="ff-body" data-i18n="ff2_body"></div>
+            </div>
+            <div class="treaty-fact">
+              <div class="ff-label" data-i18n="ff3_label"></div>
+              <div class="ff-body" data-i18n="ff3_body"></div>
+            </div>
+            <div class="treaty-fact ff-highlight">
+              <div class="ff-label" data-i18n="ff4_label"></div>
+              <div class="ff-body" data-i18n="ff4_body"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="chapter bg-alt fade-in" id="ch2">
+      <div class="inner">
+        <div class="chapter-head">
+          <div class="section-tag"><svg class="icon"><use href="#i-grid"/></svg><span data-i18n="ch2_tag"></span></div>
+          <h2 data-i18n="ch2_title"></h2>
+          <p class="intro large" data-i18n="ch2_intro"></p>
+        </div>
+        <div class="principles" id="principles-grid"></div>
+        <p class="principle-hint"><span class="pulse"></span><span data-i18n="principle_hint"></span></p>
+      </div>
+    </section>
+
+    <section class="chapter fade-in" id="ch3">
+      <div class="inner">
+        <div class="chapter-head">
+          <div class="section-tag"><svg class="icon"><use href="#i-gavel"/></svg><span data-i18n="ch3_tag"></span></div>
+          <h2 data-i18n="ch3_title"></h2>
+          <p class="intro large" data-i18n="ch3_intro"></p>
+        </div>
+        <div class="timeline-controls">
+          <span class="filter-label" data-i18n="filter_label"></span>
+          <span id="filter-status" data-i18n="filter_none"></span>
+          <button class="filter-clear" id="filter-clear" data-i18n="filter_clear" disabled></button>
+        </div>
+        <p class="timeline-hint">
+          <svg class="icon icon-sm" aria-hidden="true"><use href="#i-chevron-right"/></svg>
+          <span data-i18n="timeline_hint"></span>
+        </p>
+        <div class="timeline" id="case-timeline"></div>
+      </div>
+    </section>
+
+    <section class="scrolly" id="scrolly-decay" aria-labelledby="scrolly-title">
+      <div class="scrolly-bg" aria-hidden="true"></div>
+      <div class="scrolly-head">
+        <div class="scrolly-tag"><svg class="icon"><use href="#i-clock"/></svg><span data-i18n="scrolly_tag"></span></div>
+        <h2 id="scrolly-title" data-i18n="scrolly_title"></h2>
+        <p class="scrolly-sub" data-i18n="scrolly_sub"></p>
+      </div>
+      <div class="scrolly-container">
+        <div class="scrolly-graphic">
+          <svg class="bond-viz" viewBox="0 0 600 320" preserveAspectRatio="xMidYMid meet" data-state="0" aria-hidden="true">
+            <defs>
+              <filter id="bond-glow" x="-50%" y="-50%" width="200%" height="200%">
+                <feGaussianBlur stdDeviation="6" result="b"/>
+                <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+              </filter>
+            </defs>
+
+            <text class="year-marker" x="300" y="38" text-anchor="middle"
+                  fill="rgba(255,255,255,0.45)" font-size="11" font-weight="700"
+                  letter-spacing="3" font-family="Inter,sans-serif">YEAR 0</text>
+
+            <g class="figure figure-parent" fill="#4db2ec">
+              <circle cx="140" cy="135" r="22"/>
+              <path d="M115 162 h50 v110 a8 8 0 0 1 -8 8 h-34 a8 8 0 0 1 -8 -8 z M132 220 h16 v60"/>
+            </g>
+
+            <g class="figure figure-child" fill="#4db2ec">
+              <circle cx="460" cy="158" r="16"/>
+              <path d="M442 178 h36 v85 a6 6 0 0 1 -6 6 h-24 a6 6 0 0 1 -6 -6 z M453 220 h14 v45"/>
+            </g>
+
+            <path class="cord" d="M165 200 Q300 130 442 200"
+                  fill="none" stroke="#4db2ec" stroke-width="3.5"
+                  stroke-linecap="round" filter="url(#bond-glow)"/>
+
+            <g class="cord-anchor" fill="#4db2ec">
+              <circle cx="165" cy="200" r="4"/>
+              <circle cx="442" cy="200" r="4"/>
+            </g>
+          </svg>
+        </div>
+        <div class="scrolly-steps" id="scrolly-steps">
+          <div class="scrolly-step" data-step="0">
+            <span class="step-year" data-i18n="scrolly_y0_label"></span>
+            <p data-i18n="scrolly_y0_text"></p>
+          </div>
+          <div class="scrolly-step" data-step="1">
+            <span class="step-year" data-i18n="scrolly_y1_label"></span>
+            <p data-i18n="scrolly_y1_text"></p>
+          </div>
+          <div class="scrolly-step" data-step="2">
+            <span class="step-year" data-i18n="scrolly_y2_label"></span>
+            <p data-i18n="scrolly_y2_text"></p>
+          </div>
+          <div class="scrolly-step" data-step="3">
+            <span class="step-year" data-i18n="scrolly_y3_label"></span>
+            <p data-i18n="scrolly_y3_text"></p>
+          </div>
+          <div class="scrolly-step" data-step="4">
+            <span class="step-year" data-i18n="scrolly_y4_label"></span>
+            <p data-i18n="scrolly_y4_text"></p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="chapter bg-alt fade-in" id="ch4">
+      <div class="inner">
+        <div class="chapter-head">
+          <div class="section-tag"><svg class="icon"><use href="#i-trending"/></svg><span data-i18n="ch4_tag"></span></div>
+          <h2 data-i18n="ch4_title"></h2>
+          <p class="intro large" data-i18n="ch4_intro"></p>
+        </div>
+        <div class="stats-dramatic" id="stats-grid"></div>
+      </div>
+    </section>
+
+    <section class="chapter fade-in" id="ch5">
+      <div class="inner">
+        <div class="chapter-head">
+          <div class="section-tag"><svg class="icon"><use href="#i-balance"/></svg><span data-i18n="ch5_tag"></span></div>
+          <h2 data-i18n="ch5_title"></h2>
+          <p class="intro large" data-i18n="ch5_intro"></p>
+        </div>
+        <div class="compare-wrap" id="compare-wrap"></div>
+      </div>
+    </section>
+
+    <section class="chapter bg-alt fade-in" id="ch6">
+      <div class="inner">
+        <div class="chapter-head">
+          <div class="section-tag"><svg class="icon"><use href="#i-flag"/></svg><span data-i18n="ch6_tag"></span></div>
+          <h2 data-i18n="ch6_title"></h2>
+          <p class="intro large" data-i18n="ch6_intro"></p>
+        </div>
+        <div class="record-grid">
+          <div class="record-stats" id="norway-stats"></div>
+          <aside class="record-callout">
+            <div class="callout-label" data-i18n="nim_label"></div>
+            <blockquote class="callout-quote" data-i18n="nim_quote"></blockquote>
+            <div class="callout-cite" data-i18n="nim_cite"></div>
+          </aside>
+        </div>
+        <p class="record-note" data-i18n="record_note"></p>
+      </div>
+    </section>
+
+    <section class="chapter fade-in" id="ch7">
+      <div class="inner">
+        <div class="chapter-head">
+          <div class="section-tag"><svg class="icon"><use href="#i-book"/></svg><span data-i18n="ch7_tag"></span></div>
+          <h2 data-i18n="ch7_title"></h2>
+          <p class="intro large" data-i18n="ch7_intro"></p>
+        </div>
+        <div class="source-list" id="sources-grid"></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="inner">
+      <div>
+        <div class="footer-mark">
+          <img src="mannsforum-logo.png" alt="MannsForum" class="footer-logo" />
+          <div class="footer-mark-text">
+            <span data-i18n="footer_tagline"></span>
+          </div>
+        </div>
+        <p data-i18n="footer_about"></p>
+        <p data-i18n="footer_method"></p>
+      </div>
+      <div>
+        <p data-i18n="footer_source"></p>
+        <p data-i18n="footer_org"></p>
+      </div>
+      <div class="footer-meta" data-i18n="footer_meta"></div>
+    </div>
+  </footer>
+
+  <script>
+    // ============ CONTENT ============
+    const content = {
+      no: {
+        brand_tagline: "Interaktiv guide · Artikkel 8",
+        meta_title: "Artikkel 8 · En interaktiv guide til statens plikt",
+        meta_description: "Hva Den europeiske menneskerettskonvensjonens artikkel 8 krever av staten, og hva som faktisk skjer i Norge.",
+
+        search_label: "Søk",
+        search_placeholder: "Søk etter dom, prinsipp, situasjon...",
+        search_hint: "Søk i 9 dommer, 4 prinsipper og norsk praksis",
+        search_empty: "Ingen treff. Prøv et annet søkeord.",
+        search_type_case: "Dom",
+        search_type_principle: "Prinsipp",
+        search_type_norway: "Norge-tall",
+        search_type_compare: "Standard vs. praksis",
+        search_type_source: "Kilde",
+        search_type_glossary: "Ord & uttrykk",
+
+        menu_title: "Innhold",
+        menu_chapters: "Kapitler",
+        menu_glossary: "Ord & uttrykk",
+        menu_how: "Slik bruker du guiden",
+        tips: [
+          'Bruk <kbd>⌘K</kbd> (Mac) eller <kbd>Ctrl+K</kbd> for å søke gjennom hele guiden.',
+          'Trykk på et prinsipp i Del 02 for å filtrere de ni dommene.',
+          'Trykk på en dom i Del 03 for å se utdrag direkte fra avgjørelsen.',
+          'I Del 05 (Standarden mot praksisen), trykk en rad for å fokusere paret.',
+          'Bla nedover gjennom Mellomspillet for å se hvordan båndet forvitrer over år.',
+          'Søk på sak-navn (f.eks. <em>Ribic</em>, <em>Onodi</em>) eller på begrep (f.eks. <em>tvangsbot</em>).'
+        ],
+
+        hero_eyebrow: "Artikkel 8 · interaktiv guide",
+        hero_title: 'En rettighet, en standard, og <span class="brand-highlight"><span class="underline">praksisen som finnes</span></span>.',
+        hero_lede: "Artikkel 8 i Den europeiske menneskerettskonvensjonen garanterer enhver rett til respekt for sitt familieliv. Ni dommer fra Strasbourg har slått fast hva staten må gjøre for å beskytte den retten. Dette er hva dommene sier, og hva som skjer når en norsk forelder ikke får se barnet sitt.",
+        meta1_n: "9", meta1_l: "Strasbourg-dommer",
+        meta2_n: "4", meta2_l: "ufravikelige prinsipper",
+        meta3_n: "1972", meta3_l: "Norge ratifiserte EMK",
+        scroll_cue: "Begynn lesningen",
+
+        ch0_tag: "Start her",
+        ch0_title: "Hva handler det om?",
+        ch0_intro: "Når foreldre går fra hverandre, har barnet rett til kontakt med begge. Når den retten ikke blir respektert, skal staten gripe inn. Dette er den korte versjonen av hvorfor.",
+        op1_title: "Hva er samvær?",
+        op1_body: "Tiden barnet tilbringer med den forelderen det ikke bor fast hos. Avtalt eller fastsatt av domstol etter barneloven.",
+        op2_title: "Hva er artikkel 8?",
+        op2_body: "Bestemmelsen i Den europeiske menneskerettskonvensjonen som gir alle rett til respekt for sitt familieliv. Norge ratifiserte konvensjonen i 1952.",
+        op3_title: "Hvorfor staten?",
+        op3_body: "Strasbourg har fastslått at en rettighet uten håndhevelse er teoretisk. Når en forelder hindrer samvær, har staten plikt til å sikre at retten faktisk virker.",
+        op4_title: "Hvorfor haster det?",
+        op4_body: "Tap av tid har «uopprettelige følger» for forholdet mellom barn og forelder. Hver utsettelse har en pris.",
+        actors_title: "Hvem er involvert?",
+        actors_sub: "Åtte aktører bestemmer om samværsretten blir reell eller bare står på papiret.",
+        actor_explore: "Trykk for å se hva rollen innebærer",
+
+        ch1_tag: "01 · Rettigheten",
+        ch1_title: "Det konvensjonen lover.",
+        ch1_intro: "Norge skrev under på Den europeiske menneskerettskonvensjonen i 1950 og ratifiserte den i 1952. Gjennom menneskerettsloven § 3 har konvensjonen forrang når den kolliderer med norsk lov.",
+        treaty_label: "EMK · Vedtatt 1950 · Ratifisert av Norge 1952",
+        treaty_body: '"Enhver har rett til respekt for sitt privatliv og familieliv, sitt hjem og sin korrespondanse."',
+        treaty_cite: "Den europeiske menneskerettskonvensjonen, art. 8 nr. 1",
+        ff1_label: "Norsk gjennomføring",
+        ff1_body: "Menneskerettsloven av 1999 § 3: Konvensjonen har forrang ved motstrid mot annen norsk lovgivning.",
+        ff2_label: "Barneloven",
+        ff2_body: "Slår fast foreldreansvar og barnets rett til samvær med begge foreldre etter samlivsbrudd.",
+        ff3_label: "Det Strasbourg har lagt til",
+        ff3_body: "Retten må sikres effektivt. En rettighet staten ikke aktivt beskytter, blir, med EMDs egne ord, «teoretisk og illusorisk».",
+        ff4_label: "Høyesterett · HR-2025-942-A",
+        ff4_body: "«Staten må derfor sikre et helhetlig vern av samværsretten og effektive verktøy for å gjennomføre denne.» Norges egen Høyesterett, 2025.",
+
+        ch2_tag: "02 · Standarden",
+        ch2_title: "Det Strasbourg krever.",
+        ch2_intro: "Fire ufravikelige prinsipper kommer frem av ni Strasbourg-dommer. Til sammen utgjør de grunnstrukturen i statens plikt. Trykk på et prinsipp for å se hvilke dommer det stammer fra.",
+        principle_hint: "Trykk på et prinsipp ovenfor for å filtrere de ni dommene under.",
+
+        ch3_tag: "03 · Dommene",
+        ch3_title: "Ni dommer, én standard.",
+        ch3_intro: "Hver dom er avsagt mot en annen stat. Prinsippene gjelder likevel alle medlemslandene. Trykk på en sak for å lese et utdrag fra selve dommen.",
+        filter_label: "Filter:",
+        filter_none: "Viser alle 9 dommer",
+        filter_clear: "Tilbakestill",
+        timeline_hint: "Trykk på en sak for å lese et utdrag fra dommen.",
+
+        scrolly_tag: "Mellomspill · Tiden",
+        scrolly_title: "Hva tiden gjør med et forhold.",
+        scrolly_sub: "Strasbourg har kalt tidens gang <em>uopprettelig</em>. Bla nedover og se hva ordet betyr.",
+        scrolly_y0_label: "År 0 · avgjørelsen",
+        scrolly_y0_text: "En domstol gir samværsrett. Forelderen har retten. Forholdet er intakt.",
+        scrolly_y1_label: "År 2 · de første sviktede samværene",
+        scrolly_y1_text: "Håndhevelse begjæres. De første utsettelsene kommer. De første samværene som ikke skjer.",
+        scrolly_y2_label: "År 5 · mønsteret former seg",
+        scrolly_y2_text: "Hver forsinkelse bygger på den forrige. Hvert mistede samvær blir en vane. Barnet slutter å vente.",
+        scrolly_y3_label: "År 10 · fraværet er normalen",
+        scrolly_y3_text: "Forholdet er nå definert av fravær. Avgjørelsene blir fortsatt ikke håndhevet.",
+        scrolly_y4_label: "År 14 · uopprettelig",
+        scrolly_y4_text: "I Ribić mot Kroatia så faren sønnen sin tre ganger på fjorten år. Strasbourg kalte følgene <em>uopprettelige</em>.",
+        scrolly_year_labels: "ÅR 0|ÅR 2|ÅR 5|ÅR 10|ÅR 14",
+
+        ch4_tag: "04 · Tallene",
+        ch4_title: "Hva passivitet faktisk koster.",
+        ch4_intro: "Tallene kommer fra Strasbourgs egne dommer. Fra det faktiske livet til foreldre og barn som forsøkte å forholde seg til systemet.",
+
+        ch5_tag: "05 · Standarden mot praksisen",
+        ch5_title: "Det Strasbourg krever. Det som faktisk skjer.",
+        ch5_intro: "Til venstre: standarden som ni dommer har fastsatt. Til høyre: hvordan norsk rett og praksis faktisk håndterer samme situasjon. Sammenligningen er ikke en konklusjon. Den er det leseren selv kan trekke.",
+
+        ch6_tag: "06 · Norge ved Strasbourg",
+        ch6_title: "Det er ikke et fremtidsproblem.",
+        ch6_intro: "Norge ratifiserte EMK i 1952. Tallene under er hentet fra Strasbourgs egne dommer mot Norge, fra Statistisk sentralbyrå, og fra Norges nasjonale institusjon for menneskerettigheter.",
+        nim_label: "NIM · Norges nasjonale institusjon for menneskerettigheter",
+        nim_quote: "«Manglende sikring av retten til familieliv i barnevernssaker er en gjentakende og sentral menneskerettslig utfordring i Norge.»",
+        nim_cite: "Statusrapport · Hvorfor finner EMD menneskerettighetsbrudd i saker om norsk barnevern? (2021)",
+        record_note: "<strong>Et viktig forbehold:</strong> De fleste av dommene mot Norge gjelder barneverntiltak (omsorgsovertakelse, adopsjon), ikke håndhevelse av samvær spesifikt. Men mønsteret er det samme: feilveiing av familiebåndet, og tiltak som kommer for sent.",
+
+        ch7_tag: "07 · Kildene",
+        ch7_title: "Les selv.",
+        ch7_intro: "Ingen guide erstatter primærkildene. Her er artikkelen denne guiden bygger på, konvensjonsteksten, og dommene som er omtalt.",
+
+        footer_tagline: "Likeverdig foreldreskap · Barns rett til to foreldre",
+        footer_about: 'Dette er en interaktiv presentasjon av argumentene i artiklene <em>«Statens menneskerettslige plikt til å beskytte familierelasjoner»</em> (Bjørn Joachimsen, pasg.no) og <em>«Norsk praksis er i konflikt med EMDs krav til beskyttelse av retten til familieliv»</em> (Øivind Østberg, Geir Kjell Andersland og Bjørn Joachimsen, Advokatbladet).',
+        footer_method: "Sitater fra EMD-dommer er hentet fra de offisielle avgjørelsene på hudoc.echr.coe.int. Rettssatsene er gjengitt verbatim fra forfatternes oversettelser. Norske rettskilder er sitert med saksnummer fra Lovdata. Statistikk er hentet fra SSBs samværsundersøkelser og fra Strasbourg-dommene selv.",
+        footer_source: 'Primærkilder: <a href="https://www.pasg.no/artikler/statens-menneskerettslige-plikt-til-beskytte-familierelasjoner" target="_blank" rel="noopener">pasg.no →</a> · <a href="https://www.advokatbladet.no" target="_blank" rel="noopener">Advokatbladet →</a>',
+        footer_org: "MannsForum arbeider for likeverdig foreldreskap og barns rett til å beholde båndet til begge foreldre etter samlivsbrudd.",
+        footer_meta: "Interaktiv guide · Versjon 1 · 2026"
+      },
+      en: {
+        brand_tagline: "Interactive guide · Article 8",
+        meta_title: "Article 8 · An interactive guide to the state's duty",
+        meta_description: "What Article 8 of the European Convention on Human Rights requires of the state, and what actually happens in Norway.",
+
+        search_label: "Search",
+        search_placeholder: "Search judgments, principles, situations...",
+        search_hint: "Search 9 judgments, 4 principles, and Norwegian practice",
+        search_empty: "No matches. Try another term.",
+        search_type_case: "Judgment",
+        search_type_principle: "Principle",
+        search_type_norway: "Norway fact",
+        search_type_compare: "Standard vs. practice",
+        search_type_source: "Source",
+        search_type_glossary: "Term",
+
+        menu_title: "Contents",
+        menu_chapters: "Chapters",
+        menu_glossary: "Terms & definitions",
+        menu_how: "How to use this guide",
+        tips: [
+          'Use <kbd>⌘K</kbd> (Mac) or <kbd>Ctrl+K</kbd> to search the entire guide.',
+          'Click a principle in Chapter 02 to filter the nine judgments.',
+          'Click any judgment in Chapter 03 to read an excerpt direct from the ruling.',
+          'In Chapter 05 (Standard vs. practice), click a row to focus the pair.',
+          'Scroll through the Interlude to see how the bond decays year by year.',
+          'Search by case name (e.g. <em>Ribic</em>, <em>Onodi</em>) or by term (e.g. <em>tvangsbot</em>).'
+        ],
+
+        hero_eyebrow: "Article 8 · interactive guide",
+        hero_title: 'A right, a standard, and <span class="brand-highlight"><span class="underline">the practice that exists</span></span>.',
+        hero_lede: "Article 8 of the European Convention on Human Rights guarantees everyone the right to respect for family life. Nine Strasbourg judgments have spelled out what the state must do to protect that right. This is what those judgments say, and what happens when a Norwegian parent is denied contact with their child.",
+        meta1_n: "9", meta1_l: "Strasbourg judgments",
+        meta2_n: "4", meta2_l: "non-negotiable principles",
+        meta3_n: "1972", meta3_l: "Norway ratified ECHR",
+        scroll_cue: "Begin reading",
+
+        ch0_tag: "Start here",
+        ch0_title: "What is this about?",
+        ch0_intro: "When parents separate, the child has a right to contact with both. When that right isn't respected, the state has a duty to step in. This is the short version of why.",
+        op1_title: "What is samvær?",
+        op1_body: "The time the child spends with the parent they don't live with full-time. Agreed between parents or set by a court under the Children Act.",
+        op2_title: "What is Article 8?",
+        op2_body: "The provision in the European Convention on Human Rights granting everyone the right to respect for their family life. Norway ratified the convention in 1952.",
+        op3_title: "Why the state?",
+        op3_body: "Strasbourg has held that a right without enforcement is theoretical. When one parent obstructs contact, the state has a duty to make the right work.",
+        op4_title: "Why does it matter now?",
+        op4_body: "Lost time has \"irremediable consequences\" for the parent–child relationship. Every delay carries a price.",
+        actors_title: "Who is involved?",
+        actors_sub: "Eight actors decide whether contact rights are real or merely on paper.",
+        actor_explore: "Click to see what the role involves",
+
+        ch1_tag: "01 · The right",
+        ch1_title: "What the convention promises.",
+        ch1_intro: "Norway signed the European Convention on Human Rights in 1950 and ratified it in 1952. Through Norway's Human Rights Act § 3, the convention takes precedence when it conflicts with Norwegian law.",
+        treaty_label: "ECHR · Adopted 1950 · Ratified by Norway 1952",
+        treaty_body: '"Everyone has the right to respect for his private and family life, his home and his correspondence."',
+        treaty_cite: "European Convention on Human Rights, Article 8(1)",
+        ff1_label: "Norwegian implementation",
+        ff1_body: "Human Rights Act of 1999 § 3: The Convention takes precedence in case of conflict with other Norwegian legislation.",
+        ff2_label: "The Children Act",
+        ff2_body: "Establishes parental responsibility and the child's right to contact with both parents after a separation.",
+        ff3_label: "What Strasbourg has added",
+        ff3_body: "The right must be effectively secured. A right the state does not actively protect becomes, in the ECHR's own words, \"theoretical and illusory.\"",
+        ff4_label: "Supreme Court · HR-2025-942-A",
+        ff4_body: "\"The State must therefore secure a comprehensive protection of contact rights and effective tools to implement them.\" Norway's own Supreme Court, 2025.",
+
+        ch2_tag: "02 · The standard",
+        ch2_title: "What Strasbourg requires.",
+        ch2_intro: "Four non-negotiable principles come out of nine Strasbourg judgments. Together they form the structural backbone of the state's duty. Click a principle to see which judgments it comes from.",
+        principle_hint: "Click a principle above to filter the nine judgments below.",
+
+        ch3_tag: "03 · The judgments",
+        ch3_title: "Nine judgments, one standard.",
+        ch3_intro: "Each ruling is against a different state. The principles apply to every member state. Click a case to read a direct excerpt from the judgment.",
+        filter_label: "Filter:",
+        filter_none: "Showing all 9 judgments",
+        filter_clear: "Reset",
+        timeline_hint: "Click a case to read a direct excerpt from the judgment.",
+
+        scrolly_tag: "Interlude · Time",
+        scrolly_title: "What time does to a relationship.",
+        scrolly_sub: "Strasbourg has called the passage of time <em>irremediable</em>. Scroll and see what the word means.",
+        scrolly_y0_label: "Year 0 · the decision",
+        scrolly_y0_text: "A court grants contact. The parent has the right. The relationship is intact.",
+        scrolly_y1_label: "Year 2 · the first missed visits",
+        scrolly_y1_text: "Enforcement is requested. The first delays appear. The first visits that don't happen.",
+        scrolly_y2_label: "Year 5 · the pattern sets in",
+        scrolly_y2_text: "Each delay compounds the last. Each missed visit becomes a habit. The child stops expecting.",
+        scrolly_y3_label: "Year 10 · absence is normal",
+        scrolly_y3_text: "The relationship is now defined by absence. The orders still go unenforced.",
+        scrolly_y4_label: "Year 14 · irremediable",
+        scrolly_y4_text: "In Ribić v. Croatia, the father saw his son three times in fourteen years. Strasbourg called the consequences <em>irremediable</em>.",
+        scrolly_year_labels: "YEAR 0|YEAR 2|YEAR 5|YEAR 10|YEAR 14",
+
+        ch4_tag: "04 · The numbers",
+        ch4_title: "What inaction actually costs.",
+        ch4_intro: "These figures come from Strasbourg's own judgments. From the real lives of parents and children who tried to work with the system.",
+
+        ch5_tag: "05 · Standard vs. practice",
+        ch5_title: "What Strasbourg requires. What actually happens.",
+        ch5_intro: "Left: the standard that nine judgments have established. Right: how Norwegian law and practice actually handle the same situation. The comparison is not a conclusion. It is what the reader can draw for themselves.",
+
+        ch6_tag: "06 · Norway at Strasbourg",
+        ch6_title: "This is not a future problem.",
+        ch6_intro: "Norway ratified the ECHR in 1952. The figures below come from Strasbourg's own judgments against Norway, from Statistics Norway, and from Norway's National Human Rights Institution.",
+        nim_label: "NIM · Norway's National Human Rights Institution",
+        nim_quote: "\"The failure to safeguard the right to family life in child welfare cases poses a repeated and central human rights challenge in Norway.\"",
+        nim_cite: "Status Report · Why does the ECtHR find human rights violations in Norwegian child welfare cases? (2021)",
+        record_note: "<strong>An important caveat:</strong> Most of the judgments against Norway concern child welfare measures (care orders, adoptions), not contact enforcement specifically. But the pattern is the same: misweighing of the parent-child bond, and measures that come too late.",
+
+        ch7_tag: "07 · The sources",
+        ch7_title: "Read for yourself.",
+        ch7_intro: "No guide replaces the primary sources. Here is the article this guide is built on, the convention text, and the judgments cited.",
+
+        footer_tagline: "Equal parenthood · A child's right to two parents",
+        footer_about: 'This is an interactive presentation of the arguments in two articles: <em>"Statens menneskerettslige plikt til å beskytte familierelasjoner"</em> (Bjørn Joachimsen, pasg.no) and <em>"Norsk praksis er i konflikt med EMDs krav til beskyttelse av retten til familieliv"</em> (Øivind Østberg, Geir Kjell Andersland and Bjørn Joachimsen, Advokatbladet).',
+        footer_method: "Quotes from ECHR judgments are taken from the official rulings on hudoc.echr.coe.int. The Norwegian rettssats summaries are reproduced verbatim from the authors' translations. Norwegian legal sources are cited with case numbers from Lovdata. Statistics come from Statistics Norway's contact surveys and from the Strasbourg judgments themselves.",
+        footer_source: 'Primary sources: <a href="https://www.pasg.no/artikler/statens-menneskerettslige-plikt-til-beskytte-familierelasjoner" target="_blank" rel="noopener">pasg.no →</a> · <a href="https://www.advokatbladet.no" target="_blank" rel="noopener">Advokatbladet →</a>',
+        footer_org: "MannsForum advocates for equal parenthood and a child's right to maintain bonds with both parents after a separation.",
+        footer_meta: "Interactive guide · Version 1 · 2026"
+      }
+    };
+
+    // ============ DATA ============
+    // Principles. id used for filtering.
+    const principles = [
+      {
+        id: 'time', icon: 'i-clock',
+        no: { title: "Tiden er ufravikelig.", body: "Tap av tid har «uopprettelige følger» for forholdet mellom barn og forelder. Sene tiltak kan i seg selv være et brudd." },
+        en: { title: "Time is non-negotiable.", body: "Loss of time has \"irremediable consequences\" for the parent-child relationship. Late intervention can itself constitute a violation." }
+      },
+      {
+        id: 'active', icon: 'i-bolt',
+        no: { title: "Aktiv inngripen.", body: "Staten kan ikke nøye seg med å avsi avgjørelser. Den må sikre at samvær faktisk skjer, med et tilstrekkelig og virksomt rettslig arsenal." },
+        en: { title: "Active intervention.", body: "The state cannot stop at issuing decisions. It must ensure contact actually takes place, with an adequate and effective legal arsenal." }
+      },
+      {
+        id: 'investigate', icon: 'i-search',
+        no: { title: "Undersøk barnets motvilje.", body: "Hvis barnet motsetter seg samvær, må årsakene undersøkes. Påvirkning, lojalitetskonflikt og frykt kan ligge bak. Motviljen er ikke i seg selv et svar." },
+        en: { title: "Investigate the child's resistance.", body: "When a child refuses contact, the underlying reasons must be examined. Manipulation, loyalty conflicts and fear can lie behind it. Resistance is not, in itself, an answer." }
+      },
+      {
+        id: 'cooperation', icon: 'i-unlink',
+        no: { title: "Ikke vent på samarbeid.", body: "Håndhevelsen kan ikke gjøres avhengig av at den parten som motsetter seg samværet samarbeider. Det er nettopp der bruddet oppstår." },
+        en: { title: "Don't wait for cooperation.", body: "Enforcement cannot depend on cooperation from the obstructing parent. That dependency is exactly where the violation begins." }
+      }
+    ];
+
+    // Cases. tags = which principles they embody.
+    const cases = [
+      {
+        year: "2000", date: { no: "25. januar 2000", en: "25 January 2000" },
+        country: { no: "Romania", en: "Romania" }, name: "Ignaccolo-Zenide",
+        appNo: "31679/96", paragraphs: "§§106–112",
+        link: "https://hudoc.echr.coe.int/eng?i=002-6020",
+        tags: ['active', 'time'],
+        principle: {
+          no: "Staten har en positiv plikt til å iverksette effektive tiltak for å gjenforene foreldre og barn når relasjonen er brutt. Langvarig manglende håndheving av rettsavgjørelser om samvær eller tilbakeføring kan innebære brudd på EMK artikkel 8.",
+          en: "The state has a positive duty to take effective measures to reunite parents and children when the relationship has been broken. Prolonged failure to enforce judgments on contact or return may constitute a breach of ECHR Article 8."
+        },
+        quote: {
+          no: "«Staten må handle på en måte som er egnet til å la båndene mellom forelder og barn utvikle seg.» Plikten er ikke begrenset til å avgjøre. Den krever effektive tiltak.",
+          en: "\"The State must act in a manner calculated to allow the ties between parent and child to be developed.\" The duty is not limited to issuing decisions. It requires effective measures."
+        }
+      },
+      {
+        year: "2010", date: { no: "22. april 2010", en: "22 April 2010" },
+        country: { no: "Tsjekkia", en: "Czech Republic" }, name: "Macready",
+        appNo: "4824/06 og 15512/08",
+        link: "https://hudoc.echr.coe.int/eng?i=002-990",
+        tags: ['time', 'active'],
+        principle: {
+          no: "Staten må sikre at kontakt mellom barn og forelder opprettholdes også mens rettsprosesser pågår. Myndighetene kan ikke begrense seg til formelle avgjørelser uten å sikre praktisk gjennomføring.",
+          en: "The state must ensure that contact between child and parent is maintained while proceedings are pending. Authorities cannot confine themselves to formal decisions without securing practical implementation."
+        },
+        quote: {
+          no: "«Tidens gang kan ha uopprettelige følger for forholdet mellom et barn og den forelderen som ikke bor sammen med det.»",
+          en: "\"The passage of time can have irremediable consequences for relations between a child and the parent who does not live with him.\""
+        }
+      },
+      {
+        year: "2010", date: { no: "2. september 2010", en: "2 September 2010" },
+        country: { no: "Bulgaria", en: "Bulgaria" }, name: "Mincheva",
+        appNo: "21558/03",
+        link: "https://hudoc.echr.coe.int/eng?i=001-116487",
+        tags: ['active'],
+        principle: {
+          no: "Når en forelder systematisk hindrer kontakt mellom barn og den andre forelderen, har staten en plikt til å reagere aktivt og effektivt. Passivitet fra myndighetenes side kan innebære brudd på artikkel 8.",
+          en: "When a parent systematically prevents contact between the child and the other parent, the state has a duty to respond actively and effectively. Passivity on the part of the authorities may constitute a breach of Article 8."
+        },
+        quote: {
+          no: "EMD fremhever behovet for et «legal arsenal» som er tilstrekkelig til å sikre gjennomføring. Det er ikke nok med rettigheter på papiret dersom de ikke lar seg håndheve.",
+          en: "The Court emphasises the need for a \"legal arsenal\" sufficient to secure enforcement. Rights on paper are not enough if they cannot be enforced."
+        }
+      },
+      {
+        year: "2013", date: { no: "27. mars 2013", en: "27 March 2013" },
+        country: { no: "Kypros", en: "Cyprus" }, name: "Zavridou",
+        appNo: "15948/08",
+        link: "https://hudoc.echr.coe.int/eng?i=001-224012",
+        tags: ['cooperation', 'active'],
+        principle: {
+          no: "Myndighetene kan ikke gjøre håndheving av samvær avhengig av den samarbeidsvilligheten som vises av den forelderen barnet bor hos. Staten må bruke tilgjengelige virkemidler for å beskytte familierelasjonen.",
+          en: "Authorities cannot make enforcement of contact dependent on the cooperation shown by the parent the child lives with. The state must use available means to protect the family relationship."
+        },
+        quote: {
+          no: "Retten til familieliv kan ikke reduseres til et spørsmål om privat konsensus. Når samvær hindres, oppstår spørsmålet om statens plikt til å intervenere med effektive virkemidler.",
+          en: "The right to family life cannot be reduced to a question of private consensus. When contact is obstructed, the question arises of the state's duty to intervene with effective measures."
+        }
+      },
+      {
+        year: "2014", date: { no: "29. april 2014", en: "29 April 2014" },
+        country: { no: "Moldova", en: "Moldova" }, name: "Pisică",
+        appNo: "23641/05",
+        link: "https://hudoc.echr.coe.int/eng?i=001-197214",
+        tags: ['investigate'],
+        principle: {
+          no: "Barnets motstand mot samvær kan ikke alene være avgjørende dersom det foreligger indikasjoner på påvirkning eller lojalitetskonflikt. Myndighetene må analysere den relasjonelle konteksten.",
+          en: "A child's resistance to contact cannot alone be decisive if there are indications of manipulation or loyalty conflict. Authorities must analyse the relational context."
+        },
+        quote: {
+          no: "Myndighetene har en plikt til å undersøke årsakene til motstanden på en konkret og faglig forsvarlig måte. Dette innebærer mer enn å registrere hva barnet gir uttrykk for.",
+          en: "Authorities have a duty to investigate the reasons for the resistance in a concrete and professionally sound manner. This requires more than simply recording what the child expresses."
+        }
+      },
+      {
+        year: "2014", date: { no: "14. oktober 2014", en: "14 October 2014" },
+        country: { no: "Polen", en: "Poland" }, name: "L.D.",
+        appNo: "6289/13",
+        link: "https://hudoc.echr.coe.int/eng?i=001-241741",
+        tags: ['time', 'active'],
+        principle: {
+          no: "Selv når myndighetene forsøker å løse konflikter, kan tiltak som kommer for sent innebære brudd på artikkel 8 dersom relasjonen mellom barn og forelder brytes ned i mellomtiden.",
+          en: "Even when authorities try to resolve conflicts, measures that come too late may breach Article 8 if the relationship between child and parent breaks down in the meantime."
+        },
+        quote: {
+          no: "Det avgjørende er ikke om myndighetene har handlet, men om tiltakene faktisk har virket.",
+          en: "What is decisive is not whether the authorities have acted, but whether the measures have actually worked."
+        }
+      },
+      {
+        year: "2015", date: { no: "2. april 2015", en: "2 April 2015" },
+        country: { no: "Kroatia", en: "Croatia" }, name: "Ribić",
+        appNo: "27148/12", paragraphs: "§ 92",
+        link: "https://hudoc.echr.coe.int/eng?i=001-153315",
+        tags: ['time', 'cooperation'],
+        principle: {
+          no: "Langvarig manglende håndheving av samværsavgjørelser kan føre til at relasjonen mellom barn og forelder brytes permanent. Staten kan da bli ansvarlig for brudd på artikkel 8.",
+          en: "Prolonged failure to enforce contact orders can permanently break the relationship between child and parent. The state may then be held liable for breach of Article 8."
+        },
+        quote: {
+          no: "«Tilstrekkeligheten av et tiltak skal bedømmes etter hvor raskt det iverksettes, fordi tidens gang kan ha uopprettelige følger for forholdet mellom et barn og den forelderen som ikke bor sammen med det.» Faren så sønnen sin tre ganger i løpet av fjorten års rettsprosess.",
+          en: "\"The adequacy of a measure is to be judged by the swiftness of its implementation, as the passage of time can have irremediable consequences for relations between a child and the parent who does not live with him.\" The father saw his son three times in fourteen years of proceedings."
+        }
+      },
+      {
+        year: "2017", date: { no: "30. mai 2017", en: "30 May 2017" },
+        country: { no: "Ungarn", en: "Hungary" }, name: "Ónodi",
+        appNo: "38647/09", paragraphs: "§§30–35",
+        link: "https://hudoc.echr.coe.int/eng?i=001-173800",
+        tags: ['active', 'time'],
+        principle: {
+          no: "Kontakt mellom forelder og barn er et grunnleggende element i familielivet. Myndighetenes tiltak må vurderes etter hvor raskt de settes i verk, fordi tid kan ha irreversible konsekvenser for relasjonen.",
+          en: "Contact between parent and child is a fundamental element of family life. The authorities' measures must be assessed by how quickly they are implemented, because time can have irreversible consequences for the relationship."
+        },
+        quote: {
+          no: "«Hver kontraherende stat må utstyre seg med et tilstrekkelig og virksomt rettslig arsenal for å sikre etterlevelse.» Faren leverte over seksti håndhevelsesbegjæringer uten resultat.",
+          en: "\"Each Contracting State must equip itself with an adequate and sufficient legal arsenal to ensure compliance.\" The father filed over sixty enforcement petitions without result."
+        }
+      },
+      {
+        year: "2017", date: { no: "14. mars 2017", en: "14 March 2017" },
+        country: { no: "Kroatia", en: "Croatia" }, name: "K.B. m.fl.",
+        appNo: "36216/13", paragraphs: "§§143–151",
+        link: "https://hudoc.echr.coe.int/eng?i=001-172077",
+        tags: ['investigate', 'active'],
+        principle: {
+          no: "Myndighetene har en positiv plikt til å iverksette tilstrekkelige og koordinerte tiltak for å opprettholde kontakt mellom forelder og barn. Barnets motstand fritar ikke staten fra denne plikten, men utløser en plikt til å undersøke årsakene og handle raskt, ettersom tidens gang kan få irreversible konsekvenser for relasjonen.",
+          en: "Authorities have a positive duty to take adequate and coordinated measures to maintain contact between parent and child. The child's resistance does not relieve the state of this duty, but triggers a duty to investigate the causes and act quickly, as the passage of time can have irreversible consequences for the relationship."
+        },
+        quote: {
+          no: "Når et barn uttrykker motvilje, har myndighetene plikt til å undersøke årsaken. Ikke til å bruke motviljen som begrunnelse for å gjøre ingenting.",
+          en: "When a child expresses resistance, the authorities have a duty to investigate why. Not to use that resistance as a reason to do nothing."
+        }
+      }
+    ];
+
+    const stats = [
+      {
+        num: "14",
+        accent: false,
+        no: { label: "år tok rettsprosessen i Ribić mot Kroatia før barnet ble myndig.", source: "Ribić mot Kroatia · 2015" },
+        en: { label: "years the Ribić v. Croatia case ran before the child came of age.", source: "Ribić v. Croatia · 2015" }
+      },
+      {
+        num: "3",
+        accent: false,
+        no: { label: "ganger fikk faren se sønnen sin i løpet av disse fjorten årene.", source: "Ribić mot Kroatia · 2015" },
+        en: { label: "times the father saw his son in the course of those fourteen years.", source: "Ribić v. Croatia · 2015" }
+      },
+      {
+        num: "60+",
+        accent: false,
+        no: { label: "håndhevelsesbegjæringer leverte faren, uten at staten grep inn.", source: "Ónodi mot Ungarn · 2017" },
+        en: { label: "enforcement petitions the father filed, without the state stepping in.", source: "Ónodi v. Hungary · 2017" }
+      }
+    ];
+
+    const norwayRecord = [
+      {
+        num: "18+",
+        accent: false,
+        no: { label: "dommer hvor Strasbourg har funnet Norge i brudd med EMK artikkel 8 siden 2018.", source: "NIM · oversikt over EMD-dommer mot Norge" },
+        en: { label: "judgments where Strasbourg has found Norway in violation of ECHR Article 8 since 2018.", source: "NIM · ECHR judgments against Norway" }
+      },
+      {
+        num: "~50 000",
+        accent: true,
+        no: { label: "foreldre i Norge ser barna sine sjeldnere enn én gang i måneden. Tallet (17 %) har vært stabilt fra 2012 til 2020.", source: "SSB · bosteds- og samværsundersøkelser 2012 og 2020 · Telemarksforskning" },
+        en: { label: "parents in Norway see their children less than once a month. The figure (17%) has been stable from 2012 to 2020.", source: "Statistics Norway · residence and contact surveys 2012 and 2020 · Telemark Research" }
+      },
+      {
+        num: "0",
+        accent: false,
+        no: { label: "strafferettslige sanksjoner finnes i Norge mot samværssabotasje. Sverige, Danmark og Finland har slike bestemmelser.", source: "Straffeloven § 261 · sammenligning med øvrige nordiske land" },
+        en: { label: "criminal sanctions exist in Norway for contact sabotage. Sweden, Denmark and Finland all have such provisions.", source: "Penal Code § 261 · comparison with other Nordic countries" }
+      },
+      {
+        num: "0",
+        accent: false,
+        no: { label: "offisielle statistikker fører Norge på hvor ofte tvangsbot etter barneloven § 65 faktisk fører til at samvær gjennomføres.", source: "NOU 2020:14 · Prop. 117 L (2024–2025)" },
+        en: { label: "official statistics Norway keeps on how often §65 coercive fines actually result in contact taking place.", source: "NOU 2020:14 · Prop. 117 L (2024–2025)" }
+      }
+    ];
+
+    const compare = [
+      {
+        no: { standard: "Staten må <strong>gripe inn aktivt</strong> for å sikre at samvær faktisk skjer.", practice: "Forelderen som er nektet samvær må <strong>selv</strong> begjære tvangsfullbyrdelse." },
+        en: { standard: "The state must <strong>actively intervene</strong> to ensure that contact actually takes place.", practice: "The parent being denied contact must <strong>themselves</strong> petition for enforcement." }
+      },
+      {
+        no: { standard: "Tilstrekkelig og virksomt <strong>rettslig arsenal</strong> for å sikre etterlevelse.", practice: "Primært virkemiddel: <strong>tvangsbot</strong> etter barneloven § 65. Sjelden eskalert." },
+        en: { standard: "Adequate and effective <strong>legal arsenal</strong> to ensure compliance.", practice: "Primary tool: <strong>coercive fine</strong> under Children Act § 65. Rarely escalated." }
+      },
+      {
+        no: { standard: "Tidens gang har <strong>uopprettelige følger</strong>. Tiltak må komme raskt.", practice: "<strong>Ingen lovfestede tidsfrister</strong> for håndhevelsesprosesser i samværssaker." },
+        en: { standard: "The passage of time has <strong>irremediable consequences</strong>. Measures must come quickly.", practice: "<strong>No statutory time limits</strong> on enforcement proceedings in contact cases." }
+      },
+      {
+        no: { standard: "Når barnet motsetter seg samvær, må <strong>årsaken undersøkes</strong>.", practice: "Barnets motvilje legges <strong>ofte til grunn</strong> uten at påvirkning eller lojalitetskonflikt utredes." },
+        en: { standard: "When a child resists contact, the <strong>underlying reason must be investigated</strong>.", practice: "The child's resistance is <strong>often accepted at face value</strong> without examining manipulation or loyalty conflict." }
+      },
+      {
+        no: { standard: "<strong>Koordinert</strong> myndighetsfunksjon med klart ansvar for gjennomføring.", practice: "<strong>Fragmentert</strong>: domstol, namsmyndighet, barnevern og familievern handler hver for seg." },
+        en: { standard: "<strong>Coordinated</strong> authority with clear responsibility for enforcement.", practice: "<strong>Fragmented</strong>: courts, enforcement officers, child welfare and family services act separately." }
+      },
+      {
+        no: { standard: "Håndhevelsen kan ikke <strong>gjøres avhengig</strong> av samarbeid fra den motsettende part.", practice: "Mekling er obligatorisk, men utfallet er <strong>frivillig</strong>. Mangler den motsettende part insentiv, stopper prosessen." },
+        en: { standard: "Enforcement cannot <strong>depend on</strong> cooperation from the obstructing party.", practice: "Mediation is mandatory, but the outcome is <strong>voluntary</strong>. If the obstructing party has no incentive, the process stalls." }
+      },
+      {
+        no: { standard: "Staten må ha et <strong>tilstrekkelig og virksomt rettslig arsenal</strong> for å beskytte familielivet.", practice: "Norge har <strong>ingen straffesanksjon</strong> for samværssabotasje. Sverige, Danmark og Finland har det. I Norge er det kun krenkelse av omsorgsretten som er straffbart (§ 261)." },
+        en: { standard: "The state must have an <strong>adequate and effective legal arsenal</strong> to protect family life.", practice: "Norway has <strong>no criminal sanction</strong> for contact sabotage. Sweden, Denmark and Finland do. In Norway only violation of custody rights is criminalised (§ 261)." }
+      },
+      {
+        no: { standard: "Når milde tiltak ikke virker, må staten <strong>eskalere</strong> til mer inngripende virkemidler.", practice: "Danmark: <strong>retsplejelov § 456r</strong> gir hjemmel for fysisk avhenting av barnet ved samværshindring. Dansk Høyesterett anvendte den 22.09.2025 og viste til EMK art. 8. Norge mangler tilsvarende hjemmel." },
+        en: { standard: "When mild measures fail, the state must <strong>escalate</strong> to more invasive enforcement.", practice: "Denmark: <strong>Code of Procedure § 456r</strong> authorises physical retrieval of the child when contact is obstructed. Danish Supreme Court applied it 22.09.2025 citing ECHR Art. 8. Norway has no equivalent." }
+      },
+      {
+        no: { standard: "Statens virkemidler skal samlet sett gi <strong>insentiv til å overholde</strong> samværsretten. Ikke det motsatte.", practice: "NAVs <strong>samværsfradrag</strong> beregnes på <em>faktisk</em> samvær, ikke rettslig fastsatt. Når bostedsforelder saboterer, øker den andres bidragsplikt. Stadfestet i LF-2025-42220, anke nektet fremmet." },
+        en: { standard: "The state's instruments must together <strong>incentivise compliance</strong> with contact rights. Not the opposite.", practice: "NAV's <strong>contact deduction</strong> is calculated on <em>actual</em> contact, not court-ordered. When the resident parent sabotages, the other's child-support obligation increases. Affirmed in LF-2025-42220, appeal denied." }
+      }
+    ];
+
+    const sources = [
+      {
+        icon: 'i-quote',
+        no: { label: "Bakgrunn", title: "Statens menneskerettslige plikt til å beskytte familierelasjoner", desc: "Av Bjørn Joachimsen, PASG.no" },
+        en: { label: "Background", title: "Statens menneskerettslige plikt til å beskytte familierelasjoner", desc: "By Bjørn Joachimsen, PASG.no" },
+        url: "https://www.pasg.no/artikler/statens-menneskerettslige-plikt-til-beskytte-familierelasjoner"
+      },
+      {
+        icon: 'i-document',
+        no: { label: "Fagartikkel · advokat", title: "Norsk praksis er i konflikt med EMDs krav til beskyttelse av retten til familieliv", desc: "Av Øivind Østberg, Geir Kjell Andersland og Bjørn Joachimsen · Advokatbladet" },
+        en: { label: "Legal article · advokat", title: "Norwegian practice is in conflict with the ECHR's requirements to protect family life", desc: "By Øivind Østberg, Geir Kjell Andersland and Bjørn Joachimsen · Advokatbladet" },
+        url: "https://www.advokatbladet.no"
+      },
+      {
+        icon: 'i-shield',
+        no: { label: "Konvensjonsteksten", title: "EMK artikkel 8 · Retten til respekt for familielivet", desc: "Den europeiske menneskerettskonvensjonen" },
+        en: { label: "Convention text", title: "ECHR Article 8 · Right to respect for family life", desc: "European Convention on Human Rights" },
+        url: "https://www.echr.coe.int/documents/d/echr/convention_eng"
+      },
+      {
+        icon: 'i-gavel',
+        no: { label: "Dommene", title: "HUDOC · søkbar database over alle EMD-avgjørelser", desc: "Den europeiske menneskerettsdomstolen" },
+        en: { label: "The judgments", title: "HUDOC · searchable database of all ECHR rulings", desc: "European Court of Human Rights" },
+        url: "https://hudoc.echr.coe.int"
+      },
+      {
+        icon: 'i-balance',
+        no: { label: "Norsk høyesterett", title: "HR-2025-942-A · om statens plikt til å sikre samværsretten", desc: "Lovdata · Norges høyesterett, 2025" },
+        en: { label: "Norwegian Supreme Court", title: "HR-2025-942-A · on the state's duty to secure contact rights", desc: "Lovdata · Norwegian Supreme Court, 2025" },
+        url: "https://lovdata.no/avgjorelse/hr-2025-942-a"
+      },
+      {
+        icon: 'i-book',
+        no: { label: "Norsk lov", title: "Menneskerettsloven § 3 · konvensjonens forrang", desc: "Lovdata · Lov av 21. mai 1999 nr. 30" },
+        en: { label: "Norwegian law", title: "Human Rights Act § 3 · precedence of the convention", desc: "Lovdata · Act of 21 May 1999 no. 30" },
+        url: "https://lovdata.no/lov/1999-05-21-30/§3"
+      }
+    ];
+
+    const glossary = [
+      {
+        term: 'Samvær',
+        no: { def: 'Tiden barnet tilbringer med den forelderen det ikke bor fast hos. Fastsatt ved avtale, dom, kjennelse eller rettsforlik.' },
+        en: { term: 'Samvær (contact)', def: 'The time the child spends with the parent they don\'t live with full-time. Set by agreement, court judgment, ruling or settlement.' }
+      },
+      {
+        term: 'Samværssabotasje',
+        no: { def: 'Når en forelder systematisk hindrer eller saboterer den andres samværsrett, ved aktiv motstand eller passiv unnlatelse.' },
+        en: { term: 'Contact sabotage', def: 'When one parent systematically prevents or sabotages the other\'s contact rights, by active obstruction or passive omission.' }
+      },
+      {
+        term: 'Tvangsbot',
+        no: { def: 'Det eneste tvangsmiddelet i barneloven § 65. En økonomisk bot ilagt bostedsforelderen ved manglende oppfyllelse av samværsavgjørelse. Norge fører ingen statistikk på om den virker.' },
+        en: { term: 'Coercive fine (tvangsbot)', def: 'The only enforcement tool in Children Act § 65. A monetary fine imposed on the resident parent for failing to comply with a contact order. Norway keeps no statistics on whether it works.' }
+      },
+      {
+        term: 'Barneloven',
+        no: { def: 'Norges lov om barn og foreldre (1981, ny lov vedtatt 2025). Regulerer foreldreansvar, fast bosted og samvær.' },
+        en: { term: 'Children Act (barneloven)', def: 'Norway\'s Children Act (1981, new act adopted 2025). Regulates parental responsibility, primary residence, and contact.' }
+      },
+      {
+        term: 'EMK',
+        no: { def: 'Den europeiske menneskerettskonvensjonen (1950). Vedtatt av Europarådet. Ratifisert av Norge i 1952. Artikkel 8 verner familielivet.' },
+        en: { term: 'ECHR', def: 'The European Convention on Human Rights (1950). Adopted by the Council of Europe. Ratified by Norway in 1952. Article 8 protects family life.' }
+      },
+      {
+        term: 'EMD',
+        no: { def: 'Den europeiske menneskerettsdomstolen i Strasbourg. Avgjør klager om brudd på EMK fra borgere i medlemslandene.' },
+        en: { term: 'ECtHR', def: 'The European Court of Human Rights in Strasbourg. Decides complaints of ECHR violations brought by citizens of member states.' }
+      },
+      {
+        term: 'Menneskerettsloven § 3',
+        no: { def: 'Norsk lov av 1999. Slår fast at EMK har forrang ved motstrid mot annen norsk lovgivning.' },
+        en: { term: 'Human Rights Act § 3', def: 'Norwegian act of 1999. Establishes that the ECHR takes precedence in case of conflict with other Norwegian legislation.' }
+      },
+      {
+        term: 'Bostedsforelder',
+        no: { def: 'Forelderen barnet har fast bosted hos etter samlivsbrudd. Har plikt til lojalt å bidra til at samværsavtalen gjennomføres.' },
+        en: { term: 'Resident parent', def: 'The parent the child has primary residence with after separation. Has a duty to loyally facilitate the contact arrangement.' }
+      },
+      {
+        term: 'Familievernkontor',
+        no: { def: 'Statlig tjeneste som tilbyr mekling ved samlivsbrudd. Mekling er obligatorisk i Norge, men utfallet er frivillig.' },
+        en: { term: 'Family counseling office', def: 'State service providing mediation for separating couples. Mediation is mandatory in Norway, but the outcome is voluntary.' }
+      },
+      {
+        term: 'Namsmannen',
+        no: { def: 'Statens innfordringsmyndighet. Spiller en svært begrenset rolle ved samværssaker. I dag krever håndhevelse en egen rettsbehandling.' },
+        en: { term: 'Enforcement officer', def: 'The state\'s collection authority. Plays a very limited role in contact cases. Enforcement currently requires a separate court process.' }
+      },
+      {
+        term: 'NIM',
+        no: { def: 'Norges nasjonale institusjon for menneskerettigheter. Uavhengig organ opprettet av Stortinget. Overvåker Norges menneskerettsforpliktelser.' },
+        en: { term: 'NIM', def: 'Norway\'s National Human Rights Institution. Independent body established by Parliament. Monitors Norway\'s human rights obligations.' }
+      },
+      {
+        term: 'Strand Lobben mot Norge',
+        no: { def: 'Storkammeravgjørelse fra EMD (2019). Stadfestet med 13–4 at Norge hadde brutt artikkel 8 i en barnevernssak. Markerte starten på en serie tap for Norge.' },
+        en: { term: 'Strand Lobben v. Norway', def: 'ECHR Grand Chamber judgment (2019). Confirmed 13–4 that Norway had breached Article 8 in a child welfare case. Marked the start of a series of Norway losses.' }
+      },
+      {
+        term: 'HUDOC',
+        no: { def: 'EMDs offisielle, søkbare database over alle avgjørelser. Tilgjengelig på hudoc.echr.coe.int.' },
+        en: { term: 'HUDOC', def: 'The ECHR\'s official, searchable database of all judgments. Available at hudoc.echr.coe.int.' }
+      },
+      {
+        term: 'Rettssats',
+        no: { def: 'Den juridiske kjernen av en dom. Det generelle rettsprinsippet domstolen legger til grunn, slik det kan utledes av begrunnelsen.' },
+        en: { term: 'Holding (rettssats)', def: 'The legal core of a judgment. The general legal principle the court relies on, as derived from its reasoning.' }
+      },
+      {
+        term: 'Prop. 117 L (2024–2025)',
+        no: { def: 'Regjeringens proposisjon til ny barnelov. Vedtatt av Stortinget i 2025. Viderefører i hovedsak dagens håndhevelsesregler, til tross for gjentatte anmodningsvedtak om reform.' },
+        en: { term: 'Prop. 117 L (2024–2025)', def: 'Government bill for a new Children Act. Adopted by Parliament in 2025. Largely preserves current enforcement rules, despite repeated parliamentary calls for reform.' }
+      }
+    ];
+
+    const actors = [
+      {
+        icon: 'i-parent', kind: 'parent',
+        no: { name: 'Forelder uten daglig omsorg', role: 'Har rett til samvær. Når den retten brytes, må selv begjære håndhevelse.' },
+        en: { name: 'Non-resident parent', role: 'Has contact rights. When those rights are denied, must petition for enforcement themselves.' }
+      },
+      {
+        icon: 'i-child', kind: 'child',
+        no: { name: 'Barnet', role: 'Har rett til familieliv med begge foreldre. Skal høres, men har ingen vetorett.' },
+        en: { name: 'The child', role: 'Has the right to family life with both parents. Must be heard, but has no veto.' }
+      },
+      {
+        icon: 'i-parent', kind: 'resident',
+        no: { name: 'Bostedsforelder', role: 'Har plikt til å bidra lojalt til samvær. Når denne plikten brytes, oppstår problemet.' },
+        en: { name: 'Resident parent', role: 'Has a duty to loyally facilitate contact. When that duty is broken, the problem begins.' }
+      },
+      {
+        icon: 'i-court', kind: 'court',
+        no: { name: 'Tingretten', role: 'Avgjør samværsrett og behandler begjæringer om tvangsmulkt etter barneloven § 65.' },
+        en: { name: 'District court', role: 'Decides contact rights and handles petitions for coercive fines under Children Act § 65.' }
+      },
+      {
+        icon: 'i-judge', kind: 'judge',
+        no: { name: 'Dommere', role: 'Anvender norsk rett. Plikt til å tolke EMK i tråd med EMDs praksis (menneskerettsloven § 3).' },
+        en: { name: 'Judges', role: 'Apply Norwegian law. Duty to interpret ECHR in line with ECtHR case law (Human Rights Act § 3).' }
+      },
+      {
+        icon: 'i-lawyer', kind: 'lawyer',
+        no: { name: 'Advokater', role: 'Kan bruke EMD-praksis aktivt for å løfte håndhevelseskravene over norsk minstestandard.' },
+        en: { name: 'Lawyers', role: 'Can use ECtHR case law actively to push enforcement standards beyond the Norwegian minimum.' }
+      },
+      {
+        icon: 'i-mediator', kind: 'mediator',
+        no: { name: 'Familievernkontoret', role: 'Obligatorisk mekling. Utfallet er frivillig. Saboterende part har ingen tvang til å samarbeide.' },
+        en: { name: 'Family counseling office', role: 'Mandatory mediation. Outcome is voluntary. Obstructing party faces no compulsion to cooperate.' }
+      },
+      {
+        icon: 'i-state', kind: 'state',
+        no: { name: 'Staten', role: 'Den part Strasbourg holder ansvarlig. Plikten er aktiv, ikke passiv.' },
+        en: { name: 'The State', role: 'The party Strasbourg holds responsible. The duty is active, not passive.' }
+      }
+    ];
+
+    const railChapters = [
+      { id: 'ch0', icon: 'i-family', no: 'Start', en: 'Start' },
+      { id: 'ch1', icon: 'i-shield', no: 'Rettigheten', en: 'The right' },
+      { id: 'ch2', icon: 'i-grid', no: 'Standarden', en: 'Standard' },
+      { id: 'scrolly-decay', icon: 'i-clock', dark: true, no: 'Tiden', en: 'Time' },
+      { id: 'ch3', icon: 'i-gavel', no: 'Dommene', en: 'Judgments' },
+      { id: 'ch4', icon: 'i-trending', no: 'Tallene', en: 'Numbers' },
+      { id: 'ch5', icon: 'i-balance', no: 'Sammenligning', en: 'Compare' },
+      { id: 'ch6', icon: 'i-flag', no: 'Norge', en: 'Norway' },
+      { id: 'ch7', icon: 'i-book', no: 'Kilder', en: 'Sources' }
+    ];
+
+    // ============ STATE ============
+    let currentLang = 'no';
+    let activeFilter = null; // principle id or null
+    let statsAnimated = false;
+
+    // ============ RENDERERS ============
+    function renderPrinciples() {
+      const grid = document.getElementById('principles-grid');
+      grid.innerHTML = principles.map((p, i) => `
+        <button class="principle ${activeFilter === p.id ? 'active' : ''}" data-principle="${p.id}">
+          <span class="principle-icon"><svg class="icon"><use href="#${p.icon}"/></svg></span>
+          <div class="pnum">P${String(i + 1).padStart(2, '0')}</div>
+          <h3>${p[currentLang].title}</h3>
+          <p>${p[currentLang].body}</p>
+        </button>
+      `).join('');
+      grid.querySelectorAll('.principle').forEach(btn => {
+        btn.addEventListener('click', () => toggleFilter(btn.dataset.principle));
+      });
+    }
+
+    function renderCases() {
+      const tl = document.getElementById('case-timeline');
+      const hudocLabel = currentLang === 'no' ? 'Les dommen på HUDOC' : 'Read judgment on HUDOC';
+      tl.innerHTML = cases.map((c, i) => {
+        const dimmed = activeFilter && !c.tags.includes(activeFilter) ? 'dimmed' : '';
+        const tagsHTML = c.tags.map(t => {
+          const principle = principles.find(p => p.id === t);
+          const match = activeFilter === t ? 'match' : '';
+          return `<span class="case-tag ${match}">${principle[currentLang].title.replace(/\.$/, '')}</span>`;
+        }).join('');
+        const paraSuffix = c.paragraphs ? `, ${c.paragraphs}` : '';
+        const sourceLine = `${c.name} v. ${c.country.en} · app. no. ${c.appNo}${paraSuffix}`;
+        return `
+          <div class="case ${dimmed}" data-idx="${i}" id="case-${i}" role="button" tabindex="0" aria-expanded="false">
+            <div class="case-year">${c.year}</div>
+            <div class="case-header">
+              <div class="case-name"><em>${c.name}</em></div>
+              <div class="case-country">${c.country[currentLang]}</div>
+            </div>
+            <div class="case-principle">${c.principle[currentLang]}</div>
+            <div class="case-tags">${tagsHTML}</div>
+            <div class="case-expand">
+              <div class="case-quote">
+                ${c.quote[currentLang]}
+                <span class="case-quote-source">${sourceLine} · ${c.date[currentLang]}</span>
+                <a class="case-hudoc-link" href="${c.link}" target="_blank" rel="noopener" onclick="event.stopPropagation()">
+                  <svg class="icon icon-sm"><use href="#i-external"/></svg>
+                  <span>${hudocLabel}</span>
+                </a>
+              </div>
+            </div>
+            <span class="case-toggle" aria-hidden="true"><svg class="icon icon-sm"><use href="#i-chevron-right"/></svg></span>
+          </div>
+        `;
+      }).join('');
+      tl.querySelectorAll('.case').forEach(el => {
+        const toggle = () => {
+          el.classList.toggle('expanded');
+          el.setAttribute('aria-expanded', el.classList.contains('expanded') ? 'true' : 'false');
+        };
+        el.addEventListener('click', (e) => {
+          if (e.target.closest('a')) return;
+          toggle();
+        });
+        el.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            toggle();
+          }
+        });
+      });
+    }
+
+    function preAnimateValue(target) {
+      if (!/[0-9]/.test(target)) return target;
+      return target.replace(/[0-9]+/, '0');
+    }
+
+    // Dramatic stat rows. Each has big number + descriptive body + optional visualization.
+    const statRows = [
+      {
+        num: '14',
+        numClass: 'ink',
+        unit: { no: 'år', en: 'years' },
+        body: {
+          no: 'I <em>Ribić mot Kroatia</em> tok rettsprosessen <strong>fjorten år</strong>. På den tiden fikk faren se sønnen sin <strong>tre ganger</strong>.',
+          en: 'In <em>Ribić v. Croatia</em>, the proceedings lasted <strong>fourteen years</strong>. In that time the father saw his son <strong>three times</strong>.'
+        },
+        citation: 'Ribić v. Croatia · § 92 · 27148/12',
+        viz: 'months'
+      },
+      {
+        num: '60+',
+        numClass: 'accent',
+        unit: { no: 'begjæringer', en: 'petitions' },
+        body: {
+          no: 'I <em>Ónodi mot Ungarn</em> leverte faren <strong>over seksti</strong> begjæringer om håndhevelse. Hver enkelt forble <strong>ubesvart</strong>.',
+          en: 'In <em>Ónodi v. Hungary</em>, the father filed <strong>over sixty</strong> enforcement petitions. Every single one was <strong>left unanswered</strong>.'
+        },
+        citation: 'Ónodi v. Hungary · 38647/09',
+        viz: 'petitions'
+      },
+      {
+        num: '~50 000',
+        numClass: 'accent',
+        unit: { no: 'foreldre i Norge', en: 'parents in Norway' },
+        body: {
+          no: '<strong>17 prosent</strong> av foreldre uten daglig omsorg ser barnet sitt <em>sjeldnere enn én gang i måneden</em>. Tallet har vært stabilt fra 2012 til 2020.',
+          en: '<strong>17 percent</strong> of non-resident parents see their child <em>less than once a month</em>. The figure has been stable from 2012 to 2020.'
+        },
+        citation: 'SSB · 2012 / 2020 · Telemarksforskning',
+        viz: null
+      }
+    ];
+
+    function buildMonthsViz(lang) {
+      // 14 years × 12 months = 168 cells. 3 are visits.
+      const visits = new Set([6, 56, 122]);
+      let cells = '';
+      for (let i = 0; i < 168; i++) {
+        cells += `<div class="viz-month ${visits.has(i) ? 'visit' : ''}"></div>`;
+      }
+      const legendVisit = lang === 'no' ? '3 samvær' : '3 contacts';
+      const legendEmpty = lang === 'no' ? '165 måneder uten' : '165 months without';
+      return `<div class="viz-months">${cells}</div><div class="viz-months-legend"><span class="viz-legend-key"><span class="viz-legend-dot visit"></span>${legendVisit}</span><span class="viz-legend-key"><span class="viz-legend-dot"></span>${legendEmpty}</span></div>`;
+    }
+
+    function buildPetitionsViz(lang) {
+      let sheets = '';
+      for (let i = 0; i < 60; i++) {
+        const delay = (i * 18);
+        sheets += `<div class="viz-petition"><div class="stamp" style="animation-delay:${delay}ms"></div></div>`;
+      }
+      const caption = lang === 'no'
+        ? '<strong>60 av 60 ubesvart.</strong> Staten grep ikke inn.'
+        : '<strong>60 of 60 unanswered.</strong> The state did not intervene.';
+      return `<div class="viz-petitions">${sheets}</div><div class="viz-petitions-caption">${caption}</div>`;
+    }
+
+    function renderStats() {
+      const grid = document.getElementById('stats-grid');
+      grid.innerHTML = statRows.map(s => {
+        let vizHtml = '';
+        if (s.viz === 'months') vizHtml = buildMonthsViz(currentLang);
+        else if (s.viz === 'petitions') vizHtml = buildPetitionsViz(currentLang);
+        const numDisplay = statsAnimated ? s.num : preAnimateValue(s.num);
+        return `
+          <div class="stat-row">
+            <div class="stat-figure">
+              <div class="stat-figure-num ${s.numClass}" data-num="${s.num}">${numDisplay}</div>
+              <div class="stat-figure-unit">${s.unit[currentLang]}</div>
+            </div>
+            <div class="stat-body">
+              <p>${s.body[currentLang]}</p>
+              <span class="stat-citation">${s.citation}</span>
+              ${vizHtml}
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    let compareFocusedPair = null;
+
+    function renderCompare() {
+      const wrap = document.getElementById('compare-wrap');
+      const standardHead = currentLang === 'no' ? 'Det Strasbourg krever' : 'What Strasbourg requires';
+      const practiceHead = currentLang === 'no' ? 'Det som faktisk skjer i Norge' : 'What actually happens in Norway';
+      wrap.innerHTML = `
+        <div class="compare-col standard">
+          <div class="compare-head"><span class="badge"></span>${standardHead}</div>
+          ${compare.map((c, i) => `<div class="compare-row" data-pair="${i}">${c[currentLang].standard}</div>`).join('')}
+        </div>
+        <div class="compare-col practice">
+          <div class="compare-head"><span class="badge"></span>${practiceHead}</div>
+          ${compare.map((c, i) => `<div class="compare-row" data-pair="${i}">${c[currentLang].practice}</div>`).join('')}
+        </div>
+      `;
+      wrap.querySelectorAll('.compare-row').forEach(row => {
+        row.addEventListener('mouseenter', () => {
+          const pair = row.dataset.pair;
+          wrap.querySelectorAll(`.compare-row[data-pair="${pair}"]`).forEach(r => r.classList.add('pair-hover'));
+        });
+        row.addEventListener('mouseleave', () => {
+          wrap.querySelectorAll('.compare-row.pair-hover').forEach(r => r.classList.remove('pair-hover'));
+        });
+        row.addEventListener('click', () => {
+          const pair = row.dataset.pair;
+          if (compareFocusedPair === pair) {
+            // Unfocus
+            compareFocusedPair = null;
+            wrap.classList.remove('has-focus');
+            wrap.querySelectorAll('.compare-row.pair-focused').forEach(r => r.classList.remove('pair-focused'));
+          } else {
+            compareFocusedPair = pair;
+            wrap.classList.add('has-focus');
+            wrap.querySelectorAll('.compare-row.pair-focused').forEach(r => r.classList.remove('pair-focused'));
+            wrap.querySelectorAll(`.compare-row[data-pair="${pair}"]`).forEach(r => r.classList.add('pair-focused'));
+          }
+        });
+      });
+      // Restore stagger-reveal state if compare already passed (re-render after lang change)
+      if (wrap.dataset.revealed === 'true') {
+        wrap.querySelectorAll('.compare-row').forEach(r => r.classList.add('in'));
+      }
+    }
+
+    function setupCompareStagger() {
+      const wrap = document.getElementById('compare-wrap');
+      if (!wrap) return;
+      let revealed = false;
+      function check() {
+        if (revealed) return;
+        const rect = wrap.getBoundingClientRect();
+        if (rect.top < window.innerHeight * 0.8 && rect.bottom > 0) {
+          revealed = true;
+          wrap.dataset.revealed = 'true';
+          const rows = wrap.querySelectorAll('.compare-row');
+          rows.forEach((row, i) => {
+            const pair = parseInt(row.dataset.pair, 10);
+            setTimeout(() => row.classList.add('in'), pair * 80);
+          });
+          document.removeEventListener('scroll', check);
+        }
+      }
+      document.addEventListener('scroll', check, { passive: true });
+      check();
+    }
+
+    function renderDrawer() {
+      const toc = document.getElementById('drawer-toc');
+      if (toc) {
+        toc.innerHTML = railChapters.map((c, i) => `
+          <li><a href="#${c.id}" data-target="${c.id}" class="drawer-toc-link">
+            <span class="toc-icon"><svg class="icon"><use href="#${c.icon}"/></svg></span>
+            <span class="toc-content">
+              <span class="toc-meta">${i === 0 ? (currentLang === 'no' ? 'Start' : 'Start') : (i < 3 ? String(i).padStart(2, '0') : (i === 3 ? (currentLang === 'no' ? 'Mellomspill' : 'Interlude') : String(i - 1).padStart(2, '0')))}</span>
+              <span class="toc-title">${c[currentLang]}</span>
+            </span>
+          </a></li>
+        `).join('');
+        toc.querySelectorAll('.drawer-toc-link').forEach(link => {
+          link.addEventListener('click', (e) => {
+            e.preventDefault();
+            const id = link.dataset.target;
+            closeDrawer();
+            setTimeout(() => {
+              const el = document.getElementById(id);
+              if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }, 250);
+          });
+        });
+      }
+
+      const gl = document.getElementById('drawer-glossary');
+      if (gl) {
+        gl.innerHTML = glossary.map(g => {
+          const localTerm = currentLang === 'en' ? (g.en.term || g.term) : g.term;
+          return `<li><div class="glossary-term">${localTerm}</div><div class="glossary-def">${g[currentLang].def}</div></li>`;
+        }).join('');
+      }
+
+      const tips = document.getElementById('drawer-tips');
+      if (tips) {
+        const items = content[currentLang].tips || [];
+        tips.innerHTML = items.map(t => `<li>${t}</li>`).join('');
+      }
+    }
+
+    function renderActors() {
+      const grid = document.getElementById('actors-grid');
+      if (!grid) return;
+      grid.innerHTML = actors.map(a => `
+        <div class="actor-chip ${a.kind}">
+          <span class="actor-icon"><svg class="icon"><use href="#${a.icon}"/></svg></span>
+          <div class="actor-name">${a[currentLang].name}</div>
+          <div class="actor-role">${a[currentLang].role}</div>
+        </div>
+      `).join('');
+    }
+
+    function renderChapterRail() {
+      const rail = document.getElementById('chapter-rail');
+      if (!rail) return;
+      rail.innerHTML = '<ol>' + railChapters.map(c => `
+        <li><a href="#${c.id}" data-target="${c.id}" class="${c.dark ? 'dark' : ''}" aria-label="${c[currentLang]}">
+          <svg class="icon"><use href="#${c.icon}"/></svg>
+          <span class="rail-label">${c[currentLang]}</span>
+        </a></li>
+      `).join('') + '</ol>';
+    }
+
+    function renderNorwayRecord() {
+      const grid = document.getElementById('norway-stats');
+      if (!grid) return;
+      grid.innerHTML = norwayRecord.map(s => `
+        <div class="record-stat">
+          <div class="rs-num ${s.accent ? 'accent' : ''}">${s.num}</div>
+          <div class="rs-label">${s[currentLang].label}<span class="rs-source">${s[currentLang].source}</span></div>
+        </div>
+      `).join('');
+    }
+
+    function renderSources() {
+      const grid = document.getElementById('sources-grid');
+      grid.innerHTML = sources.map(s => `
+        <a class="source-card" href="${s.url}" target="_blank" rel="noopener">
+          <span class="src-icon"><svg class="icon"><use href="#${s.icon}"/></svg></span>
+          <div class="src-label">${s[currentLang].label}</div>
+          <div class="src-title">${s[currentLang].title}</div>
+          <div class="src-url">${s[currentLang].desc}</div>
+        </a>
+      `).join('');
+    }
+
+    function updateFilterStatus() {
+      const status = document.getElementById('filter-status');
+      const clearBtn = document.getElementById('filter-clear');
+      if (!activeFilter) {
+        const all = currentLang === 'no' ? `Viser alle ${cases.length} dommer` : `Showing all ${cases.length} judgments`;
+        status.textContent = all;
+        clearBtn.disabled = true;
+      } else {
+        const principle = principles.find(p => p.id === activeFilter);
+        const matching = cases.filter(c => c.tags.includes(activeFilter)).length;
+        const label = currentLang === 'no'
+          ? `Viser ${matching} av ${cases.length} dommer som handler om: «${principle.no.title.replace(/\.$/, '')}»`
+          : `Showing ${matching} of ${cases.length} judgments on: "${principle.en.title.replace(/\.$/, '')}"`;
+        status.textContent = label;
+        clearBtn.disabled = false;
+      }
+    }
+
+    function toggleFilter(id) {
+      activeFilter = activeFilter === id ? null : id;
+      renderPrinciples();
+      renderCases();
+      updateFilterStatus();
+      // Smooth-scroll the timeline into view if filter activated
+      if (activeFilter) {
+        const tl = document.getElementById('ch3');
+        const rect = tl.getBoundingClientRect();
+        if (rect.top > 200 || rect.bottom < 200) {
+          tl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      }
+    }
+
+    // ============ I18N ============
+    function setLang(lang) {
+      if (!content[lang]) lang = 'no';
+      currentLang = lang;
+      document.documentElement.lang = lang === 'no' ? 'no' : 'en';
+
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.dataset.i18n;
+        if (content[lang][key] !== undefined) el.innerHTML = content[lang][key];
+      });
+
+      document.title = content[lang].meta_title;
+      const metaDesc = document.querySelector('meta[name="description"]');
+      if (metaDesc) metaDesc.setAttribute('content', content[lang].meta_description);
+
+      document.querySelectorAll('.lang-toggle button').forEach(btn => {
+        const active = btn.dataset.lang === lang;
+        btn.classList.toggle('active', active);
+        btn.setAttribute('aria-pressed', active ? 'true' : 'false');
+      });
+
+      renderActors();
+      renderPrinciples();
+      renderCases();
+      renderStats();
+      renderCompare();
+      renderNorwayRecord();
+      renderSources();
+      renderChapterRail();
+      renderDrawer();
+      buildSearchIndex();
+      updateFilterStatus();
+
+      // Update search input placeholder if modal is open
+      const searchInputEl = document.getElementById('search-input');
+      if (searchInputEl) searchInputEl.placeholder = content[lang].search_placeholder;
+
+      // Refresh scrolly year marker if present
+      const viz = document.querySelector('.bond-viz');
+      if (viz) {
+        const state = parseInt(viz.dataset.state || '0', 10);
+        const ym = viz.querySelector('.year-marker');
+        const labels = (content[lang].scrolly_year_labels || '').split('|');
+        if (ym && labels[state]) ym.textContent = labels[state];
+      }
+
+      localStorage.setItem('lang', lang);
+    }
+
+    // ============ COUNTER ANIMATION ============
+    // Uses setTimeout instead of requestAnimationFrame so it keeps running
+    // even when iframe is throttled by the browser.
+    function animateCounter(el) {
+      const target = el.dataset.num;
+      const match = target.match(/^([0-9]+)(.*)$/);
+      if (!match) { el.textContent = target; return; }
+      const targetNum = parseInt(match[1], 10);
+      const suffix = match[2];
+      const duration = 1400;
+      const steps = 30;
+      const stepDuration = duration / steps;
+      let frame = 0;
+      function tick() {
+        frame += 1;
+        const progress = Math.min(frame / steps, 1);
+        const eased = 1 - Math.pow(1 - progress, 3);
+        el.textContent = Math.floor(eased * targetNum) + suffix;
+        if (progress < 1) setTimeout(tick, stepDuration);
+        else el.textContent = target;
+      }
+      setTimeout(tick, stepDuration);
+    }
+
+    // ============ SEARCH ============
+    let searchIndex = [];
+    let searchFocusedIndex = -1;
+
+    function stripTags(s) { return String(s).replace(/<[^>]+>/g, ''); }
+    function escapeRegExp(s) { return s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); }
+    function escapeHtml(s) {
+      return String(s)
+        .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+    }
+    // Diacritic-insensitive normalize: "Ribić" -> "ribic", "Ónodi" -> "onodi"
+    function deburr(s) {
+      return String(s).normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase();
+    }
+
+    function buildSearchIndex() {
+      const lang = currentLang;
+      const T = content[lang];
+      const idx = [];
+
+      cases.forEach((c, i) => {
+        idx.push({
+          type: 'case',
+          typeLabel: T.search_type_case,
+          icon: 'i-gavel',
+          sectionId: 'ch3',
+          elementId: `case-${i}`,
+          expand: true,
+          title: lang === 'no'
+            ? `${c.name} mot ${c.country.no} (${c.year})`
+            : `${c.name} v. ${c.country.en} (${c.year})`,
+          body: `${c.principle[lang]} ${c.quote[lang]} ${c.appNo}`
+        });
+      });
+
+      principles.forEach((p) => {
+        idx.push({
+          type: 'principle',
+          typeLabel: T.search_type_principle,
+          icon: p.icon,
+          sectionId: 'ch2',
+          title: p[lang].title,
+          body: p[lang].body
+        });
+      });
+
+      norwayRecord.forEach((s) => {
+        idx.push({
+          type: 'norway',
+          typeLabel: T.search_type_norway,
+          icon: 'i-flag',
+          sectionId: 'ch6',
+          title: `${s.num} · ${stripTags(s[lang].label).substring(0, 60)}${s[lang].label.length > 60 ? '…' : ''}`,
+          body: `${stripTags(s[lang].label)} ${s[lang].source}`
+        });
+      });
+
+      compare.forEach((c) => {
+        const s = stripTags(c[lang].standard);
+        const p = stripTags(c[lang].practice);
+        idx.push({
+          type: 'compare',
+          typeLabel: T.search_type_compare,
+          icon: 'i-balance',
+          sectionId: 'ch5',
+          title: s.substring(0, 80) + (s.length > 80 ? '…' : ''),
+          body: `${s} ${p}`
+        });
+      });
+
+      sources.forEach((s) => {
+        idx.push({
+          type: 'source',
+          typeLabel: T.search_type_source,
+          icon: s.icon,
+          sectionId: 'ch7',
+          external: s.url,
+          title: s[lang].title,
+          body: `${s[lang].title} ${s[lang].desc}`
+        });
+      });
+
+      glossary.forEach((g) => {
+        const localTerm = lang === 'en' ? (g.en.term || g.term) : g.term;
+        idx.push({
+          type: 'glossary',
+          typeLabel: T.search_type_glossary || 'Term',
+          icon: 'i-book-open',
+          openDrawer: true,
+          title: localTerm,
+          body: `${localTerm} ${g[lang].def}`
+        });
+      });
+
+      searchIndex = idx;
+    }
+
+    function searchQuery(query) {
+      const q = deburr(query).trim();
+      if (!q) return [];
+      const tokens = q.split(/\s+/).filter(t => t.length > 0);
+
+      return searchIndex
+        .map(item => {
+          const titleL = deburr(item.title);
+          const bodyL = deburr(item.body);
+          let score = 0;
+
+          tokens.forEach(t => {
+            if (titleL.includes(t)) score += 12;
+            if (bodyL.includes(t)) score += 4;
+            // word-boundary bonus
+            const re = new RegExp('\\b' + escapeRegExp(t), 'i');
+            if (re.test(titleL)) score += 4;
+            if (re.test(bodyL)) score += 2;
+          });
+
+          if (score === 0) return null;
+
+          // Build snippet around first match (use original body, not deburred)
+          let snippet = '';
+          const firstMatch = tokens
+            .map(t => bodyL.indexOf(t))
+            .filter(i => i >= 0)
+            .sort((a, b) => a - b)[0];
+          if (firstMatch !== undefined) {
+            const start = Math.max(0, firstMatch - 50);
+            const end = Math.min(item.body.length, firstMatch + 130);
+            snippet = (start > 0 ? '…' : '') + item.body.substring(start, end) + (end < item.body.length ? '…' : '');
+          } else {
+            snippet = item.body.substring(0, 160) + (item.body.length > 160 ? '…' : '');
+          }
+
+          return { item, score, snippet };
+        })
+        .filter(Boolean)
+        .sort((a, b) => b.score - a.score)
+        .slice(0, 10);
+    }
+
+    function highlight(text, query) {
+      const tokens = query.toLowerCase().trim().split(/\s+/).filter(t => t.length > 1);
+      let out = escapeHtml(text);
+      tokens.forEach(t => {
+        const re = new RegExp('(' + escapeRegExp(t) + ')', 'gi');
+        out = out.replace(re, '<mark>$1</mark>');
+      });
+      return out;
+    }
+
+    function renderSearchResults(query) {
+      const wrap = document.getElementById('search-results');
+      if (!query.trim()) {
+        wrap.innerHTML = `<div class="search-empty">${content[currentLang].search_hint}</div>`;
+        searchFocusedIndex = -1;
+        return;
+      }
+      const results = searchQuery(query);
+      if (results.length === 0) {
+        wrap.innerHTML = `<div class="search-empty">${content[currentLang].search_empty}</div>`;
+        searchFocusedIndex = -1;
+        return;
+      }
+      wrap.innerHTML = results.map((r, i) => `
+        <button class="search-result ${i === 0 ? 'focused' : ''}" data-idx="${i}" data-section="${r.item.sectionId || ''}" data-element="${r.item.elementId || ''}" data-expand="${r.item.expand ? '1' : ''}" data-external="${r.item.external || ''}" data-open-drawer="${r.item.openDrawer ? '1' : ''}">
+          <span class="result-icon"><svg class="icon"><use href="#${r.item.icon}"/></svg></span>
+          <div class="result-content">
+            <div class="result-meta">${r.item.typeLabel}</div>
+            <div class="result-title">${highlight(r.item.title, query)}</div>
+            <div class="result-snippet">${highlight(r.snippet, query)}</div>
+          </div>
+        </button>
+      `).join('');
+      searchFocusedIndex = 0;
+      wrap.querySelectorAll('.search-result').forEach(btn => {
+        btn.addEventListener('click', () => handleResultSelect(btn));
+        btn.addEventListener('mouseenter', () => {
+          wrap.querySelectorAll('.search-result.focused').forEach(b => b.classList.remove('focused'));
+          btn.classList.add('focused');
+          searchFocusedIndex = parseInt(btn.dataset.idx, 10);
+        });
+      });
+    }
+
+    function handleResultSelect(btn) {
+      const sid = btn.dataset.section;
+      const eid = btn.dataset.element;
+      const exp = btn.dataset.expand === '1';
+      const ext = btn.dataset.external;
+      const openDrawer = btn.dataset.openDrawer === '1';
+
+      closeSearch();
+
+      if (ext) {
+        window.open(ext, '_blank', 'noopener');
+        return;
+      }
+      if (openDrawer) {
+        setTimeout(() => openDrawerPanel(), 100);
+        return;
+      }
+      if (eid) {
+        const el = document.getElementById(eid);
+        if (el) {
+          el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          if (exp) {
+            setTimeout(() => {
+              el.classList.add('expanded');
+              el.setAttribute('aria-expanded', 'true');
+            }, 450);
+          }
+          return;
+        }
+      }
+      if (sid) {
+        const el = document.getElementById(sid);
+        if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }
+
+    function openSearch() {
+      const modal = document.getElementById('search-modal');
+      const input = document.getElementById('search-input');
+      modal.hidden = false;
+      modal.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+      input.placeholder = content[currentLang].search_placeholder;
+      setTimeout(() => input.focus(), 30);
+      if (!input.value) renderSearchResults('');
+    }
+
+    function closeSearch() {
+      const modal = document.getElementById('search-modal');
+      modal.hidden = true;
+      modal.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+    }
+
+    function setupSearch() {
+      const trigger = document.getElementById('search-trigger');
+      const closeBtn = document.getElementById('search-close');
+      const backdrop = document.getElementById('search-backdrop');
+      const input = document.getElementById('search-input');
+      const results = document.getElementById('search-results');
+
+      trigger.addEventListener('click', openSearch);
+      closeBtn.addEventListener('click', closeSearch);
+      backdrop.addEventListener('click', closeSearch);
+      input.addEventListener('input', (e) => renderSearchResults(e.target.value));
+
+      // Keyboard nav
+      input.addEventListener('keydown', (e) => {
+        const items = results.querySelectorAll('.search-result');
+        if (e.key === 'ArrowDown') {
+          e.preventDefault();
+          if (items.length === 0) return;
+          searchFocusedIndex = Math.min(searchFocusedIndex + 1, items.length - 1);
+          items.forEach((b, i) => b.classList.toggle('focused', i === searchFocusedIndex));
+          items[searchFocusedIndex].scrollIntoView({ block: 'nearest' });
+        } else if (e.key === 'ArrowUp') {
+          e.preventDefault();
+          if (items.length === 0) return;
+          searchFocusedIndex = Math.max(searchFocusedIndex - 1, 0);
+          items.forEach((b, i) => b.classList.toggle('focused', i === searchFocusedIndex));
+          items[searchFocusedIndex].scrollIntoView({ block: 'nearest' });
+        } else if (e.key === 'Enter') {
+          e.preventDefault();
+          const focused = items[searchFocusedIndex];
+          if (focused) handleResultSelect(focused);
+        }
+      });
+
+      // Global shortcuts
+      document.addEventListener('keydown', (e) => {
+        if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') {
+          e.preventDefault();
+          openSearch();
+        } else if (e.key === 'Escape' && !document.getElementById('search-modal').hidden) {
+          closeSearch();
+        }
+      });
+    }
+
+    // ============ DRAWER (hamburger menu) ============
+    function openDrawerPanel() {
+      const drawer = document.getElementById('drawer');
+      const trigger = document.getElementById('menu-trigger');
+      if (!drawer) return;
+      drawer.hidden = false;
+      drawer.setAttribute('aria-hidden', 'false');
+      if (trigger) trigger.setAttribute('aria-expanded', 'true');
+      document.body.style.overflow = 'hidden';
+
+      // Highlight active chapter in TOC
+      const activeRailLink = document.querySelector('.chapter-rail a.active');
+      if (activeRailLink) {
+        const activeId = activeRailLink.dataset.target;
+        drawer.querySelectorAll('.drawer-toc-link').forEach(l => {
+          l.classList.toggle('active', l.dataset.target === activeId);
+        });
+      }
+    }
+
+    function closeDrawer() {
+      const drawer = document.getElementById('drawer');
+      const trigger = document.getElementById('menu-trigger');
+      if (!drawer) return;
+      drawer.hidden = true;
+      drawer.setAttribute('aria-hidden', 'true');
+      if (trigger) trigger.setAttribute('aria-expanded', 'false');
+      document.body.style.overflow = '';
+    }
+
+    function setupDrawer() {
+      const trigger = document.getElementById('menu-trigger');
+      const closeBtn = document.getElementById('drawer-close');
+      const backdrop = document.getElementById('drawer-backdrop');
+      if (trigger) trigger.addEventListener('click', openDrawerPanel);
+      if (closeBtn) closeBtn.addEventListener('click', closeDrawer);
+      if (backdrop) backdrop.addEventListener('click', closeDrawer);
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && !document.getElementById('drawer').hidden) closeDrawer();
+      });
+    }
+
+    // ============ CHAPTER RAIL (active section tracking) ============
+    function setupChapterRail() {
+      const rail = document.getElementById('chapter-rail');
+      if (!rail) return;
+
+      const setActive = (id) => {
+        rail.querySelectorAll('a').forEach(a => {
+          a.classList.toggle('active', a.dataset.target === id);
+        });
+      };
+
+      const observer = new IntersectionObserver((entries) => {
+        const visible = entries.filter(e => e.isIntersecting);
+        if (visible.length === 0) return;
+        // Pick the topmost visible section
+        const top = visible.reduce((a, b) =>
+          (a.boundingClientRect.top < b.boundingClientRect.top ? a : b));
+        setActive(top.target.id);
+      }, {
+        threshold: [0, 0.25],
+        rootMargin: '-10% 0px -60% 0px'
+      });
+
+      railChapters.forEach(c => {
+        const el = document.getElementById(c.id);
+        if (el) observer.observe(el);
+      });
+    }
+
+    // ============ SCROLLYTELLING (BOND DECAY) ============
+    function setupScrolly() {
+      const viz = document.querySelector('.bond-viz');
+      const yearMarker = viz && viz.querySelector('.year-marker');
+      const steps = document.querySelectorAll('#scrolly-steps .scrolly-step');
+      if (!viz || steps.length === 0) return;
+
+      let currentStep = -1;
+      const setState = (step) => {
+        if (step === currentStep) return;
+        currentStep = step;
+        viz.setAttribute('data-state', String(step));
+        steps.forEach(s => s.classList.toggle('active', parseInt(s.dataset.step) === step));
+        if (yearMarker) {
+          const labels = (content[currentLang].scrolly_year_labels || '').split('|');
+          if (labels[step]) yearMarker.textContent = labels[step];
+        }
+      };
+
+      // Scroll-driven state: which step's top has crossed the 55% line?
+      function update() {
+        const lineY = window.innerHeight * 0.55;
+        let active = 0;
+        for (let i = 0; i < steps.length; i++) {
+          const rect = steps[i].getBoundingClientRect();
+          if (rect.top <= lineY) active = i;
+          else break;
+        }
+        setState(active);
+      }
+
+      document.addEventListener('scroll', update, { passive: true });
+      window.addEventListener('resize', update, { passive: true });
+      update();
+    }
+
+    // ============ READING PROGRESS ============
+    function setupProgress() {
+      const fill = document.getElementById('progress-fill');
+      function update() {
+        const h = document.documentElement;
+        const max = h.scrollHeight - h.clientHeight;
+        const pct = max > 0 ? (h.scrollTop / max) * 100 : 0;
+        fill.style.width = Math.min(100, Math.max(0, pct)) + '%';
+      }
+      document.addEventListener('scroll', update, { passive: true });
+      update();
+    }
+
+    // ============ INIT ============
+    (function init() {
+      const saved = localStorage.getItem('lang');
+      const browser = (navigator.language || 'en').toLowerCase();
+      const isNorwegian = browser.startsWith('no') || browser.startsWith('nb') || browser.startsWith('nn');
+      const initialLang = saved || (isNorwegian ? 'no' : 'en');
+
+      setLang(initialLang);
+
+      document.querySelectorAll('.lang-toggle button').forEach(btn => {
+        btn.addEventListener('click', () => setLang(btn.dataset.lang));
+      });
+
+      document.getElementById('filter-clear').addEventListener('click', () => {
+        activeFilter = null;
+        renderPrinciples();
+        renderCases();
+        updateFilterStatus();
+      });
+
+      // Fade-in observer
+      const fadeObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            fadeObserver.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.08, rootMargin: '0px 0px -50px 0px' });
+      document.querySelectorAll('.fade-in').forEach(el => fadeObserver.observe(el));
+
+      // Stats counter trigger: scroll-listener fallback
+      const statsGrid = document.getElementById('stats-grid');
+      function checkStatsVisible() {
+        if (statsAnimated) return;
+        const rect = statsGrid.getBoundingClientRect();
+        if (rect.top < window.innerHeight * 0.85 && rect.bottom > 0) {
+          statsAnimated = true;
+          statsGrid.querySelectorAll('.stat-figure-num').forEach(animateCounter);
+          document.removeEventListener('scroll', checkStatsVisible);
+        }
+      }
+      document.addEventListener('scroll', checkStatsVisible, { passive: true });
+      checkStatsVisible();
+
+      setupProgress();
+      setupScrolly();
+      setupChapterRail();
+      setupSearch();
+      setupCompareStagger();
+      setupDrawer();
+
+      // Kill the principle-hint pulse after 6s or first interaction
+      const pulseEl = document.querySelector('.principle-hint .pulse');
+      if (pulseEl) {
+        const stopPulse = () => {
+          pulseEl.style.animation = 'none';
+          pulseEl.style.opacity = '1';
+        };
+        setTimeout(stopPulse, 6000);
+        document.getElementById('principles-grid').addEventListener('click', stopPulse, { once: true });
+      }
+    })();
+  </script>
+</body>
+</html>
