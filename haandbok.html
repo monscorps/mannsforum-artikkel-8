@@ -335,6 +335,16 @@
     }
 
     /* DOCTRINE BOX */
+    .doctrine-stack {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 18px;
+      margin-top: 16px;
+    }
+    @media (min-width: 880px) {
+      .doctrine-stack { grid-template-columns: 1fr 1fr; gap: 20px; }
+    }
+
     .doctrine-box {
       padding: 38px 36px;
       background: var(--ink);
@@ -393,6 +403,19 @@
       position: relative;
     }
 
+    .doctrine-box-secondary {
+      background: var(--white);
+      color: var(--ink);
+      border: 1px solid var(--rule);
+    }
+    .doctrine-box-secondary::before {
+      background: radial-gradient(circle at 92% 10%, rgba(77, 178, 236, 0.18) 0%, transparent 55%);
+    }
+    .doctrine-box-secondary .db-label { color: var(--brand-deep); }
+    .doctrine-box-secondary h3 { color: var(--ink); }
+    .doctrine-box-secondary p { color: var(--body); }
+    .doctrine-box-secondary .db-cite { color: var(--muted); }
+
     /* OBLIGATION CARDS */
     .obligations {
       display: grid;
@@ -424,12 +447,42 @@
       box-shadow: 0 10px 28px -12px rgba(26, 127, 184, 0.2);
     }
 
+    .obligation {
+      cursor: pointer;
+      text-align: left;
+      font-family: inherit;
+      color: inherit;
+      width: 100%;
+    }
+
+    .obligation:focus-visible {
+      outline: 2px solid var(--brand);
+      outline-offset: 3px;
+    }
+
+    .obligation .ob-top {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+
     .obligation .ob-num {
       font-size: 11px;
       font-weight: 700;
       letter-spacing: 0.2em;
       color: var(--brand-deep);
-      margin-bottom: 12px;
+    }
+
+    .obligation .ob-count {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      color: var(--muted);
+      padding: 3px 9px;
+      background: var(--rule-soft);
+      border-radius: 999px;
     }
 
     .obligation .ob-icon {
@@ -599,11 +652,11 @@
     .case-row.hidden { display: none; }
 
     .case-row-summary {
-      padding: 18px 22px;
+      padding: 20px 24px;
       cursor: pointer;
       display: grid;
-      grid-template-columns: auto 1fr auto;
-      gap: 16px;
+      grid-template-columns: 56px 1fr auto;
+      gap: 18px;
       align-items: center;
       border: none;
       background: transparent;
@@ -614,12 +667,12 @@
     }
 
     .case-row-year {
-      font-size: 13px;
-      font-weight: 700;
-      color: var(--muted);
-      letter-spacing: 0.04em;
+      font-size: 22px;
+      font-weight: 800;
+      color: var(--brand-deep);
+      letter-spacing: -0.02em;
       font-variant-numeric: tabular-nums;
-      width: 48px;
+      line-height: 1;
     }
 
     .case-row-body {
@@ -627,38 +680,49 @@
     }
 
     .case-row-name {
-      font-size: 16px;
+      font-size: 17px;
       font-weight: 700;
       color: var(--ink);
       letter-spacing: -0.015em;
       line-height: 1.3;
-      margin-bottom: 4px;
+      margin-bottom: 6px;
     }
     .case-row-name em { font-style: italic; font-feature-settings: "ss01"; }
 
     .case-row-meta {
       display: flex;
       flex-wrap: wrap;
-      gap: 8px 14px;
+      gap: 6px 12px;
       font-size: 11.5px;
       color: var(--muted);
       letter-spacing: 0.02em;
+      align-items: center;
     }
 
     .case-row-meta .country-chip {
       display: inline-block;
-      padding: 2px 8px;
+      padding: 3px 9px;
       background: var(--rule-soft);
-      border-radius: 4px;
+      border-radius: 999px;
       font-size: 10.5px;
-      font-weight: 600;
-      letter-spacing: 0.12em;
+      font-weight: 700;
+      letter-spacing: 0.1em;
       text-transform: uppercase;
       color: var(--muted);
     }
     .case-row-meta .country-chip.norway {
       background: rgba(225, 29, 72, 0.12);
       color: var(--accent);
+    }
+    .case-row-meta .meta-app {
+      font-family: ui-monospace, "SF Mono", monospace;
+      font-size: 11px;
+      color: var(--muted-soft);
+      letter-spacing: 0;
+    }
+    .case-row-meta .meta-divider {
+      color: var(--muted-soft);
+      opacity: 0.5;
     }
 
     .case-row-chev {
@@ -793,6 +857,50 @@
       letter-spacing: 0.04em;
     }
     .case-app strong { color: var(--ink); font-weight: 700; }
+
+    .case-copy {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 7px 12px 7px 11px;
+      background: var(--white);
+      color: var(--brand-deep);
+      border: 1px solid var(--rule);
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      cursor: pointer;
+      font-family: inherit;
+      transition: all 0.15s var(--ease);
+    }
+    .case-copy:hover { border-color: var(--brand); background: var(--brand-soft); }
+    .case-copy.done { background: var(--brand); color: var(--white); border-color: var(--brand); }
+    .case-copy .icon { width: 12px; height: 12px; stroke-width: 2.2; }
+
+    .toast {
+      position: fixed;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%) translateY(40px);
+      padding: 11px 20px;
+      background: var(--ink);
+      color: var(--white);
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      z-index: 300;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.2s var(--ease), transform 0.2s var(--ease);
+      box-shadow: 0 10px 30px -10px rgba(10, 25, 41, 0.4);
+    }
+    .toast.show {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+    .toast .icon { width: 14px; height: 14px; color: var(--brand); vertical-align: -3px; margin-right: 6px; }
 
     mark {
       background: rgba(77, 178, 236, 0.35);
@@ -943,11 +1051,19 @@
           <h2 data-i18n="doc_title"></h2>
           <p class="intro" data-i18n="doc_intro"></p>
         </div>
-        <div class="doctrine-box">
-          <div class="db-label" data-i18n="db_label"></div>
-          <h3 data-i18n="db_quote"></h3>
-          <p data-i18n="db_explain"></p>
-          <div class="db-cite" data-i18n="db_cite"></div>
+        <div class="doctrine-stack">
+          <div class="doctrine-box">
+            <div class="db-label" data-i18n="db_label"></div>
+            <h3 data-i18n="db_quote"></h3>
+            <p data-i18n="db_explain"></p>
+            <div class="db-cite" data-i18n="db_cite"></div>
+          </div>
+          <div class="doctrine-box doctrine-box-secondary">
+            <div class="db-label" data-i18n="doc2_label"></div>
+            <h3 data-i18n="doc2_quote"></h3>
+            <p data-i18n="doc2_explain"></p>
+            <div class="db-cite" data-i18n="doc2_cite"></div>
+          </div>
         </div>
       </div>
     </section>
@@ -994,6 +1110,8 @@
     </section>
   </main>
 
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
   <footer class="site-footer">
     <div class="inner">
       <p data-i18n="footer_note"></p>
@@ -1032,9 +1150,8 @@
         db_section_title: "Søk i den fulle dommen.",
         db_section_intro: "Alle relevante EMD-dommer er samlet her. Søk på navn, land, prinsipp, eller faktisk innhold. Filtre lar deg avgrense til land eller plikttype. Hver dom har lenke direkte til HUDOC.",
         db_search_placeholder: "Søk på sak, land, paragraf, sitat...",
-        db_filter_all: "Alle",
-        db_filter_norway: "Mot Norge",
-        db_filter_other: "Mot andre stater",
+        db_filter_all: "Alle 9 dommer",
+        db_filter_effective: "Effektive tiltak",
         db_filter_time: "Tid",
         db_filter_active: "Aktiv inngripen",
         db_filter_investigate: "Undersøkelsesplikt",
@@ -1042,6 +1159,14 @@
         db_filter_arsenal: "Rettslig arsenal",
         db_stats_showing: "Viser %CURRENT% av %TOTAL% dommer",
         db_stats_none: "Ingen treff. Prøv andre søkeord eller filtre.",
+        copy_cite: "Kopier sitering",
+        copy_done: "Kopiert!",
+        case_count: "%N% dommer",
+        case_count_one: "1 dom",
+        doc2_label: "Det rettslige arsenal — Ónodi mot Ungarn, EMD 2017",
+        doc2_quote: "«Hver kontraherende stat må utstyre seg med et tilstrekkelig og virksomt rettslig arsenal for å sikre etterlevelse av sine positive forpliktelser etter artikkel 8.»",
+        doc2_explain: "Mens Ignaccolo-Zenide etablerte at staten har en positiv plikt, går Ónodi videre og krever konkrete strukturelle virkemidler. Det er ikke nok at staten prøver. Den må være utstyrt med tiltak som faktisk fungerer. En forelder leverte over seksti håndhevelsesbegjæringer uten resultat — det var i seg selv et brudd på artikkel 8.",
+        doc2_cite: "Bygger på Mincheva (2010) som først krevde «legal arsenal». Anvendt i K.B. (2017) som krever «koordinerte» tiltak.",
 
         ht_tag: "Slik bruker du håndboken",
         ht_title: "For advokater, forskere, journalister, foreldre.",
@@ -1078,9 +1203,8 @@
         db_section_title: "Search the full case law.",
         db_section_intro: "All relevant ECHR judgments are gathered here. Search by name, country, principle, or actual content. Filters let you narrow by country or type of obligation. Each judgment links directly to HUDOC.",
         db_search_placeholder: "Search by case, country, paragraph, quote...",
-        db_filter_all: "All",
-        db_filter_norway: "Against Norway",
-        db_filter_other: "Against other states",
+        db_filter_all: "All 9 judgments",
+        db_filter_effective: "Effective measures",
         db_filter_time: "Time",
         db_filter_active: "Active intervention",
         db_filter_investigate: "Duty to investigate",
@@ -1088,6 +1212,14 @@
         db_filter_arsenal: "Legal arsenal",
         db_stats_showing: "Showing %CURRENT% of %TOTAL% judgments",
         db_stats_none: "No matches. Try other terms or filters.",
+        copy_cite: "Copy citation",
+        copy_done: "Copied!",
+        case_count: "%N% judgments",
+        case_count_one: "1 judgment",
+        doc2_label: "The legal arsenal — Ónodi v. Hungary, ECHR 2017",
+        doc2_quote: "\"Each Contracting State must equip itself with an adequate and sufficient legal arsenal to ensure compliance with its positive obligations under Article 8.\"",
+        doc2_explain: "Where Ignaccolo-Zenide established the positive duty, Ónodi goes further and requires concrete structural measures. It is not enough that the state tries. It must be equipped with measures that actually work. A father filed over sixty enforcement petitions without result — that itself was a breach of Article 8.",
+        doc2_cite: "Builds on Mincheva (2010) which first required a \"legal arsenal\". Applied in K.B. (2017) requiring \"coordinated\" measures.",
 
         ht_tag: "How to use the handbook",
         ht_title: "For lawyers, researchers, journalists, parents.",
@@ -1099,19 +1231,25 @@
     };
 
     /* ============ DATA ============ */
-    // Five categories of positive obligations
+    // Six categories of positive obligations distilled from ECHR case law
     const obligations = [
       {
         id: 'effective', icon: 'i-bolt',
         no: { title: "Plikten til effektive tiltak", body: "Rettigheter etter EMK må være «praktiske og effektive», ikke «teoretiske og illusoriske». Tiltak skal bedømmes etter om de virker." },
         en: { title: "Duty to take effective measures", body: "ECHR rights must be \"practical and effective\", not \"theoretical and illusory\". Measures are judged by whether they work." },
-        cases: ['Ignaccolo-Zenide', 'Mincheva', 'Ónodi']
+        cases: ['Ignaccolo-Zenide', 'Macready', 'L.D.']
       },
       {
         id: 'time', icon: 'i-clock',
         no: { title: "Plikten til å handle raskt", body: "Tidens gang har «uopprettelige følger» for forholdet mellom barn og forelder. Sene tiltak kan i seg selv være et brudd." },
         en: { title: "Duty to act quickly", body: "The passage of time has \"irremediable consequences\" for the parent-child relationship. Late measures can themselves be a breach." },
         cases: ['Macready', 'Ribić', 'L.D.', 'Ónodi', 'K.B.']
+      },
+      {
+        id: 'active', icon: 'i-shield',
+        no: { title: "Plikten til aktiv inngripen", body: "Når samvær systematisk hindres, kreves konkret og hensiktsmessig respons fra myndighetene. Passivitet over tid er i seg selv et brudd." },
+        en: { title: "Duty of active intervention", body: "When contact is systematically obstructed, authorities must respond with concrete and appropriate measures. Passivity over time is itself a breach." },
+        cases: ['Mincheva', 'Zavridou', 'K.B.', 'Ónodi']
       },
       {
         id: 'investigate', icon: 'i-search',
@@ -1123,7 +1261,7 @@
         id: 'cooperation', icon: 'i-unlink',
         no: { title: "Ikke-avhengig håndhevelse", body: "Statens plikt kan ikke gjøres avhengig av samarbeid fra den parten som motsetter seg samværet. Det er der bruddet oppstår." },
         en: { title: "Non-dependent enforcement", body: "The state's duty cannot be made dependent on cooperation from the party who is obstructing contact. That dependency is where the violation arises." },
-        cases: ['Zavridou', 'Mincheva']
+        cases: ['Zavridou', 'Ribić']
       },
       {
         id: 'arsenal', icon: 'i-balance',
@@ -1347,20 +1485,40 @@
 
     function renderObligations() {
       const grid = document.getElementById('obligations-grid');
+      const T = content[currentLang];
       grid.innerHTML = obligations.map((o, i) => {
-        const caseChips = o.cases.map(name => `<button class="ob-case" data-jump-name="${name}">${name}</button>`).join('');
+        const matchingCount = cases.filter(c => c.principles && c.principles.includes(o.id)).length;
+        const countLabel = matchingCount === 1
+          ? T.case_count_one
+          : T.case_count.replace('%N%', matchingCount);
+        const caseChips = o.cases.map(name => `<button class="ob-case" data-jump-name="${name}" type="button" onclick="event.stopPropagation()">${name}</button>`).join('');
         return `
-          <div class="obligation">
-            <div class="ob-num">P${String(i + 1).padStart(2, '0')}</div>
+          <button class="obligation" data-filter-to="${o.id}" type="button">
+            <div class="ob-top">
+              <div class="ob-num">P${String(i + 1).padStart(2, '0')}</div>
+              <div class="ob-count">${countLabel}</div>
+            </div>
             <span class="ob-icon"><svg class="icon"><use href="#${o.icon}"/></svg></span>
             <h3>${o[currentLang].title}</h3>
             <p>${o[currentLang].body}</p>
             <div class="ob-cases">${caseChips}</div>
-          </div>
+          </button>
         `;
       }).join('');
+      grid.querySelectorAll('.obligation').forEach(card => {
+        card.addEventListener('click', () => {
+          const target = card.dataset.filterTo;
+          if (!target) return;
+          activeFilter = target;
+          renderFilters();
+          renderCases();
+          const db = document.getElementById('database');
+          if (db) db.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        });
+      });
       grid.querySelectorAll('.ob-case').forEach(btn => {
-        btn.addEventListener('click', () => {
+        btn.addEventListener('click', (e) => {
+          e.stopPropagation();
           const name = btn.dataset.jumpName;
           const c = cases.find(cc => cc.name === name || cc.nameEn === name);
           if (c) {
@@ -1379,8 +1537,7 @@
       const wrap = document.getElementById('db-filters');
       const filters = [
         { id: 'all', label: T.db_filter_all },
-        { id: 'norway', label: T.db_filter_norway },
-        { id: 'other', label: T.db_filter_other },
+        { id: 'effective', label: T.db_filter_effective },
         { id: 'time', label: T.db_filter_time },
         { id: 'active', label: T.db_filter_active },
         { id: 'investigate', label: T.db_filter_investigate },
@@ -1401,8 +1558,6 @@
 
     function matchesFilter(c) {
       if (activeFilter === 'all') return true;
-      if (activeFilter === 'norway') return c.country === 'Norge' || c.country === 'Norway';
-      if (activeFilter === 'other') return c.country !== 'Norge' && c.country !== 'Norway';
       return c.principles && c.principles.includes(activeFilter);
     }
 
@@ -1457,7 +1612,8 @@
                 <div class="case-row-meta">
                   <span class="country-chip ${isNorway ? 'norway' : ''}">${getCountry(c)}</span>
                   <span>${c.date[currentLang]}</span>
-                  <span>App. no. ${c.appNo}</span>
+                  <span class="meta-divider">·</span>
+                  <span class="meta-app">${c.appNo}</span>
                 </div>
               </div>
               <span class="case-row-chev" aria-hidden="true"><svg class="icon"><use href="#i-chevron-right"/></svg></span>
@@ -1477,8 +1633,10 @@
                   <a class="case-hudoc" href="${c.hudoc}" target="_blank" rel="noopener" onclick="event.stopPropagation()">
                     <svg class="icon"><use href="#i-external"/></svg>${currentLang === 'no' ? 'Les dommen på HUDOC' : 'Read on HUDOC'}
                   </a>
+                  <button class="case-copy" data-case-id="${c.id}" type="button" onclick="event.stopPropagation()">
+                    <svg class="icon"><use href="#i-list"/></svg>${content[currentLang].copy_cite}
+                  </button>
                   <div class="case-tags">${principleChips}</div>
-                  <span class="case-app">App. no. <strong>${c.appNo}</strong></span>
                 </div>
               </div>
             </div>
@@ -1493,6 +1651,53 @@
           btn.setAttribute('aria-expanded', open ? 'true' : 'false');
         });
       });
+
+      list.querySelectorAll('.case-copy').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          const cid = btn.dataset.caseId;
+          const c = cases.find(cc => cc.id === cid);
+          if (!c) return;
+          const lang = currentLang;
+          const fullName = `${getName(c)} v. ${getCountry(c)}`;
+          const citation = `${fullName}, app. no. ${c.appNo}, ECHR ${c.date[lang]}. Available at ${c.hudoc}`;
+          if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(citation).then(() => {
+              btn.classList.add('done');
+              btn.innerHTML = `<svg class="icon"><use href="#i-list"/></svg>${content[lang].copy_done}`;
+              showToast(content[lang].copy_done + ' · ' + fullName);
+              setTimeout(() => {
+                btn.classList.remove('done');
+                btn.innerHTML = `<svg class="icon"><use href="#i-list"/></svg>${content[lang].copy_cite}`;
+              }, 2200);
+            }).catch(() => fallbackCopy(citation, btn));
+          } else {
+            fallbackCopy(citation, btn);
+          }
+        });
+      });
+    }
+
+    function fallbackCopy(text, btn) {
+      const ta = document.createElement('textarea');
+      ta.value = text;
+      ta.style.position = 'fixed';
+      ta.style.opacity = '0';
+      document.body.appendChild(ta);
+      ta.select();
+      try { document.execCommand('copy'); } catch (e) {}
+      document.body.removeChild(ta);
+      showToast(content[currentLang].copy_done);
+    }
+
+    let toastTimer;
+    function showToast(msg) {
+      const t = document.getElementById('toast');
+      if (!t) return;
+      t.textContent = msg;
+      t.classList.add('show');
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => t.classList.remove('show'), 2400);
     }
 
     function renderHowto() {
