@@ -339,47 +339,38 @@
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
-      align-items: baseline;
-      gap: 4px 18px;
+      align-items: center;
+      gap: 8px;
       margin-top: 18px;
-      font-size: 13px;
-      color: var(--muted);
     }
     .search-suggestions .ss-label {
-      font-size: 11px;
+      font-size: 10.5px;
       font-weight: 700;
-      letter-spacing: 0.16em;
+      letter-spacing: 0.18em;
       text-transform: uppercase;
       color: var(--muted-soft);
-      margin-right: 6px;
+      margin-right: 4px;
+      align-self: center;
     }
     .ss-chip {
-      padding: 4px 0;
-      background: none;
-      border: none;
-      border-bottom: 1px dashed var(--rule);
+      padding: 6px 11px;
+      background: var(--white);
+      border: 1px solid var(--rule);
+      border-radius: 5px;
       font-family: inherit;
-      font-size: 13.5px;
-      color: var(--ink);
+      font-size: 12.5px;
+      font-weight: 500;
+      color: var(--body);
       cursor: pointer;
       transition: all 0.15s var(--ease);
       letter-spacing: -0.005em;
-      font-weight: 500;
-      font-style: italic;
     }
     .ss-chip:hover {
+      background: var(--brand-soft);
+      border-color: var(--brand);
       color: var(--brand-deep);
-      border-bottom-color: var(--brand);
-      border-bottom-style: solid;
     }
-    .ss-chip::before {
-      content: '↗';
-      margin-right: 5px;
-      font-size: 11px;
-      vertical-align: 1px;
-      color: var(--brand);
-      font-style: normal;
-    }
+    .ss-chip:active { transform: translateY(1px); }
 
     .search-hero .db-filters {
       justify-content: center;
@@ -932,12 +923,21 @@
     }
 
     .case-row-flag {
-      font-size: 18px;
-      margin-right: 8px;
-      vertical-align: -1px;
-      line-height: 1;
       display: inline-block;
+      margin-right: 10px;
+      vertical-align: -3px;
+      line-height: 1;
     }
+    .flag-svg {
+      display: inline-block;
+      height: 14px;
+      width: auto;
+      border-radius: 2px;
+      box-shadow: 0 0 0 1px rgba(10, 25, 41, 0.08);
+      vertical-align: middle;
+    }
+    .case-row-flag .flag-svg { height: 16px; }
+    .cr-flag .flag-svg { height: 22px; box-shadow: 0 0 0 1px rgba(10, 25, 41, 0.12); }
 
     .case-row-body {
       min-width: 0;
@@ -2079,8 +2079,8 @@
         id: 'ignaccolo', name: 'Ignaccolo-Zenide', country: 'Romania', year: 2000, date: { no: '25. januar 2000', en: '25 January 2000' },
         appNo: '31679/96', hudoc: 'https://hudoc.echr.coe.int/eng?i=002-6020', principles: ['effective', 'time'],
         tags: {
-          no: ['samværssabotasje', 'barnebortføring', 'Haag-konvensjonen', 'gjenforening', 'returvedtak', 'tilbakeføring av barn', 'manglende håndhevelse', 'positive forpliktelser', 'effektive tiltak', 'utvikling av familieliv', 'foundational', 'grunnsetning', 'EMK artikkel 8', 'mor flyttet barna', 'Frankrike Romania', 'rumenske myndigheter', 'samværsavtale brutt', 'far får ikke se barna'],
-          en: ['contact sabotage', 'child abduction', 'Hague Convention', 'reunification', 'return order', 'failure to enforce', 'positive obligations', 'effective measures', 'foundational holding', 'developing family ties', 'ECHR Article 8', 'mother moved children', 'France Romania', 'Romanian authorities', 'father denied access', 'cross-border']
+          no: ['samværssabotasje', 'barnebortføring', 'internasjonal barnebortføring', 'Haag-konvensjonen', 'gjenforening', 'returvedtak', 'tilbakeføring av barn', 'manglende håndhevelse', 'positive forpliktelser', 'effektive tiltak', 'utvikling av familieliv', 'foundational', 'grunnsetning', 'leading case', 'EMK artikkel 8', 'familieliv', 'forelder flyttet barna', 'Frankrike Romania', 'rumenske myndigheter', 'samværsavtale brutt', 'samværsbrudd', 'forelder får ikke se barna', 'foreldretvist', 'returvedtak ikke iverksatt', 'mangel på effektive tiltak', 'fullbyrdelse av returvedtak', 'praktisk gjennomføring', 'teoretisk og illusorisk', 'practical and effective', 'samværsrett', 'fullbyrdelse', 'kontaktrett', 'foreldreansvar', 'barnets beste', 'Strasbourg-doktrinen', 'positive obligation', 'reunite parent and child', 'parental rights', 'fundamental ruling'],
+          en: ['contact sabotage', 'child abduction', 'international child abduction', 'Hague Convention', 'reunification', 'return order', 'failure to enforce', 'positive obligations', 'effective measures', 'foundational holding', 'leading case', 'developing family ties', 'ECHR Article 8', 'family life', 'mother moved children', 'France Romania', 'Romanian authorities', 'father denied access', 'cross-border', 'enforcement of return order', 'practical and effective', 'theoretical and illusory', 'parental dispute', 'reunite parent and child', 'unenforced court orders', 'duty to reunite', 'developing personal relations', 'parental rights', 'rights of access', 'measures of execution', 'practical implementation', 'positive duty', 'state duty to act', 'state action required', 'foundational ruling', 'doctrine source', 'Strasbourg doctrine', 'Article 8 family life', 'parent-child relationship', 'restoring family ties']
         },
         no: {
           rettssats: 'Staten har en positiv plikt til å iverksette effektive tiltak for å gjenforene foreldre og barn når relasjonen er brutt. Langvarig manglende håndheving av rettsavgjørelser om samvær eller tilbakeføring kan innebære brudd på EMK artikkel 8.',
@@ -2103,8 +2103,8 @@
         id: 'macready', name: 'Macready', country: 'Tsjekkia', countryEn: 'Czech Republic', year: 2010, date: { no: '22. april 2010', en: '22 April 2010' },
         appNo: '4824/06 og 15512/08', hudoc: 'https://hudoc.echr.coe.int/eng?i=002-990', principles: ['time', 'effective'],
         tags: {
-          no: ['tidsfaktor', 'uopprettelige følger', 'kontakt under rettsprosess', 'tidens gang', 'langvarig prosess', 'manglende håndhevelse', 'amerikansk far', 'tsjekkiske myndigheter', 'mor tok barn til utlandet', 'internasjonal sak', 'samvær mens sak pågår', 'formelle avgjørelser ikke nok', 'midlertidige tiltak', 'praktisk gjennomføring'],
-          en: ['time factor', 'irremediable consequences', 'passage of time', 'contact during proceedings', 'prolonged process', 'failure to enforce', 'American father', 'Czech authorities', 'mother took child abroad', 'international case', 'pendency', 'formal decisions insufficient', 'practical implementation', 'interim measures']
+          no: ['tidsfaktor', 'uopprettelige følger', 'irreversible konsekvenser', 'kontakt under rettsprosess', 'samvær under behandling', 'tidens gang', 'tid har irreversible konsekvenser', 'langvarig prosess', 'forsinkelse', 'manglende håndhevelse', 'amerikansk far', 'tsjekkiske myndigheter', 'forelder tok barn til utlandet', 'internasjonal sak', 'cross-border', 'samvær mens sak pågår', 'formelle avgjørelser ikke nok', 'midlertidige tiltak', 'praktisk gjennomføring', 'svikt i effektivitet', 'samværsrett under prosess', 'tap av tid', 'kvalitet i statlig respons', 'effektivitetskrav', 'tidskritisk respons', 'tiltak bedømmes etter raskhet', 'swiftness of implementation', 'rask iverksetting', 'foreldretvist', 'interim contact', 'samværsrett opprettholdes', 'midlertidig samværsrett', 'samvær opprettholdt mens prosess pågår', 'foreldre-barn forhold', 'relasjonsbygging', 'samværsstans', 'samvær avskjært', 'mangel på effektive tiltak', 'manglende koordinering', 'prosessuell forsinkelse', 'pendency'],
+          en: ['time factor', 'irremediable consequences', 'irreversible consequences', 'passage of time', 'time can have irremediable consequences', 'contact during proceedings', 'interim contact', 'prolonged process', 'delay', 'failure to enforce', 'American father', 'Czech authorities', 'mother took child abroad', 'international case', 'cross-border', 'pendency', 'pendente lite', 'formal decisions insufficient', 'practical implementation', 'interim measures', 'swiftness of implementation', 'speed of enforcement', 'measures judged by swiftness', 'time-critical response', 'state response speed', 'effectiveness requirement', 'contact pending proceedings', 'maintain contact during litigation', 'parental dispute', 'loss of time', 'contact suspension', 'contact cut off', 'parent-child relationship breakdown', 'procedural delay', 'time-sensitive', 'state response in time', 'foundational time doctrine', 'temporary contact arrangement', 'parent-child relations']
         },
         no: {
           rettssats: 'Staten må sikre at kontakt mellom barn og forelder opprettholdes også mens rettsprosesser pågår. Myndighetene kan ikke begrense seg til formelle avgjørelser uten å sikre praktisk gjennomføring.',
@@ -2127,8 +2127,8 @@
         id: 'mincheva', name: 'Mincheva', country: 'Bulgaria', year: 2010, date: { no: '2. september 2010', en: '2 September 2010' },
         appNo: '21558/03', hudoc: 'https://hudoc.echr.coe.int/eng?i=001-116487', principles: ['active', 'arsenal'],
         tags: {
-          no: ['samværssabotasje', 'systematisk hindring', 'passivitet', 'legal arsenal', 'rettslig arsenal', 'bulgarske myndigheter', 'bulgarsk politi', 'bulgarsk barnevern', 'manglende håndhevelse', 'aktiv inngripen', 'mor hindrer far', 'politi reagerer ikke', 'flere klager', 'konkrete tiltak', 'hensiktsmessige tiltak', 'passiv venting'],
-          en: ['contact sabotage', 'systematic obstruction', 'state passivity', 'legal arsenal', 'Bulgarian authorities', 'Bulgarian police', 'Bulgarian child welfare', 'failure to enforce', 'active intervention', 'mother prevents father', 'police inaction', 'multiple complaints', 'concrete measures', 'appropriate measures', 'passive waiting']
+          no: ['samværssabotasje', 'systematisk hindring av samvær', 'systematisk obstruksjon', 'passivitet fra myndighetene', 'statlig passivitet', 'legal arsenal', 'rettslig arsenal', 'tilstrekkelig rettslig arsenal', 'adequate legal arsenal', 'bulgarske myndigheter', 'bulgarsk politi', 'bulgarsk barnevern', 'manglende håndhevelse', 'aktiv inngripen', 'forelder hindrer den andre', 'politi reagerer ikke', 'flere klager ignorert', 'gjentatte klager', 'konkrete tiltak', 'hensiktsmessige tiltak', 'passiv venting', 'staten må handle aktivt', 'effektiv respons', 'mangelfullt apparat', 'utilstrekkelige virkemidler', 'svikt over tid', 'sak mot Bulgaria', 'svikt i barnevern', 'samværssvikt', 'manglende håndhevelse over tid', 'foreldretvist', 'far nektet samvær', 'kontaktsabotasje', 'systematisk samværsnektelse', 'måneder uten samvær', 'år uten samvær', 'rettslig fastsatt samvær', 'hindret samvær', 'forelder hindrer kontakt', 'positive forpliktelser', 'konsekvent svikt'],
+          en: ['contact sabotage', 'systematic obstruction', 'systematic prevention of contact', 'state passivity', 'authorities passive', 'legal arsenal', 'adequate legal arsenal', 'Bulgarian authorities', 'Bulgarian police', 'Bulgarian child welfare', 'failure to enforce', 'active intervention required', 'mother prevents father', 'parent prevents the other', 'police inaction', 'multiple complaints', 'repeated complaints ignored', 'concrete measures', 'appropriate measures', 'passive waiting', 'state must act', 'effective response', 'inadequate apparatus', 'insufficient measures', 'long-term failure', 'case against Bulgaria', 'child welfare failure', 'parental dispute', 'father denied contact', 'months without contact', 'years without contact', 'court-ordered contact', 'obstructed contact', 'parent obstructs contact', 'positive obligations', 'consistent failure', 'systematic denial of contact', 'state must intervene', 'persistent obstruction']
         },
         no: {
           rettssats: 'Når en forelder systematisk hindrer kontakt mellom barn og den andre forelderen, har staten en plikt til å reagere aktivt og effektivt. Passivitet fra myndighetenes side kan innebære brudd på artikkel 8.',
@@ -2151,8 +2151,8 @@
         id: 'zavridou', name: 'Zavridou', country: 'Kypros', countryEn: 'Cyprus', year: 2013, date: { no: '27. mars 2013', en: '27 March 2013' },
         appNo: '15948/08', hudoc: 'https://hudoc.echr.coe.int/eng?i=001-224012', principles: ['cooperation', 'active'],
         tags: {
-          no: ['ikke-avhengighet', 'avhengighet av samarbeid', 'oppfordring til frivillighet', 'mor avskjærer far', 'samværssabotasje', 'kypriotiske myndigheter', 'datter nektet samvær', 'privat konsensus', 'frivillig overholdelse', 'statens plikt å gripe inn', 'aktiv inngripen', 'utilstrekkelig statlig respons'],
-          en: ['non-dependency', 'dependency on cooperation', 'voluntary compliance', 'mother cuts off father', 'contact sabotage', 'Cypriot authorities', 'daughter denied contact', 'private consensus', 'state duty to intervene', 'active intervention', 'state cannot rely on goodwill', 'obstructing parent']
+          no: ['ikke-avhengighet', 'avhengighet av samarbeid', 'oppfordring til frivillighet', 'forelder avskjærer den andre', 'samværssabotasje', 'kypriotiske myndigheter', 'datter nektet samvær', 'privat konsensus', 'frivillig overholdelse', 'statens plikt å gripe inn', 'aktiv inngripen', 'utilstrekkelig statlig respons', 'sak mot Kypros', 'myndighetene må eskalere', 'eskalering av tiltak', 'milde tiltak virker ikke', 'oppfordringer alene er ikke nok', 'staten kan ikke vente', 'sabotering av kontakt', 'forelder som motsetter seg samvær', 'samværspliktig samarbeider ikke', 'manglende eskalering', 'staten må intervenere', 'oppfordringer fungerer ikke', 'far nektet samvær', 'foreldretvist', 'samværsnektelse over år', 'avskjæring av kontakt', 'familieliv beskyttes', 'statens uavhengige plikt', 'plikt uavhengig av samarbeid', 'kan ikke kun be om frivillig oppfyllelse', 'frivillig samtykke ikke nok', 'statens uavhengige rolle', 'reduce duty to encouragement', 'tilbakeholden myndighetsutøvelse', 'unilateral state action', 'state cannot be passive', 'samværsobstruktivitet'],
+          en: ['non-dependency', 'dependency on cooperation', 'voluntary compliance', 'mother cuts off father', 'parent cuts off the other', 'contact sabotage', 'Cypriot authorities', 'daughter denied contact', 'private consensus', 'state duty to intervene', 'active intervention', 'state cannot rely on goodwill', 'obstructing parent', 'case against Cyprus', 'authorities must escalate', 'escalation of measures', 'mild measures fail', 'encouragement alone insufficient', 'state cannot wait', 'sabotaging contact', 'parent who refuses contact', 'parent does not cooperate', 'failure to escalate', 'state must act', 'encouragements do not work', 'father denied contact', 'parental dispute', 'years of denied contact', 'cutting off contact', 'family life protection', 'state independent duty', 'duty regardless of cooperation', 'cannot reduce to encouragement', 'voluntary consent insufficient', 'state cannot be passive', 'unilateral state action', 'contact obstructionism', 'state must take initiative', 'duty does not depend on goodwill', 'enforcement without consent']
         },
         no: {
           rettssats: 'Myndighetene kan ikke gjøre håndheving av samvær avhengig av den samarbeidsvilligheten som vises av den forelderen barnet bor hos. Staten må bruke tilgjengelige virkemidler for å beskytte familierelasjonen.',
@@ -2173,8 +2173,8 @@
         id: 'pisica', name: 'Pisică', country: 'Moldova', year: 2014, date: { no: '29. april 2014', en: '29 April 2014' },
         appNo: '23641/05', hudoc: 'https://hudoc.echr.coe.int/eng?i=001-197214', principles: ['investigate'],
         tags: {
-          no: ['barnets motvilje', 'undersøkelsesplikt', 'påvirkning', 'lojalitetskonflikt', 'manipulasjon av barn', 'moldovske myndigheter', 'barnet vil ikke', 'barnets stemme', 'barnet sier nei', 'vetorett', 'relasjonell kontekst', 'barnets uttalelser', 'far nektet samvær', 'undersøke årsaken', 'foreldrefiendtlighet'],
-          en: ['child resistance', 'duty to investigate', 'manipulation', 'loyalty conflict', 'parental alienation', 'Moldovan authorities', 'child refuses contact', 'child says no', 'child veto', 'child voice', 'relational context', 'investigate the cause', 'father denied contact', 'manipulation of child']
+          no: ['barnets motvilje', 'undersøkelsesplikt', 'påvirkning', 'lojalitetskonflikt', 'manipulasjon av barn', 'moldovske myndigheter', 'barnet vil ikke', 'barnets stemme', 'barnet sier nei', 'vetorett', 'barnet har ikke vetorett', 'relasjonell kontekst', 'barnets uttalelser', 'forelder nektet samvær', 'undersøke årsaken', 'foreldrefiendtlighet', 'foreldrefiendtliggjøring', 'parental alienation', 'sak mot Moldova', 'barnehøring', 'barnesakkyndig', 'sakkyndig vurdering', 'omdiskutert sak', 'undersøke hvorfor barnet motsetter seg', 'utrede påvirkning', 'utrede lojalitetskonflikt', 'samværsnektelse begrunnet i barnets vilje', 'barnets ønske', 'barnets vilje', 'manipulert barn', 'mor påvirker barn', 'far påvirker barn', 'forelder påvirker', 'samværsnektelse', 'foreldretvist', 'samværsobstruksjon via barnet', 'barn nekter samvær', 'utredningsplikt', 'analysere relasjonell kontekst', 'familieliv beskyttes', 'plikt til kontekstuell analyse', 'motvilje ikke avgjørende', 'motvilje skal utredes', 'kvalitet i barnesakkyndig', 'foreldrekonflikt påvirker barn', 'manipulasjon av barns syn'],
+          en: ['child resistance', 'duty to investigate', 'manipulation', 'loyalty conflict', 'parental alienation', 'Moldovan authorities', 'child refuses contact', 'child says no', 'child veto', 'no veto for child', 'child voice', 'relational context', 'investigate the cause', 'parent denied contact', 'parental alienation syndrome', 'case against Moldova', 'hearing the child', 'child welfare expert', 'expert assessment', 'investigate why child resists', 'examine manipulation', 'examine loyalty conflict', 'contact denied based on child wish', 'child wishes', 'manipulated child', 'mother influences child', 'father influences child', 'parent influences', 'contact denial', 'parental dispute', 'contact obstruction via child', 'duty of investigation', 'analyze relational context', 'family life protection', 'contextual analysis duty', 'resistance not decisive', 'resistance must be investigated', 'quality of child expert', 'parental conflict affects child', 'manipulating child views', 'duty to look behind resistance', 'underlying reasons']
         },
         no: {
           rettssats: 'Barnets motstand mot samvær kan ikke alene være avgjørende dersom det foreligger indikasjoner på påvirkning eller lojalitetskonflikt. Myndighetene må analysere den relasjonelle konteksten.',
@@ -2195,8 +2195,8 @@
         id: 'ld', name: 'L.D.', country: 'Polen', countryEn: 'Poland', year: 2014, date: { no: '14. oktober 2014', en: '14 October 2014' },
         appNo: '6289/13', hudoc: 'https://hudoc.echr.coe.int/eng?i=001-241741', principles: ['time', 'effective'],
         tags: {
-          no: ['sen inngripen', 'tiltak for sent', 'ineffektive tiltak', 'polske myndigheter', 'far nektet samvær', 'brudd på relasjonen', 'effektivitet', 'tidsfaktor', 'forsinket reaksjon', 'tilstrekkelige tiltak', 'utilstrekkelige tiltak', 'relasjon nedbrutt', 'forsøkte men feilet'],
-          en: ['late intervention', 'measures too late', 'ineffective measures', 'Polish authorities', 'father denied contact', 'relationship breakdown', 'effectiveness', 'time factor', 'delayed response', 'inadequate measures', 'relationship destroyed', 'tried but failed']
+          no: ['sen inngripen', 'tiltak for sent', 'ineffektive tiltak', 'polske myndigheter', 'sak mot Polen', 'forelder nektet samvær', 'brudd på relasjonen', 'effektivitet', 'tidsfaktor', 'forsinket reaksjon', 'tilstrekkelige tiltak', 'utilstrekkelige tiltak', 'relasjon nedbrutt', 'forsøkte men feilet', 'staten prøvde uten å lykkes', 'tiltak virket ikke', 'avgjørende ikke om man handlet, men om man lyktes', 'innsatsplikt vs resultat', 'effektivitetsstandard', 'systematisk svikt', 'svikt over tid', 'manglende koordinering', 'manglende eskalering', 'foreldretvist', 'samværsnektelse', 'samværssvikt', 'manglende familievernoppfølging', 'manglende mekling', 'manglende håndhevelse', 'tidsbruk i barnesaker', 'foreldre-barn forhold svekkes', 'irreversible konsekvenser', 'tap av tid', 'forsinkelse skader relasjonen', 'sen tilbakeføring', 'effective measures', 'tiltak må fungere i praksis', 'innsats er ikke nok', 'resultatorientert vurdering', 'relasjon ødelegges av tid', 'foreldreansvar tapt', 'years lost'],
+          en: ['late intervention', 'measures too late', 'ineffective measures', 'Polish authorities', 'case against Poland', 'parent denied contact', 'relationship breakdown', 'effectiveness', 'time factor', 'delayed response', 'inadequate measures', 'relationship destroyed', 'tried but failed', 'state tried without succeeding', 'measures did not work', 'decisive is not whether they acted', 'effort vs result', 'effectiveness standard', 'systematic failure', 'long-term failure', 'lack of coordination', 'failure to escalate', 'parental dispute', 'contact denial', 'contact failure', 'family counselling failure', 'mediation failure', 'failure to enforce', 'time use in family cases', 'parent-child relationship weakens', 'irremediable consequences', 'loss of time', 'delay damages relationship', 'late return', 'measures must work in practice', 'effort is not enough', 'result-oriented assessment', 'relationship destroyed by time', 'parental responsibility lost', 'years lost', 'result not just process']
         },
         no: {
           rettssats: 'Selv når myndighetene forsøker å løse konflikter, kan tiltak som kommer for sent innebære brudd på artikkel 8 dersom relasjonen mellom barn og forelder brytes ned i mellomtiden.',
@@ -2217,8 +2217,8 @@
         id: 'ribic', name: 'Ribić', country: 'Kroatia', countryEn: 'Croatia', year: 2015, date: { no: '2. april 2015', en: '2 April 2015' },
         appNo: '27148/12', hudoc: 'https://hudoc.echr.coe.int/eng?i=001-153315', principles: ['time', 'cooperation'],
         tags: {
-          no: ['14 år', 'fjorten år', 'langvarig prosess', 'kroatiske myndigheter', 'far så sønnen 3 ganger', 'tre samvær', 'permanent brutt bånd', 'tidsfaktor', 'uopprettelige følger', 'klassisk eksempel', 'innsatsplikt', 'ikke resultatplikt', 'svikt over tid', 'far nektet samvær', 'langvarig manglende håndhevelse'],
-          en: ['14 years', 'fourteen years', 'prolonged process', 'Croatian authorities', 'father saw son 3 times', 'three contacts', 'permanently broken bond', 'time factor', 'irremediable consequences', 'classic example', 'obligation of means', 'not result', 'long-term failure', 'father denied contact', 'prolonged failure to enforce']
+          no: ['14 år', 'fjorten år', 'langvarig prosess', 'kroatiske myndigheter', 'sak mot Kroatia', 'far så sønnen 3 ganger', 'tre samvær', 'tre møter på 14 år', 'permanent brutt bånd', 'tidsfaktor', 'uopprettelige følger', 'irreversible konsekvenser', 'klassisk eksempel', 'innsatsplikt', 'ikke resultatplikt', 'svikt over tid', 'far nektet samvær', 'langvarig manglende håndhevelse', 'foreldretvist', 'samværsnektelse over år', 'tap av tid', 'eksempel på systemets svikt', 'mest siterte sak', 'klassisk Strasbourg-dom', 'samværssvikt over år', 'foreldrebånd ødelagt', 'familieliv beskyttes', 'effektivitetsstandard', 'tiltak må iverksettes raskt', 'swiftness of implementation', 'tidskritisk', 'lang berammelse', 'søknad etter søknad', 'mange begjæringer', 'erstatning for tap', 'oppreisning', 'far og sønn separert', 'far diskriminert', 'samværsrett verdiløs i praksis', 'rett uten håndhevelse', 'teoretisk rett', 'illusorisk samvær', 'mistet barndom', 'manglende statlig respons', 'svikt over tiår', 'innsats var utilstrekkelig', 'states obligation of means', 'innsats måles på resultat'],
+          en: ['14 years', 'fourteen years', 'prolonged process', 'Croatian authorities', 'case against Croatia', 'father saw son 3 times', 'three contacts', 'three meetings in 14 years', 'permanently broken bond', 'time factor', 'irremediable consequences', 'irreversible consequences', 'classic example', 'obligation of means', 'not obligation of result', 'long-term failure', 'father denied contact', 'prolonged failure to enforce', 'parental dispute', 'years of denied contact', 'loss of time', 'example of system failure', 'most cited case', 'classic Strasbourg ruling', 'contact failure over years', 'parent-child bond destroyed', 'family life protection', 'effectiveness standard', 'measures must be taken quickly', 'swiftness of implementation', 'time-critical', 'long scheduling', 'application after application', 'many petitions', 'compensation for loss', 'father and son separated', 'father discriminated', 'contact right worthless in practice', 'right without enforcement', 'theoretical right', 'illusory contact', 'lost childhood', 'lack of state response', 'failure over decades', 'effort was insufficient', 'effort measured by result', 'fundamental ruling on time', 'flagship time case']
         },
         no: {
           rettssats: 'Langvarig manglende håndheving av samværsavgjørelser kan føre til at relasjonen mellom barn og forelder brytes permanent. Staten kan da bli ansvarlig for brudd på artikkel 8.',
@@ -2241,8 +2241,8 @@
         id: 'onodi', name: 'Ónodi', country: 'Ungarn', countryEn: 'Hungary', year: 2017, date: { no: '30. mai 2017', en: '30 May 2017' },
         appNo: '38647/09', hudoc: 'https://hudoc.echr.coe.int/eng?i=001-173800', principles: ['active', 'time', 'arsenal'],
         tags: {
-          no: ['60 begjæringer', 'seksti håndhevelsesbegjæringer', 'rettslig arsenal', 'legal arsenal', 'tilstrekkelig og virksomt', 'kontraherende stat', 'ungarske myndigheter', 'tidsfaktor', 'irreversible konsekvenser', 'statens plikt', 'ineffektive tiltak', 'gjentatte begjæringer', 'manglende resultat', 'far gir ikke opp', 'systematisk svikt'],
-          en: ['60 petitions', 'sixty enforcement requests', 'legal arsenal', 'adequate and sufficient', 'Contracting State', 'Hungarian authorities', 'time factor', 'irreversible consequences', 'state duty', 'ineffective measures', 'repeated petitions', 'no result', 'father persists', 'systematic failure', 'positive obligations doctrine']
+          no: ['60 begjæringer', 'seksti håndhevelsesbegjæringer', '60+', 'seksti petisjoner', 'rettslig arsenal', 'legal arsenal', 'tilstrekkelig og virksomt rettslig arsenal', 'adequate legal arsenal', 'kontraherende stat', 'sak mot Ungarn', 'ungarske myndigheter', 'tidsfaktor', 'irreversible konsekvenser', 'uopprettelige følger', 'statens plikt', 'ineffektive tiltak', 'gjentatte begjæringer', 'manglende resultat', 'forelder gir ikke opp', 'systematisk svikt', 'tomme sanksjoner', 'sanksjoner uten effekt', 'manglende effekt', 'foreldretvist', 'samværsnektelse', 'samværsobstruksjon', 'forelder hindrer kontakt', 'manglende statlig respons', 'positive forpliktelser', 'foundational ruling on arsenal', 'klassisk arsenal-dom', 'staten må eskalere', 'eskalering nødvendig', 'manglende virkemidler', 'utilstrekkelig statsapparat', 'staten må ha verktøy', 'staten må være utstyrt', 'doktrinen utvides', 'effektivitet vs innsats', 'forelder leverer 60 begjæringer', 'gjentatt søknad uten resultat', 'tomgang i håndhevelse', 'systemfeil', 'manglende koordinering mellom myndigheter'],
+          en: ['60 petitions', 'sixty enforcement requests', '60+ petitions', 'sixty enforcement applications', 'legal arsenal', 'adequate and sufficient legal arsenal', 'Contracting State', 'each Contracting State must equip itself', 'case against Hungary', 'Hungarian authorities', 'time factor', 'irreversible consequences', 'irremediable consequences', 'state duty', 'ineffective measures', 'repeated petitions', 'no result', 'father persists', 'parent does not give up', 'systematic failure', 'positive obligations doctrine', 'empty sanctions', 'sanctions without effect', 'lack of effect', 'parental dispute', 'contact denial', 'contact obstruction', 'parent obstructs contact', 'lack of state response', 'foundational arsenal ruling', 'classic legal arsenal case', 'state must escalate', 'escalation required', 'lack of tools', 'inadequate state apparatus', 'state must have tools', 'state must be equipped', 'doctrine extended', 'effectiveness vs effort', 'parent files 60 petitions', 'repeated applications without result', 'enforcement stagnation', 'systemic failure', 'lack of coordination between authorities']
         },
         no: {
           rettssats: 'Kontakt mellom forelder og barn er et grunnleggende element i familielivet. Myndighetenes tiltak må vurderes etter hvor raskt de settes i verk, fordi tid kan ha irreversible konsekvenser for relasjonen.',
@@ -2262,11 +2262,33 @@
         }
       },
       {
+        id: 'sanchez', name: 'Sanchez Cardenas', country: 'Norge', countryEn: 'Norway', year: 2007, date: { no: '4. oktober 2007', en: '4 October 2007' },
+        appNo: '12148/03', hudoc: 'https://hudoc.echr.coe.int/eng?i=001-82560', principles: ['investigate', 'effective'],
+        tags: {
+          no: ['Norge', 'norske myndigheter', 'lagmannsrett', 'samværsnektelse', 'mistanke om overgrep', 'ubegrunnet mistanke', 'prosessuell rettferdighet', 'begrunnelsesplikt', 'far nektet samvær', 'chilensk far', 'stigmatisering', 'manglende bevisvurdering', 'foreldretvist', 'menneskerettsdomstolen og Norge', 'sak mot Norge', 'far diskriminert', 'beskyldning uten bevis'],
+          en: ['Norway', 'Norwegian authorities', 'High Court Norway', 'denial of contact', 'sexual abuse allegation', 'unsubstantiated suspicion', 'procedural fairness', 'duty to give reasons', 'father denied contact', 'Chilean father', 'stigmatisation', 'failure to examine evidence', 'custody and access proceedings', 'case against Norway', 'father discriminated', 'allegation without proof']
+        },
+        no: {
+          rettssats: 'Når en domstol inkluderer en alvorlig anklage som grunnlag for å nekte samvær, må anklagen være underlagt en konkret bevisvurdering. Å la en mistanke om overgrep stå uten begrunnelse i selve avgjørelsen, slik at den blir værende på rullen som en stigmatiserende konstatering, utgjør et uberettiget inngrep i familielivet etter EMK artikkel 8.',
+          facts: 'En chilensk far bosatt i Norge ble nektet enhver samværsrett med sønnen av lagmannsretten. Lagmannsretten begrunnet nektelsen med en «sterk mistanke» om at faren hadde forgrepet seg på gutten, men foretok ingen egen bevisvurdering av denne mistanken. Uttalelsen ble stående offentlig uten at faren fikk anledning til å imøtegå den.',
+          quotes: [
+            { para: '§§ 38–39', text: 'The High Court neither decided the issue nor made a proper analysis. It left the matter open in such a way that readers would inevitably get the impression that the suspicions were well-founded. The applicant was thus stigmatised without being given the opportunity to defend himself.' }
+          ]
+        },
+        en: {
+          rettssats: 'When a court grounds a denial of contact on a serious allegation, that allegation must be subjected to a concrete evidentiary assessment. Leaving a suspicion of abuse standing without reasoning in the judgment itself, allowing it to remain on the record as a stigmatising finding, constitutes an unjustified interference with family life under ECHR Article 8.',
+          facts: 'A Chilean father resident in Norway was denied all contact with his son by the High Court. The High Court grounded the denial on a "strong suspicion" that the father had sexually abused the boy, but undertook no independent evidentiary assessment of the suspicion. The statement remained publicly on record without the father having any opportunity to rebut it.',
+          quotes: [
+            { para: '§§ 38–39', text: 'The High Court neither decided the issue nor made a proper analysis. It left the matter open in such a way that readers would inevitably get the impression that the suspicions were well-founded. The applicant was thus stigmatised without being given the opportunity to defend himself.' }
+          ]
+        }
+      },
+      {
         id: 'kb', name: 'K.B. m.fl.', nameEn: 'K.B. and Others', country: 'Kroatia', countryEn: 'Croatia', year: 2017, date: { no: '14. mars 2017', en: '14 March 2017' },
         appNo: '36216/13', hudoc: 'https://hudoc.echr.coe.int/eng?i=001-172077', principles: ['investigate', 'active', 'time'],
         tags: {
-          no: ['koordinert handling', 'fragmentert respons', 'barnets motvilje', 'undersøkelsesplikt', 'kroatiske myndigheter', 'manglende koordinering', 'mellom etater', 'domstol barnevern politi', 'barn uttrykker motvilje', 'far nektet samvær', 'undersøke årsaken', 'koordinerte tiltak', 'aktiv inngripen', 'tidsfaktor', 'samarbeid mellom myndigheter'],
-          en: ['coordinated action', 'fragmented response', 'child resistance', 'duty to investigate', 'Croatian authorities', 'lack of coordination', 'inter-agency', 'courts welfare police', 'child expresses resistance', 'father denied contact', 'investigate the cause', 'coordinated measures', 'active intervention', 'time factor', 'authority cooperation']
+          no: ['koordinert handling', 'fragmentert respons', 'barnets motvilje', 'undersøkelsesplikt', 'kroatiske myndigheter', 'sak mot Kroatia', 'manglende koordinering', 'mellom etater', 'domstol barnevern politi', 'barn uttrykker motvilje', 'forelder nektet samvær', 'undersøke årsaken', 'koordinerte tiltak', 'aktiv inngripen', 'tidsfaktor', 'samarbeid mellom myndigheter', 'manglende tverretatlig samarbeid', 'undersøkelsesplikt utløses', 'samværssabotasje', 'samværsnektelse', 'foreldretvist', 'foreldrefiendtlighet', 'parental alienation', 'manglende håndhevelse', 'manglende koordinering politi-barnevern-domstol', 'silo-tenkning', 'fragmentert myndighetsapparat', 'flere myndigheter involvert', 'koordinert respons kreves', 'effektive tiltak må samordnes', 'barnets motvilje utløser plikt', 'plikt til undersøkelse', 'plikt til rask handling', 'positive forpliktelser', 'rask reaksjon', 'samordnet innsats', 'tverrfaglig respons', 'systematisk svikt i koordinering', 'manglende felles plan', 'staten må samordne tiltak', 'barnesakkyndig', 'plikt til faglig undersøkelse', 'motvilje er ikke frikort', 'barn nekter samvær', 'flere etater må samarbeide'],
+          en: ['coordinated action', 'fragmented response', 'child resistance', 'duty to investigate', 'Croatian authorities', 'case against Croatia', 'lack of coordination', 'inter-agency', 'courts welfare police', 'child expresses resistance', 'parent denied contact', 'investigate the cause', 'coordinated measures', 'active intervention', 'time factor', 'authority cooperation', 'lack of inter-agency cooperation', 'investigation duty triggered', 'contact sabotage', 'contact denial', 'parental dispute', 'parental alienation', 'failure to enforce', 'lack of coordination police-welfare-court', 'siloed authorities', 'fragmented state apparatus', 'multiple authorities involved', 'coordinated response required', 'effective measures must coordinate', 'child resistance triggers duty', 'duty to investigate', 'duty to act quickly', 'positive obligations', 'rapid response', 'coordinated effort', 'cross-disciplinary response', 'systematic coordination failure', 'lack of common plan', 'state must coordinate measures', 'child welfare expert', 'duty to professionally investigate', 'resistance is no free pass', 'child refuses contact', 'multiple agencies must cooperate']
         },
         no: {
           rettssats: 'Myndighetene har en positiv plikt til å iverksette tilstrekkelige og koordinerte tiltak for å opprettholde kontakt mellom forelder og barn. Barnets motstand fritar ikke staten fra denne plikten, men utløser en plikt til å undersøke årsakene og handle raskt.',
@@ -2299,20 +2321,22 @@
     function getName(c) {
       return currentLang === 'en' ? (c.nameEn || c.name) : c.name;
     }
-    // Emoji flag from country name (NO or EN)
-    const FLAGS = {
-      'Romania': '🇷🇴',
-      'Bulgaria': '🇧🇬',
-      'Tsjekkia': '🇨🇿', 'Czech Republic': '🇨🇿',
-      'Kypros': '🇨🇾', 'Cyprus': '🇨🇾',
-      'Moldova': '🇲🇩',
-      'Polen': '🇵🇱', 'Poland': '🇵🇱',
-      'Kroatia': '🇭🇷', 'Croatia': '🇭🇷',
-      'Ungarn': '🇭🇺', 'Hungary': '🇭🇺',
-      'Norge': '🇳🇴', 'Norway': '🇳🇴'
+    // SVG flag from country name. Uses flagcdn.com (sharp + consistent across OS).
+    const FLAG_CODES = {
+      'Romania': 'ro',
+      'Bulgaria': 'bg',
+      'Tsjekkia': 'cz', 'Czech Republic': 'cz',
+      'Kypros': 'cy', 'Cyprus': 'cy',
+      'Moldova': 'md',
+      'Polen': 'pl', 'Poland': 'pl',
+      'Kroatia': 'hr', 'Croatia': 'hr',
+      'Ungarn': 'hu', 'Hungary': 'hu',
+      'Norge': 'no', 'Norway': 'no'
     };
     function getFlag(c) {
-      return FLAGS[c.country] || FLAGS[c.countryEn] || '';
+      const code = FLAG_CODES[c.country] || FLAG_CODES[c.countryEn];
+      if (!code) return '';
+      return `<img class="flag-svg" src="https://flagcdn.com/h20/${code}.png" srcset="https://flagcdn.com/h40/${code}.png 2x" alt="" loading="lazy" />`;
     }
 
     // Build a Text Fragment URL to the pasg.no article that highlights
@@ -2731,11 +2755,23 @@
       document.body.style.overflow = 'hidden';
       // Scroll sheet to top
       document.querySelector('.cr-sheet').scrollTop = 0;
+      // Sync URL — shareable deep link
+      const url = new URL(window.location.href);
+      url.searchParams.set('case', c.id);
+      if (window.location.href !== url.href) {
+        history.pushState({ case: c.id }, '', url.href);
+      }
     }
     function closeCaseReader() {
       const modal = document.getElementById('cr-modal');
       modal.hidden = true;
       document.body.style.overflow = '';
+      // Clear URL param
+      const url = new URL(window.location.href);
+      if (url.searchParams.has('case')) {
+        url.searchParams.delete('case');
+        history.pushState({}, '', url.pathname + (url.search ? '?' + url.search.replace(/^\?/, '') : '') + url.hash);
+      }
     }
     function setupCaseReader() {
       const close = document.getElementById('cr-close');
@@ -2745,6 +2781,24 @@
       document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape' && !document.getElementById('cr-modal').hidden) closeCaseReader();
       });
+      // Browser back/forward syncs to URL
+      window.addEventListener('popstate', (e) => {
+        const caseId = new URL(window.location.href).searchParams.get('case');
+        if (caseId) {
+          openCaseReader(caseId);
+        } else if (!document.getElementById('cr-modal').hidden) {
+          // Avoid pushing a new state when closing via popstate
+          const modal = document.getElementById('cr-modal');
+          modal.hidden = true;
+          document.body.style.overflow = '';
+        }
+      });
+      // Initial URL deep-link
+      const initialCase = new URL(window.location.href).searchParams.get('case');
+      if (initialCase) {
+        // Defer so render functions have run
+        setTimeout(() => openCaseReader(initialCase), 50);
+      }
     }
 
     /* ============ OBLIGATION MODAL ============ */
