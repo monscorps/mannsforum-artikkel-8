@@ -2342,6 +2342,73 @@
       }
     ];
 
+    // Common Norwegian + English terms in this legal domain. Added to every
+    // case's searchable haystack so any reasonable variant finds something.
+    // Lower scoring weight than case-specific tags so ranking is preserved.
+    const commonSynonyms = {
+      no: [
+        // samvær variants
+        'samvær', 'samværsrett', 'samværshindring', 'samværsobstruksjon',
+        'samværsnektelse', 'samværsboikott', 'samværsvegring', 'samværsbrudd',
+        'samværssvikt', 'samværssabotasje', 'samværsforhindring',
+        'samværsavtale', 'samværsavgjørelse', 'samværsordning',
+        'samværsrettsbrudd', 'krenkelse av samværsrett',
+        'ikke gjennomført samvær', 'avskåret samvær',
+        // omgang (older term still used)
+        'omgang', 'omgangsrett', 'omgangshindring',
+        // foreldre variants
+        'foreldretvist', 'foreldreansvar', 'foreldrekonflikt',
+        'foreldrefremmedgjøring', 'foreldrefiendtlighet', 'foreldrefiendtliggjøring',
+        'foreldrebrudd', 'foreldrebånd', 'foreldrerettigheter',
+        'bostedsforelder', 'samværsforelder', 'daglig omsorg', 'fast bosted',
+        'barnefordeling', 'far nektet samvær', 'mor nektet samvær', 'forelder nektet samvær',
+        'forelder hindrer kontakt', 'forelder hindrer samvær', 'avskåret kontakt',
+        'far diskriminert', 'mor diskriminert',
+        // konvensjon + statlig
+        'EMK', 'EMK artikkel 8', 'artikkel 8', 'menneskerettsdomstolen', 'EMD',
+        'Strasbourg', 'menneskerettighetene', 'menneskerettsloven',
+        'familieliv', 'privatliv', 'rett til familieliv', 'rett til samvær',
+        'krenkelse av familieliv',
+        'positiv plikt', 'positive forpliktelser', 'positiv forpliktelse',
+        'statens ansvar', 'statens plikt', 'staten må handle',
+        'manglende håndhevelse', 'manglende sanksjoner', 'effektivitet',
+        // norsk rett
+        'tvangsmulkt', 'tvangsbot', 'tvangsfullbyrdelse', 'barneloven',
+        'barneloven § 65', 'barneloven § 43', 'mekling', 'familievernkontoret',
+        'barnets beste', 'barnekonvensjonen', 'BK', 'barnesakkyndig',
+        'barnevernet', 'gjenforening', 'rettsavgjørelse om samvær',
+        // omsorg
+        'omsorgssvikt', 'omsorgsnektelse', 'foreldreomsorg',
+        // common phrasings a lawyer might type
+        'hva sier EMK', 'hva er statens plikt', 'hvordan håndheve samvær',
+        'kan jeg klage', 'jeg ser ikke barnet mitt', 'fars rett til samvær',
+        'mors rett til samvær', 'barnets rett til samvær'
+      ],
+      en: [
+        'contact', 'contact rights', 'contact obstruction', 'contact denial',
+        'contact sabotage', 'contact prevention', 'contact refusal',
+        'visitation', 'visitation rights', 'denied visitation',
+        'access', 'access rights', 'right of access', 'denial of access',
+        'deny contact', 'obstruct visitation', 'interfere with contact',
+        'parental dispute', 'parental responsibility', 'parental conflict',
+        'parental alienation', 'parental rights', 'parental authority',
+        'father\'s rights', 'mother\'s rights', 'resident parent', 'non-resident parent',
+        'custody', 'custody battle', 'custody dispute',
+        'mother obstructs', 'father obstructs', 'parent obstructs',
+        'ECHR', 'ECHR Article 8', 'Article 8', 'ECtHR',
+        'European Court of Human Rights', 'European Convention on Human Rights',
+        'Strasbourg', 'human rights',
+        'family life', 'private life', 'right to family life',
+        'right to contact', 'family ties', 'parent-child relationship',
+        'positive obligation', 'positive obligations', 'state duty',
+        'state responsibility', 'failure to enforce', 'enforcement',
+        'enforcement of contact', 'court-ordered contact', 'coercive fine',
+        'penalty', 'sanction', 'effectiveness', 'effective measures',
+        'best interests of the child', 'mediation', 'reunification',
+        'reuniting parent and child', 'separation', 'divorce'
+      ]
+    };
+
     /* ============ STATE ============ */
     let currentLang = 'no';
     let activeFilter = 'all';
@@ -2486,7 +2553,6 @@
 
     function scoreCase(c, q) {
       // Returns 0 if no match, higher = better match.
-      // Weights: name 18, keyword 12, country 8, holding 6, quote 4, facts 3, app no 5
       const tokens = q.split(/\s+/).filter(t => t.length > 0);
       if (tokens.length === 0) return 0;
       const lang = currentLang;
@@ -2497,9 +2563,15 @@
         keywords: deburr((c.tags && c.tags[lang] ? c.tags[lang].join(' | ') : '')),
         rettssats: deburr(c[lang].rettssats || ''),
         facts: deburr(c[lang].facts || ''),
-        quotes: deburr((c[lang].quotes || []).map(q => q.text).join(' '))
+        quotes: deburr((c[lang].quotes || []).map(q => q.text).join(' ')),
+        // Domain synonyms — common terms shared across all cases. Lower weight
+        // so case-specific tags rank higher when both match.
+        common: deburr((commonSynonyms[lang] || []).join(' | '))
       };
-      const weights = { name: 18, keywords: 12, country: 8, appNo: 5, rettssats: 6, facts: 3, quotes: 4 };
+      const weights = {
+        name: 18, keywords: 12, country: 8, appNo: 5,
+        rettssats: 6, facts: 3, quotes: 4, common: 4
+      };
       let score = 0;
       tokens.forEach(t => {
         Object.keys(fields).forEach(k => {
