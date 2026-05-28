@@ -562,6 +562,16 @@
       z-index: -1;
     }
 
+    .hero-title {
+      font-size: clamp(26px, 3.2vw, 36px);
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      color: var(--ink);
+      line-height: 1.1;
+      margin: 0 0 14px;
+      max-width: 18em;
+    }
+
     .hero-lede {
       font-size: clamp(17px, 1.85vw, 21px);
       line-height: 1.55;
@@ -2340,6 +2350,7 @@
     <section class="search-hero">
       <div class="hero-bg" aria-hidden="true"></div>
       <div class="search-hero-inner">
+        <h1 class="hero-title" data-i18n="hero_title"></h1>
         <p class="hero-lede" data-i18n="hero_lede"></p>
         <div class="big-search-wrap">
           <svg class="icon big-search-icon"><use href="#i-search"/></svg>
@@ -2423,7 +2434,8 @@
 
         banner_eyebrow: 'Den europeiske menneskerettsdomstolen',
         banner_title: '<strong>Statens positive forpliktelser</strong> etter EMK artikkel 8',
-        hero_lede: "Den europeiske menneskerettsdomstolen har gjennom mer enn 25 år bygget en konsistent doktrine: EMK artikkel 8 krever ikke bare at staten avstår fra inngrep, men at staten aktivt sikrer at rettighetene blir reelle.",
+        hero_title: "Myndighetens positive forpliktelser",
+        hero_lede: "Den europeiske menneskerettsdomstolen har gjennom mer enn 25 år bygget en konsistent doktrine i saker vedr. barneloven: EMK artikkel 8 krever ikke bare at staten avstår fra inngrep, men at staten aktivt sikrer at rettighetene blir reelle.",
 
         doc_tag: "Doktrinen",
         doc_title: "Hva er statens positive forpliktelser?",
@@ -2495,7 +2507,8 @@
 
         banner_eyebrow: 'European Court of Human Rights',
         banner_title: '<strong>State positive obligations</strong> under ECHR Article 8',
-        hero_lede: "Over more than 25 years the European Court of Human Rights has built a consistent doctrine: ECHR Article 8 requires not only that the state refrain from interference, but that it actively secure that those rights are real.",
+        hero_title: "The state's positive obligations",
+        hero_lede: "Over more than 25 years the European Court of Human Rights has built a consistent doctrine in cases concerning the Norwegian Children Act: ECHR Article 8 requires not only that the state refrain from interference, but that it actively secure that those rights are real.",
 
         doc_tag: "The doctrine",
         doc_title: "What are state positive obligations?",
