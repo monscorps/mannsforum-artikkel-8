@@ -2904,8 +2904,8 @@
         const kwChips = visibleKws.map(k => `<span class="keyword-chip ${matched.has(k) ? 'match' : ''}">${k}</span>`).join('');
 
         return `
-          <button class="case-row" id="case-${c.id}" data-open-case="${c.id}" type="button">
-            <span class="case-row-summary">
+          <div class="case-row" id="case-${c.id}" data-open-case="${c.id}" role="button" tabindex="0" aria-label="${getName(c)} ${currentLang === 'no' ? 'mot' : 'v.'} ${getCountry(c)}">
+            <div class="case-row-summary">
               <span class="case-row-year">${c.year}</span>
               <div class="case-row-body">
                 <div class="case-row-name"><span class="case-row-flag" aria-hidden="true">${getFlag(c)}</span>${nameDisplay}</div>
@@ -2916,21 +2916,28 @@
                 </div>
               </div>
               <span class="case-row-chev" aria-hidden="true"><svg class="icon"><use href="#i-chevron-right"/></svg></span>
-            </span>
+            </div>
             <div class="case-row-preview"><div class="case-row-preview-text">${previewHtml}</div></div>
             <div class="case-keywords">${kwChips}</div>
             <div class="case-row-tags-strip">${principleChips}</div>
-          </button>
+          </div>
         `;
       }).join('');
 
       // Card click opens the full case reader modal
       list.querySelectorAll('.case-row').forEach(card => {
-        card.addEventListener('click', (e) => {
+        const open = (e) => {
           // Don't trigger if user clicked an interactive child (principle tag)
           if (e.target.closest('.case-tag') || e.target.closest('a')) return;
           const caseId = card.dataset.openCase;
           if (caseId) openCaseReader(caseId);
+        };
+        card.addEventListener('click', open);
+        card.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            open(e);
+          }
         });
       });
 
