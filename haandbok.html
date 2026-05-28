@@ -365,12 +365,8 @@
     }
 
     .search-suggestions {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      align-items: center;
-      gap: 8px;
-      margin-top: 18px;
+      margin-top: 22px;
+      min-height: 60px;
     }
     .search-suggestions .ss-label {
       font-size: 10.5px;
@@ -378,7 +374,7 @@
       letter-spacing: 0.18em;
       text-transform: uppercase;
       color: var(--muted-soft);
-      margin-right: 4px;
+      margin-right: 6px;
       align-self: center;
     }
     .ss-chip {
@@ -400,6 +396,89 @@
       color: var(--brand-deep);
     }
     .ss-chip:active { transform: translateY(1px); }
+
+    /* Empty / no-search state */
+    .def-empty {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 14px;
+      text-align: center;
+    }
+    .def-empty-tip {
+      font-size: 13px;
+      color: var(--muted);
+      max-width: 520px;
+      line-height: 1.5;
+    }
+    .def-empty-tip.def-unknown {
+      color: var(--ink);
+      background: rgba(245, 158, 11, 0.08);
+      border-left: 3px solid #d97706;
+      padding: 10px 14px;
+      border-radius: 0 6px 6px 0;
+      text-align: left;
+      max-width: 640px;
+    }
+    .def-empty-tip em {
+      font-style: normal;
+      color: var(--brand-deep);
+      font-weight: 600;
+    }
+    .def-empty-examples {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+      gap: 8px;
+    }
+
+    /* Definition card — shown when the search resolves to a concept */
+    .def-card {
+      background: linear-gradient(180deg, rgba(77, 178, 236, 0.06), rgba(77, 178, 236, 0.02));
+      border: 1px solid rgba(77, 178, 236, 0.30);
+      border-left: 4px solid var(--brand);
+      border-radius: 10px;
+      padding: 16px 20px;
+      max-width: 720px;
+      margin: 0 auto 12px;
+      box-shadow: 0 1px 3px rgba(10, 25, 41, 0.04);
+    }
+    .def-card + .def-card {
+      margin-top: 10px;
+    }
+    .def-prefix {
+      font-size: 11.5px;
+      color: var(--muted);
+      margin-bottom: 8px;
+      letter-spacing: 0.02em;
+    }
+    .def-prefix em {
+      font-style: normal;
+      color: var(--brand-deep);
+      font-weight: 600;
+    }
+    .def-card-title {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--brand-deep);
+      letter-spacing: -0.01em;
+      margin-bottom: 6px;
+      text-transform: lowercase;
+    }
+    .def-card-title::first-letter {
+      text-transform: uppercase;
+    }
+    .def-card-body {
+      font-size: 13.5px;
+      line-height: 1.55;
+      color: var(--ink);
+      letter-spacing: -0.003em;
+    }
+    .def-card-body em {
+      font-style: italic;
+      font-feature-settings: "ss01";
+    }
 
     .search-hero .db-filters {
       justify-content: center;
@@ -2906,6 +2985,10 @@
       {
         id: 'contact',
         label: { no: 'samvær', en: 'contact' },
+        description: {
+          no: 'Barnets og forelderens rettslige adgang til å være sammen etter samlivsbrudd. Beskyttes av EMK artikkel 8 som en del av retten til familieliv — både barnet og forelderen har en selvstendig rett. Norske termer omfatter samvær, omgang, samværsrett. Engelske termer: contact, visitation, access.',
+          en: "The child's and parent's legal right to spend time together after separation. Protected by Article 8 ECHR as part of the right to family life — both the child and the parent have an independent right. Norwegian terms include samvær, omgang, samværsrett."
+        },
         no: ['samvær', 'samværsrett', 'rett til samvær', 'omgang', 'omgangsrett',
              'kontakt', 'samværsavtale', 'samværsordning', 'samværsavgjørelse',
              'barnets rett til samvær', 'fars rett til samvær', 'mors rett til samvær'],
@@ -2915,6 +2998,10 @@
       {
         id: 'contact-obstruction',
         label: { no: 'hindring av samvær', en: 'contact obstruction' },
+        description: {
+          no: 'Når én forelder systematisk forhindrer at den andre forelderen får utøve sin rettslig fastsatte samværsrett. EMD krever at staten reagerer aktivt og effektivt — passivitet er ikke nok. Mincheva v. Bulgaria (2010), Zavridou v. Cyprus (2024) og Ribić v. Croatia (2015) er sentrale dommer der staten ble dømt for ikke å handle.',
+          en: 'When one parent systematically prevents the other from exercising legally established contact rights. The ECtHR requires the state to react actively and effectively — passivity is not enough. Mincheva v. Bulgaria (2010), Zavridou v. Cyprus (2024) and Ribić v. Croatia (2015) are leading cases where the state was found to have violated Article 8.'
+        },
         no: ['samværshindring', 'samværsobstruksjon', 'samværsnektelse', 'samværsnekt',
              'samværsboikott', 'samværsvegring', 'samværsbrudd', 'samværssvikt',
              'samværssabotasje', 'samværsforhindring', 'omgangshindring',
@@ -2932,6 +3019,10 @@
       {
         id: 'parental-alienation',
         label: { no: 'foreldrefremmedgjøring', en: 'parental alienation' },
+        description: {
+          no: 'Når et barn over tid blir påvirket eller manipulert til å avvise den ene forelderen. EMD anerkjenner ikke uttrykket «parental alienation» som diagnose, men dommen Pisică v. Moldova (2019) krever at myndighetene undersøker årsakene til barnets motstand — herunder lojalitetskonflikt, påvirkning og ensidig informasjon — og ikke uten videre legger barnets uttalelse til grunn.',
+          en: "When a child over time is influenced or manipulated into rejecting one parent. The ECtHR does not recognise 'parental alienation' as a diagnosis, but Pisică v. Moldova (2019) requires authorities to investigate the reasons for the child's resistance — including loyalty conflicts, influence and one-sided information — rather than simply accepting the child's stated wishes."
+        },
         no: ['foreldrefremmedgjøring', 'foreldrefiendtlighet',
              'foreldrefiendtliggjøring', 'foreldrebrudd', 'lojalitetskonflikt',
              'manipulasjon av barn', 'påvirkning av barn', 'PAS'],
@@ -2941,6 +3032,10 @@
       {
         id: 'child-resistance',
         label: { no: 'barnets motstand', en: "child's resistance" },
+        description: {
+          no: 'Når barnet selv uttrykker motvilje mot samvær med den ene forelderen. Barnets stemme har vekt, men er ikke avgjørende alene. Pisică v. Moldova (2019) og K.B. and Others v. Croatia (2017) slår fast at myndighetene har en plikt til å undersøke om motstanden er reell — eller om den skyldes påvirkning, lojalitetskonflikt eller ensidig informasjon fra den forelderen barnet bor hos.',
+          en: "When the child themselves expresses opposition to contact with one parent. The child's voice carries weight, but is not decisive alone. Pisică v. Moldova (2019) and K.B. and Others v. Croatia (2017) establish that authorities have a duty to investigate whether the resistance is genuine — or stems from influence, loyalty conflict, or one-sided information from the parent the child lives with."
+        },
         no: ['barnets motstand', 'barnet motsetter seg', 'barnets vegring',
              'barnets uttalelse', 'barnets stemme', 'barnets mening',
              'høre barnet', 'barns rett til å bli hørt'],
@@ -2950,6 +3045,10 @@
       {
         id: 'positive-obligations',
         label: { no: 'positive forpliktelser', en: 'positive obligations' },
+        description: {
+          no: 'Statens aktive plikt til å sikre at rettighetene etter EMK artikkel 8 blir reelle — ikke bare å avstå fra inngrep, men å treffe konkrete tiltak. Doktrinen ble formulert i Ignaccolo-Zenide v. Romania (2000): rettighetene må være «praktiske og effektive», ikke «teoretiske og illusoriske». Det er ikke nok å avsi en avgjørelse — staten må sørge for at avgjørelsen blir realitet.',
+          en: "The state's active duty to ensure that Article 8 ECHR rights are real — not just to refrain from interference, but to take concrete measures. The doctrine was formulated in Ignaccolo-Zenide v. Romania (2000): rights must be 'practical and effective', not 'theoretical and illusory'. Issuing a decision is not enough — the state must make sure that decision becomes reality."
+        },
         no: ['positive forpliktelser', 'positiv forpliktelse', 'positiv plikt',
              'statens ansvar', 'statens plikt', 'staten må handle',
              'praktiske og effektive', 'legal arsenal'],
@@ -2959,6 +3058,10 @@
       {
         id: 'enforcement',
         label: { no: 'håndhevelse', en: 'enforcement' },
+        description: {
+          no: 'Statens plikt til å gjennomføre rettsavgjørelser om samvær i praksis. Når milde tiltak ikke virker, må de eskaleres. Ónodi v. Hungary (2017) er sentral: faren leverte over 60 håndhevelsesbegjæringer uten at samværet ble realitet. EMD krever et «tilstrekkelig og virksomt rettslig arsenal» — herunder tvangsmulkt, tvangsfullbyrdelse og om nødvendig endring av bosted.',
+          en: 'The state\'s duty to actually carry out judicial decisions on contact. When mild measures fail, they must be escalated. Ónodi v. Hungary (2017) is central: the father filed over 60 enforcement applications without contact materialising. The ECtHR requires an "adequate and effective legal arsenal" — including coercive fines, enforcement proceedings and, where necessary, a change of residence.'
+        },
         no: ['håndhevelse', 'manglende håndhevelse', 'manglende sanksjoner',
              'effektivitet', 'effektive tiltak', 'tvangsmulkt', 'tvangsbot',
              'tvangsfullbyrdelse', 'håndhevelsesbegjæring', 'sanksjon'],
@@ -2969,6 +3072,10 @@
       {
         id: 'delay',
         label: { no: 'tidsbruk og forsinkelser', en: 'delay' },
+        description: {
+          no: 'Tiden er en selvstendig krenkelse. Når en sak går over år, kan relasjonen mellom barn og forelder brytes ned før rettssystemet får effekt — uavhengig av utfallet. Ribić v. Croatia (2015) er et grellt eksempel: fjorten års rettsprosess, faren fikk se sønnen tre ganger. EMD krever rask og effektiv behandling i samværssaker fordi tidens gang har irreversible konsekvenser.',
+          en: 'Time is itself a violation. When proceedings stretch over years, the relationship between child and parent can break down before the legal system has any effect — regardless of the outcome. Ribić v. Croatia (2015) is a stark example: fourteen years of litigation, the father saw his son three times. The ECtHR requires expedient and effective handling of contact cases because the passage of time has irreversible consequences.'
+        },
         no: ['langvarig saksbehandling', 'sendrektighet', 'forsinkelse',
              'lang saksgang', 'tidsbruk', 'lang prosess', 'mange år',
              'tiden går', 'irreversible konsekvenser'],
@@ -2978,6 +3085,10 @@
       {
         id: 'family-life',
         label: { no: 'familieliv', en: 'family life' },
+        description: {
+          no: 'Rettsgodet som beskyttes av EMK artikkel 8 — relasjonen mellom foreldre, barn og nær familie. Begrepet er bredt og dekker biologiske, sosiale og rettslige bånd, også når foreldrene ikke bor sammen. Når relasjonen brytes ned på grunn av statlig passivitet eller mangelfull håndhevelse, foreligger et inngrep i familielivet som staten må kunne rettferdiggjøre.',
+          en: 'The legal interest protected by Article 8 ECHR — the relationship between parents, children and close family. The concept is broad and covers biological, social and legal ties, including when parents do not live together. When the relationship breaks down due to state inaction or inadequate enforcement, there is an interference with family life that the state must be able to justify.'
+        },
         no: ['familieliv', 'privatliv', 'rett til familieliv',
              'krenkelse av familieliv', 'familieforhold', 'familierelasjon',
              'foreldrebånd', 'barn-forelder-relasjon'],
@@ -2988,6 +3099,10 @@
       {
         id: 'echr',
         label: { no: 'EMK artikkel 8 / EMD', en: 'ECHR Article 8 / ECtHR' },
+        description: {
+          no: 'EMK = Den europeiske menneskerettskonvensjon. EMD = Den europeiske menneskerettsdomstol i Strasbourg. Artikkel 8 beskytter retten til respekt for privatliv og familieliv. Konvensjonen er inkorporert i norsk rett gjennom menneskerettsloven og har forrang foran annen norsk lov ved motstrid. Et brudd kan klages inn for Strasbourg etter at norske rettsmidler er uttømt.',
+          en: 'ECHR = European Convention on Human Rights. ECtHR = European Court of Human Rights in Strasbourg. Article 8 protects the right to respect for private and family life. The Convention is incorporated into Norwegian law via the Human Rights Act and takes precedence over conflicting domestic law. A violation can be brought to Strasbourg after domestic remedies are exhausted.'
+        },
         no: ['EMK', 'EMK artikkel 8', 'artikkel 8', 'menneskerettsdomstolen',
              'EMD', 'Strasbourg', 'menneskerettighetene', 'menneskerettsloven',
              'konvensjonen', 'EMK art. 8'],
@@ -2998,6 +3113,10 @@
       {
         id: 'parental-rights',
         label: { no: 'foreldretvist og rettigheter', en: 'parental dispute & rights' },
+        description: {
+          no: 'Konflikten mellom foreldre om hvor barnet skal bo, omfanget av samvær og foreldreansvaret. I norsk rett reguleres dette av barneloven. Norske domstoler er bundet av menneskerettsloven og må ta hensyn til EMK artikkel 8 — også der det handler om å gi den forelderen som blir hindret, et effektivt rettslig vern.',
+          en: 'The dispute between parents over where the child should live, the extent of contact and parental responsibility. In Norwegian law this is regulated by the Children Act (barneloven). Norwegian courts are bound by the Human Rights Act and must take account of Article 8 ECHR — including providing effective legal protection to the parent being obstructed.'
+        },
         no: ['foreldretvist', 'foreldreansvar', 'foreldrekonflikt',
              'foreldrerettigheter', 'bostedsforelder', 'samværsforelder',
              'daglig omsorg', 'fast bosted', 'barnefordeling',
@@ -3011,6 +3130,10 @@
       {
         id: 'best-interest',
         label: { no: 'barnets beste', en: 'best interests of the child' },
+        description: {
+          no: 'Det overordnede vurderingsprinsippet i barnerettssaker, forankret i barnekonvensjonen artikkel 3 og barneloven § 48. EMD presiserer at barnets beste ikke kan reduseres til hva barnet sier — det krever en helhetlig faglig vurdering, og som hovedregel er det best for barnet å opprettholde båndet til begge foreldre.',
+          en: "The overarching assessment principle in cases involving children, anchored in CRC Article 3 and the Norwegian Children Act § 48. The ECtHR makes clear that 'the best interests of the child' cannot be reduced to what the child says — it requires a holistic professional assessment, and as a rule it is in the child's best interest to maintain ties to both parents."
+        },
         no: ['barnets beste', 'barnekonvensjonen', 'BK', 'barnesakkyndig'],
         en: ['best interests of the child', 'best interests', 'CRC',
              'Convention on the Rights of the Child', 'child welfare expert']
@@ -3018,6 +3141,10 @@
       {
         id: 'norwegian-law',
         label: { no: 'norsk rett', en: 'Norwegian law' },
+        description: {
+          no: 'Barneloven og tilstøtende lovgivning som regulerer samvær, foreldreansvar og håndhevelse i Norge. Sentrale virkemidler er mekling ved familievernkontoret, tvangsmulkt etter barneloven § 65 og endring av bosted i alvorlige tilfeller. Sanchez Cardenas v. Norway (2007) er den eneste foreldretvist-dommen der Norge er funnet å bryte artikkel 8 — saken viser at norske domstoler ikke er fritatt fra EMDs effektivitetskrav.',
+          en: "The Children Act (barneloven) and adjacent legislation governing contact, parental responsibility and enforcement in Norway. Key tools include mediation at the Family Counselling Office, coercive fines under § 65 of the Children Act, and changing the child's residence in serious cases. Sanchez Cardenas v. Norway (2007) is the only contact-dispute judgment finding Norway in breach of Article 8 — showing Norwegian courts are not exempt from the ECtHR's effectiveness standard."
+        },
         no: ['barneloven', 'barneloven § 65', 'barneloven § 43', 'mekling',
              'familievernkontoret', 'barnevernet', 'omsorgssvikt',
              'omsorgsnektelse', 'foreldreomsorg', 'rettsavgjørelse om samvær'],
@@ -3028,6 +3155,10 @@
       {
         id: 'investigation-duty',
         label: { no: 'undersøkelsesplikten', en: 'duty to investigate' },
+        description: {
+          no: 'Statens plikt til å gjøre en konkret og faglig undersøkelse av årsakene når barnet motsetter seg samvær — i stedet for å bare registrere uttalelsen. Slått fast i Pisică v. Moldova (2019) og K.B. and Others v. Croatia (2017). Norske domstoler kritiseres ofte for å begrense seg til å høre barnet uten å analysere lojalitetskonflikt, påvirkning eller relasjonell kontekst.',
+          en: "The state's duty to make a concrete, professional investigation of the reasons when a child opposes contact — instead of merely recording the statement. Established in Pisică v. Moldova (2019) and K.B. and Others v. Croatia (2017). Norwegian courts are often criticised for limiting themselves to hearing the child without analysing loyalty conflict, influence or relational context."
+        },
         no: ['undersøkelsesplikten', 'undersøkelsesplikt', 'utrede',
              'sakkyndig utredning', 'bevisvurdering', 'konkret vurdering'],
         en: ['duty to investigate', 'investigation', 'expert assessment',
@@ -4160,21 +4291,89 @@
       if (c) c.textContent = cases.filter(cc => cc.country === 'Norge' || cc.country === 'Norway').length;
     }
 
+    // Renders the contextual help below the search input. Three states:
+    //   1) No search   → quiet tip with a few example terms (click to fill)
+    //   2) Search resolves to concept(s) → definition card(s) explaining
+    //      what the term means in this legal context
+    //   3) Search returns no concept match → polite "unknown term" notice +
+    //      the example chips as a fallback
     function renderSuggestions() {
       const wrap = document.getElementById('search-suggestions');
       if (!wrap) return;
-      const suggestions = currentLang === 'no'
-        ? ['rettslig arsenal', 'barnets motvilje', 'uopprettelige følger', 'koordinerte tiltak']
-        : ['legal arsenal', 'child resistance', 'irremediable consequences', 'coordinated measures'];
-      const label = currentLang === 'no' ? 'Prøv' : 'Try';
-      wrap.innerHTML = `<span class="ss-label">${label}</span>` + suggestions.map(s =>
-        `<button class="ss-chip" type="button" data-q="${s}">${s}</button>`
+      const lang = currentLang;
+      const resolved = resolveQuery(searchTerm, lang);
+
+      const exampleTerms = lang === 'no'
+        ? ['samværshindring', 'barnets motstand', 'foreldrefremmedgjøring', 'tvangsmulkt', 'rettslig arsenal']
+        : ['contact obstruction', "child's resistance", 'parental alienation', 'coercive fine', 'legal arsenal'];
+      const exampleChips = exampleTerms.map(s =>
+        `<button class="ss-chip" type="button" data-q="${escapeHtml(s)}">${escapeHtml(s)}</button>`
       ).join('');
+
+      // STATE 1: no search → quiet tip
+      if (!resolved) {
+        const tip = lang === 'no'
+          ? 'Søk på et juridisk begrep, en sak eller en hel setning. Bruk «sitater» for å låse en frase.'
+          : 'Search a legal term, a case name, or a full sentence. Use "quotes" to lock a phrase.';
+        wrap.innerHTML = `
+          <div class="def-empty">
+            <div class="def-empty-tip">${tip}</div>
+            <div class="def-empty-examples">
+              <span class="ss-label">${lang === 'no' ? 'Prøv' : 'Try'}</span>
+              ${exampleChips}
+            </div>
+          </div>
+        `;
+        wireSuggestionChips(wrap);
+        return;
+      }
+
+      // STATE 2: search resolves to one or more concepts → definition card(s)
+      if (resolved.concepts.length > 0) {
+        const cards = resolved.concepts.map((c, i) => {
+          const def = thesaurus.find(t => t.id === c.id);
+          const desc = def && def.description ? def.description[lang] : '';
+          const label = c.label;
+          const userTermNotice = lang === 'no'
+            ? `Du søkte «<em>${escapeHtml(c.triggeredBy)}</em>» — i denne håndboken hører dette inn under konseptet:`
+            : `You searched «<em>${escapeHtml(c.triggeredBy)}</em>» — in this handbook this falls under the concept:`;
+          // Show the user-term notice only on the first card to avoid repetition
+          const notice = i === 0 ? `<div class="def-prefix">${userTermNotice}</div>` : '';
+          return `
+            <div class="def-card">
+              ${notice}
+              <div class="def-card-title">${escapeHtml(label)}</div>
+              ${desc ? `<div class="def-card-body">${escapeHtml(desc)}</div>` : ''}
+            </div>
+          `;
+        }).join('');
+        wrap.innerHTML = cards;
+        return;
+      }
+
+      // STATE 3: query has text but matches no known concept
+      const unknown = lang === 'no'
+        ? `«<em>${escapeHtml(resolved.raw)}</em>» er ikke et juridisk begrep vi har en definisjon for. Vi søker fortsatt i hele teksten.`
+        : `«<em>${escapeHtml(resolved.raw)}</em>» is not a legal term we have a definition for. We're still searching the full text.`;
+      wrap.innerHTML = `
+        <div class="def-empty">
+          <div class="def-empty-tip def-unknown">${unknown}</div>
+          <div class="def-empty-examples">
+            <span class="ss-label">${lang === 'no' ? 'Kjente begreper' : 'Known terms'}</span>
+            ${exampleChips}
+          </div>
+        </div>
+      `;
+      wireSuggestionChips(wrap);
+    }
+
+    function wireSuggestionChips(wrap) {
       wrap.querySelectorAll('.ss-chip').forEach(chip => {
         chip.addEventListener('click', () => {
           const input = document.getElementById('db-search');
           input.value = chip.dataset.q;
           searchTerm = chip.dataset.q;
+          renderSuggestions();
           renderCases();
           input.focus();
         });
@@ -4230,6 +4429,7 @@
       const searchInput = document.getElementById('db-search');
       searchInput.addEventListener('input', (e) => {
         searchTerm = e.target.value;
+        renderSuggestions();
         renderCases();
       });
 
@@ -4243,6 +4443,7 @@
           if (searchInput.value) {
             searchInput.value = '';
             searchTerm = '';
+            renderSuggestions();
             renderCases();
           } else {
             searchInput.blur();
