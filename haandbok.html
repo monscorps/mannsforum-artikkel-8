@@ -179,7 +179,7 @@
         font-size: 9px;
         letter-spacing: 0.16em;
         margin-bottom: 3px;
-        /* Truncate the long agency name on narrow screens — keep one line */
+        /* Truncate the long agency name on narrow screens. Keep one line */
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
@@ -321,7 +321,7 @@
       padding: clamp(48px, 8vh, 80px) var(--pad) clamp(30px, 5vh, 50px);
       max-width: 1320px;
       margin: 0 auto;
-      /* No overflow:hidden — would clip the typeahead dropdown. The hero-bg
+      /* No overflow:hidden. Would clip the typeahead dropdown. The hero-bg
          already fades via mask-image, so clipping isn't needed. */
       z-index: 30;
     }
@@ -537,7 +537,7 @@
       gap: 8px;
     }
 
-    /* Definition card — shown when the search resolves to a concept */
+    /* Definition card. Shown when the search resolves to a concept */
     .def-card {
       background: linear-gradient(180deg, rgba(77, 178, 236, 0.06), rgba(77, 178, 236, 0.02));
       border: 1px solid rgba(77, 178, 236, 0.30);
@@ -754,7 +754,7 @@
       /* On mobile the group is one column with padding-left:36px.
          The spine sits at left:13px inside the group (no group margins).
          The dot is position:absolute relative to the group, so we place
-         it at left:6px to center the 16px dot on the 2px spine — well
+         it at left:6px to center the 16px dot on the 2px spine. Well
          to the LEFT of the year label which starts at the 36px padding. */
       .tl-year-dot {
         right: auto;
@@ -913,7 +913,7 @@
         font-size: 10px;
         padding: 2px 7px;
         /* On narrow screens, prefer wrapping the full label over truncating
-           — these are legal terms and chopping mid-word looks unprofessional */
+          , these are legal terms and chopping mid-word looks unprofessional */
         white-space: normal;
         overflow: visible;
         text-overflow: clip;
@@ -1023,6 +1023,23 @@
       color: var(--body);
       max-width: 42em;
       margin: 0 0 36px;
+    }
+    .hero-lede-more {
+      display: inline-block;
+      margin-left: 6px;
+      font-size: 0.78em;
+      font-weight: 600;
+      color: var(--brand-deep);
+      text-decoration: none;
+      border-bottom: 1px solid rgba(26, 127, 184, 0.35);
+      transition: color 0.15s, border-color 0.15s;
+      letter-spacing: 0.01em;
+      vertical-align: 2px;
+      white-space: nowrap;
+    }
+    .hero-lede-more:hover {
+      color: var(--brand);
+      border-bottom-color: var(--brand);
     }
 
     .hero-meta {
@@ -2796,7 +2813,14 @@
       <div class="hero-bg" aria-hidden="true"></div>
       <div class="search-hero-inner">
         <h1 class="hero-title" data-i18n="hero_title"></h1>
-        <p class="hero-lede" data-i18n="hero_lede"></p>
+        <p class="hero-lede">
+          <span data-i18n="hero_lede"></span>
+          <a class="hero-lede-more"
+             href="https://www.pasg.no/artikler/statens-menneskerettslige-plikt-til-beskytte-familierelasjoner"
+             target="_blank"
+             rel="noopener"
+             data-i18n="hero_lede_more"></a>
+        </p>
         <div class="big-search-wrap">
           <svg class="icon big-search-icon"><use href="#i-search"/></svg>
           <input type="search" class="big-search" id="db-search" placeholder="" autocomplete="off" spellcheck="false" autofocus role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="search-typeahead" />
@@ -2882,13 +2906,14 @@
         banner_title: '<strong>Statens positive forpliktelser</strong> etter EMK artikkel 8',
         hero_title: "Myndighetens positive forpliktelser",
         hero_lede: "Den europeiske menneskerettsdomstolen har gjennom mer enn 25 år bygget en konsistent doktrine i saker vedr. barneloven: EMK artikkel 8 krever ikke bare at staten avstår fra inngrep, men at staten aktivt sikrer at rettighetene blir reelle.",
+        hero_lede_more: "Les mer ↗",
 
         doc_tag: "Doktrinen",
         doc_title: "Hva er statens positive forpliktelser?",
-        doc_intro: "Artikkel 8 er klassisk formulert som et vern mot inngrep. Strasbourg har lest mer ut av bestemmelsen. Staten er ikke bare forpliktet til å la være å bryte rettigheten — den må aktivt sikre at den virker.",
-        db_label: "Grunnsetningen — Ignaccolo-Zenide mot Romania, EMD 2000",
+        doc_intro: "Artikkel 8 er klassisk formulert som et vern mot inngrep. Strasbourg har lest mer ut av bestemmelsen. Staten er ikke bare forpliktet til å la være å bryte rettigheten. Den må aktivt sikre at den virker.",
+        db_label: "Grunnsetningen: Ignaccolo-Zenide mot Romania, EMD 2000",
         db_quote: "«Staten må handle på en måte som er egnet til å la båndene mellom forelder og barn utvikle seg.»",
-        db_explain: "Dommen i Ignaccolo-Zenide etablerer at staten har en positiv forpliktelse til å sikre at samværsretten faktisk lar seg gjennomføre. Plikten er ikke begrenset til å avsi avgjørelser. Den krever effektive tiltak — tiltak som faktisk virker i praksis. Denne setningen er gjentatt og bygget videre på i flere titalls dommer siden.",
+        db_explain: "Dommen i Ignaccolo-Zenide etablerer at staten har en positiv forpliktelse til å sikre at samværsretten faktisk lar seg gjennomføre. Plikten er ikke begrenset til å avsi avgjørelser. Den krever effektive tiltak. Tiltak som faktisk virker i praksis. Denne setningen er gjentatt og bygget videre på i flere titalls dommer siden.",
         db_cite: "Gjentatt i Macready (2010), Mincheva (2010), Zavridou (2013), Pisică (2014), L.D. (2014), Ribić (2015), Ónodi (2017), K.B. (2017), m.fl.",
 
         ob_tag: "Forpliktelsene",
@@ -2925,21 +2950,21 @@
         cr_action_show_full: "Vis hele dommen (PDF-tekst)",
         cr_action_hide_full: "Skjul hele dommen",
         cr_quote_lang_note: "Originalspråk: engelsk. Pinpoint-referanse til dommen.",
-        cr_analysis_source: "Østberg, Andersland og Joachimsen — Advokatbladet",
+        cr_analysis_source: "Østberg, Andersland og Joachimsen · Advokatbladet",
         footer_org: "MannsForum arbeider for likeverdig foreldreskap og barns rett til to foreldre etter samlivsbrudd.",
         footer_sources_label: "Primærkilder",
         footer_meta_label: "Om håndboken",
         footer_meta: "Håndbok over EMDs praksis om statens positive forpliktelser etter EMK artikkel 8. Bygget på artiklene fra Joachimsen (pasg.no) og Østberg / Andersland / Joachimsen (Advokatbladet). Versjon 1 · 2026.",
         case_count: "%N% dommer",
         case_count_one: "1 dom",
-        doc2_label: "Det rettslige arsenal — Ónodi mot Ungarn, EMD 2017",
+        doc2_label: "Det rettslige arsenal: Ónodi mot Ungarn, EMD 2017",
         doc2_quote: "«Hver kontraherende stat må utstyre seg med et tilstrekkelig og virksomt rettslig arsenal for å sikre etterlevelse av sine positive forpliktelser etter artikkel 8.»",
-        doc2_explain: "Mens Ignaccolo-Zenide etablerte at staten har en positiv plikt, går Ónodi videre og krever konkrete strukturelle virkemidler. Det er ikke nok at staten prøver. Den må være utstyrt med tiltak som faktisk fungerer. En forelder leverte over seksti håndhevelsesbegjæringer uten resultat — det var i seg selv et brudd på artikkel 8.",
+        doc2_explain: "Mens Ignaccolo-Zenide etablerte at staten har en positiv plikt, går Ónodi videre og krever konkrete strukturelle virkemidler. Det er ikke nok at staten prøver. Den må være utstyrt med tiltak som faktisk fungerer. En forelder leverte over seksti håndhevelsesbegjæringer uten resultat. Det var i seg selv et brudd på artikkel 8.",
         doc2_cite: "Bygger på Mincheva (2010) som først krevde «legal arsenal». Anvendt i K.B. (2017) som krever «koordinerte» tiltak.",
 
         ht_tag: "Slik bruker du håndboken",
         ht_title: "For advokater, forskere, journalister, foreldre.",
-        ht_intro: "Håndboken er en oppslagsbok. Den er strukturert slik at du kan finne det rettslige grunnlaget for en konkret situasjon — eller dykke ned i selve dommene.",
+        ht_intro: "Håndboken er en oppslagsbok. Den er strukturert slik at du kan finne det rettslige grunnlaget for en konkret situasjon, eller dykke ned i selve dommene.",
 
         footer_note: "Håndbok over EMDs praksis om statens positive forpliktelser etter EMK artikkel 8. Sitater er hentet fra hudoc.echr.coe.int.",
         footer_back: "← Tilbake til den interaktive guiden",
@@ -2955,13 +2980,14 @@
         banner_title: '<strong>State positive obligations</strong> under ECHR Article 8',
         hero_title: "The state's positive obligations",
         hero_lede: "Over more than 25 years the European Court of Human Rights has built a consistent doctrine in cases concerning the Norwegian Children Act: ECHR Article 8 requires not only that the state refrain from interference, but that it actively secure that those rights are real.",
+        hero_lede_more: "Read more ↗",
 
         doc_tag: "The doctrine",
         doc_title: "What are state positive obligations?",
-        doc_intro: "Article 8 is classically framed as protection against interference. Strasbourg has read more into it. The state is not only obliged to refrain from breaching the right — it must actively ensure it works.",
-        db_label: "The foundational holding — Ignaccolo-Zenide v. Romania, ECHR 2000",
+        doc_intro: "Article 8 is classically framed as protection against interference. Strasbourg has read more into it. The state is not only obliged to refrain from breaching the right. It must actively ensure it works.",
+        db_label: "The foundational holding: Ignaccolo-Zenide v. Romania, ECHR 2000",
         db_quote: "\"The State must act in a manner calculated to allow the ties between parent and child to be developed.\"",
-        db_explain: "Ignaccolo-Zenide establishes that the state has a positive obligation to make contact rights actually workable. The duty is not limited to issuing decisions. It requires effective measures — measures that actually work in practice. This holding has been repeated and built upon in dozens of judgments since.",
+        db_explain: "Ignaccolo-Zenide establishes that the state has a positive obligation to make contact rights actually workable. The duty is not limited to issuing decisions. It requires effective measures. Measures that actually work in practice. This holding has been repeated and built upon in dozens of judgments since.",
         db_cite: "Repeated in Macready (2010), Mincheva (2010), Zavridou (2013), Pisică (2014), L.D. (2014), Ribić (2015), Ónodi (2017), K.B. (2017), and more.",
 
         ob_tag: "The obligations",
@@ -2998,21 +3024,21 @@
         cr_action_show_full: "Show full judgment (PDF text)",
         cr_action_hide_full: "Hide full judgment",
         cr_quote_lang_note: "Original language: English. Pinpoint reference to the judgment.",
-        cr_analysis_source: "Østberg, Andersland and Joachimsen — Advokatbladet",
+        cr_analysis_source: "Østberg, Andersland and Joachimsen · Advokatbladet",
         footer_org: "MannsForum advocates for equal parenthood and a child's right to both parents after a separation.",
         footer_sources_label: "Primary sources",
         footer_meta_label: "About the handbook",
         footer_meta: "Handbook on ECHR case law on the State's positive obligations under Article 8. Built on the articles by Joachimsen (pasg.no) and Østberg / Andersland / Joachimsen (Advokatbladet). Version 1 · 2026.",
         case_count: "%N% judgments",
         case_count_one: "1 judgment",
-        doc2_label: "The legal arsenal — Ónodi v. Hungary, ECHR 2017",
+        doc2_label: "The legal arsenal: Ónodi v. Hungary, ECHR 2017",
         doc2_quote: "\"Each Contracting State must equip itself with an adequate and sufficient legal arsenal to ensure compliance with its positive obligations under Article 8.\"",
-        doc2_explain: "Where Ignaccolo-Zenide established the positive duty, Ónodi goes further and requires concrete structural measures. It is not enough that the state tries. It must be equipped with measures that actually work. A father filed over sixty enforcement petitions without result — that itself was a breach of Article 8.",
+        doc2_explain: "Where Ignaccolo-Zenide established the positive duty, Ónodi goes further and requires concrete structural measures. It is not enough that the state tries. It must be equipped with measures that actually work. A father filed over sixty enforcement petitions without result. That itself was a breach of Article 8.",
         doc2_cite: "Builds on Mincheva (2010) which first required a \"legal arsenal\". Applied in K.B. (2017) requiring \"coordinated\" measures.",
 
         ht_tag: "How to use the handbook",
         ht_title: "For lawyers, researchers, journalists, parents.",
-        ht_intro: "The handbook is a reference work. Structured so you can find the legal basis for a concrete situation — or dive deep into the judgments themselves.",
+        ht_intro: "The handbook is a reference work. Structured so you can find the legal basis for a concrete situation, or dive deep into the judgments themselves.",
 
         footer_note: "Handbook of ECHR case law on state positive obligations under Article 8. Quotations sourced from hudoc.echr.coe.int.",
         footer_back: "← Back to the interactive guide",
@@ -3066,7 +3092,7 @@
         id: 'active', icon: 'i-shield',
         no: { title: "Plikten til aktiv inngripen", body: "Når samvær systematisk hindres, kreves konkret og hensiktsmessig respons fra myndighetene. Passivitet over tid er i seg selv et brudd.",
           actionables: [
-            'Statlig initiert håndhevelse — ikke avhengig av begjæring fra forelderen',
+            'Statlig initiert håndhevelse. Ikke avhengig av begjæring fra forelderen',
             'Eskaleringskjede med klart definerte trinn (advarsel → bot → henteplikt)',
             'Faktisk politiintervensjon ved gjentatte brudd, ikke kun henvisning til ny rettsrunde',
             'Lovhjemmel for fysisk avhenting av barn ved samværssabotasje (jf. dansk retsplejelov § 456r)'
@@ -3074,7 +3100,7 @@
         },
         en: { title: "Duty of active intervention", body: "When contact is systematically obstructed, authorities must respond with concrete and appropriate measures. Passivity over time is itself a breach.",
           actionables: [
-            'State-initiated enforcement — not dependent on a petition from the parent',
+            'State-initiated enforcement. Not dependent on a petition from the parent',
             'Escalation ladder with clearly defined steps (warning → fine → retrieval)',
             'Actual police intervention on repeated breach, not just referral to another court round',
             'Legal basis for physical retrieval of the child where contact is sabotaged (cf. Danish Code of Procedure § 456r)'
@@ -3084,7 +3110,7 @@
       },
       {
         id: 'investigate', icon: 'i-search',
-        no: { title: "Undersøkelsesplikten", body: "Når barnet uttrykker motvilje, har myndighetene plikt til å undersøke årsaken — faglig og kontekstuelt. Motviljen er ikke et svar i seg selv.",
+        no: { title: "Undersøkelsesplikten", body: "Når barnet uttrykker motvilje, har myndighetene plikt til å undersøke årsaken. Faglig og kontekstuelt. Motviljen er ikke et svar i seg selv.",
           actionables: [
             'Obligatorisk sakkyndig vurdering når barnet motsetter seg samvær',
             'Konkret vurdering av lojalitetskonflikt og påvirkning, ikke bare nedtegning av barnets uttalelse',
@@ -3092,7 +3118,7 @@
             'Avvisning av løsninger som ene og alene bygger på barnets uttrykte motvilje'
           ]
         },
-        en: { title: "Duty to investigate", body: "When a child expresses resistance, authorities have a duty to investigate the cause — professionally and contextually. Resistance is not an answer in itself.",
+        en: { title: "Duty to investigate", body: "When a child expresses resistance, authorities have a duty to investigate the cause. Professionally and contextually. Resistance is not an answer in itself.",
           actionables: [
             'Mandatory expert assessment when the child resists contact',
             'Concrete assessment of loyalty conflict and manipulation, not mere recording of the statement',
@@ -3106,7 +3132,7 @@
         id: 'cooperation', icon: 'i-unlink',
         no: { title: "Ikke-avhengig håndhevelse", body: "Statens plikt kan ikke gjøres avhengig av samarbeid fra den parten som motsetter seg samværet. Det er der bruddet oppstår.",
           actionables: [
-            'Mekling kan ikke være en sluttstasjon — staten må ha alternative virkemidler',
+            'Mekling kan ikke være en sluttstasjon. Staten må ha alternative virkemidler',
             'Tvangstiltak skal kunne iverksettes uten samtykke fra den motsettende part',
             'Privat avtale skal kunne tvangsfullbyrdes (i dag krever det stadfestelse hos Statsforvalter)',
             'Strafferettslig vern mot grov og vedvarende samværssabotasje'
@@ -3114,7 +3140,7 @@
         },
         en: { title: "Non-dependent enforcement", body: "The state's duty cannot be made dependent on cooperation from the party who is obstructing contact. That dependency is where the violation arises.",
           actionables: [
-            'Mediation cannot be a terminus — the state must have alternative tools',
+            'Mediation cannot be a terminus. The state must have alternative tools',
             'Enforcement measures must be available without consent from the obstructing party',
             'Private agreements should be enforceable (currently require approval from the County Governor)',
             'Criminal protection against gross and sustained contact sabotage'
@@ -3144,7 +3170,7 @@
       }
     ];
 
-    // Cases — start with the 9 from the guide, expanded
+    // Cases. Start with the 9 from the guide, expanded
     let cases = [
       {
         id: 'ignaccolo', name: 'Ignaccolo-Zenide', country: 'Romania', year: 2000, date: { no: '25. januar 2000', en: '25 January 2000' },
@@ -3197,7 +3223,7 @@
           rettssats: 'The state must ensure that contact between child and parent is maintained while proceedings are pending. Authorities cannot confine themselves to formal decisions without securing practical implementation.',
           facts: 'An American father lost contact with his son after the mother took the child to the Czech Republic. Czech courts issued several decisions, but enforcement was ineffective. The case dragged on for years.',
           quotes: [
-            { para: 'FLAG · French original', text: 'Macready v. Czech Republic is available only in French (authentic) on HUDOC — only an unofficial Czech translation is on the site. The Court found in substance: (§ 62) adequacy of measures depends on swiftness given irremediable consequences of delay; once Hague Convention conditions are met, the aim is to restore status quo ante as rapidly as possible. (§ 63) Article 11 of the Hague Convention requires expeditious action; inaction beyond six weeks may demand explanation. (§ 64) Here, more than 20 months passed before the final domestic ruling on return. (§ 65) Restoration of status quo ante was no longer realistic given the child\'s autism-related need for stability. (§ 66) Czech courts took no own-motion interim measures to facilitate the father\'s contact during proceedings — each Contracting State must equip itself with adequate legal tools to honour Article 8 positive obligations.' }
+            { para: 'FLAG · French original', text: 'Macready v. Czech Republic is available only in French (authentic) on HUDOC. Only an unofficial Czech translation is on the site. The Court found in substance: (§ 62) adequacy of measures depends on swiftness given irremediable consequences of delay; once Hague Convention conditions are met, the aim is to restore status quo ante as rapidly as possible. (§ 63) Article 11 of the Hague Convention requires expeditious action; inaction beyond six weeks may demand explanation. (§ 64) Here, more than 20 months passed before the final domestic ruling on return. (§ 65) Restoration of status quo ante was no longer realistic given the child\'s autism-related need for stability. (§ 66) Czech courts took no own-motion interim measures to facilitate the father\'s contact during proceedings. Each Contracting State must equip itself with adequate legal tools to honour Article 8 positive obligations.' }
           ]
         }
       },
@@ -3222,7 +3248,7 @@
           rettssats: 'When a parent systematically prevents contact between the child and the other parent, the state has a duty to respond actively and effectively. Passivity on the part of the authorities may constitute a breach of Article 8.',
           facts: 'A mother systematically sabotaged contact between the child and the father. Bulgarian police and child welfare remained passive despite multiple complaints. The ECHR found the state had not secured the "legal arsenal" Article 8 requires.',
           quotes: [
-            { para: 'FLAG · French original', text: 'Mincheva v. Bulgaria is available only in French (authentic) on HUDOC — no official English version exists. The Court found in substance: (i) Article 8 imposes a positive obligation to take adequate measures to reunite parent and child; (ii) measures must be judged by swiftness of implementation given that passage of time has irremediable consequences; (iii) Bulgarian authorities failed to act with the required diligence — no measures were taken for years to overcome the father\'s obstruction; (iv) the existence of a legal framework on paper is insufficient — each Contracting State must equip itself with an adequate legal arsenal to ensure positive obligations under Article 8.' }
+            { para: 'FLAG · French original', text: 'Mincheva v. Bulgaria is available only in French (authentic) on HUDOC. No official English version exists. The Court found in substance: (i) Article 8 imposes a positive obligation to take adequate measures to reunite parent and child; (ii) measures must be judged by swiftness of implementation given that passage of time has irremediable consequences; (iii) Bulgarian authorities failed to act with the required diligence. No measures were taken for years to overcome the father\'s obstruction; (iv) the existence of a legal framework on paper is insufficient. Each Contracting State must equip itself with an adequate legal arsenal to ensure positive obligations under Article 8.' }
           ]
         }
       },
@@ -3266,10 +3292,10 @@
           rettssats: 'Barnets motstand mot samvær kan ikke alene være avgjørende dersom det foreligger indikasjoner på påvirkning eller lojalitetskonflikt. Myndighetene må analysere den relasjonelle konteksten.',
           facts: 'En far ble nektet samvær av moren over år. Barnet uttrykte motvilje mot samvær, og dette ble av moldovske myndigheter behandlet som avgjørende. EMD fant at årsaken til motviljen ikke var tilstrekkelig undersøkt.',
           quotes: [
-            { para: '§§ 64-65', text: 'Myndighetene har en plikt til å undersøke årsakene til barnets motvilje. Det er ikke nok å registrere hva barnet sier — relasjonell kontekst, påvirkning og lojalitetskonflikt må vurderes.' }
+            { para: '§§ 64-65', text: 'Myndighetene har en plikt til å undersøke årsakene til barnets motvilje. Det er ikke nok å registrere hva barnet sier. Relasjonell kontekst, påvirkning og lojalitetskonflikt må vurderes.' }
           ]
         ,
-          analysis: 'I Pisică v. Moldova (2014) og K.B. and Others v. Croatia (2017) fastslår EMD at barnets syn ikke uten videre kan være avgjørende dersom det foreligger indikasjoner på påvirkning eller lojalitetskonflikt. Myndighetene har en plikt til å undersøke årsakene til motstanden på en konkret og faglig forsvarlig måte. Dette innebærer mer enn å registrere hva barnet gir uttrykk for — slik vi svært ofte ser at norske domstoler begrenser seg til. EMD forutsetter en aktiv og selvstendig vurdering av om barnets motstand er et resultat av egne erfaringer, eller om den kan være påvirket av relasjonelle forhold, herunder press, lojalitetsbindinger eller ensidig informasjonsgrunnlag.'
+          analysis: 'I Pisică v. Moldova (2014) og K.B. and Others v. Croatia (2017) fastslår EMD at barnets syn ikke uten videre kan være avgjørende dersom det foreligger indikasjoner på påvirkning eller lojalitetskonflikt. Myndighetene har en plikt til å undersøke årsakene til motstanden på en konkret og faglig forsvarlig måte. Dette innebærer mer enn å registrere hva barnet gir uttrykk for, slik vi svært ofte ser at norske domstoler begrenser seg til. EMD forutsetter en aktiv og selvstendig vurdering av om barnets motstand er et resultat av egne erfaringer, eller om den kan være påvirket av relasjonelle forhold, herunder press, lojalitetsbindinger eller ensidig informasjonsgrunnlag.'
         },
         en: {
           rettssats: 'A child\'s resistance to contact cannot alone be decisive when there are indications of manipulation or loyalty conflict. Authorities must analyse the relational context.',
@@ -3326,10 +3352,10 @@
           facts: 'I løpet av fjorten års rettsprosess fikk far se sønnen sin tre ganger. Kroatiske domstoler avsa flere avgjørelser om samvær, men ingen ble effektivt gjennomført. EMD fant brudd på artikkel 8.',
           quotes: [
             { para: '§ 92', text: '«Tilstrekkeligheten av et tiltak skal bedømmes etter hvor raskt det iverksettes, fordi tidens gang kan ha uopprettelige følger for forholdet mellom et barn og den forelderen som ikke bor sammen med det.»' },
-            { para: '§ 94', text: 'Plikten er en innsatsplikt, ikke en resultatplikt — men den innsatsen må være effektiv.' }
+            { para: '§ 94', text: 'Plikten er en innsatsplikt, ikke en resultatplikt, men den innsatsen må være effektiv.' }
           ]
         ,
-          analysis: 'I Ribić v. Croatia (2015) og Macready v. the Czech Republic (2010) understrekes det at langvarige prosesser i realiteten kan avgjøre saken, fordi relasjonen brytes ned før rettssystemet får effekt, og fordi tidens gang kan få irreversible konsekvenser for forholdet mellom barn og forelder. I løpet av fjorten års rettsprosess fikk far se sønnen sin tre ganger — et tydelig eksempel på systemets svikt i å verne om familielivet over tid.'
+          analysis: 'I Ribić v. Croatia (2015) og Macready v. the Czech Republic (2010) understrekes det at langvarige prosesser i realiteten kan avgjøre saken, fordi relasjonen brytes ned før rettssystemet får effekt, og fordi tidens gang kan få irreversible konsekvenser for forholdet mellom barn og forelder. I løpet av fjorten års rettsprosess fikk far se sønnen sin tre ganger. Et tydelig eksempel på systemets svikt i å verne om familielivet over tid.'
         },
         en: {
           rettssats: 'Prolonged failure to enforce contact orders can permanently break the relationship between parent and child. The state may then be liable for breach of Article 8.',
@@ -3356,7 +3382,7 @@
           facts: 'En far leverte over seksti begjæringer om håndhevelse av samvær. Ingen av dem ledet til effektivt samvær. Ungarske myndigheter ble holdt ansvarlige for å ha sviktet sin positive plikt etter artikkel 8.',
           quotes: [
             { para: '§§ 30-31', text: '«Hver kontraherende stat må utstyre seg med et tilstrekkelig og virksomt rettslig arsenal for å sikre etterlevelse av sine positive forpliktelser etter artikkel 8.»' },
-            { para: '§ 35', text: 'Tiltak må bedømmes etter hvor raskt de iverksettes — tid har irreversible konsekvenser.' }
+            { para: '§ 35', text: 'Tiltak må bedømmes etter hvor raskt de iverksettes. Tid har irreversible konsekvenser.' }
           ]
         ,
           analysis: 'I senere praksis skjerpes effektivitetskravet. I Ónodi v. Hungary (2017) konstaterte EMD krenkelse til tross for at domstolene hadde truffet gjentatte vedtak om sanksjoner, fordi tiltakene ikke førte til faktisk kontakt. Faren leverte over seksti håndhevelsesbegjæringer uten at samværet ble en realitet. EMD slo fast at hver kontraherende stat må utstyre seg med et tilstrekkelig og virksomt rettslig arsenal for å sikre etterlevelse av sine positive forpliktelser etter artikkel 8.'
@@ -3388,7 +3414,7 @@
             { para: '§§ 38–39', text: 'The High Court neither decided the issue nor made a proper analysis. It left the matter open in such a way that readers would inevitably get the impression that the suspicions were well-founded. The applicant was thus stigmatised without being given the opportunity to defend himself.' }
           ]
         ,
-          analysis: 'Sanchez Cardenas mot Norge (2007) er et av få EMD-dommer mot Norge i en foreldretvist (i motsetning til de mange barnevernsavgjørelsene). EMD fant brudd på artikkel 8 fordi lagmannsretten inkluderte en uttalelse om «sterk mistanke» mot faren uten å ta stilling til mistanken. Saken viser at statens positive plikt også omfatter en plikt til prosessuell forsvarlighet — en stigmatiserende uttalelse i dom uten konkret bevisvurdering er et inngrep i familielivet.'
+          analysis: 'Sanchez Cardenas mot Norge (2007) er et av få EMD-dommer mot Norge i en foreldretvist (i motsetning til de mange barnevernsavgjørelsene). EMD fant brudd på artikkel 8 fordi lagmannsretten inkluderte en uttalelse om «sterk mistanke» mot faren uten å ta stilling til mistanken. Saken viser at statens positive plikt også omfatter en plikt til prosessuell forsvarlighet. En stigmatiserende uttalelse i dom uten konkret bevisvurdering er et inngrep i familielivet.'
         },
         en: {
           rettssats: 'When a court grounds a denial of contact on a serious allegation, that allegation must be subjected to a concrete evidentiary assessment. Leaving a suspicion of abuse standing without reasoning in the judgment itself, allowing it to remain on the record as a stigmatising finding, constitutes an unjustified interference with family life under ECHR Article 8.',
@@ -3413,17 +3439,17 @@
           rettssats: 'Myndighetene har en positiv plikt til å iverksette tilstrekkelige og koordinerte tiltak for å opprettholde kontakt mellom forelder og barn. Barnets motstand fritar ikke staten fra denne plikten, men utløser en plikt til å undersøke årsakene og handle raskt.',
           facts: 'En far ble nektet samvær med sine barn over år. Kroatiske myndigheter forholdt seg til barnets uttrykk for motvilje uten å undersøke om denne var et resultat av påvirkning. Tiltakene var ikke tilstrekkelig koordinerte mellom domstol, barnevern og politi.',
           quotes: [
-            { para: '§§ 143-145', text: 'Når et barn uttrykker motvilje, har myndighetene plikt til å undersøke årsaken — ikke til å bruke motviljen som begrunnelse for å gjøre ingenting.' },
+            { para: '§§ 143-145', text: 'Når et barn uttrykker motvilje, har myndighetene plikt til å undersøke årsaken. Ikke til å bruke motviljen som begrunnelse for å gjøre ingenting.' },
             { para: '§ 151', text: 'Koordinert handling mellom myndigheter er en del av statens positive plikt. Fragmentert respons er svikt.' }
           ]
         ,
-          analysis: 'K.B. and Others v. Croatia (2017) — sammen med Pisică (2014) — fastslår at barnets motstand utløser en undersøkelsesplikt for myndighetene. Når barn er i tilspissede foreldretvister, ligger det i sakens natur at de gjerne befinner seg i en form for lojalitetskonflikt som vil prege uttalelsene deres. Barnets utsagn kan ikke uten videre legges til grunn som avgjørende. Manglende koordinering mellom domstol, barnevern og politi er i seg selv en svikt i statens positive plikt.'
+          analysis: 'K.B. and Others v. Croatia (2017), sammen med Pisică (2014), fastslår at barnets motstand utløser en undersøkelsesplikt for myndighetene. Når barn er i tilspissede foreldretvister, ligger det i sakens natur at de gjerne befinner seg i en form for lojalitetskonflikt som vil prege uttalelsene deres. Barnets utsagn kan ikke uten videre legges til grunn som avgjørende. Manglende koordinering mellom domstol, barnevern og politi er i seg selv en svikt i statens positive plikt.'
         },
         en: {
           rettssats: 'Authorities have a positive duty to take adequate and coordinated measures to maintain contact between parent and child. The child\'s resistance does not relieve the state of this duty, but triggers a duty to investigate the causes and act quickly.',
           facts: 'A father was denied contact with his children for years. Croatian authorities relied on the child\'s expression of resistance without investigating whether it was the result of manipulation. Measures were not sufficiently coordinated between courts, child welfare and police.',
           quotes: [
-            { para: '§ 143', text: 'While its case-law requires children\'s views to be taken into account, those views are not necessarily immutable and their objections, which must be given due weight, are not necessarily sufficient to override the parents\' interests, especially in having regular contact with their child. The right of a child to express his or her own views should not be interpreted as effectively giving an unconditional veto power to children without any other factors being considered and an examination being carried out to determine their best interests. What is more, if a court would base a decision on the views of children who are palpably unable to form and articulate an opinion as to their wishes — for example, because of a loyalty conflict and/or their exposure to the alienating behaviour of one parent — such a decision could run contrary to Article 8 of the Convention.' },
+            { para: '§ 143', text: 'While its case-law requires children\'s views to be taken into account, those views are not necessarily immutable and their objections, which must be given due weight, are not necessarily sufficient to override the parents\' interests, especially in having regular contact with their child. The right of a child to express his or her own views should not be interpreted as effectively giving an unconditional veto power to children without any other factors being considered and an examination being carried out to determine their best interests. What is more, if a court would base a decision on the views of children who are palpably unable to form and articulate an opinion as to their wishes, for example, because of a loyalty conflict and/or their exposure to the alienating behaviour of one parent. Such a decision could run contrary to Article 8 of the Convention.' },
             { para: '§ 144', text: 'Restrictions on contact rights call for stricter scrutiny than restrictions on other parental rights. The Court therefore considers that in cases such as the present one, where the children resist contact with one parent, Article 8 of the Convention requires States to try to identify the causes of such resistance and address them accordingly. It is an obligation of means, not of result, and may require preparatory or phased measures. Since the authorities must do their utmost to facilitate such cooperation, the lack of it is not a circumstance which can by itself exempt them from their positive obligations under Article 8.' },
             { para: '§ 145', text: 'The children began drifting apart from their mother in July and August 2010. The Court finds it evident that, in order to have any effect, her appeal had to be decided urgently. Yet the Split County Court only decided on the applicant\'s appeal on 20 May 2011, almost eleven months after the end of the period covered by the first-instance decision. That court thus failed to recognise the urgency of the situation. In other words, it allowed the passage of time to resolve the matter.' },
             { para: '§ 150', text: 'The children started showing signs of resistance towards their mother during their stay with their father in the summer of 2010. However, the domestic authorities only decided to procure an opinion from forensic experts as to the causes of the children\'s resistance on 11 November 2013 and eventually obtained it only on 10 June 2015. In other words, it took the domestic authorities almost five years to obtain the authoritative opinion necessary for them to make an informed decision as to what measures to take to address the applicant\'s children\'s refusal to meet her.' },
@@ -3435,7 +3461,7 @@
 
     // Concept thesaurus. Each entry groups synonyms under a single concept so
     // we can: (a) expand a user's query to related terms, (b) tell the user
-    // "you searched X — we also looked for Y, Z", and (c) explain WHY a case
+    // "you searched X. We also looked for Y, Z", and (c) explain WHY a case
     // matched even when the literal term doesn't appear in the displayed text.
     //
     // label[lang] = short human label shown in "Also searched" / "Why matched".
@@ -3445,8 +3471,8 @@
         id: 'contact',
         label: { no: 'samvær', en: 'contact' },
         description: {
-          no: 'Barnets og forelderens rettslige adgang til å være sammen etter samlivsbrudd. Beskyttes av EMK artikkel 8 som en del av retten til familieliv — både barnet og forelderen har en selvstendig rett. Norske termer omfatter samvær, omgang, samværsrett. Engelske termer: contact, visitation, access.',
-          en: "The child's and parent's legal right to spend time together after separation. Protected by Article 8 ECHR as part of the right to family life — both the child and the parent have an independent right. Norwegian terms include samvær, omgang, samværsrett."
+          no: 'Barnets og forelderens rettslige adgang til å være sammen etter samlivsbrudd. Beskyttes av EMK artikkel 8 som en del av retten til familieliv. Både barnet og forelderen har en selvstendig rett. Norske termer omfatter samvær, omgang, samværsrett. Engelske termer: contact, visitation, access.',
+          en: "The child's and parent's legal right to spend time together after separation. Protected by Article 8 ECHR as part of the right to family life. Both the child and the parent have an independent right. Norwegian terms include samvær, omgang, samværsrett."
         },
         no: ['samvær', 'samværsrett', 'rett til samvær', 'omgang', 'omgangsrett',
              'kontakt', 'samværsavtale', 'samværsordning', 'samværsavgjørelse',
@@ -3458,8 +3484,8 @@
         id: 'contact-obstruction',
         label: { no: 'hindring av samvær', en: 'contact obstruction' },
         description: {
-          no: 'Når én forelder systematisk forhindrer at den andre forelderen får utøve sin rettslig fastsatte samværsrett. EMD krever at staten reagerer aktivt og effektivt — passivitet er ikke nok. Mincheva v. Bulgaria (2010), Zavridou v. Cyprus (2024) og Ribić v. Croatia (2015) er sentrale dommer der staten ble dømt for ikke å handle.',
-          en: 'When one parent systematically prevents the other from exercising legally established contact rights. The ECtHR requires the state to react actively and effectively — passivity is not enough. Mincheva v. Bulgaria (2010), Zavridou v. Cyprus (2024) and Ribić v. Croatia (2015) are leading cases where the state was found to have violated Article 8.'
+          no: 'Når én forelder systematisk forhindrer at den andre forelderen får utøve sin rettslig fastsatte samværsrett. EMD krever at staten reagerer aktivt og effektivt. Passivitet er ikke nok. Mincheva v. Bulgaria (2010), Zavridou v. Cyprus (2024) og Ribić v. Croatia (2015) er sentrale dommer der staten ble dømt for ikke å handle.',
+          en: 'When one parent systematically prevents the other from exercising legally established contact rights. The ECtHR requires the state to react actively and effectively. Passivity is not enough. Mincheva v. Bulgaria (2010), Zavridou v. Cyprus (2024) and Ribić v. Croatia (2015) are leading cases where the state was found to have violated Article 8.'
         },
         no: ['samværshindring', 'samværsobstruksjon', 'samværsnektelse', 'samværsnekt',
              'samværsboikott', 'samværsvegring', 'samværsbrudd', 'samværssvikt',
@@ -3479,8 +3505,8 @@
         id: 'parental-alienation',
         label: { no: 'foreldrefremmedgjøring', en: 'parental alienation' },
         description: {
-          no: 'Når et barn over tid blir påvirket eller manipulert til å avvise den ene forelderen. EMD anerkjenner ikke uttrykket «parental alienation» som diagnose, men dommen Pisică v. Moldova (2019) krever at myndighetene undersøker årsakene til barnets motstand — herunder lojalitetskonflikt, påvirkning og ensidig informasjon — og ikke uten videre legger barnets uttalelse til grunn.',
-          en: "When a child over time is influenced or manipulated into rejecting one parent. The ECtHR does not recognise 'parental alienation' as a diagnosis, but Pisică v. Moldova (2019) requires authorities to investigate the reasons for the child's resistance — including loyalty conflicts, influence and one-sided information — rather than simply accepting the child's stated wishes."
+          no: 'Når et barn over tid blir påvirket eller manipulert til å avvise den ene forelderen. EMD anerkjenner ikke uttrykket «parental alienation» som diagnose, men dommen Pisică v. Moldova (2019) krever at myndighetene undersøker årsakene til barnets motstand, herunder lojalitetskonflikt, påvirkning og ensidig informasjon, og ikke uten videre legger barnets uttalelse til grunn.',
+          en: "When a child over time is influenced or manipulated into rejecting one parent. The ECtHR does not recognise 'parental alienation' as a diagnosis, but Pisică v. Moldova (2019) requires authorities to investigate the reasons for the child's resistance, including loyalty conflicts, influence and one-sided information. Rather than simply accepting the child's stated wishes."
         },
         no: ['foreldrefremmedgjøring', 'foreldrefiendtlighet',
              'foreldrefiendtliggjøring', 'foreldrebrudd', 'lojalitetskonflikt',
@@ -3492,8 +3518,8 @@
         id: 'child-resistance',
         label: { no: 'barnets motstand', en: "child's resistance" },
         description: {
-          no: 'Når barnet selv uttrykker motvilje mot samvær med den ene forelderen. Barnets stemme har vekt, men er ikke avgjørende alene. Pisică v. Moldova (2019) og K.B. and Others v. Croatia (2017) slår fast at myndighetene har en plikt til å undersøke om motstanden er reell — eller om den skyldes påvirkning, lojalitetskonflikt eller ensidig informasjon fra den forelderen barnet bor hos.',
-          en: "When the child themselves expresses opposition to contact with one parent. The child's voice carries weight, but is not decisive alone. Pisică v. Moldova (2019) and K.B. and Others v. Croatia (2017) establish that authorities have a duty to investigate whether the resistance is genuine — or stems from influence, loyalty conflict, or one-sided information from the parent the child lives with."
+          no: 'Når barnet selv uttrykker motvilje mot samvær med den ene forelderen. Barnets stemme har vekt, men er ikke avgjørende alene. Pisică v. Moldova (2019) og K.B. and Others v. Croatia (2017) slår fast at myndighetene har en plikt til å undersøke om motstanden er reell, eller om den skyldes påvirkning, lojalitetskonflikt eller ensidig informasjon fra den forelderen barnet bor hos.',
+          en: "When the child themselves expresses opposition to contact with one parent. The child's voice carries weight, but is not decisive alone. Pisică v. Moldova (2019) and K.B. and Others v. Croatia (2017) establish that authorities have a duty to investigate whether the resistance is genuine, or stems from influence, loyalty conflict, or one-sided information from the parent the child lives with."
         },
         no: ['barnets motstand', 'barnet motsetter seg', 'barnets vegring',
              'barnets uttalelse', 'barnets stemme', 'barnets mening',
@@ -3505,8 +3531,8 @@
         id: 'positive-obligations',
         label: { no: 'positive forpliktelser', en: 'positive obligations' },
         description: {
-          no: 'Statens aktive plikt til å sikre at rettighetene etter EMK artikkel 8 blir reelle — ikke bare å avstå fra inngrep, men å treffe konkrete tiltak. Doktrinen ble formulert i Ignaccolo-Zenide v. Romania (2000): rettighetene må være «praktiske og effektive», ikke «teoretiske og illusoriske». Det er ikke nok å avsi en avgjørelse — staten må sørge for at avgjørelsen blir realitet.',
-          en: "The state's active duty to ensure that Article 8 ECHR rights are real — not just to refrain from interference, but to take concrete measures. The doctrine was formulated in Ignaccolo-Zenide v. Romania (2000): rights must be 'practical and effective', not 'theoretical and illusory'. Issuing a decision is not enough — the state must make sure that decision becomes reality."
+          no: 'Statens aktive plikt til å sikre at rettighetene etter EMK artikkel 8 blir reelle. Ikke bare å avstå fra inngrep, men å treffe konkrete tiltak. Doktrinen ble formulert i Ignaccolo-Zenide v. Romania (2000): rettighetene må være «praktiske og effektive», ikke «teoretiske og illusoriske». Det er ikke nok å avsi en avgjørelse. Staten må sørge for at avgjørelsen blir realitet.',
+          en: "The state's active duty to ensure that Article 8 ECHR rights are real. Not just to refrain from interference, but to take concrete measures. The doctrine was formulated in Ignaccolo-Zenide v. Romania (2000): rights must be 'practical and effective', not 'theoretical and illusory'. Issuing a decision is not enough. The state must make sure that decision becomes reality."
         },
         no: ['positive forpliktelser', 'positiv forpliktelse', 'positiv plikt',
              'statens ansvar', 'statens plikt', 'staten må handle',
@@ -3518,8 +3544,8 @@
         id: 'enforcement',
         label: { no: 'håndhevelse', en: 'enforcement' },
         description: {
-          no: 'Statens plikt til å gjennomføre rettsavgjørelser om samvær i praksis. Når milde tiltak ikke virker, må de eskaleres. Ónodi v. Hungary (2017) er sentral: faren leverte over 60 håndhevelsesbegjæringer uten at samværet ble realitet. EMD krever et «tilstrekkelig og virksomt rettslig arsenal» — herunder tvangsmulkt, tvangsfullbyrdelse og om nødvendig endring av bosted.',
-          en: 'The state\'s duty to actually carry out judicial decisions on contact. When mild measures fail, they must be escalated. Ónodi v. Hungary (2017) is central: the father filed over 60 enforcement applications without contact materialising. The ECtHR requires an "adequate and effective legal arsenal" — including coercive fines, enforcement proceedings and, where necessary, a change of residence.'
+          no: 'Statens plikt til å gjennomføre rettsavgjørelser om samvær i praksis. Når milde tiltak ikke virker, må de eskaleres. Ónodi v. Hungary (2017) er sentral: faren leverte over 60 håndhevelsesbegjæringer uten at samværet ble realitet. EMD krever et «tilstrekkelig og virksomt rettslig arsenal», herunder tvangsmulkt, tvangsfullbyrdelse og om nødvendig endring av bosted.',
+          en: 'The state\'s duty to actually carry out judicial decisions on contact. When mild measures fail, they must be escalated. Ónodi v. Hungary (2017) is central: the father filed over 60 enforcement applications without contact materialising. The ECtHR requires an "adequate and effective legal arsenal", including coercive fines, enforcement proceedings and, where necessary, a change of residence.'
         },
         no: ['håndhevelse', 'manglende håndhevelse', 'manglende sanksjoner',
              'effektivitet', 'effektive tiltak', 'tvangsmulkt', 'tvangsbot',
@@ -3532,8 +3558,8 @@
         id: 'delay',
         label: { no: 'tidsbruk og forsinkelser', en: 'delay' },
         description: {
-          no: 'Tiden er en selvstendig krenkelse. Når en sak går over år, kan relasjonen mellom barn og forelder brytes ned før rettssystemet får effekt — uavhengig av utfallet. Ribić v. Croatia (2015) er et grellt eksempel: fjorten års rettsprosess, faren fikk se sønnen tre ganger. EMD krever rask og effektiv behandling i samværssaker fordi tidens gang har irreversible konsekvenser.',
-          en: 'Time is itself a violation. When proceedings stretch over years, the relationship between child and parent can break down before the legal system has any effect — regardless of the outcome. Ribić v. Croatia (2015) is a stark example: fourteen years of litigation, the father saw his son three times. The ECtHR requires expedient and effective handling of contact cases because the passage of time has irreversible consequences.'
+          no: 'Tiden er en selvstendig krenkelse. Når en sak går over år, kan relasjonen mellom barn og forelder brytes ned før rettssystemet får effekt. Uavhengig av utfallet. Ribić v. Croatia (2015) er et grellt eksempel: fjorten års rettsprosess, faren fikk se sønnen tre ganger. EMD krever rask og effektiv behandling i samværssaker fordi tidens gang har irreversible konsekvenser.',
+          en: 'Time is itself a violation. When proceedings stretch over years, the relationship between child and parent can break down before the legal system has any effect. Regardless of the outcome. Ribić v. Croatia (2015) is a stark example: fourteen years of litigation, the father saw his son three times. The ECtHR requires expedient and effective handling of contact cases because the passage of time has irreversible consequences.'
         },
         no: ['langvarig saksbehandling', 'sendrektighet', 'forsinkelse',
              'lang saksgang', 'tidsbruk', 'lang prosess', 'mange år',
@@ -3545,8 +3571,8 @@
         id: 'family-life',
         label: { no: 'familieliv', en: 'family life' },
         description: {
-          no: 'Rettsgodet som beskyttes av EMK artikkel 8 — relasjonen mellom foreldre, barn og nær familie. Begrepet er bredt og dekker biologiske, sosiale og rettslige bånd, også når foreldrene ikke bor sammen. Når relasjonen brytes ned på grunn av statlig passivitet eller mangelfull håndhevelse, foreligger et inngrep i familielivet som staten må kunne rettferdiggjøre.',
-          en: 'The legal interest protected by Article 8 ECHR — the relationship between parents, children and close family. The concept is broad and covers biological, social and legal ties, including when parents do not live together. When the relationship breaks down due to state inaction or inadequate enforcement, there is an interference with family life that the state must be able to justify.'
+          no: 'Rettsgodet som beskyttes av EMK artikkel 8. Relasjonen mellom foreldre, barn og nær familie. Begrepet er bredt og dekker biologiske, sosiale og rettslige bånd, også når foreldrene ikke bor sammen. Når relasjonen brytes ned på grunn av statlig passivitet eller mangelfull håndhevelse, foreligger et inngrep i familielivet som staten må kunne rettferdiggjøre.',
+          en: 'The legal interest protected by Article 8 ECHR. The relationship between parents, children and close family. The concept is broad and covers biological, social and legal ties, including when parents do not live together. When the relationship breaks down due to state inaction or inadequate enforcement, there is an interference with family life that the state must be able to justify.'
         },
         no: ['familieliv', 'privatliv', 'rett til familieliv',
              'krenkelse av familieliv', 'familieforhold', 'familierelasjon',
@@ -3573,8 +3599,8 @@
         id: 'parental-rights',
         label: { no: 'foreldretvist og rettigheter', en: 'parental dispute & rights' },
         description: {
-          no: 'Konflikten mellom foreldre om hvor barnet skal bo, omfanget av samvær og foreldreansvaret. I norsk rett reguleres dette av barneloven. Norske domstoler er bundet av menneskerettsloven og må ta hensyn til EMK artikkel 8 — også der det handler om å gi den forelderen som blir hindret, et effektivt rettslig vern.',
-          en: 'The dispute between parents over where the child should live, the extent of contact and parental responsibility. In Norwegian law this is regulated by the Children Act (barneloven). Norwegian courts are bound by the Human Rights Act and must take account of Article 8 ECHR — including providing effective legal protection to the parent being obstructed.'
+          no: 'Konflikten mellom foreldre om hvor barnet skal bo, omfanget av samvær og foreldreansvaret. I norsk rett reguleres dette av barneloven. Norske domstoler er bundet av menneskerettsloven og må ta hensyn til EMK artikkel 8. Også der det handler om å gi den forelderen som blir hindret, et effektivt rettslig vern.',
+          en: 'The dispute between parents over where the child should live, the extent of contact and parental responsibility. In Norwegian law this is regulated by the Children Act (barneloven). Norwegian courts are bound by the Human Rights Act and must take account of Article 8 ECHR, including providing effective legal protection to the parent being obstructed.'
         },
         no: ['foreldretvist', 'foreldreansvar', 'foreldrekonflikt',
              'foreldrerettigheter', 'bostedsforelder', 'samværsforelder',
@@ -3590,8 +3616,8 @@
         id: 'best-interest',
         label: { no: 'barnets beste', en: 'best interests of the child' },
         description: {
-          no: 'Det overordnede vurderingsprinsippet i barnerettssaker, forankret i barnekonvensjonen artikkel 3 og barneloven § 48. EMD presiserer at barnets beste ikke kan reduseres til hva barnet sier — det krever en helhetlig faglig vurdering, og som hovedregel er det best for barnet å opprettholde båndet til begge foreldre.',
-          en: "The overarching assessment principle in cases involving children, anchored in CRC Article 3 and the Norwegian Children Act § 48. The ECtHR makes clear that 'the best interests of the child' cannot be reduced to what the child says — it requires a holistic professional assessment, and as a rule it is in the child's best interest to maintain ties to both parents."
+          no: 'Det overordnede vurderingsprinsippet i barnerettssaker, forankret i barnekonvensjonen artikkel 3 og barneloven § 48. EMD presiserer at barnets beste ikke kan reduseres til hva barnet sier. Det krever en helhetlig faglig vurdering, og som hovedregel er det best for barnet å opprettholde båndet til begge foreldre.',
+          en: "The overarching assessment principle in cases involving children, anchored in CRC Article 3 and the Norwegian Children Act § 48. The ECtHR makes clear that 'the best interests of the child' cannot be reduced to what the child says. It requires a holistic professional assessment, and as a rule it is in the child's best interest to maintain ties to both parents."
         },
         no: ['barnets beste', 'barnekonvensjonen', 'BK', 'barnesakkyndig'],
         en: ['best interests of the child', 'best interests', 'CRC',
@@ -3601,8 +3627,8 @@
         id: 'norwegian-law',
         label: { no: 'norsk rett', en: 'Norwegian law' },
         description: {
-          no: 'Barneloven og tilstøtende lovgivning som regulerer samvær, foreldreansvar og håndhevelse i Norge. Sentrale virkemidler er mekling ved familievernkontoret, tvangsmulkt etter barneloven § 65 og endring av bosted i alvorlige tilfeller. Sanchez Cardenas v. Norway (2007) er den eneste foreldretvist-dommen der Norge er funnet å bryte artikkel 8 — saken viser at norske domstoler ikke er fritatt fra EMDs effektivitetskrav.',
-          en: "The Children Act (barneloven) and adjacent legislation governing contact, parental responsibility and enforcement in Norway. Key tools include mediation at the Family Counselling Office, coercive fines under § 65 of the Children Act, and changing the child's residence in serious cases. Sanchez Cardenas v. Norway (2007) is the only contact-dispute judgment finding Norway in breach of Article 8 — showing Norwegian courts are not exempt from the ECtHR's effectiveness standard."
+          no: 'Barneloven og tilstøtende lovgivning som regulerer samvær, foreldreansvar og håndhevelse i Norge. Sentrale virkemidler er mekling ved familievernkontoret, tvangsmulkt etter barneloven § 65 og endring av bosted i alvorlige tilfeller. Sanchez Cardenas v. Norway (2007) er den eneste foreldretvist-dommen der Norge er funnet å bryte artikkel 8. Saken viser at norske domstoler ikke er fritatt fra EMDs effektivitetskrav.',
+          en: "The Children Act (barneloven) and adjacent legislation governing contact, parental responsibility and enforcement in Norway. Key tools include mediation at the Family Counselling Office, coercive fines under § 65 of the Children Act, and changing the child's residence in serious cases. Sanchez Cardenas v. Norway (2007) is the only contact-dispute judgment finding Norway in breach of Article 8. Showing Norwegian courts are not exempt from the ECtHR's effectiveness standard."
         },
         no: ['barneloven', 'barneloven § 65', 'barneloven § 43', 'mekling',
              'familievernkontoret', 'barnevernet', 'omsorgssvikt',
@@ -3615,8 +3641,8 @@
         id: 'investigation-duty',
         label: { no: 'undersøkelsesplikten', en: 'duty to investigate' },
         description: {
-          no: 'Statens plikt til å gjøre en konkret og faglig undersøkelse av årsakene når barnet motsetter seg samvær — i stedet for å bare registrere uttalelsen. Slått fast i Pisică v. Moldova (2019) og K.B. and Others v. Croatia (2017). Norske domstoler kritiseres ofte for å begrense seg til å høre barnet uten å analysere lojalitetskonflikt, påvirkning eller relasjonell kontekst.',
-          en: "The state's duty to make a concrete, professional investigation of the reasons when a child opposes contact — instead of merely recording the statement. Established in Pisică v. Moldova (2019) and K.B. and Others v. Croatia (2017). Norwegian courts are often criticised for limiting themselves to hearing the child without analysing loyalty conflict, influence or relational context."
+          no: 'Statens plikt til å gjøre en konkret og faglig undersøkelse av årsakene når barnet motsetter seg samvær. I stedet for å bare registrere uttalelsen. Slått fast i Pisică v. Moldova (2019) og K.B. and Others v. Croatia (2017). Norske domstoler kritiseres ofte for å begrense seg til å høre barnet uten å analysere lojalitetskonflikt, påvirkning eller relasjonell kontekst.',
+          en: "The state's duty to make a concrete, professional investigation of the reasons when a child opposes contact. Instead of merely recording the statement. Established in Pisică v. Moldova (2019) and K.B. and Others v. Croatia (2017). Norwegian courts are often criticised for limiting themselves to hearing the child without analysing loyalty conflict, influence or relational context."
         },
         no: ['undersøkelsesplikten', 'undersøkelsesplikt', 'utrede',
              'sakkyndig utredning', 'bevisvurdering', 'konkret vurdering'],
@@ -3644,7 +3670,7 @@
       return currentLang === 'en' ? (c.nameEn || c.name) : c.name;
     }
     // ISO 3166 alpha-2 codes per country, used as typographic chips
-    // (preferred over raster flags — cleaner, locale-stable, accessible).
+    // (preferred over raster flags. Cleaner, locale-stable, accessible).
     const FLAG_CODES = {
       'Romania': 'RO',
       'Bulgaria': 'BG',
@@ -3748,7 +3774,7 @@
       tokens.forEach(t => allTermsSet.add(deburr(t)));
       concepts.forEach(c => c.terms.forEach(t => allTermsSet.add(deburr(t))));
 
-      // "Also searched for" — concept terms that aren't already in the raw query
+      // "Also searched for" concept terms that aren't already in the raw query
       const alsoSearched = new Set();
       concepts.forEach(c => c.terms.forEach(t => {
         if (!lowerOriginal.includes(deburr(t)) && t !== c.triggeredBy) alsoSearched.add(t);
@@ -3768,7 +3794,7 @@
     }
 
     // Build a regex that matches any of the given terms, longest first
-    // (alternation tries left-to-right — order matters for "phrase over token").
+    // (alternation tries left-to-right. Order matters for "phrase over token").
     function buildHighlightRegex(terms) {
       if (!terms || terms.length === 0) return null;
       const sorted = [...new Set(terms)].sort((a, b) => b.length - a.length);
@@ -3949,10 +3975,10 @@
 
     // Per-case scoring with full reason tracking. Returns { score, reasons }
     // where reasons records:
-    //   fieldHits: { rettssats: 3, keywords: 2, ... }  — how many matches per field
-    //   phraseMatches / tokenMatches / conceptMatches  — counts
-    //   matchedKeywords: Set<string>                   — which tag chips matched
-    //   matchedConcepts: [{label, triggeredBy}]        — concepts that actually hit this case
+    //   fieldHits: { rettssats: 3, keywords: 2, ... } , how many matches per field
+    //   phraseMatches / tokenMatches / conceptMatches , counts
+    //   matchedKeywords: Set<string>                  , which tag chips matched
+    //   matchedConcepts: [{label, triggeredBy}]       , concepts that actually hit this case
     //   bestField: which field had the highest weighted contribution
     // Minimum score a case must reach to be returned as a search hit.
     // Set above the value of a single weak substring match so that a case
@@ -3970,7 +3996,7 @@
     //      count when the user has explicitly picked a concept from the
     //      typeahead. Default search is strict literal.
     //
-    // opts.pickedConceptId — when set, the picked concept's full term list
+    // opts.pickedConceptId. When set, the picked concept's full term list
     //   is added to scoring as a soft expansion (weight ×0.45). Other
     //   triggered-but-not-picked concepts are ignored.
     function scoreCaseV2(c, resolved, lang, opts) {
@@ -4078,7 +4104,7 @@
 
       // AND-of-tokens gate: every typed token must hit somewhere (or be
       // covered by a matching phrase). Cases that don't pass are NOT included
-      // based on literal matching alone — even if a single word like "barnets"
+      // based on literal matching alone. Even if a single word like "barnets"
       // happens to appear in an unrelated keyword tag.
       const allTokensCovered = resolved.marksTokens.length === 0 ||
         resolved.marksTokens.every(t => tokenHits[t] > 0);
@@ -4133,7 +4159,7 @@
       return { score: 0, reasons: null };
     }
 
-    // Legacy shim — keep the old signature working for any callers
+    // Legacy shim. Keep the old signature working for any callers
     function scoreCase(c, q) {
       const r = resolveQuery(q);
       return scoreCaseV2(c, r).score;
@@ -4177,7 +4203,7 @@
     }
 
     // Vertical timeline view used for the no-search browse state. Groups
-    // cases by year along a single vertical spine — communicates "25 years
+    // cases by year along a single vertical spine. Communicates "25 years
     // of doctrine, growing case by case" instead of a generic card grid.
     function renderTimeline(visible) {
       const list = document.getElementById('case-list');
@@ -4191,7 +4217,7 @@
       const years = [...byYear.keys()].sort((a, b) => a - b);
 
       // Track which case in the visible set is the very first (oldest) and
-      // which is the most recent — used for first/last visual treatment.
+      // which is the most recent. Used for first/last visual treatment.
       const firstYear = years[0];
       const lastYear = years[years.length - 1];
 
@@ -4282,7 +4308,7 @@
 
       // Score every case once (so we have reasons + score available for sort and render).
       // pickedConceptId enables broader thesaurus-based matching for cases that
-      // share a concept with the user's typed term — but only when the user
+      // share a concept with the user's typed term, but only when the user
       // has explicitly picked that concept from the typeahead. Strict literal
       // matching otherwise.
       const allWithScores = cases
@@ -4324,10 +4350,10 @@
         return;
       }
 
-      // Stats line — informative when there's a search, quiet otherwise.
+      // Stats line. Informative when there's a search, quiet otherwise.
       // When a concept is picked we expose ONLY that concept's expanded
       // terms (not every concept the resolver could trigger), so the user
-      // sees a coherent line — not a wall of unrelated synonyms.
+      // sees a coherent line. Not a wall of unrelated synonyms.
       if (stats) {
         if (resolved) {
           const n = visible.length;
@@ -4338,7 +4364,7 @@
           html += '</div>';
           // When a concept is picked, list its other synonym terms so the
           // user understands the broadened scope. Skip this line otherwise
-          // — it's redundant with the typeahead and definition card.
+          //, it's redundant with the typeahead and definition card.
           if (pickedConceptId) {
             const concept = thesaurus.find(t => t.id === pickedConceptId);
             if (concept) {
@@ -4369,7 +4395,7 @@
         // Preview snippet: when a search is active, center the snippet on
         // whichever field had the best match. If the best field was keywords
         // (i.e. only the tag chips matched), prefer a non-keyword field that
-        // ALSO contained matched terms — so the user sees the search terms
+        // ALSO contained matched terms. So the user sees the search terms
         // appear in actual text whenever possible.
         let previewText = c[currentLang].rettssats || '';
         if (resolved && reasons) {
@@ -4415,14 +4441,14 @@
         // When the ONLY hits are in keywords, prepend a short note above the
         // preview so the user sees the connection between their search and
         // this case's tagged terms even though the prose doesn't contain
-        // the literal word (common in Norwegian — different word forms).
+        // the literal word (common in Norwegian. Different word forms).
         const onlyKeywordHit = resolved && reasons && reasons.bestField === 'keywords'
           && Object.keys(reasons.fieldHits).every(k => k === 'keywords');
         const keywordHint = onlyKeywordHit && matchedKws.length
           ? `<div class="kw-hint">${currentLang === 'no' ? 'Tagget med' : 'Tagged with'}: ${matchedKws.slice(0, 3).map(k => `<em>${escapeHtml(k)}</em>`).join(', ')}${matchedKws.length > 3 ? ' …' : ''}</div>`
           : '';
 
-        // "Why this matched" — small line under preview, listing fields + counts
+        // "Why this matched" small line under preview, listing fields + counts
         const matchExplain = (resolved && reasons) ? renderMatchExplain(reasons, resolved, lang) : '';
 
         return `
@@ -4537,7 +4563,7 @@
       return highlight(escapedHtml, resolved);
     }
 
-    // PDF highlighter — same logic but also reports match count.
+    // PDF highlighter. Same logic but also reports match count.
     // Each <mark> gets a sequential data-match-idx so prev/next nav can jump.
     function highlightPdf(text, query) {
       const escaped = escapeHtml(text);
@@ -4822,7 +4848,7 @@
       document.body.style.overflow = 'hidden';
       // Scroll sheet to top
       document.querySelector('.cr-sheet').scrollTop = 0;
-      // Sync URL — shareable deep link
+      // Sync URL. Shareable deep link
       const url = new URL(window.location.href);
       url.searchParams.set('case', c.id);
       if (window.location.href !== url.href) {
@@ -4910,13 +4936,13 @@
       if (!grid) return;
       const T = currentLang;
       const steps = T === 'no' ? [
-        { num: '01', h: 'Identifiser plikten', p: 'Start i kapittel «Forpliktelsene» og finn hvilken positiv plikt din sak handler om — tid, aktiv inngripen, undersøkelse, ikke-avhengighet, eller rettslig arsenal.' },
+        { num: '01', h: 'Identifiser plikten', p: 'Start i kapittel «Forpliktelsene» og finn hvilken positiv plikt din sak handler om. Tid, aktiv inngripen, undersøkelse, ikke-avhengighet, eller rettslig arsenal.' },
         { num: '02', h: 'Finn relevante dommer', p: 'Bruk filter på plikttype, eller søk på stikkord, paragraf eller sitat. Du kan også filtrere etter saker mot Norge spesifikt.' },
-        { num: '03', h: 'Sitér primærkilden', p: 'Hver dom har lenke til HUDOC. Sitér paragrafer og sjekk originalen. Håndboken hjelper deg å finne frem — den erstatter ikke domsteksten.' }
+        { num: '03', h: 'Sitér primærkilden', p: 'Hver dom har lenke til HUDOC. Sitér paragrafer og sjekk originalen. Håndboken hjelper deg å finne frem. Den erstatter ikke domsteksten.' }
       ] : [
-        { num: '01', h: 'Identify the obligation', p: 'Start in the "Obligations" chapter and identify which positive duty your case is about — time, active intervention, investigation, non-dependency, or legal arsenal.' },
+        { num: '01', h: 'Identify the obligation', p: 'Start in the "Obligations" chapter and identify which positive duty your case is about. Time, active intervention, investigation, non-dependency, or legal arsenal.' },
         { num: '02', h: 'Find relevant judgments', p: 'Use the obligation-type filter, or search by keyword, paragraph or quote. You can also filter for cases against Norway specifically.' },
-        { num: '03', h: 'Cite the primary source', p: 'Each judgment links to HUDOC. Cite paragraphs and check the original. The handbook helps you find your way — it does not replace the judgment text.' }
+        { num: '03', h: 'Cite the primary source', p: 'Each judgment links to HUDOC. Cite paragraphs and check the original. The handbook helps you find your way. It does not replace the judgment text.' }
       ];
       grid.innerHTML = steps.map(s => `
         <div class="howto-step">
@@ -4944,7 +4970,7 @@
 
     // Permissive matcher used only to populate the typeahead dropdown.
     // Returns top N concepts ranked by match quality so the dropdown
-    // adapts as the user types — even partial words like "han" find
+    // adapts as the user types. Even partial words like "han" find
     // "håndhevelse". Distinct from resolveQuery() which drives case
     // scoring and requires stronger matches.
     function findConceptsForTypeahead(input, lang, limit) {
@@ -5024,8 +5050,8 @@
         const desc = def.description ? def.description[lang] : '';
         const label = def.label[lang];
         const userTermNotice = lang === 'no'
-          ? `Du søkte «<em>${escapeHtml(triggeredBy || searchTerm)}</em>» — i denne håndboken hører dette inn under konseptet:`
-          : `You searched «<em>${escapeHtml(triggeredBy || searchTerm)}</em>» — in this handbook this falls under the concept:`;
+          ? `Du søkte «<em>${escapeHtml(triggeredBy || searchTerm)}</em>» i denne håndboken hører dette inn under konseptet:`
+          : `You searched «<em>${escapeHtml(triggeredBy || searchTerm)}</em>» in this handbook this falls under the concept:`;
         return `
           <div class="def-card">
             <div class="def-prefix">${userTermNotice}</div>
@@ -5055,7 +5081,7 @@
         return;
       }
 
-      // ─── STATE 2/3: query has text — find candidate concepts ───
+      // ─── STATE 2/3: query has text. Find candidate concepts ───
       // The dropdown uses a more PERMISSIVE matcher so it adapts as the
       // user types ("han" → håndhevelse, "fre" → foreldrefremmedgjøring).
       // resolveQuery is still used for actual case scoring.
@@ -5090,10 +5116,10 @@
         const tip = lang === 'no'
           ? (candidates.length === 1
               ? 'Trykk Enter eller velg konseptet for å se hva det betyr:'
-              : 'Velg konseptet du mener — eller bla blant alternativene:')
+              : 'Velg konseptet du mener, eller bla blant alternativene:')
           : (candidates.length === 1
               ? 'Press Enter or pick the concept to see what it means:'
-              : 'Pick the concept you mean — or browse the alternatives:');
+              : 'Pick the concept you mean, or browse the alternatives:');
         wrap.innerHTML = `
           <div class="def-empty">
             <div class="def-empty-tip">${tip}</div>
