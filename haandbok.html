@@ -981,23 +981,6 @@
       line-height: 1;
     }
 
-    .case-row-flag {
-      display: inline-block;
-      margin-right: 10px;
-      vertical-align: -3px;
-      line-height: 1;
-    }
-    .flag-svg {
-      display: inline-block;
-      height: 14px;
-      width: auto;
-      border-radius: 2px;
-      box-shadow: 0 0 0 1px rgba(10, 25, 41, 0.08);
-      vertical-align: middle;
-    }
-    .case-row-flag .flag-svg { height: 16px; }
-    .cr-flag .flag-svg { height: 22px; box-shadow: 0 0 0 1px rgba(10, 25, 41, 0.12); }
-
     .case-row-body {
       min-width: 0;
     }
@@ -1022,20 +1005,22 @@
       align-items: center;
     }
 
-    .case-row-meta .country-chip {
-      display: inline-block;
-      padding: 3px 9px;
-      background: var(--rule-soft);
-      border-radius: 999px;
-      font-size: 10.5px;
+    .case-row-meta .iso-chip {
+      display: inline-flex;
+      align-items: center;
+      font-family: ui-monospace, "SF Mono", monospace;
+      font-size: 10px;
       font-weight: 700;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--muted);
+      letter-spacing: 0.16em;
+      color: var(--brand-deep);
+      padding: 2px 6px;
+      border: 1px solid rgba(10, 25, 41, 0.16);
+      border-radius: 3px;
+      line-height: 1;
     }
-    .case-row-meta .country-chip.norway {
-      background: rgba(225, 29, 72, 0.12);
+    .case-row-meta .iso-chip.norway {
       color: var(--accent);
+      border-color: rgba(225, 29, 72, 0.32);
     }
     .case-row-meta .meta-app {
       font-family: ui-monospace, "SF Mono", monospace;
@@ -1268,7 +1253,32 @@
       line-height: 1;
       margin-right: 4px;
     }
-    .cr-case-meta .cr-flag { font-size: 22px; }
+    .cr-case-meta .cr-jurisdiction {
+      display: inline-flex;
+      align-items: baseline;
+      gap: 8px;
+      padding: 0;
+    }
+    .cr-case-meta .cr-iso {
+      font-family: ui-monospace, "SF Mono", monospace;
+      font-size: 10.5px;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      color: var(--brand-deep);
+      padding: 3px 7px;
+      border: 1px solid rgba(10, 25, 41, 0.18);
+      border-radius: 3px;
+      line-height: 1;
+    }
+    .cr-case-meta .cr-iso.norway {
+      color: var(--accent);
+      border-color: rgba(225, 29, 72, 0.35);
+    }
+    .cr-case-meta .cr-country-name {
+      font-size: 12px;
+      color: var(--muted);
+      letter-spacing: 0.02em;
+    }
     .cr-case-meta .cr-app {
       font-family: ui-monospace, monospace;
       font-size: 11px;
@@ -2761,22 +2771,31 @@
     function getName(c) {
       return currentLang === 'en' ? (c.nameEn || c.name) : c.name;
     }
-    // SVG flag from country name. Uses flagcdn.com (sharp + consistent across OS).
+    // ISO 3166 alpha-2 codes per country, used as typographic chips
+    // (preferred over raster flags — cleaner, locale-stable, accessible).
     const FLAG_CODES = {
-      'Romania': 'ro',
-      'Bulgaria': 'bg',
-      'Tsjekkia': 'cz', 'Czech Republic': 'cz',
-      'Kypros': 'cy', 'Cyprus': 'cy',
-      'Moldova': 'md',
-      'Polen': 'pl', 'Poland': 'pl',
-      'Kroatia': 'hr', 'Croatia': 'hr',
-      'Ungarn': 'hu', 'Hungary': 'hu',
-      'Norge': 'no', 'Norway': 'no'
+      'Romania': 'RO',
+      'Bulgaria': 'BG',
+      'Tsjekkia': 'CZ', 'Czech Republic': 'CZ',
+      'Kypros': 'CY', 'Cyprus': 'CY',
+      'Moldova': 'MD',
+      'Polen': 'PL', 'Poland': 'PL',
+      'Kroatia': 'HR', 'Croatia': 'HR',
+      'Ungarn': 'HU', 'Hungary': 'HU',
+      'Norge': 'NO', 'Norway': 'NO'
     };
-    function getFlag(c) {
-      const code = FLAG_CODES[c.country] || FLAG_CODES[c.countryEn];
+    function getIsoCode(c) {
+      return FLAG_CODES[c.country] || FLAG_CODES[c.countryEn] || '';
+    }
+    function getJurisdictionChip(c) {
+      const code = getIsoCode(c);
       if (!code) return '';
-      return `<img class="flag-svg" src="https://flagcdn.com/h20/${code}.png" srcset="https://flagcdn.com/h40/${code}.png 2x" alt="" loading="lazy" />`;
+      const isNorway = code === 'NO';
+      const country = getCountry(c);
+      return `<span class="cr-jurisdiction">
+        <span class="cr-iso${isNorway ? ' norway' : ''}">${code}</span>
+        <span class="cr-country-name">${country}</span>
+      </span>`;
     }
 
     // Build a Text Fragment URL to the pasg.no article that highlights
@@ -3003,6 +3022,7 @@
               <div class="case-row-body">
                 <div class="case-row-name">${nameDisplay}</div>
                 <div class="case-row-meta">
+                  ${getIsoCode(c) ? `<span class="iso-chip${getIsoCode(c) === 'NO' ? ' norway' : ''}" aria-label="${getCountry(c)}">${getIsoCode(c)}</span>` : ''}
                   <span>${c.date[currentLang]}</span>
                   <span class="meta-divider">·</span>
                   <span class="meta-app">${c.appNo}</span>
@@ -3228,7 +3248,7 @@
         <div class="cr-case-head">
           <div class="cr-case-meta">
             <span class="cr-year">${c.year}</span>
-            <span class="cr-flag" aria-hidden="true">${getFlag(c)}</span>
+            ${getJurisdictionChip(c)}
             <span>${c.date[lang]}</span>
             <span>·</span>
             <span class="cr-app">App. no. ${c.appNo}</span>
