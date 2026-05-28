@@ -171,12 +171,33 @@
     }
 
     @media (max-width: 720px) {
-      .echr-banner { padding: 18px var(--pad); }
-      .echr-banner-inner { gap: 16px; }
-      .echr-banner-icon { width: 44px; height: 44px; }
-      .echr-banner-icon .icon { width: 22px; height: 22px; }
-      .echr-banner-eyebrow { font-size: 9.5px; }
-      .echr-banner-title { font-size: 14.5px; }
+      .echr-banner { padding: 14px var(--pad); }
+      .echr-banner-inner { gap: 12px; }
+      .echr-banner-icon { width: 38px; height: 38px; border-radius: 9px; }
+      .echr-banner-icon .icon { width: 19px; height: 19px; }
+      .echr-banner-eyebrow {
+        font-size: 9px;
+        letter-spacing: 0.16em;
+        margin-bottom: 3px;
+        /* Truncate the long agency name on narrow screens — keep one line */
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+      .echr-banner-title {
+        font-size: 13px;
+        line-height: 1.25;
+        /* Cap at 2 lines so the bar stays a single height */
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+      }
+      .echr-banner .lang-toggle button {
+        padding: 5px 10px;
+        font-size: 10px;
+        letter-spacing: 0.08em;
+      }
     }
 
     /* HEADER */
@@ -587,16 +608,66 @@
 
     /* ============ TIMELINE VIEW (no-search browse) ============ */
     .timeline-wrap {
-      max-width: 920px;
+      max-width: 1080px;
       margin: 0 auto;
-      padding: 0 8px;
+      padding: 0 4px;
+    }
+    .timeline-header {
+      display: grid;
+      grid-template-columns: 130px 1fr;
+      gap: 32px;
+      align-items: baseline;
+      margin-bottom: 28px;
+    }
+    @media (max-width: 720px) {
+      .timeline-header {
+        grid-template-columns: 1fr;
+        gap: 12px;
+        margin-bottom: 18px;
+      }
+    }
+    .timeline-stat {
+      text-align: right;
+      padding-right: 28px;
+      font-size: 13px;
+      color: var(--muted);
+      letter-spacing: 0.02em;
+      line-height: 1.35;
+    }
+    .timeline-stat strong {
+      display: block;
+      font-size: 24px;
+      font-weight: 800;
+      color: var(--brand-deep);
+      letter-spacing: -0.02em;
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+    .timeline-stat span {
+      font-family: ui-monospace, "SF Mono", monospace;
+      font-size: 11px;
+      color: var(--muted-soft);
+    }
+    @media (max-width: 720px) {
+      .timeline-stat {
+        text-align: left;
+        padding-right: 0;
+        font-size: 12px;
+      }
+      .timeline-stat strong {
+        display: inline-block;
+        font-size: 16px;
+        margin-right: 6px;
+        margin-bottom: 0;
+        vertical-align: baseline;
+      }
     }
     .timeline-intro {
       font-size: 15px;
       color: var(--muted);
       line-height: 1.55;
       max-width: 640px;
-      margin: 0 0 32px;
+      margin: 0;
       letter-spacing: -0.005em;
     }
     .timeline-intro strong {
@@ -621,7 +692,7 @@
       position: absolute;
       top: 16px;
       bottom: 16px;
-      left: 70px;
+      left: 110px;
       width: 2px;
       background: linear-gradient(180deg,
         var(--brand) 0%,
@@ -630,33 +701,42 @@
       border-radius: 2px;
     }
     @media (max-width: 720px) {
-      .timeline::before { left: 18px; }
+      .timeline::before { left: 13px; }
     }
 
     .tl-year-group {
       position: relative;
       display: grid;
-      grid-template-columns: 140px 1fr;
-      gap: 24px;
+      grid-template-columns: 130px 1fr;
+      gap: 32px;
       align-items: start;
       padding: 0 0 36px;
     }
     @media (max-width: 720px) {
       .tl-year-group {
-        grid-template-columns: 60px 1fr;
-        gap: 14px;
-        padding-bottom: 24px;
+        grid-template-columns: 1fr;
+        gap: 10px;
+        padding-bottom: 26px;
+        padding-left: 36px;
       }
     }
 
     .tl-year-marker {
       position: relative;
       text-align: right;
-      padding-right: 30px;
+      padding-right: 28px;
       padding-top: 8px;
     }
     @media (max-width: 720px) {
-      .tl-year-marker { padding-right: 24px; text-align: left; padding-left: 0; }
+      .tl-year-marker {
+        text-align: left;
+        padding-right: 0;
+        padding-top: 2px;
+        padding-left: 0;
+        /* Let the GROUP be the containing block for the dot on mobile so
+           it sits ON the spine, not inside the marker's text area */
+        position: static;
+      }
     }
     .tl-year-dot {
       position: absolute;
@@ -671,7 +751,16 @@
       z-index: 2;
     }
     @media (max-width: 720px) {
-      .tl-year-dot { right: auto; left: 10px; top: 14px; }
+      /* On mobile the group is one column with padding-left:36px.
+         The spine sits at left:13px inside the group (no group margins).
+         The dot is position:absolute relative to the group, so we place
+         it at left:6px to center the 16px dot on the 2px spine — well
+         to the LEFT of the year label which starts at the 36px padding. */
+      .tl-year-dot {
+        right: auto;
+        left: 6px;
+        top: 4px;
+      }
     }
     .tl-first .tl-year-dot {
       border-color: var(--ink);
@@ -705,8 +794,17 @@
       font-weight: 600;
     }
     @media (max-width: 720px) {
-      .tl-year-label { font-size: 22px; }
-      .tl-year-count { font-size: 9.5px; }
+      .tl-year-label {
+        font-size: 19px;
+        display: inline-block;
+        margin-right: 10px;
+      }
+      .tl-year-count {
+        font-size: 10px;
+        display: inline-block;
+        margin-top: 0;
+        vertical-align: 2px;
+      }
     }
 
     .tl-cases {
@@ -809,6 +907,28 @@
       max-width: 100%;
       overflow: hidden;
       text-overflow: ellipsis;
+    }
+    @media (max-width: 720px) {
+      .tl-pchip {
+        font-size: 10px;
+        padding: 2px 7px;
+        /* On narrow screens, prefer wrapping the full label over truncating
+           — these are legal terms and chopping mid-word looks unprofessional */
+        white-space: normal;
+        overflow: visible;
+        text-overflow: clip;
+        line-height: 1.3;
+      }
+      .tl-chips {
+        gap: 4px 5px;
+        flex: 0 0 100%;
+        order: 3;
+      }
+      .tl-foot {
+        gap: 6px 10px;
+      }
+      .tl-cta { order: 2; margin-left: 0; }
+      .tl-app { order: 1; }
     }
     .tl-cta {
       font-size: 11px;
@@ -4123,11 +4243,17 @@
 
       const introNo = '<strong>25 år med doktrine.</strong> Hver dom legger en stein i grunnmuren for statens positive forpliktelser etter EMK artikkel 8.';
       const introEn = '<strong>25 years of doctrine.</strong> Each judgment adds a stone to the foundation of the state\'s positive obligations under ECHR Article 8.';
+      const yearSpan = `${visible[0]?.c.year}–${visible[visible.length - 1]?.c.year}`;
+      const statBadgeNo = `<strong>${visible.length}</strong> dommer · <span>${yearSpan}</span>`;
+      const statBadgeEn = `<strong>${visible.length}</strong> judgments · <span>${yearSpan}</span>`;
       list.innerHTML = `
         <div class="timeline-wrap">
-          <p class="timeline-intro">${lang === 'no' ? introNo : introEn}</p>
+          <div class="timeline-header">
+            <div class="timeline-stat">${lang === 'no' ? statBadgeNo : statBadgeEn}</div>
+            <p class="timeline-intro">${lang === 'no' ? introNo : introEn}</p>
+          </div>
           <div class="timeline">${rowHtml}</div>
-          <div class="timeline-tail">${lang === 'no' ? 'Søk eller filtrer over for å utforske detaljene' : 'Search or filter above to explore details'} ↑</div>
+          <div class="timeline-tail">${lang === 'no' ? 'Søk over for å utforske detaljene' : 'Search above to explore details'} ↑</div>
         </div>
       `;
 
@@ -4174,11 +4300,11 @@
       }
       const stats = document.getElementById('db-stats');
 
-      // No active search → timeline view (stats line stays compact)
+      // No active search → timeline view. Stats line is rendered INSIDE the
+      // timeline (by renderTimeline) so it aligns visually with the cards
+      // instead of floating at a different left margin.
       if (!resolved) {
-        if (stats) {
-          stats.innerHTML = `<div class="stats-line"><strong>${visible.length}</strong> ${lang === 'no' ? 'dommer i kronologi' : 'judgments in chronology'} · ${visible[0]?.c.year}–${visible[visible.length - 1]?.c.year}</div>`;
-        }
+        if (stats) stats.innerHTML = '';
         if (visible.length === 0) {
           list.innerHTML = `<div class="empty-state">${T.db_stats_none}</div>`;
         } else {
@@ -4198,7 +4324,10 @@
         return;
       }
 
-      // Stats line — informative when there's a search, quiet otherwise
+      // Stats line — informative when there's a search, quiet otherwise.
+      // When a concept is picked we expose ONLY that concept's expanded
+      // terms (not every concept the resolver could trigger), so the user
+      // sees a coherent line — not a wall of unrelated synonyms.
       if (stats) {
         if (resolved) {
           const n = visible.length;
@@ -4207,16 +4336,21 @@
           let html = `<div class="stats-line"><strong>${n}</strong> ${noun} «<em>${escapeHtml(resolved.raw)}</em>»`;
           if (n < totalMatchableInFilter) html += ` <span class="stats-of">${lang === 'no' ? 'av' : 'of'} ${totalMatchableInFilter}</span>`;
           html += '</div>';
-          // "Also searched" via thesaurus — show the concept-level labels so
-          // the user can see what their term means in this domain
-          if (resolved.concepts.length > 0) {
-            const labels = resolved.concepts.map(c => `<span class="syn-chip" title="${lang === 'no' ? 'Trigget av' : 'Triggered by'}: ${escapeHtml(c.triggeredBy)}">${escapeHtml(c.label)}</span>`).join('');
-            html += `<div class="stats-also"><span class="stats-also-label">${lang === 'no' ? 'Konsepter i søket' : 'Concepts in search'}:</span> ${labels}</div>`;
-          }
-          // List a few thesaurus-expanded terms so it's transparent what we searched for
-          if (resolved.alsoSearched.length > 0) {
-            const items = resolved.alsoSearched.slice(0, 6).map(t => `<span class="syn-term">${escapeHtml(t)}</span>`).join('');
-            html += `<div class="stats-also"><span class="stats-also-label">${lang === 'no' ? 'Også søkt etter' : 'Also searched for'}:</span> ${items}</div>`;
+          // When a concept is picked, list its other synonym terms so the
+          // user understands the broadened scope. Skip this line otherwise
+          // — it's redundant with the typeahead and definition card.
+          if (pickedConceptId) {
+            const concept = thesaurus.find(t => t.id === pickedConceptId);
+            if (concept) {
+              const rawLower = deburr(resolved.raw);
+              const extras = (concept[lang] || [])
+                .filter(t => deburr(t) !== rawLower)
+                .slice(0, 6);
+              if (extras.length > 0) {
+                const items = extras.map(t => `<span class="syn-term">${escapeHtml(t)}</span>`).join('');
+                html += `<div class="stats-also"><span class="stats-also-label">${lang === 'no' ? 'Søket inkluderer' : 'Search includes'}:</span> ${items}</div>`;
+              }
+            }
           }
           stats.innerHTML = html;
         } else {
