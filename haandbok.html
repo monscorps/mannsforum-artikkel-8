@@ -300,7 +300,9 @@
       padding: clamp(48px, 8vh, 80px) var(--pad) clamp(30px, 5vh, 50px);
       max-width: 1320px;
       margin: 0 auto;
-      overflow: hidden;
+      /* No overflow:hidden — would clip the typeahead dropdown. The hero-bg
+         already fades via mask-image, so clipping isn't needed. */
+      z-index: 30;
     }
     .search-hero-inner { position: relative; max-width: 880px; margin: 0 auto; text-align: left; }
     .search-hero .hero-lede {
@@ -363,8 +365,8 @@
       box-shadow: 0 16px 40px -12px rgba(10, 25, 41, 0.18),
                   0 2px 8px rgba(10, 25, 41, 0.05);
       padding: 8px;
-      z-index: 50;
-      max-height: 360px;
+      z-index: 1000;
+      max-height: 380px;
       overflow-y: auto;
     }
     .search-typeahead[hidden] { display: none; }
@@ -797,12 +799,16 @@
     }
     .tl-pchip {
       display: inline-block;
-      padding: 2px 8px;
+      padding: 2px 9px;
       background: rgba(77, 178, 236, 0.10);
       color: var(--brand-deep);
       border-radius: 999px;
       font-size: 10.5px;
       font-weight: 500;
+      white-space: nowrap;
+      max-width: 100%;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
     .tl-cta {
       font-size: 11px;
@@ -3828,8 +3834,28 @@
     //   matchedKeywords: Set<string>                   — which tag chips matched
     //   matchedConcepts: [{label, triggeredBy}]        — concepts that actually hit this case
     //   bestField: which field had the highest weighted contribution
-    function scoreCaseV2(c, resolved, lang) {
+    // Minimum score a case must reach to be returned as a search hit.
+    // Set above the value of a single weak substring match so that a case
+    // doesn't qualify just because some unrelated keyword tag contained
+    // one of the user's words.
+    const MIN_CASE_SCORE = 10;
+
+    // Score a case against a resolved query.
+    //
+    // Two rules together make the result set actually meaningful:
+    //   1) EVERY user token must hit at least one field. If the user typed
+    //      "barnets motstand", a case that only mentions "barnets" (because
+    //      its tag list happens to include "barnets stemme") is excluded.
+    //   2) Concept-expanded terms (synonyms reached via the thesaurus) only
+    //      count when the user has explicitly picked a concept from the
+    //      typeahead. Default search is strict literal.
+    //
+    // opts.pickedConceptId — when set, the picked concept's full term list
+    //   is added to scoring as a soft expansion (weight ×0.45). Other
+    //   triggered-but-not-picked concepts are ignored.
+    function scoreCaseV2(c, resolved, lang, opts) {
       lang = lang || currentLang;
+      opts = opts || {};
       if (!resolved) return { score: 0, reasons: null };
 
       const text = {
@@ -3861,7 +3887,12 @@
       };
       let score = 0;
 
-      // Word-boundary regex builder (Norwegian-friendly: æ ø å count as letters)
+      // Per-token hit count, used to enforce AND-of-tokens.
+      // Phrase match implicitly satisfies all its component tokens.
+      const tokenHits = {};
+      resolved.marksTokens.forEach(t => { tokenHits[t] = 0; });
+
+      // Word-boundary regex (Norwegian-friendly: æ ø å count as letters)
       const wbCache = new Map();
       const wb = (needle) => {
         if (wbCache.has(needle)) return wbCache.get(needle);
@@ -3870,8 +3901,6 @@
         return re;
       };
 
-      // Try matching one needle against one haystack; return weighted score.
-      // tier: 'phrase' | 'token' | 'concept'  (concept = expanded-only)
       const tryMatch = (haystack, needle, baseWeight, fieldName, tier) => {
         const n = needle;
         if (!n || n.length < 2) return 0;
@@ -3880,7 +3909,6 @@
         if (tier === 'phrase') mult = 3;
         else if (tier === 'concept') mult = 0.45;
         let s = 0;
-        // Word-boundary bonus
         if (wb(n).test(haystack)) {
           s = baseWeight * mult * 1.5;
         } else if (haystack.includes(n)) {
@@ -3889,7 +3917,7 @@
         if (s > 0) {
           reasons.fieldHits[fieldName] = (reasons.fieldHits[fieldName] || 0) + 1;
           if (tier === 'phrase') reasons.phraseMatches++;
-          else if (tier === 'token') reasons.tokenMatches++;
+          else if (tier === 'token') { reasons.tokenMatches++; tokenHits[needle] = (tokenHits[needle] || 0) + 1; }
           else reasons.conceptMatches++;
           if (s > reasons.bestFieldScore) {
             reasons.bestField = fieldName;
@@ -3903,7 +3931,6 @@
         for (const [fn, fv] of Object.entries(text)) {
           score += tryMatch(fv, needle, fieldWeights[fn], fn, tier);
         }
-        // Keywords are scored once per matching keyword to keep ranking sane
         keywords.forEach(kw => {
           const kd = deburr(kw);
           const s = tryMatch(kd, needle, KW_WEIGHT, 'keywords', tier);
@@ -3912,37 +3939,78 @@
         });
       };
 
-      // 1) Phrases (highest weight)
-      resolved.marksPhrases.forEach(p => matchAcrossFields(p, 'phrase'));
+      // 1) Phrases (highest weight, also satisfy their component tokens)
+      resolved.marksPhrases.forEach(p => {
+        const beforeScore = score;
+        matchAcrossFields(p, 'phrase');
+        if (score > beforeScore) {
+          resolved.marksTokens.forEach(t => { if (p.includes(t)) tokenHits[t] = (tokenHits[t] || 0) + 1; });
+        }
+      });
       // 2) Tokens
       resolved.marksTokens.forEach(t => {
-        // Skip if already covered by a phrase (avoid double-counting)
-        if (resolved.marksPhrases.some(p => p.includes(t))) return;
-        matchAcrossFields(t, 'token');
-      });
-      // 3) Concept-expanded terms (only if they aren't already in phrases/tokens)
-      const direct = new Set([...resolved.marksPhrases, ...resolved.marksTokens]);
-      const expandedOnly = resolved.marksExpanded.filter(t => !direct.has(t));
-      resolved.concepts.forEach(concept => {
-        let conceptScored = false;
-        const before = score;
-        concept.terms.forEach(termRaw => {
-          const term = deburr(termRaw);
-          if (!expandedOnly.includes(term)) return;
-          const beforeT = score;
-          matchAcrossFields(term, 'concept');
-          if (score > beforeT) conceptScored = true;
-        });
-        if (conceptScored) {
-          reasons.matchedConcepts.push({
-            id: concept.id,
-            label: concept.label,
-            triggeredBy: concept.triggeredBy
-          });
+        if (resolved.marksPhrases.some(p => p.includes(t))) {
+          if (tokenHits[t] === 0) matchAcrossFields(t, 'token');
+        } else {
+          matchAcrossFields(t, 'token');
         }
       });
 
-      return { score, reasons: score > 0 ? reasons : null };
+      // AND-of-tokens gate: every typed token must hit somewhere (or be
+      // covered by a matching phrase). Cases that don't pass are NOT included
+      // based on literal matching alone — even if a single word like "barnets"
+      // happens to appear in an unrelated keyword tag.
+      const allTokensCovered = resolved.marksTokens.length === 0 ||
+        resolved.marksTokens.every(t => tokenHits[t] > 0);
+      const anyPhraseHit = reasons.phraseMatches > 0;
+      const literalPassed = (resolved.marksPhrases.length === 0 || anyPhraseHit)
+                          && allTokensCovered;
+
+      // ── BRANCH A: literal gate passed → tight result, no concept broadening
+      // The case has direct textual support for the user's exact words. Keep
+      // results precise; don't add cases via thesaurus expansion.
+      if (literalPassed && score > 0) {
+        if (score < MIN_CASE_SCORE) return { score: 0, reasons: null };
+        return { score, reasons };
+      }
+
+      // ── BRANCH B: literal gate failed but a concept is picked (often auto)
+      // Fall back to scoring via the picked concept's synonyms. This is what
+      // makes compound words like "tvangsmulkt" surface enforcement cases that
+      // don't literally contain the word.
+      if (opts.pickedConceptId) {
+        const concept = thesaurus.find(t => t.id === opts.pickedConceptId);
+        if (concept) {
+          // Reset partial literal scoring (those didn't pass the gate)
+          score = 0;
+          reasons.fieldHits = {};
+          reasons.phraseMatches = 0;
+          reasons.tokenMatches = 0;
+          reasons.matchedKeywords = new Set();
+          reasons.bestField = null;
+          reasons.bestFieldScore = 0;
+
+          const direct = new Set([...resolved.marksPhrases, ...resolved.marksTokens]);
+          const conceptTermSet = new Set((concept[lang] || []).map(deburr));
+          let conceptScored = false;
+          conceptTermSet.forEach(term => {
+            if (direct.has(term) || term.length < 2) return;
+            const beforeT = score;
+            matchAcrossFields(term, 'concept');
+            if (score > beforeT) conceptScored = true;
+          });
+          if (conceptScored) {
+            reasons.matchedConcepts.push({
+              id: concept.id,
+              label: concept.label[lang],
+              triggeredBy: opts.pickedConceptId
+            });
+          }
+          if (score >= MIN_CASE_SCORE) return { score, reasons };
+        }
+      }
+
+      return { score: 0, reasons: null };
     }
 
     // Legacy shim — keep the old signature working for any callers
@@ -3955,7 +4023,7 @@
       if (!searchTerm) return true;
       const r = resolveQuery(searchTerm);
       if (!r) return true;
-      return scoreCaseV2(c, r).score > 0;
+      return scoreCaseV2(c, r, currentLang, { pickedConceptId }).score > 0;
     }
 
     function getMatchedKeywords(c, q) {
@@ -4086,11 +4154,15 @@
       const lang = currentLang;
       const resolved = resolveQuery(searchTerm, lang);
 
-      // Score every case once (so we have reasons + score available for sort and render)
+      // Score every case once (so we have reasons + score available for sort and render).
+      // pickedConceptId enables broader thesaurus-based matching for cases that
+      // share a concept with the user's typed term — but only when the user
+      // has explicitly picked that concept from the typeahead. Strict literal
+      // matching otherwise.
       const allWithScores = cases
         .filter(c => matchesFilter(c))
         .map(c => {
-          const r = resolved ? scoreCaseV2(c, resolved, lang) : { score: 0, reasons: null };
+          const r = resolved ? scoreCaseV2(c, resolved, lang, { pickedConceptId }) : { score: 0, reasons: null };
           return { c, score: r.score, reasons: r.reasons };
         });
 
@@ -4860,9 +4932,16 @@
         pickedConceptId = null;
       }
 
-      // Auto-pick only on a strong unambiguous match (exact term/label hit)
-      if (!pickedConceptId && candidates.length === 1 && candidates[0].score >= 95) {
-        pickedConceptId = candidates[0].id;
+      // Auto-pick on a strong match. Two criteria: the top candidate must
+      // score ≥95 (exact label or exact term hit), AND it must dominate
+      // (either it's the only candidate, or its score is ≥1.8× the next).
+      // This auto-picks unambiguous compound words like "samværshindring"
+      // (top 95 vs second 42) while still requiring user choice for genuine
+      // ambiguity (top 78 vs second 72).
+      if (!pickedConceptId && candidates.length >= 1 && candidates[0].score >= 95) {
+        const dominates = candidates.length === 1
+          || candidates[0].score >= candidates[1].score * 1.8;
+        if (dominates) pickedConceptId = candidates[0].id;
       }
 
       if (pickedConceptId) {
