@@ -1332,6 +1332,94 @@
       color: var(--white);
     }
 
+    /* ANALYSIS BLOCK (Joachimsen / Advokatbladet) */
+    .cr-analysis {
+      padding: 22px 26px;
+      background: var(--brand-softer);
+      border-left: 4px solid var(--brand);
+      border-radius: 6px;
+      font-size: 16px;
+      line-height: 1.6;
+      color: var(--ink);
+    }
+    .cr-analysis-source {
+      margin-top: 14px;
+      padding-top: 12px;
+      border-top: 1px dashed var(--rule);
+      font-size: 11.5px;
+      color: var(--muted);
+      letter-spacing: 0.02em;
+      font-style: italic;
+    }
+
+    .cr-pinpoint {
+      padding: 18px 22px;
+      border: 1.5px solid var(--accent);
+      background: rgba(225, 29, 72, 0.03);
+      border-radius: 6px;
+      margin-bottom: 12px;
+      position: relative;
+    }
+    .cr-pinpoint::before {
+      content: 'PINPOINT';
+      position: absolute;
+      top: -9px;
+      left: 16px;
+      background: var(--accent);
+      color: var(--white);
+      font-size: 9.5px;
+      font-weight: 800;
+      letter-spacing: 0.18em;
+      padding: 3px 9px;
+      border-radius: 3px;
+    }
+    .cr-pinpoint-para {
+      font-size: 11.5px;
+      font-weight: 800;
+      letter-spacing: 0.16em;
+      color: var(--accent);
+      margin: 4px 0 12px;
+    }
+    .cr-pinpoint-text {
+      font-size: 15.5px;
+      line-height: 1.6;
+      color: var(--ink);
+    }
+    .cr-pinpoint-source {
+      margin-top: 12px;
+      padding-top: 10px;
+      border-top: 1px dashed var(--rule);
+      font-size: 10.5px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted-soft);
+    }
+
+    /* Toggle button for full PDF panel */
+    .pdf-toggle {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 14px;
+      background: var(--white);
+      border: 1px dashed var(--rule);
+      border-radius: 6px;
+      cursor: pointer;
+      font-family: inherit;
+      font-size: 12.5px;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      color: var(--muted);
+      transition: all 0.15s var(--ease);
+    }
+    .pdf-toggle:hover {
+      color: var(--brand-deep);
+      border-color: var(--brand);
+      border-style: solid;
+    }
+    .pdf-toggle .icon { width: 14px; height: 14px; stroke-width: 2; }
+
     /* PDF READER PANEL inside case modal */
     .pdf-panel {
       margin-top: 28px;
@@ -1964,12 +2052,16 @@
         quote_lang_note: "Verbatim fra dommen (engelsk original).",
         cr_head_title: "Dommen i sin helhet",
         cr_label_holding: "Rettssats",
+        cr_label_analysis: "Analyse fra Advokatbladet",
         cr_label_facts: "Sakens fakta",
-        cr_label_quotes: "Verbatim sitater fra dommen",
+        cr_label_quotes: "Pinpoint-sitater fra dommen",
         cr_label_principles: "Positive forpliktelser etablert",
         cr_action_hudoc: "Åpne på HUDOC",
         cr_action_copy: "Kopier sitering",
-        cr_quote_lang_note: "Originalspråk: engelsk. Tekst hentet direkte fra dommen.",
+        cr_action_show_full: "Vis hele dommen (PDF-tekst)",
+        cr_action_hide_full: "Skjul hele dommen",
+        cr_quote_lang_note: "Originalspråk: engelsk. Pinpoint-referanse til dommen.",
+        cr_analysis_source: "Østberg, Andersland og Joachimsen — Advokatbladet",
         case_count: "%N% dommer",
         case_count_one: "1 dom",
         doc2_label: "Det rettslige arsenal — Ónodi mot Ungarn, EMD 2017",
@@ -2027,13 +2119,17 @@
         modal_cases_label: "Established in:",
         quote_lang_note: "Verbatim from the judgment (English original).",
         cr_head_title: "Full judgment view",
-        cr_label_holding: "Holding",
+        cr_label_holding: "Holding (rettssats)",
+        cr_label_analysis: "Analysis from Advokatbladet",
         cr_label_facts: "Facts of the case",
-        cr_label_quotes: "Verbatim quotes from the judgment",
+        cr_label_quotes: "Pinpoint quotes from the judgment",
         cr_label_principles: "Positive obligations established",
         cr_action_hudoc: "Open on HUDOC",
         cr_action_copy: "Copy citation",
-        cr_quote_lang_note: "Original language: English. Text taken directly from the judgment.",
+        cr_action_show_full: "Show full judgment (PDF text)",
+        cr_action_hide_full: "Hide full judgment",
+        cr_quote_lang_note: "Original language: English. Pinpoint reference to the judgment.",
+        cr_analysis_source: "Østberg, Andersland and Joachimsen — Advokatbladet",
         case_count: "%N% judgments",
         case_count_one: "1 judgment",
         doc2_label: "The legal arsenal — Ónodi v. Hungary, ECHR 2017",
@@ -2191,6 +2287,8 @@
             { para: '§§ 94, 105', text: '«Staten må handle på en måte som er egnet til å la båndene mellom forelder og barn utvikle seg.» Plikten er ikke begrenset til å avgjøre, men krever effektive tiltak.' },
             { para: '§ 108', text: 'EMD fant brudd på artikkel 8 fordi rumenske myndigheter ikke hadde tatt «adekvate og effektive» tiltak for å fullbyrde returvedtaket.' }
           ]
+        ,
+          analysis: 'Utgangspunktet ble formulert i Ignaccolo-Zenide v. Romania (2000) hvor EMD fastslår at rettighetene må være «praktiske og effektive». Dette betyr at statens ansvar ikke opphører i og med at det etableres en lovbestemt rett til samvær, eller ved at statens organer avsier en avgjørelse. Myndighetene må handle slik at relasjonen faktisk kan opprettholdes og utvikles. Dermed forskyves vurderingen fra et formelt til et materielt nivå.'
         },
         en: {
           rettssats: 'The state has a positive duty to take effective measures to reunite parents and children when the relationship has been broken. Prolonged failure to enforce judgments on contact or return may constitute a breach of ECHR Article 8.',
@@ -2219,6 +2317,8 @@
             { para: '§ 66', text: '«Tidens gang kan ha uopprettelige følger for forholdet mellom et barn og den forelderen som ikke bor sammen med det.»' },
             { para: '§ 65', text: 'Tilstrekkeligheten av et tiltak skal bedømmes etter hvor raskt det iverksettes.' }
           ]
+        ,
+          analysis: 'I Macready v. the Czech Republic (2010) presiseres det at det er statens samlede innsats som vurderes. Manglende koordinering mellom myndigheter eller passivitet over tid fritar ikke staten for ansvar.'
         },
         en: {
           rettssats: 'The state must ensure that contact between child and parent is maintained while proceedings are pending. Authorities cannot confine themselves to formal decisions without securing practical implementation.',
@@ -2242,6 +2342,8 @@
             { para: '§ 84', text: 'Myndighetene må ha et tilstrekkelig «legal arsenal» til å sikre at samværsavgjørelser blir gjennomført.' },
             { para: '§ 89', text: 'Passivitet over tid kan i seg selv være et brudd på statens positive forpliktelser etter artikkel 8.' }
           ]
+        ,
+          analysis: 'Denne plikten konkretiseres i Mincheva v. Bulgaria (2010) hvor EMD fremhever behovet for et «legal arsenal» som er tilstrekkelig til å sikre gjennomføring. Det er ikke nok med rettigheter på papiret dersom de ikke lar seg håndheve.'
         },
         en: {
           rettssats: 'When a parent systematically prevents contact between the child and the other parent, the state has a duty to respond actively and effectively. Passivity on the part of the authorities may constitute a breach of Article 8.',
@@ -2264,6 +2366,8 @@
           quotes: [
             { para: '§§ 56-57', text: 'Statens plikt kan ikke reduseres til å oppfordre den ene forelderen til å overholde sine forpliktelser frivillig. Når oppfordringen ikke virker, må staten gripe inn.' }
           ]
+        ,
+          analysis: 'I Zavridou v. Cyprus (2013) slår EMD fast at gjennomføring av samvær ikke kan gjøres avhengig av den ene forelders samarbeidsvilje. Retten til familieliv kan ikke reduseres til et spørsmål om privat konsensus. Når samvær hindres, oppstår spørsmålet om statens plikt til å intervenere med effektive virkemidler.'
         },
         en: {
           rettssats: 'Authorities cannot make enforcement of contact dependent on cooperation shown by the parent the child lives with. The state must use available means to protect the family relationship.',
@@ -2291,6 +2395,8 @@
           quotes: [
             { para: '§§ 64-65', text: 'Myndighetene har en plikt til å undersøke årsakene til barnets motvilje. Det er ikke nok å registrere hva barnet sier — relasjonell kontekst, påvirkning og lojalitetskonflikt må vurderes.' }
           ]
+        ,
+          analysis: 'I Pisică v. Moldova (2014) og K.B. and Others v. Croatia (2017) fastslår EMD at barnets syn ikke uten videre kan være avgjørende dersom det foreligger indikasjoner på påvirkning eller lojalitetskonflikt. Myndighetene har en plikt til å undersøke årsakene til motstanden på en konkret og faglig forsvarlig måte. Dette innebærer mer enn å registrere hva barnet gir uttrykk for — slik vi svært ofte ser at norske domstoler begrenser seg til. EMD forutsetter en aktiv og selvstendig vurdering av om barnets motstand er et resultat av egne erfaringer, eller om den kan være påvirket av relasjonelle forhold, herunder press, lojalitetsbindinger eller ensidig informasjonsgrunnlag.'
         },
         en: {
           rettssats: 'A child\'s resistance to contact cannot alone be decisive when there are indications of manipulation or loyalty conflict. Authorities must analyse the relational context.',
@@ -2318,6 +2424,8 @@
           quotes: [
             { para: '§§ 66-68', text: 'Det avgjørende er ikke om myndighetene har handlet, men om tiltakene faktisk har virket. Tiltak som kommer for sent oppfyller ikke statens forpliktelser.' }
           ]
+        ,
+          analysis: 'L.D. v. Poland viser at tiltak som er utilstrekkelige eller kommer for sent, ikke oppfyller statens forpliktelser. Det avgjørende er ikke om myndighetene har handlet, men om tiltakene faktisk har virket. Selv når myndighetene forsøker å løse konflikter, kan tiltak som kommer for sent innebære brudd på artikkel 8 dersom relasjonen mellom barn og forelder brytes ned i mellomtiden.'
         },
         en: {
           rettssats: 'Even when authorities try to resolve conflicts, measures that come too late may breach Article 8 if the parent-child relationship breaks down in the meantime.',
@@ -2347,6 +2455,8 @@
             { para: '§ 92', text: '«Tilstrekkeligheten av et tiltak skal bedømmes etter hvor raskt det iverksettes, fordi tidens gang kan ha uopprettelige følger for forholdet mellom et barn og den forelderen som ikke bor sammen med det.»' },
             { para: '§ 94', text: 'Plikten er en innsatsplikt, ikke en resultatplikt — men den innsatsen må være effektiv.' }
           ]
+        ,
+          analysis: 'I Ribić v. Croatia (2015) og Macready v. the Czech Republic (2010) understrekes det at langvarige prosesser i realiteten kan avgjøre saken, fordi relasjonen brytes ned før rettssystemet får effekt, og fordi tidens gang kan få irreversible konsekvenser for forholdet mellom barn og forelder. I løpet av fjorten års rettsprosess fikk far se sønnen sin tre ganger — et tydelig eksempel på systemets svikt i å verne om familielivet over tid.'
         },
         en: {
           rettssats: 'Prolonged failure to enforce contact orders can permanently break the relationship between parent and child. The state may then be liable for breach of Article 8.',
@@ -2375,6 +2485,8 @@
             { para: '§§ 30-31', text: '«Hver kontraherende stat må utstyre seg med et tilstrekkelig og virksomt rettslig arsenal for å sikre etterlevelse av sine positive forpliktelser etter artikkel 8.»' },
             { para: '§ 35', text: 'Tiltak må bedømmes etter hvor raskt de iverksettes — tid har irreversible konsekvenser.' }
           ]
+        ,
+          analysis: 'I senere praksis skjerpes effektivitetskravet. I Ónodi v. Hungary (2017) konstaterte EMD krenkelse til tross for at domstolene hadde truffet gjentatte vedtak om sanksjoner, fordi tiltakene ikke førte til faktisk kontakt. Faren leverte over seksti håndhevelsesbegjæringer uten at samværet ble en realitet. EMD slo fast at hver kontraherende stat må utstyre seg med et tilstrekkelig og virksomt rettslig arsenal for å sikre etterlevelse av sine positive forpliktelser etter artikkel 8.'
         },
         en: {
           rettssats: 'Contact between parent and child is a fundamental element of family life. Measures must be assessed by how quickly they are implemented, because time can have irreversible consequences for the relationship.',
@@ -2402,6 +2514,8 @@
           quotes: [
             { para: '§§ 38–39', text: 'The High Court neither decided the issue nor made a proper analysis. It left the matter open in such a way that readers would inevitably get the impression that the suspicions were well-founded. The applicant was thus stigmatised without being given the opportunity to defend himself.' }
           ]
+        ,
+          analysis: 'Sanchez Cardenas mot Norge (2007) er et av få EMD-dommer mot Norge i en foreldretvist (i motsetning til de mange barnevernsavgjørelsene). EMD fant brudd på artikkel 8 fordi lagmannsretten inkluderte en uttalelse om «sterk mistanke» mot faren uten å ta stilling til mistanken. Saken viser at statens positive plikt også omfatter en plikt til prosessuell forsvarlighet — en stigmatiserende uttalelse i dom uten konkret bevisvurdering er et inngrep i familielivet.'
         },
         en: {
           rettssats: 'When a court grounds a denial of contact on a serious allegation, that allegation must be subjected to a concrete evidentiary assessment. Leaving a suspicion of abuse standing without reasoning in the judgment itself, allowing it to remain on the record as a stigmatising finding, constitutes an unjustified interference with family life under ECHR Article 8.',
@@ -2429,6 +2543,8 @@
             { para: '§§ 143-145', text: 'Når et barn uttrykker motvilje, har myndighetene plikt til å undersøke årsaken — ikke til å bruke motviljen som begrunnelse for å gjøre ingenting.' },
             { para: '§ 151', text: 'Koordinert handling mellom myndigheter er en del av statens positive plikt. Fragmentert respons er svikt.' }
           ]
+        ,
+          analysis: 'K.B. and Others v. Croatia (2017) — sammen med Pisică (2014) — fastslår at barnets motstand utløser en undersøkelsesplikt for myndighetene. Når barn er i tilspissede foreldretvister, ligger det i sakens natur at de gjerne befinner seg i en form for lojalitetskonflikt som vil prege uttalelsene deres. Barnets utsagn kan ikke uten videre legges til grunn som avgjørende. Manglende koordinering mellom domstol, barnevern og politi er i seg selv en svikt i statens positive plikt.'
         },
         en: {
           rettssats: 'Authorities have a positive duty to take adequate and coordinated measures to maintain contact between parent and child. The child\'s resistance does not relieve the state of this duty, but triggers a duty to investigate the causes and act quickly.',
@@ -2878,6 +2994,17 @@
     }
     function escapeRegExp(s) { return s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); }
 
+    // Highlights global search term in already-escaped HTML.
+    // Returns HTML string with <mark> wrappers.
+    function highlightSearchTerm(escapedHtml, term) {
+      if (!term || term.length < 2) return escapedHtml;
+      const tokens = term.split(/\s+/).filter(t => t.length >= 2);
+      if (tokens.length === 0) return escapedHtml;
+      const pattern = tokens.map(escapeRegExp).join('|');
+      const re = new RegExp('(' + pattern + ')', 'gi');
+      return escapedHtml.replace(re, '<mark>$1</mark>');
+    }
+
     function highlightPdf(text, query) {
       const escaped = escapeHtml(text);
       if (!query || query.length < 2) return { html: escaped, count: 0 };
@@ -2970,6 +3097,32 @@
       const meta = (typeof pdfMeta !== 'undefined') ? (pdfMeta[caseId] || {}) : {};
       const pdfFile = meta.pdfFile || (caseId + '.pdf');
 
+      // Build pinpoint citations from existing curated quotes (these have § refs)
+      const pinpoints = (c.en.quotes || []).map(q => {
+        const txt = highlightSearchTerm(escapeHtml(q.text), searchTerm);
+        return `
+          <div class="cr-pinpoint">
+            <div class="cr-pinpoint-para">${escapeHtml(q.para)}</div>
+            <div class="cr-pinpoint-text">${txt}</div>
+            <div class="cr-pinpoint-source">${T.cr_quote_lang_note}</div>
+          </div>
+        `;
+      }).join('');
+
+      // Highlight search term in analysis + rettssats + facts
+      const rettssatsHtml = highlightSearchTerm(escapeHtml(c[lang].rettssats || ''), searchTerm);
+      const analysisRaw = c[lang].analysis || '';
+      const analysisHtml = analysisRaw
+        ? `<div class="cr-section">
+            <div class="cr-section-label"><svg class="icon"><use href="#i-book-open"/></svg>${T.cr_label_analysis}</div>
+            <div class="cr-analysis">
+              ${highlightSearchTerm(escapeHtml(analysisRaw), searchTerm)}
+              <div class="cr-analysis-source">${T.cr_analysis_source}</div>
+            </div>
+          </div>`
+        : '';
+      const factsHtml = (c[lang].facts) ? highlightSearchTerm(escapeHtml(c[lang].facts), searchTerm) : '';
+
       const body = document.getElementById('cr-body');
       body.innerHTML = `
         <div class="cr-case-head">
@@ -2985,16 +3138,36 @@
 
         <div class="cr-section">
           <div class="cr-section-label"><svg class="icon"><use href="#i-shield"/></svg>${T.cr_label_holding}</div>
-          <div class="cr-text">${c[lang].rettssats || ''}</div>
+          <div class="cr-text">${rettssatsHtml}</div>
         </div>
+
+        ${analysisHtml}
+
+        ${factsHtml ? `
+        <div class="cr-section">
+          <div class="cr-section-label"><svg class="icon"><use href="#i-list"/></svg>${T.cr_label_facts}</div>
+          <div class="cr-text">${factsHtml}</div>
+        </div>` : ''}
 
         <div class="cr-section">
           <div class="cr-section-label"><svg class="icon"><use href="#i-grid"/></svg>${T.cr_label_principles}</div>
           <div class="cr-principles">${principleChips}</div>
         </div>
 
-        <div class="cr-section" id="cr-pdf-section">
-          ${renderPdfPanel(caseId, crPdfQuery)}
+        ${pinpoints ? `
+        <div class="cr-section">
+          <div class="cr-section-label"><svg class="icon"><use href="#i-search"/></svg>${T.cr_label_quotes}</div>
+          ${pinpoints}
+        </div>` : ''}
+
+        <div class="cr-section">
+          <button class="pdf-toggle" id="cr-pdf-toggle" type="button">
+            <svg class="icon"><use href="#i-book-open"/></svg>
+            <span id="cr-pdf-toggle-label">${T.cr_action_show_full}</span>
+          </button>
+          <div id="cr-pdf-section" style="display:none; margin-top: 14px;">
+            ${renderPdfPanel(caseId, crPdfQuery)}
+          </div>
         </div>
 
         <div class="cr-actions">
@@ -3009,6 +3182,27 @@
           </button>
         </div>
       `;
+
+      // Wire toggle
+      const toggle = document.getElementById('cr-pdf-toggle');
+      const pdfSection = document.getElementById('cr-pdf-section');
+      const toggleLabel = document.getElementById('cr-pdf-toggle-label');
+      if (toggle) {
+        toggle.addEventListener('click', () => {
+          const open = pdfSection.style.display !== 'none';
+          pdfSection.style.display = open ? 'none' : 'block';
+          toggleLabel.textContent = open ? T.cr_action_show_full : T.cr_action_hide_full;
+          if (!open) {
+            wirePdfSearch(caseId);
+            // If main search has a term, pre-highlight in the PDF too
+            const pdfInput = document.getElementById('pdf-search-input');
+            if (pdfInput && searchTerm && !crPdfQuery) {
+              pdfInput.value = searchTerm;
+              pdfInput.dispatchEvent(new Event('input'));
+            }
+          }
+        });
+      }
 
       wirePdfSearch(caseId);
       // Auto-scroll to first match on open if there's already a query
