@@ -851,12 +851,127 @@
     }
 
     .db-stats {
+      font-size: 13px;
+      color: var(--muted);
+      margin-bottom: 18px;
+      padding-left: 2px;
+    }
+    .db-stats strong { color: var(--ink); font-weight: 700; }
+    .db-stats .stats-line {
+      font-size: 14px;
+      color: var(--ink);
+      letter-spacing: -0.005em;
+    }
+    .db-stats .stats-line em {
+      font-style: normal;
+      color: var(--brand-deep);
+      font-weight: 600;
+    }
+    .db-stats .stats-of {
+      color: var(--muted-soft);
+      font-weight: 400;
+      font-size: 12px;
+    }
+    .db-stats .stats-also {
+      margin-top: 8px;
       font-size: 12px;
       color: var(--muted);
-      margin-bottom: 16px;
-      padding-left: 4px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 4px 6px;
+      align-items: baseline;
     }
-    .db-stats strong { color: var(--ink); }
+    .db-stats .stats-also-label {
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      font-size: 10.5px;
+      color: var(--muted-soft);
+      margin-right: 4px;
+    }
+    .db-stats .syn-chip {
+      display: inline-flex;
+      align-items: center;
+      padding: 2px 8px;
+      background: rgba(77, 178, 236, 0.10);
+      color: var(--brand-deep);
+      border-radius: 999px;
+      font-size: 11.5px;
+      font-weight: 500;
+      cursor: help;
+    }
+    .db-stats .syn-term {
+      display: inline-flex;
+      align-items: center;
+      padding: 1px 6px;
+      color: var(--muted);
+      font-size: 11.5px;
+      font-style: italic;
+    }
+    .db-stats .syn-term:not(:last-child)::after {
+      content: '·';
+      margin-left: 8px;
+      color: var(--muted-soft);
+      opacity: 0.6;
+      font-style: normal;
+    }
+
+    /* Per-card "why this matched" line */
+    .match-explain {
+      padding: 8px 18px 0;
+      font-size: 11px;
+      color: var(--muted-soft);
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 4px 8px;
+      letter-spacing: 0.02em;
+    }
+    .match-explain .me-label {
+      text-transform: uppercase;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      font-size: 9.5px;
+      color: var(--muted-soft);
+    }
+    .match-explain .me-field {
+      display: inline-flex;
+      align-items: baseline;
+      gap: 4px;
+      color: var(--muted);
+    }
+    .match-explain .me-field-name { font-weight: 500; }
+    .match-explain .me-field-count {
+      display: inline-block;
+      min-width: 16px;
+      padding: 0 5px;
+      background: var(--rule-soft);
+      color: var(--ink);
+      border-radius: 8px;
+      font-size: 10px;
+      font-weight: 700;
+      text-align: center;
+      font-variant-numeric: tabular-nums;
+    }
+    .match-explain .me-via {
+      margin-left: auto;
+      font-size: 10.5px;
+      color: var(--brand-deep);
+      opacity: 0.85;
+    }
+
+    /* Highlight tiers: phrase > token > synonym */
+    mark { background: rgba(255, 230, 130, 0.65); color: inherit; padding: 0 2px; border-radius: 2px; }
+    mark.m-phrase {
+      background: rgba(255, 213, 60, 0.85);
+      box-shadow: inset 0 -2px 0 rgba(220, 150, 0, 0.55);
+      font-weight: 600;
+    }
+    mark.m-syn {
+      background: rgba(77, 178, 236, 0.18);
+      color: inherit;
+      border-bottom: 1px dotted rgba(10, 25, 41, 0.35);
+    }
 
     .case-row {
       background: var(--white);
@@ -932,6 +1047,21 @@
       -webkit-line-clamp: 3;
       -webkit-box-orient: vertical;
       overflow: hidden;
+    }
+    .case-row-preview .kw-hint {
+      font-size: 11.5px;
+      color: var(--muted);
+      margin-bottom: 8px;
+      padding: 6px 10px;
+      background: rgba(77, 178, 236, 0.06);
+      border-left: 2px solid var(--brand);
+      border-radius: 0 4px 4px 0;
+      line-height: 1.4;
+    }
+    .case-row-preview .kw-hint em {
+      font-style: normal;
+      color: var(--brand-deep);
+      font-weight: 600;
     }
     .case-row.open .case-row-preview { display: none; }
 
@@ -1519,6 +1649,68 @@
     }
     .pdf-match-count strong { color: var(--accent); font-weight: 700; }
 
+    /* Prev / next match navigation inside the PDF panel */
+    .pdf-nav {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 3px 6px;
+      background: var(--white);
+      border: 1px solid var(--rule);
+      border-radius: 8px;
+      white-space: nowrap;
+    }
+    .pdf-nav-btn {
+      width: 22px;
+      height: 22px;
+      border: none;
+      background: transparent;
+      color: var(--ink);
+      font-size: 14px;
+      line-height: 1;
+      cursor: pointer;
+      border-radius: 4px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 600;
+    }
+    .pdf-nav-btn:hover { background: var(--brand-soft); color: var(--brand-deep); }
+    .pdf-nav-counter {
+      font-size: 11px;
+      color: var(--muted);
+      font-family: ui-monospace, "SF Mono", monospace;
+      letter-spacing: 0;
+      padding: 0 6px;
+      font-variant-numeric: tabular-nums;
+    }
+    .pdf-nav-counter #pdf-match-current { color: var(--brand-deep); font-weight: 700; }
+    .pdf-no-matches {
+      font-size: 11px;
+      color: var(--muted-soft);
+      font-style: italic;
+      padding: 0 6px;
+    }
+    .pdf-concept-hint {
+      padding: 6px 22px;
+      background: rgba(77, 178, 236, 0.06);
+      border-bottom: 1px solid var(--rule);
+      font-size: 11px;
+      color: var(--muted);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .pdf-concept-chip {
+      display: inline-flex;
+      padding: 2px 8px;
+      background: rgba(77, 178, 236, 0.18);
+      color: var(--brand-deep);
+      border-radius: 999px;
+      font-size: 10.5px;
+      font-weight: 600;
+    }
+
     .pdf-body {
       max-height: 50vh;
       overflow-y: auto;
@@ -1537,10 +1729,20 @@
       border-radius: 2px;
       font-weight: 600;
     }
-    .pdf-body mark.current {
+    .pdf-body mark.m-phrase {
+      background: var(--accent);
+      box-shadow: 0 0 0 1px rgba(140, 20, 50, 0.65);
+    }
+    .pdf-body mark.m-syn {
+      background: rgba(77, 178, 236, 0.4);
+      color: var(--brand-deep);
+      border-bottom: 1px dashed var(--brand-deep);
+    }
+    .pdf-body mark.focused {
       background: #fbbf24;
       color: var(--ink);
       outline: 2px solid var(--accent);
+      outline-offset: 1px;
     }
 
     .pdf-empty {
@@ -2070,6 +2272,7 @@
 
     <section class="results-section" id="database">
       <div class="results-inner">
+        <div class="db-stats" id="db-stats"></div>
         <div class="case-grid" id="case-list"></div>
       </div>
     </section>
@@ -2692,71 +2895,150 @@
       }
     ];
 
-    // Common Norwegian + English terms in this legal domain. Added to every
-    // case's searchable haystack so any reasonable variant finds something.
-    // Lower scoring weight than case-specific tags so ranking is preserved.
+    // Concept thesaurus. Each entry groups synonyms under a single concept so
+    // we can: (a) expand a user's query to related terms, (b) tell the user
+    // "you searched X — we also looked for Y, Z", and (c) explain WHY a case
+    // matched even when the literal term doesn't appear in the displayed text.
+    //
+    // label[lang] = short human label shown in "Also searched" / "Why matched".
+    // [lang]      = synonym list searched in that language's content fields.
+    const thesaurus = [
+      {
+        id: 'contact',
+        label: { no: 'samvær', en: 'contact' },
+        no: ['samvær', 'samværsrett', 'rett til samvær', 'omgang', 'omgangsrett',
+             'kontakt', 'samværsavtale', 'samværsordning', 'samværsavgjørelse',
+             'barnets rett til samvær', 'fars rett til samvær', 'mors rett til samvær'],
+        en: ['contact', 'contact rights', 'right to contact', 'visitation',
+             'visitation rights', 'access', 'access rights', 'right of access']
+      },
+      {
+        id: 'contact-obstruction',
+        label: { no: 'hindring av samvær', en: 'contact obstruction' },
+        no: ['samværshindring', 'samværsobstruksjon', 'samværsnektelse', 'samværsnekt',
+             'samværsboikott', 'samværsvegring', 'samværsbrudd', 'samværssvikt',
+             'samværssabotasje', 'samværsforhindring', 'omgangshindring',
+             'hindring av samvær', 'hindre samvær', 'nekte samvær',
+             'sabotere samvær', 'forelder hindrer samvær', 'forelder hindrer kontakt',
+             'far nektet samvær', 'mor nektet samvær', 'forelder nektet samvær',
+             'ikke gjennomført samvær', 'avskåret samvær', 'avskåret kontakt',
+             'samværsrettsbrudd', 'krenkelse av samværsrett'],
+        en: ['contact obstruction', 'contact denial', 'contact sabotage',
+             'contact prevention', 'contact refusal', 'denied visitation',
+             'denial of access', 'deny contact', 'obstruct visitation',
+             'interfere with contact', 'mother obstructs', 'father obstructs',
+             'parent obstructs', 'prevent contact', 'denied access']
+      },
+      {
+        id: 'parental-alienation',
+        label: { no: 'foreldrefremmedgjøring', en: 'parental alienation' },
+        no: ['foreldrefremmedgjøring', 'foreldrefiendtlighet',
+             'foreldrefiendtliggjøring', 'foreldrebrudd', 'lojalitetskonflikt',
+             'manipulasjon av barn', 'påvirkning av barn', 'PAS'],
+        en: ['parental alienation', 'loyalty conflict', 'alienation syndrome',
+             'manipulating the child', 'turning the child', 'PAS']
+      },
+      {
+        id: 'child-resistance',
+        label: { no: 'barnets motstand', en: "child's resistance" },
+        no: ['barnets motstand', 'barnet motsetter seg', 'barnets vegring',
+             'barnets uttalelse', 'barnets stemme', 'barnets mening',
+             'høre barnet', 'barns rett til å bli hørt'],
+        en: ["child's resistance", "child's opposition", "child's wishes",
+             "child's views", "hearing the child", 'right to be heard']
+      },
+      {
+        id: 'positive-obligations',
+        label: { no: 'positive forpliktelser', en: 'positive obligations' },
+        no: ['positive forpliktelser', 'positiv forpliktelse', 'positiv plikt',
+             'statens ansvar', 'statens plikt', 'staten må handle',
+             'praktiske og effektive', 'legal arsenal'],
+        en: ['positive obligation', 'positive obligations', 'state duty',
+             'state responsibility', 'practical and effective', 'legal arsenal']
+      },
+      {
+        id: 'enforcement',
+        label: { no: 'håndhevelse', en: 'enforcement' },
+        no: ['håndhevelse', 'manglende håndhevelse', 'manglende sanksjoner',
+             'effektivitet', 'effektive tiltak', 'tvangsmulkt', 'tvangsbot',
+             'tvangsfullbyrdelse', 'håndhevelsesbegjæring', 'sanksjon'],
+        en: ['enforcement', 'failure to enforce', 'enforcement of contact',
+             'court-ordered contact', 'coercive fine', 'penalty', 'sanction',
+             'effectiveness', 'effective measures', 'enforcement application']
+      },
+      {
+        id: 'delay',
+        label: { no: 'tidsbruk og forsinkelser', en: 'delay' },
+        no: ['langvarig saksbehandling', 'sendrektighet', 'forsinkelse',
+             'lang saksgang', 'tidsbruk', 'lang prosess', 'mange år',
+             'tiden går', 'irreversible konsekvenser'],
+        en: ['delay', 'lengthy proceedings', 'protracted proceedings',
+             'passage of time', 'years of litigation', 'irreversible consequences']
+      },
+      {
+        id: 'family-life',
+        label: { no: 'familieliv', en: 'family life' },
+        no: ['familieliv', 'privatliv', 'rett til familieliv',
+             'krenkelse av familieliv', 'familieforhold', 'familierelasjon',
+             'foreldrebånd', 'barn-forelder-relasjon'],
+        en: ['family life', 'private life', 'right to family life',
+             'family ties', 'family relations', 'parent-child relationship',
+             'parent-child bond']
+      },
+      {
+        id: 'echr',
+        label: { no: 'EMK artikkel 8 / EMD', en: 'ECHR Article 8 / ECtHR' },
+        no: ['EMK', 'EMK artikkel 8', 'artikkel 8', 'menneskerettsdomstolen',
+             'EMD', 'Strasbourg', 'menneskerettighetene', 'menneskerettsloven',
+             'konvensjonen', 'EMK art. 8'],
+        en: ['ECHR', 'ECHR Article 8', 'Article 8', 'ECtHR', 'Strasbourg',
+             'European Court of Human Rights', 'European Convention on Human Rights',
+             'Convention', 'human rights']
+      },
+      {
+        id: 'parental-rights',
+        label: { no: 'foreldretvist og rettigheter', en: 'parental dispute & rights' },
+        no: ['foreldretvist', 'foreldreansvar', 'foreldrekonflikt',
+             'foreldrerettigheter', 'bostedsforelder', 'samværsforelder',
+             'daglig omsorg', 'fast bosted', 'barnefordeling',
+             'far diskriminert', 'mor diskriminert', 'fars rettigheter',
+             'mors rettigheter'],
+        en: ['parental dispute', 'parental responsibility', 'parental conflict',
+             'parental rights', 'parental authority', "father's rights",
+             "mother's rights", 'resident parent', 'non-resident parent',
+             'custody', 'custody battle', 'custody dispute']
+      },
+      {
+        id: 'best-interest',
+        label: { no: 'barnets beste', en: 'best interests of the child' },
+        no: ['barnets beste', 'barnekonvensjonen', 'BK', 'barnesakkyndig'],
+        en: ['best interests of the child', 'best interests', 'CRC',
+             'Convention on the Rights of the Child', 'child welfare expert']
+      },
+      {
+        id: 'norwegian-law',
+        label: { no: 'norsk rett', en: 'Norwegian law' },
+        no: ['barneloven', 'barneloven § 65', 'barneloven § 43', 'mekling',
+             'familievernkontoret', 'barnevernet', 'omsorgssvikt',
+             'omsorgsnektelse', 'foreldreomsorg', 'rettsavgjørelse om samvær'],
+        en: ['Norwegian Children Act', 'Children Act', 'mediation',
+             'Family Counselling Office', 'child welfare service',
+             'reunification', 'reuniting parent and child']
+      },
+      {
+        id: 'investigation-duty',
+        label: { no: 'undersøkelsesplikten', en: 'duty to investigate' },
+        no: ['undersøkelsesplikten', 'undersøkelsesplikt', 'utrede',
+             'sakkyndig utredning', 'bevisvurdering', 'konkret vurdering'],
+        en: ['duty to investigate', 'investigation', 'expert assessment',
+             'evidentiary assessment', 'concrete assessment']
+      }
+    ];
+
+    // Backwards-compatibility: flat list still used elsewhere. Derived from thesaurus.
     const commonSynonyms = {
-      no: [
-        // samvær variants
-        'samvær', 'samværsrett', 'samværshindring', 'samværsobstruksjon',
-        'samværsnektelse', 'samværsboikott', 'samværsvegring', 'samværsbrudd',
-        'samværssvikt', 'samværssabotasje', 'samværsforhindring',
-        'samværsavtale', 'samværsavgjørelse', 'samværsordning',
-        'samværsrettsbrudd', 'krenkelse av samværsrett',
-        'ikke gjennomført samvær', 'avskåret samvær',
-        // omgang (older term still used)
-        'omgang', 'omgangsrett', 'omgangshindring',
-        // foreldre variants
-        'foreldretvist', 'foreldreansvar', 'foreldrekonflikt',
-        'foreldrefremmedgjøring', 'foreldrefiendtlighet', 'foreldrefiendtliggjøring',
-        'foreldrebrudd', 'foreldrebånd', 'foreldrerettigheter',
-        'bostedsforelder', 'samværsforelder', 'daglig omsorg', 'fast bosted',
-        'barnefordeling', 'far nektet samvær', 'mor nektet samvær', 'forelder nektet samvær',
-        'forelder hindrer kontakt', 'forelder hindrer samvær', 'avskåret kontakt',
-        'far diskriminert', 'mor diskriminert',
-        // konvensjon + statlig
-        'EMK', 'EMK artikkel 8', 'artikkel 8', 'menneskerettsdomstolen', 'EMD',
-        'Strasbourg', 'menneskerettighetene', 'menneskerettsloven',
-        'familieliv', 'privatliv', 'rett til familieliv', 'rett til samvær',
-        'krenkelse av familieliv',
-        'positiv plikt', 'positive forpliktelser', 'positiv forpliktelse',
-        'statens ansvar', 'statens plikt', 'staten må handle',
-        'manglende håndhevelse', 'manglende sanksjoner', 'effektivitet',
-        // norsk rett
-        'tvangsmulkt', 'tvangsbot', 'tvangsfullbyrdelse', 'barneloven',
-        'barneloven § 65', 'barneloven § 43', 'mekling', 'familievernkontoret',
-        'barnets beste', 'barnekonvensjonen', 'BK', 'barnesakkyndig',
-        'barnevernet', 'gjenforening', 'rettsavgjørelse om samvær',
-        // omsorg
-        'omsorgssvikt', 'omsorgsnektelse', 'foreldreomsorg',
-        // common phrasings a lawyer might type
-        'hva sier EMK', 'hva er statens plikt', 'hvordan håndheve samvær',
-        'kan jeg klage', 'jeg ser ikke barnet mitt', 'fars rett til samvær',
-        'mors rett til samvær', 'barnets rett til samvær'
-      ],
-      en: [
-        'contact', 'contact rights', 'contact obstruction', 'contact denial',
-        'contact sabotage', 'contact prevention', 'contact refusal',
-        'visitation', 'visitation rights', 'denied visitation',
-        'access', 'access rights', 'right of access', 'denial of access',
-        'deny contact', 'obstruct visitation', 'interfere with contact',
-        'parental dispute', 'parental responsibility', 'parental conflict',
-        'parental alienation', 'parental rights', 'parental authority',
-        'father\'s rights', 'mother\'s rights', 'resident parent', 'non-resident parent',
-        'custody', 'custody battle', 'custody dispute',
-        'mother obstructs', 'father obstructs', 'parent obstructs',
-        'ECHR', 'ECHR Article 8', 'Article 8', 'ECtHR',
-        'European Court of Human Rights', 'European Convention on Human Rights',
-        'Strasbourg', 'human rights',
-        'family life', 'private life', 'right to family life',
-        'right to contact', 'family ties', 'parent-child relationship',
-        'positive obligation', 'positive obligations', 'state duty',
-        'state responsibility', 'failure to enforce', 'enforcement',
-        'enforcement of contact', 'court-ordered contact', 'coercive fine',
-        'penalty', 'sanction', 'effectiveness', 'effective measures',
-        'best interests of the child', 'mediation', 'reunification',
-        'reuniting parent and child', 'separation', 'divorce'
-      ]
+      no: thesaurus.flatMap(c => c.no || []),
+      en: thesaurus.flatMap(c => c.en || [])
     };
 
     /* ============ STATE ============ */
@@ -2818,16 +3100,181 @@
         .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
         .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
     }
-    function highlight(text, query) {
-      if (!query) return text;
-      const tokens = deburr(query).split(/\s+/).filter(t => t.length > 1);
-      if (tokens.length === 0) return text;
+    // Resolve a raw search input into structured pieces the rest of the
+    // pipeline understands. Handles:
+    //   - quoted "phrases" → strict adjacency
+    //   - bare words → individual tokens (still AND-matched)
+    //   - multi-word bare queries → also tried as phrase for adjacency bonus
+    //   - thesaurus expansion → concepts triggered by any term
+    function resolveQuery(raw, lang) {
+      lang = lang || currentLang;
+      if (!raw || !String(raw).trim()) return null;
+      const original = String(raw);
+      // Pull out quoted phrases first
+      const quotedRe = /"([^"]+)"/g;
+      const quoted = [];
+      let m;
+      while ((m = quotedRe.exec(original)) !== null) {
+        const p = m[1].trim();
+        if (p.length >= 2) quoted.push(p);
+      }
+      const stripped = original.replace(quotedRe, ' ').replace(/\s+/g, ' ').trim();
+      const tokens = stripped ? stripped.split(/\s+/).filter(t => t.length >= 2) : [];
+      // Adjacency phrase: if user typed 2+ unquoted words, also try as one phrase
+      const phrases = [...quoted];
+      if (tokens.length > 1 && !quoted.includes(stripped)) phrases.push(stripped);
+
+      // Resolve concepts from thesaurus
+      const userTerms = [...phrases, ...tokens];
+      const lowerOriginal = deburr(original);
+      const concepts = [];
+      for (const concept of thesaurus) {
+        const conceptTerms = (concept[lang] || []).map(deburr);
+        let triggeredBy = null;
+        for (const ut of userTerms) {
+          const dut = deburr(ut);
+          if (dut.length < 2) continue;
+          for (const ct of conceptTerms) {
+            if (ct === dut || (ct.length >= 4 && dut.includes(ct)) || (dut.length >= 4 && ct.includes(dut))) {
+              triggeredBy = ut;
+              break;
+            }
+          }
+          if (triggeredBy) break;
+        }
+        if (triggeredBy) {
+          concepts.push({
+            id: concept.id,
+            label: (concept.label && concept.label[lang]) || concept.id,
+            triggeredBy,
+            terms: concept[lang] || []
+          });
+        }
+      }
+
+      // All terms we will search for (deduped, deburred)
+      const allTermsSet = new Set();
+      phrases.forEach(p => allTermsSet.add(deburr(p)));
+      tokens.forEach(t => allTermsSet.add(deburr(t)));
+      concepts.forEach(c => c.terms.forEach(t => allTermsSet.add(deburr(t))));
+
+      // "Also searched for" — concept terms that aren't already in the raw query
+      const alsoSearched = new Set();
+      concepts.forEach(c => c.terms.forEach(t => {
+        if (!lowerOriginal.includes(deburr(t)) && t !== c.triggeredBy) alsoSearched.add(t);
+      }));
+
+      return {
+        raw: original,
+        phrases,            // strings as-typed (not deburred) for display
+        tokens,
+        concepts,           // [{id, label, triggeredBy, terms}]
+        alsoSearched: Array.from(alsoSearched).slice(0, 8),
+        // For highlight/snippet code: just the literal pieces to mark
+        marksPhrases: phrases.map(deburr),
+        marksTokens: tokens.map(deburr),
+        marksExpanded: Array.from(allTermsSet).filter(t => t.length >= 3)
+      };
+    }
+
+    // Build a regex that matches any of the given terms, longest first
+    // (alternation tries left-to-right — order matters for "phrase over token").
+    function buildHighlightRegex(terms) {
+      if (!terms || terms.length === 0) return null;
+      const sorted = [...new Set(terms)].sort((a, b) => b.length - a.length);
+      const pattern = sorted.map(escapeRegExp).join('|');
+      try {
+        return new RegExp('(' + pattern + ')', 'gi');
+      } catch (e) {
+        return null;
+      }
+    }
+
+    // Highlight phrase-aware: phrases marked as single units, tokens as their
+    // own. Phrase regex is run first to avoid token re-wrapping. Resolved obj
+    // also includes concept-expanded terms (marked but with a different class
+    // so the UI can show them more quietly if desired).
+    function highlight(text, queryOrResolved) {
+      if (!text) return text;
+      if (!queryOrResolved) return text;
+      // Accept either a raw string (back-compat) or a resolved object
+      let resolved;
+      if (typeof queryOrResolved === 'string') {
+        resolved = resolveQuery(queryOrResolved);
+        if (!resolved) return text;
+      } else {
+        resolved = queryOrResolved;
+      }
+      const phraseRe = buildHighlightRegex(resolved.marksPhrases);
+      const tokenRe = buildHighlightRegex(resolved.marksTokens);
+      const expandedRe = buildHighlightRegex(
+        resolved.marksExpanded.filter(t =>
+          !resolved.marksPhrases.includes(t) && !resolved.marksTokens.includes(t)
+        )
+      );
+      // Apply in order: phrases (strongest), tokens, expanded (concept). Each
+      // wrapper class is distinguishable so users can see the strength of
+      // the match.
       let out = text;
-      tokens.forEach(t => {
-        const re = new RegExp('(' + escapeRegExp(t) + ')', 'gi');
-        out = out.replace(re, '<mark>$1</mark>');
-      });
+      // Temporary placeholders so the regex doesn't re-match inside its own output
+      const placeholders = [];
+      const stash = (frag) => {
+        const i = placeholders.length;
+        placeholders.push(frag);
+        return ` H${i} `;
+      };
+      if (phraseRe) out = out.replace(phraseRe, m => stash(`<mark class="m-phrase">${m}</mark>`));
+      if (tokenRe) out = out.replace(tokenRe, m => stash(`<mark>${m}</mark>`));
+      if (expandedRe) out = out.replace(expandedRe, m => stash(`<mark class="m-syn">${m}</mark>`));
+      // Restore placeholders
+      out = out.replace(/ H(\d+) /g, (_, i) => placeholders[+i]);
       return out;
+    }
+
+    // Snippet builder: return ~maxLen chars of text centered on the first
+    // match (or first phrase match preferred), with leading/trailing ellipses
+    // if we trimmed. If no match, return the head of the text.
+    function snippetAroundMatch(text, resolved, maxLen) {
+      maxLen = maxLen || 240;
+      if (!text) return '';
+      if (!resolved) {
+        return text.length > maxLen ? text.slice(0, maxLen).trim() + '…' : text;
+      }
+      const lower = deburr(text);
+      // Prefer phrase match position; fall back to any token; fall back to expanded
+      const tryFind = (arr) => {
+        let best = -1;
+        for (const term of arr) {
+          if (!term || term.length < 2) continue;
+          const pos = lower.indexOf(term);
+          if (pos !== -1 && (best === -1 || pos < best)) best = pos;
+        }
+        return best;
+      };
+      let pos = tryFind(resolved.marksPhrases);
+      if (pos === -1) pos = tryFind(resolved.marksTokens);
+      if (pos === -1) pos = tryFind(resolved.marksExpanded);
+      if (pos === -1) {
+        return text.length > maxLen ? text.slice(0, maxLen).trim() + '…' : text;
+      }
+      // Center window. Try not to cut in the middle of a word.
+      const half = Math.floor(maxLen / 2);
+      let start = Math.max(0, pos - half);
+      let end = Math.min(text.length, start + maxLen);
+      // Re-extend start if end ran short
+      if (end - start < maxLen) start = Math.max(0, end - maxLen);
+      // Snap to a word boundary on each side
+      if (start > 0) {
+        const space = text.indexOf(' ', start);
+        if (space !== -1 && space < start + 20) start = space + 1;
+      }
+      if (end < text.length) {
+        const lastSpace = text.lastIndexOf(' ', end);
+        if (lastSpace !== -1 && lastSpace > end - 20) end = lastSpace;
+      }
+      const prefix = start > 0 ? '…' : '';
+      const suffix = end < text.length ? '…' : '';
+      return prefix + text.slice(start, end).trim() + suffix;
     }
 
     function renderObligations() {
@@ -2910,110 +3357,297 @@
       return c.principles && c.principles.includes(activeFilter);
     }
 
-    function scoreCase(c, q) {
-      // Returns 0 if no match, higher = better match.
-      const tokens = q.split(/\s+/).filter(t => t.length > 0);
-      if (tokens.length === 0) return 0;
-      const lang = currentLang;
-      const fields = {
+    // Per-case scoring with full reason tracking. Returns { score, reasons }
+    // where reasons records:
+    //   fieldHits: { rettssats: 3, keywords: 2, ... }  — how many matches per field
+    //   phraseMatches / tokenMatches / conceptMatches  — counts
+    //   matchedKeywords: Set<string>                   — which tag chips matched
+    //   matchedConcepts: [{label, triggeredBy}]        — concepts that actually hit this case
+    //   bestField: which field had the highest weighted contribution
+    function scoreCaseV2(c, resolved, lang) {
+      lang = lang || currentLang;
+      if (!resolved) return { score: 0, reasons: null };
+
+      const text = {
         name: deburr(getName(c)),
         country: deburr(getCountry(c)),
-        appNo: deburr(c.appNo),
-        keywords: deburr((c.tags && c.tags[lang] ? c.tags[lang].join(' | ') : '')),
+        appNo: deburr(c.appNo || ''),
         rettssats: deburr(c[lang].rettssats || ''),
+        analysis: deburr(c[lang].analysis || ''),
         facts: deburr(c[lang].facts || ''),
-        quotes: deburr((c[lang].quotes || []).map(q => q.text).join(' ')),
-        // Domain synonyms — common terms shared across all cases. Lower weight
-        // so case-specific tags rank higher when both match.
-        common: deburr((commonSynonyms[lang] || []).join(' | '))
+        quotes: deburr((c[lang].quotes || []).map(q => q.text).join(' '))
       };
-      const weights = {
-        name: 18, keywords: 12, country: 8, appNo: 5,
-        rettssats: 6, facts: 3, quotes: 4, common: 4
+      const keywords = (c.tags && c.tags[lang]) ? c.tags[lang] : [];
+
+      const fieldWeights = {
+        name: 20, country: 10, appNo: 6,
+        rettssats: 8, analysis: 6, facts: 4, quotes: 5
+      };
+      const KW_WEIGHT = 14;
+
+      const reasons = {
+        fieldHits: {},
+        phraseMatches: 0,
+        tokenMatches: 0,
+        conceptMatches: 0,
+        matchedKeywords: new Set(),
+        matchedConcepts: [],
+        bestField: null,
+        bestFieldScore: 0
       };
       let score = 0;
-      tokens.forEach(t => {
-        Object.keys(fields).forEach(k => {
-          if (fields[k].includes(t)) score += weights[k];
+
+      // Word-boundary regex builder (Norwegian-friendly: æ ø å count as letters)
+      const wbCache = new Map();
+      const wb = (needle) => {
+        if (wbCache.has(needle)) return wbCache.get(needle);
+        const re = new RegExp('(?:^|[^a-zæøåü0-9])' + escapeRegExp(needle) + '(?=[^a-zæøåü0-9]|$)', 'i');
+        wbCache.set(needle, re);
+        return re;
+      };
+
+      // Try matching one needle against one haystack; return weighted score.
+      // tier: 'phrase' | 'token' | 'concept'  (concept = expanded-only)
+      const tryMatch = (haystack, needle, baseWeight, fieldName, tier) => {
+        const n = needle;
+        if (!n || n.length < 2) return 0;
+        if (!haystack) return 0;
+        let mult = 1;
+        if (tier === 'phrase') mult = 3;
+        else if (tier === 'concept') mult = 0.45;
+        let s = 0;
+        // Word-boundary bonus
+        if (wb(n).test(haystack)) {
+          s = baseWeight * mult * 1.5;
+        } else if (haystack.includes(n)) {
+          s = baseWeight * mult * 0.7;
+        }
+        if (s > 0) {
+          reasons.fieldHits[fieldName] = (reasons.fieldHits[fieldName] || 0) + 1;
+          if (tier === 'phrase') reasons.phraseMatches++;
+          else if (tier === 'token') reasons.tokenMatches++;
+          else reasons.conceptMatches++;
+          if (s > reasons.bestFieldScore) {
+            reasons.bestField = fieldName;
+            reasons.bestFieldScore = s;
+          }
+        }
+        return s;
+      };
+
+      const matchAcrossFields = (needle, tier) => {
+        for (const [fn, fv] of Object.entries(text)) {
+          score += tryMatch(fv, needle, fieldWeights[fn], fn, tier);
+        }
+        // Keywords are scored once per matching keyword to keep ranking sane
+        keywords.forEach(kw => {
+          const kd = deburr(kw);
+          const s = tryMatch(kd, needle, KW_WEIGHT, 'keywords', tier);
+          if (s > 0) reasons.matchedKeywords.add(kw);
+          score += s;
         });
+      };
+
+      // 1) Phrases (highest weight)
+      resolved.marksPhrases.forEach(p => matchAcrossFields(p, 'phrase'));
+      // 2) Tokens
+      resolved.marksTokens.forEach(t => {
+        // Skip if already covered by a phrase (avoid double-counting)
+        if (resolved.marksPhrases.some(p => p.includes(t))) return;
+        matchAcrossFields(t, 'token');
       });
-      return score;
+      // 3) Concept-expanded terms (only if they aren't already in phrases/tokens)
+      const direct = new Set([...resolved.marksPhrases, ...resolved.marksTokens]);
+      const expandedOnly = resolved.marksExpanded.filter(t => !direct.has(t));
+      resolved.concepts.forEach(concept => {
+        let conceptScored = false;
+        const before = score;
+        concept.terms.forEach(termRaw => {
+          const term = deburr(termRaw);
+          if (!expandedOnly.includes(term)) return;
+          const beforeT = score;
+          matchAcrossFields(term, 'concept');
+          if (score > beforeT) conceptScored = true;
+        });
+        if (conceptScored) {
+          reasons.matchedConcepts.push({
+            id: concept.id,
+            label: concept.label,
+            triggeredBy: concept.triggeredBy
+          });
+        }
+      });
+
+      return { score, reasons: score > 0 ? reasons : null };
+    }
+
+    // Legacy shim — keep the old signature working for any callers
+    function scoreCase(c, q) {
+      const r = resolveQuery(q);
+      return scoreCaseV2(c, r).score;
     }
 
     function matchesSearch(c) {
       if (!searchTerm) return true;
-      const q = deburr(searchTerm).trim();
-      if (!q) return true;
-      return scoreCase(c, q) > 0;
+      const r = resolveQuery(searchTerm);
+      if (!r) return true;
+      return scoreCaseV2(c, r).score > 0;
     }
 
     function getMatchedKeywords(c, q) {
-      if (!q) return new Set();
-      const lang = currentLang;
-      const tokens = deburr(q).split(/\s+/).filter(t => t.length > 0);
-      const matched = new Set();
-      const kws = c.tags && c.tags[lang] ? c.tags[lang] : [];
-      kws.forEach(kw => {
-        const kd = deburr(kw);
-        if (tokens.some(t => kd.includes(t) || t.includes(kd))) matched.add(kw);
-      });
-      return matched;
+      const r = (typeof q === 'object' && q && q.marksPhrases) ? q : resolveQuery(q);
+      if (!r) return new Set();
+      const result = scoreCaseV2(c, r);
+      return result.reasons ? result.reasons.matchedKeywords : new Set();
+    }
+
+    // Friendly labels for the "matched in: X (3), Y (1)" line on a card.
+    function renderMatchExplain(reasons, resolved, lang) {
+      const labels = lang === 'no' ? {
+        name: 'navn', country: 'land', appNo: 'app-nr',
+        keywords: 'nøkkelord', rettssats: 'rettssats',
+        analysis: 'analyse', facts: 'fakta', quotes: 'sitater'
+      } : {
+        name: 'name', country: 'country', appNo: 'app no.',
+        keywords: 'keywords', rettssats: 'holding',
+        analysis: 'analysis', facts: 'facts', quotes: 'quotes'
+      };
+      const entries = Object.entries(reasons.fieldHits)
+        .sort((a, b) => b[1] - a[1])
+        .slice(0, 4)
+        .map(([k, v]) => `<span class="me-field"><span class="me-field-name">${labels[k] || k}</span><span class="me-field-count">${v}</span></span>`)
+        .join('');
+      if (!entries) return '';
+      const conceptVia = reasons.matchedConcepts.length > 0
+        ? `<span class="me-via">${lang === 'no' ? 'via konsept' : 'via concept'}: ${reasons.matchedConcepts.map(c => escapeHtml(c.label)).join(', ')}</span>`
+        : '';
+      return `<div class="match-explain"><span class="me-label">${lang === 'no' ? 'Treff i' : 'Matched in'}:</span> ${entries} ${conceptVia}</div>`;
     }
 
     function renderCases() {
       const list = document.getElementById('case-list');
-      let visible = cases.filter(c => matchesFilter(c) && matchesSearch(c));
-      // Sort by search relevance when a search term is active
-      if (searchTerm) {
-        const q = deburr(searchTerm).trim();
-        visible = visible.map(c => ({ c, s: scoreCase(c, q) }))
-                         .sort((a, b) => b.s - a.s)
-                         .map(x => x.c);
+      const T = content[currentLang];
+      const lang = currentLang;
+      const resolved = resolveQuery(searchTerm, lang);
+
+      // Score every case once (so we have reasons + score available for sort and render)
+      const allWithScores = cases
+        .filter(c => matchesFilter(c))
+        .map(c => {
+          const r = resolved ? scoreCaseV2(c, resolved, lang) : { score: 0, reasons: null };
+          return { c, score: r.score, reasons: r.reasons };
+        });
+
+      let visible;
+      if (resolved) {
+        visible = allWithScores.filter(x => x.score > 0).sort((a, b) => b.score - a.score);
       } else {
-        visible = visible.sort((a, b) => a.year - b.year);
+        visible = allWithScores.sort((a, b) => a.c.year - b.c.year);
       }
       const stats = document.getElementById('db-stats');
-      const T = content[currentLang];
 
       if (visible.length === 0) {
-        if (stats) stats.textContent = T.db_stats_none;
-        list.innerHTML = `<div class="empty-state">${T.db_stats_none}</div>`;
+        if (stats) {
+          stats.innerHTML = resolved
+            ? `<div class="stats-line"><strong>0</strong> ${lang === 'no' ? 'saker matcher' : 'cases match'} «<em>${escapeHtml(resolved.raw)}</em>»</div>`
+            : T.db_stats_none;
+        }
+        list.innerHTML = `<div class="empty-state">${lang === 'no' ? 'Ingen treff. Prøv et annet ord eller fjern søket.' : 'No matches. Try a different word or clear the search.'}</div>`;
         return;
       }
-      if (stats) stats.innerHTML = T.db_stats_showing.replace('%CURRENT%', `<strong>${visible.length}</strong>`).replace('%TOTAL%', `<strong>${cases.length}</strong>`);
 
-      const matchedSet = (c) => getMatchedKeywords(c, searchTerm);
+      // Stats line — informative when there's a search, quiet otherwise
+      if (stats) {
+        if (resolved) {
+          const n = visible.length;
+          const totalMatchableInFilter = allWithScores.length;
+          const noun = lang === 'no' ? (n === 1 ? 'sak matcher' : 'saker matcher') : (n === 1 ? 'case matches' : 'cases match');
+          let html = `<div class="stats-line"><strong>${n}</strong> ${noun} «<em>${escapeHtml(resolved.raw)}</em>»`;
+          if (n < totalMatchableInFilter) html += ` <span class="stats-of">${lang === 'no' ? 'av' : 'of'} ${totalMatchableInFilter}</span>`;
+          html += '</div>';
+          // "Also searched" via thesaurus — show the concept-level labels so
+          // the user can see what their term means in this domain
+          if (resolved.concepts.length > 0) {
+            const labels = resolved.concepts.map(c => `<span class="syn-chip" title="${lang === 'no' ? 'Trigget av' : 'Triggered by'}: ${escapeHtml(c.triggeredBy)}">${escapeHtml(c.label)}</span>`).join('');
+            html += `<div class="stats-also"><span class="stats-also-label">${lang === 'no' ? 'Konsepter i søket' : 'Concepts in search'}:</span> ${labels}</div>`;
+          }
+          // List a few thesaurus-expanded terms so it's transparent what we searched for
+          if (resolved.alsoSearched.length > 0) {
+            const items = resolved.alsoSearched.slice(0, 6).map(t => `<span class="syn-term">${escapeHtml(t)}</span>`).join('');
+            html += `<div class="stats-also"><span class="stats-also-label">${lang === 'no' ? 'Også søkt etter' : 'Also searched for'}:</span> ${items}</div>`;
+          }
+          stats.innerHTML = html;
+        } else {
+          stats.innerHTML = `<div class="stats-line"><strong>${visible.length}</strong> ${lang === 'no' ? 'saker totalt' : 'cases total'} · ${lang === 'no' ? 'sortert etter år' : 'sorted by year'}</div>`;
+        }
+      }
 
-      list.innerHTML = visible.map(c => {
-        const isNorway = c.country === 'Norge' || c.country === 'Norway';
+      list.innerHTML = visible.map(({ c, reasons }) => {
         const principleChips = c.principles.map(p => {
           const o = obligations.find(x => x.id === p);
           return o ? `<button class="case-tag" type="button" data-obligation="${p}" onclick="event.stopPropagation()">${o[currentLang].title}</button>` : '';
         }).join('');
-        // Always show verbatim English quote (we can't translate judgment text)
-        const enQuotes = (c.en.quotes || []);
-        const quotes = enQuotes.map(q => `
-          <div class="case-quote-block">
-            <div class="qb-para">${q.para}</div>
-            <div class="qb-text">${highlight(q.text, searchTerm)}</div>
-          </div>
-        `).join('');
-        const facts = highlight(c[currentLang].facts || '', searchTerm);
-        const rettssats = highlight(c[currentLang].rettssats || '', searchTerm);
         const sep = currentLang === 'no' ? 'mot' : 'v.';
-        const nameDisplay = `<em>${highlight(getName(c), searchTerm)}</em> <span class="case-sep">${sep}</span> ${highlight(getCountry(c), searchTerm)}`;
+        const nameDisplay = `<em>${highlight(getName(c), resolved)}</em> <span class="case-sep">${sep}</span> ${highlight(getCountry(c), resolved)}`;
 
-        // Preview text — short rettssats
-        const previewText = c[currentLang].rettssats || '';
-        const previewHtml = highlight(previewText, searchTerm);
+        // Preview snippet: when a search is active, center the snippet on
+        // whichever field had the best match. If the best field was keywords
+        // (i.e. only the tag chips matched), prefer a non-keyword field that
+        // ALSO contained matched terms — so the user sees the search terms
+        // appear in actual text whenever possible.
+        let previewText = c[currentLang].rettssats || '';
+        if (resolved && reasons) {
+          const bf = reasons.bestField;
+          const tryFields = ['analysis', 'rettssats', 'facts', 'quotes'];
+          // Helper: does this field contain any of the search marks?
+          const fieldContainsMark = (key) => {
+            let txt = '';
+            if (key === 'analysis') txt = c[currentLang].analysis || '';
+            else if (key === 'rettssats') txt = c[currentLang].rettssats || '';
+            else if (key === 'facts') txt = c[currentLang].facts || '';
+            else if (key === 'quotes' && c[currentLang].quotes) txt = c[currentLang].quotes.map(q => q.text).join(' ');
+            const lower = deburr(txt);
+            return [...resolved.marksPhrases, ...resolved.marksTokens, ...resolved.marksExpanded]
+              .some(t => t.length >= 2 && lower.includes(t));
+          };
+          // If best field was keywords, find another field that has marks
+          if (bf === 'keywords') {
+            const fallback = tryFields.find(fieldContainsMark);
+            if (fallback) {
+              if (fallback === 'analysis') previewText = c[currentLang].analysis;
+              else if (fallback === 'facts') previewText = c[currentLang].facts;
+              else if (fallback === 'quotes') previewText = c[currentLang].quotes.map(q => q.text).join(' ');
+              // else: rettssats default
+            }
+          } else if (bf === 'analysis' && c[currentLang].analysis) {
+            previewText = c[currentLang].analysis;
+          } else if (bf === 'facts' && c[currentLang].facts) {
+            previewText = c[currentLang].facts;
+          } else if (bf === 'quotes' && c[currentLang].quotes && c[currentLang].quotes.length) {
+            previewText = c[currentLang].quotes.map(q => q.text).join(' ');
+          }
+        }
+        const snippet = resolved ? snippetAroundMatch(previewText, resolved, 260) : (previewText.length > 260 ? previewText.slice(0, 260).trim() + '…' : previewText);
+        const previewHtml = highlight(escapeHtml(snippet), resolved);
 
-        // Show matched keywords only when a search is active. Keeps cards
-        // visually quiet by default; surfaces "why this matched" on demand.
-        const matched = matchedSet(c);
-        const matchedKws = [...matched].slice(0, 5);
-        const kwChipsMatched = searchTerm && matchedKws.length
-          ? matchedKws.map(k => `<span class="keyword-chip match">${k}</span>`).join('')
+        // Matched-keyword chips (when search is active)
+        const matchedKws = resolved && reasons ? [...reasons.matchedKeywords].slice(0, 5) : [];
+        const kwChipsMatched = matchedKws.length
+          ? matchedKws.map(k => `<span class="keyword-chip match">${highlight(escapeHtml(k), resolved)}</span>`).join('')
           : '';
+
+        // When the ONLY hits are in keywords, prepend a short note above the
+        // preview so the user sees the connection between their search and
+        // this case's tagged terms even though the prose doesn't contain
+        // the literal word (common in Norwegian — different word forms).
+        const onlyKeywordHit = resolved && reasons && reasons.bestField === 'keywords'
+          && Object.keys(reasons.fieldHits).every(k => k === 'keywords');
+        const keywordHint = onlyKeywordHit && matchedKws.length
+          ? `<div class="kw-hint">${currentLang === 'no' ? 'Tagget med' : 'Tagged with'}: ${matchedKws.slice(0, 3).map(k => `<em>${escapeHtml(k)}</em>`).join(', ')}${matchedKws.length > 3 ? ' …' : ''}</div>`
+          : '';
+
+        // "Why this matched" — small line under preview, listing fields + counts
+        const matchExplain = (resolved && reasons) ? renderMatchExplain(reasons, resolved, lang) : '';
 
         return `
           <div class="case-row" id="case-${c.id}" data-open-case="${c.id}" role="button" tabindex="0" aria-label="${getName(c)} ${currentLang === 'no' ? 'mot' : 'v.'} ${getCountry(c)}">
@@ -3030,7 +3664,11 @@
               </div>
               <span class="case-row-chev" aria-hidden="true"><svg class="icon"><use href="#i-chevron-right"/></svg></span>
             </div>
-            <div class="case-row-preview"><div class="case-row-preview-text">${previewHtml}</div></div>
+            <div class="case-row-preview">
+              ${keywordHint}
+              <div class="case-row-preview-text">${previewHtml}</div>
+            </div>
+            ${matchExplain}
             <div class="case-row-tags-strip">${principleChips}${kwChipsMatched}</div>
           </div>
         `;
@@ -3115,25 +3753,29 @@
     function escapeRegExp(s) { return s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); }
 
     // Highlights global search term in already-escaped HTML.
-    // Returns HTML string with <mark> wrappers.
+    // Uses the resolver so phrases mark as one unit, concepts in m-syn.
     function highlightSearchTerm(escapedHtml, term) {
-      if (!term || term.length < 2) return escapedHtml;
-      const tokens = term.split(/\s+/).filter(t => t.length >= 2);
-      if (tokens.length === 0) return escapedHtml;
-      const pattern = tokens.map(escapeRegExp).join('|');
-      const re = new RegExp('(' + pattern + ')', 'gi');
-      return escapedHtml.replace(re, '<mark>$1</mark>');
+      if (!term) return escapedHtml;
+      const resolved = (typeof term === 'object' && term && term.marksPhrases) ? term : resolveQuery(term);
+      if (!resolved) return escapedHtml;
+      return highlight(escapedHtml, resolved);
     }
 
+    // PDF highlighter — same logic but also reports match count.
+    // Each <mark> gets a sequential data-match-idx so prev/next nav can jump.
     function highlightPdf(text, query) {
       const escaped = escapeHtml(text);
-      if (!query || query.length < 2) return { html: escaped, count: 0 };
-      const tokens = query.split(/\s+/).filter(t => t.length >= 2);
-      if (tokens.length === 0) return { html: escaped, count: 0 };
-      const pattern = tokens.map(escapeRegExp).join('|');
-      const re = new RegExp('(' + pattern + ')', 'gi');
+      const resolved = (typeof query === 'object' && query && query.marksPhrases) ? query : resolveQuery(query);
+      if (!resolved) return { html: escaped, count: 0 };
+      // Reuse highlight() then re-tag to insert idx and count
+      const highlighted = highlight(escaped, resolved);
       let count = 0;
-      const html = escaped.replace(re, (m) => { count++; return `<mark>${m}</mark>`; });
+      const html = highlighted.replace(/<mark(\s[^>]*)?>/g, (full, attrs) => {
+        const idx = count++;
+        const cls = (full.match(/class="([^"]*)"/) || [, ''])[1];
+        const otherAttrs = (attrs || '').replace(/class="[^"]*"/, '').trim();
+        return `<mark class="${cls || ''}" data-match-idx="${idx}"${otherAttrs ? ' ' + otherAttrs : ''}>`;
+      });
       return { html, count };
     }
 
@@ -3151,8 +3793,20 @@
         summary: lang === 'no' ? 'Sammendrag' : 'Summary'
       }[meta.kind || 'full'];
       const { html, count } = highlightPdf(text, query || '');
-      const matchInfo = query && query.length >= 2
-        ? `<span class="pdf-match-count"><strong>${count}</strong> ${lang === 'no' ? 'treff' : 'matches'}</span>`
+      const resolved = query ? resolveQuery(query) : null;
+      const hasQuery = !!resolved;
+      // Match counter + prev/next nav (only when there's a query with matches)
+      const navHtml = hasQuery
+        ? (count > 0
+            ? `<div class="pdf-nav">
+                 <button class="pdf-nav-btn" id="pdf-prev" type="button" aria-label="${lang === 'no' ? 'Forrige treff' : 'Previous match'}">↑</button>
+                 <span class="pdf-nav-counter"><span id="pdf-match-current">1</span> / <span id="pdf-match-total">${count}</span></span>
+                 <button class="pdf-nav-btn" id="pdf-next" type="button" aria-label="${lang === 'no' ? 'Neste treff' : 'Next match'}">↓</button>
+               </div>`
+            : `<span class="pdf-no-matches">${lang === 'no' ? 'Ingen treff' : 'No matches'}</span>`)
+        : '';
+      const conceptHint = resolved && resolved.concepts.length > 0
+        ? `<div class="pdf-concept-hint">${lang === 'no' ? 'Konsept' : 'Concept'}: ${resolved.concepts.map(c => `<span class="pdf-concept-chip">${escapeHtml(c.label)}</span>`).join(' ')}</div>`
         : '';
       return `
         <div class="pdf-panel">
@@ -3161,44 +3815,78 @@
             <span class="pdf-panel-kind ${meta.kind || 'full'}">${kindLabel}</span>
             <div class="pdf-search-wrap">
               <svg class="icon"><use href="#i-search"/></svg>
-              <input class="pdf-search" id="pdf-search-input" type="search" placeholder="${lang === 'no' ? 'Søk i dommen…' : 'Search in document…'}" value="${escapeHtml(query || '')}" />
+              <input class="pdf-search" id="pdf-search-input" type="search" placeholder="${lang === 'no' ? 'Søk i dommen… (bruk «sitater» for hel frase)' : 'Search the judgment… (use \"quotes\" for exact phrase)'}" value="${escapeHtml(query || '')}" />
             </div>
-            ${matchInfo}
+            ${navHtml}
           </div>
-          <div class="pdf-body" id="pdf-body">${html}</div>
+          ${conceptHint}
+          <div class="pdf-body" id="pdf-body" tabindex="0">${html}</div>
         </div>
       `;
     }
 
     let crCurrentCaseId = null;
     let crPdfQuery = '';
+    let crPdfMatchIdx = 0;
 
-    // Wires the PDF in-document search input. Called after the panel is rendered.
+    // Move focus + visual highlight to a specific mark. Scrolls the mark
+    // into view inside the pdf-body scroll container WITHOUT scrolling the
+    // whole page (which would yank the user out of the modal).
+    function focusPdfMatch(idx) {
+      const body = document.getElementById('pdf-body');
+      if (!body) return;
+      const marks = body.querySelectorAll('mark[data-match-idx]');
+      if (marks.length === 0) return;
+      idx = ((idx % marks.length) + marks.length) % marks.length;
+      crPdfMatchIdx = idx;
+      marks.forEach(m => m.classList.remove('focused'));
+      const target = marks[idx];
+      target.classList.add('focused');
+      // Manually compute the position inside the scroll container
+      const bodyRect = body.getBoundingClientRect();
+      const targetRect = target.getBoundingClientRect();
+      const offset = (targetRect.top - bodyRect.top) + body.scrollTop;
+      const desired = offset - body.clientHeight / 2 + target.clientHeight / 2;
+      body.scrollTo({ top: desired, behavior: 'smooth' });
+      const counter = document.getElementById('pdf-match-current');
+      if (counter) counter.textContent = String(idx + 1);
+    }
+
+    // Wires the PDF in-document search input + prev/next buttons.
     function wirePdfSearch(caseId) {
       const pdfInput = document.getElementById('pdf-search-input');
-      if (!pdfInput) return;
-      // Debounce to keep typing snappy on big PDFs
-      let timer;
-      pdfInput.addEventListener('input', (e) => {
-        clearTimeout(timer);
-        const val = e.target.value;
-        timer = setTimeout(() => {
-          crPdfQuery = val;
-          const section = document.getElementById('cr-pdf-section');
-          section.innerHTML = renderPdfPanel(caseId, crPdfQuery);
-          // Re-focus and restore cursor at end
-          const newInput = document.getElementById('pdf-search-input');
-          if (newInput) {
-            newInput.focus();
-            const len = newInput.value.length;
-            newInput.setSelectionRange(len, len);
+      if (pdfInput) {
+        let timer;
+        pdfInput.addEventListener('input', (e) => {
+          clearTimeout(timer);
+          const val = e.target.value;
+          timer = setTimeout(() => {
+            crPdfQuery = val;
+            crPdfMatchIdx = 0;
+            const section = document.getElementById('cr-pdf-section');
+            section.innerHTML = renderPdfPanel(caseId, crPdfQuery);
+            const newInput = document.getElementById('pdf-search-input');
+            if (newInput) {
+              newInput.focus();
+              const len = newInput.value.length;
+              newInput.setSelectionRange(len, len);
+            }
+            wirePdfSearch(caseId);
+            focusPdfMatch(0);
+          }, 180);
+        });
+        // Enter inside the input → next match
+        pdfInput.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter') {
+            e.preventDefault();
+            focusPdfMatch(crPdfMatchIdx + 1);
           }
-          wirePdfSearch(caseId);
-          // Scroll to first match
-          const firstMark = document.querySelector('#pdf-body mark');
-          if (firstMark) firstMark.scrollIntoView({ block: 'center', behavior: 'smooth' });
-        }, 180);
-      });
+        });
+      }
+      const prev = document.getElementById('pdf-prev');
+      const next = document.getElementById('pdf-next');
+      if (prev) prev.addEventListener('click', () => focusPdfMatch(crPdfMatchIdx - 1));
+      if (next) next.addEventListener('click', () => focusPdfMatch(crPdfMatchIdx + 1));
     }
 
     function openCaseReader(caseId) {
